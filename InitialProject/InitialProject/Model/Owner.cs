@@ -10,24 +10,21 @@ namespace TravelAgency.Model
 {
     public class Owner : ISerializable
     {
-        public enum Role {Owner,Guset1,Guset2,Guide}
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public Role LoginRole { get; set; }
 
         public Owner() { }
 
-        public Owner(string username, string password, Role loginRole)
+        public Owner(string username, string password)
         {
             Username = username;
             Password = password;
-            LoginRole = loginRole;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password, LoginRole.ToString() };
+            string[] csvValues = { Id.ToString(), Username, Password};
             return csvValues;
         }
 
