@@ -69,7 +69,7 @@ namespace InitialProject.Forms {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/InitialProject;V1.0.0.0;component/view/commentform.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TravelAgency;V1.0.0.0;component/view/commentform.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\CommentForm.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
