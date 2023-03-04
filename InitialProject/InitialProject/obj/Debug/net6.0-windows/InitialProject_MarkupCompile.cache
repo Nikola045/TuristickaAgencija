@@ -1,16 +1,20 @@
-﻿TravelAgency
-1.0.0.0
+﻿InitialProject
+
 
 winexe
 C#
 .cs
 C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\obj\Debug\net6.0-windows\
-TravelAgency
+InitialProject
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\App.xaml
 3-1443022645
 4990891272
+11223157101
+194101785492
+View\CommentForm.xaml;View\CommentsOverview.xaml;View\SignInForm.xaml;
 
+False
 
