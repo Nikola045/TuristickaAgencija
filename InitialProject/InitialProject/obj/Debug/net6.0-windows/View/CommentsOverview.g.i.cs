@@ -61,7 +61,7 @@ namespace InitialProject.Forms {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TravelAgency;V1.0.0.0;component/view/commentsoverview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TravelAgency;component/view/commentsoverview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\CommentsOverview.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

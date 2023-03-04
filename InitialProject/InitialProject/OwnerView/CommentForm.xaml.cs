@@ -54,8 +54,6 @@ namespace InitialProject.Forms
             InitializeComponent();
             DataContext = this;
             Title = "View comment";
-            txtCommentText.IsEnabled = false;
-            btnSave.Visibility = Visibility.Collapsed;
             SelectedComment = selectedComment;
             Text = selectedComment.Text;
             _repository = new CommentRepository();
@@ -101,6 +99,16 @@ namespace InitialProject.Forms
         private void Cancel(object sender, RoutedEventArgs e) 
         { 
             Close();
-        } 
+        }
+
+        private void ListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

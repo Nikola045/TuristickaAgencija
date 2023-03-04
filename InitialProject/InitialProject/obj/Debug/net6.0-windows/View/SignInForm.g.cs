@@ -61,7 +61,7 @@ namespace InitialProject {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/InitialProject;component/view/signinform.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TravelAgency;component/view/signinform.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\SignInForm.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
