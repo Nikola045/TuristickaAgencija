@@ -50,9 +50,33 @@ namespace InitialProject
             {
                 if(user.Password == txtPassword.Password)
                 {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close();
+                    if(user.LoginRole == "Owner")
+                    {
+                        
+                        OwnerOverview ownerOverview = new OwnerOverview(user);
+                        ownerOverview.Show();
+                        Close();
+                    }
+                    if (user.LoginRole == "Guide")
+                    {
+                        OwnerOverview commentsOverview = new OwnerOverview(user);
+                        commentsOverview.Show();
+                        Close();
+                    }
+                    if (user.LoginRole == "Guest1")
+                    {
+                        OwnerOverview commentsOverview = new OwnerOverview(user);
+                        commentsOverview.Show();
+                        Close();
+                    }
+                    if (user.LoginRole == "Guset2")
+                    {
+                        OwnerOverview commentsOverview = new OwnerOverview(user);
+                        commentsOverview.Show();
+                        Close();
+                    }
+
+
                 } 
                 else
                 {

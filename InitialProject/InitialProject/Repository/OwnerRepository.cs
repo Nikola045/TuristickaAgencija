@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.Repository
 {
-    internal class OwnerRepository
+    public class OwnerRepository
     {
     }
 }

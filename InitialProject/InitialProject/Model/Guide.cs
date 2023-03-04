@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.Model
 {
-    internal class Guide
+    public class Guide
     {
     }
 }
