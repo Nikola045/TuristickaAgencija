@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\App.xaml
-3-831028096
+3-1443022645
 4990891272
-23817473979
+231345890520
 194101785492
-OwnerView\CommentForm.xaml;OwnerView\CommentsOverview.xaml;OwnerView\SignInForm.xaml;
+View\CommentForm.xaml;View\CommentsOverview.xaml;View\SignInForm.xaml;
 
-True
+False
 
