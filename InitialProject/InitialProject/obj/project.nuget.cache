@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "X6GuDTvsdJsX4mX/Bx9RWzRCWhEgPIKrwDz7lH8F7gbtvY4JTe3zMgAVZEDpAdyziWtqVrGHqMXCd4M16PIH9g==",
+  "dgSpecHash": "c06AgktkFvuTWhHE7vM8tzr9KY1AJ7v+b/yryQeUOh+kJllXICUcs8zJBVNnTfZEjS1CxysVKIYrHglGzDVLIg==",
   "success": true,
   "projectFilePath": "C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\kojic\\.nuget\\packages\\cake.core\\3.0.0\\cake.core.3.0.0.nupkg.sha512",
+    "C:\\Users\\kojic\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\kojic\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\kojic\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
+    "C:\\Users\\kojic\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\kojic\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

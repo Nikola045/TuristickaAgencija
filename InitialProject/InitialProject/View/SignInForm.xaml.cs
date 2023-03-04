@@ -1,11 +1,11 @@
-﻿using InitialProject.Forms;
-using InitialProject.Model;
-using InitialProject.Repository;
+﻿using TravelAgency.Forms;
+using TravelAgency.Model;
+using TravelAgency.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
-namespace InitialProject
+namespace TravelAgency
 {
     /// <summary>
     /// Interaction logic for SignInForm.xaml

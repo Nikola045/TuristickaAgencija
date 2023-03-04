@@ -3,45 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.Forms"
-        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Model" x:Class="InitialProject.Forms.OwnerForm"
+        xmlns:local="clr-namespace:TravelAgency.Forms"
+        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Model" x:Class="TravelAgency.Forms.OwnerForm"
         mc:Ignorable="d"
         Title="Create new accommodation" Height="300" Width="500" WindowStartupLocation="CenterScreen">
     <Canvas>
         <Label Content="Name:" Canvas.Left="10" Canvas.Top="10"/>
         <Label Content="Location:" Canvas.Left="10" Canvas.Top="41"/>
-        <Label Content="Type:" Canvas.Left="11" Canvas.Top="72" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Max Gusets:" Canvas.Left="10" Canvas.Top="103" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Min Gusets:" Canvas.Left="10" Canvas.Top="134"/>
-        <Label Content="Nuber of cancle days:" Canvas.Left="10" Canvas.Top="165"/>
-        <Label Content="Insert picture url:" Canvas.Left="10" Canvas.Top="196"/>
-        <TextBox Canvas.Left="59" TextWrapping="Wrap" Canvas.Top="18" Width="120"/>
-        <TextBox Canvas.Left="73" TextWrapping="Wrap" Canvas.Top="45" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="89" TextWrapping="Wrap" Canvas.Top="107" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="87" TextWrapping="Wrap" Canvas.Top="138" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="139" TextWrapping="Wrap" Text="1" Canvas.Top="169" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="114" TextWrapping="Wrap" Canvas.Top="200" Width="120"/>
-        <Button Content="Save" Canvas.Left="402" Canvas.Top="241" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Content="Cancel" Canvas.Left="447" Canvas.Top="241"/>
-        <RadioButton Content="House" Canvas.Left="62" Canvas.Top="78" GroupName="type">
+        <Label Content="Type:" Canvas.Left="11" Canvas.Top="92" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Max Gusets:" Canvas.Left="10" Canvas.Top="123" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Min Gusets:" Canvas.Left="10" Canvas.Top="154" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Nuber of cancle days:" Canvas.Left="10" Canvas.Top="185" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Insert picture url:" Canvas.Left="10" Canvas.Top="216" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtName" Canvas.Left="59" TextWrapping="Wrap" Canvas.Top="18" Width="120"
+                 Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="txtCity" Canvas.Left="44" TextWrapping="Wrap" Canvas.Top="71" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                 Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+        <TextBox x:Name="brMax" Canvas.Left="89" TextWrapping="Wrap" Canvas.Top="127" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="brMin" Canvas.Left="87" TextWrapping="Wrap" Canvas.Top="158" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="brDaysLeft" Canvas.Left="139" TextWrapping="Wrap" Canvas.Top="189" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Canvas.Left="114" TextWrapping="Wrap" Canvas.Top="220" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Click="Save" Content="Save" Canvas.Left="402" Canvas.Top="241" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Button Content="Cancel" Canvas.Left="447" Canvas.Top="241" Click="Cancel"/>
+        <RadioButton Content="House" Canvas.Left="62" Canvas.Top="98" GroupName="type" HorizontalAlignment="Center" VerticalAlignment="Top">
             <RadioButton.DataContext>
                 <Model:Hotel TypeOfHotel="House"/>
             </RadioButton.DataContext>
         </RadioButton>
-        <RadioButton Content="Hotel" Canvas.Left="186" Canvas.Top="78" HorizontalAlignment="Left" VerticalAlignment="Center" GroupName="type">
+        <RadioButton Content="Hotel" Canvas.Left="186" Canvas.Top="98" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
             <RadioButton.DataContext>
                 <Model:Hotel TypeOfHotel="Hotel"/>
             </RadioButton.DataContext>
         </RadioButton>
-        <RadioButton Content="Apartmant" Canvas.Left="250" Canvas.Top="78" HorizontalAlignment="Left" VerticalAlignment="Center" GroupName="type">
+        <RadioButton Content="Apartmant" Canvas.Left="250" Canvas.Top="98" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
             <RadioButton.DataContext>
                 <Model:Hotel/>
             </RadioButton.DataContext>
         </RadioButton>
-        <RadioButton Content="Hut" Canvas.Left="130" Canvas.Top="78" HorizontalAlignment="Left" VerticalAlignment="Center" GroupName="type">
+        <RadioButton Content="Hut" Canvas.Left="130" Canvas.Top="98" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
             <RadioButton.DataContext>
                 <Model:Hotel TypeOfHotel="Hut"/>
             </RadioButton.DataContext>
         </RadioButton>
+        <Label Content="City:" Canvas.Left="11" Canvas.Top="67" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Country:" Canvas.Left="166" Canvas.Top="67" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtCountry" Canvas.Left="228" TextWrapping="Wrap" Canvas.Top="71" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}"  TextChanged="TextBox_TextChanged"></TextBox>
     </Canvas>
 </Window>

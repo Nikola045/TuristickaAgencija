@@ -1,11 +1,10 @@
-﻿using InitialProject.Model;
-using InitialProject.Repository;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
+using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Repository;
 
-namespace InitialProject.Forms
+namespace TravelAgency.Forms
 {
     /// <summary>
     /// Interaction logic for CommentsOverview.xaml
@@ -13,25 +12,28 @@ namespace InitialProject.Forms
     public partial class OwnerOverview : Window
     {
 
-        public static ObservableCollection<Owner> Comments { get; set; }
+        public static ObservableCollection<Hotel> Hotels { get; set; }
 
-        public Owner SelectedComment { get; set; }
+        public Owner SelectedHotel { get; set; }
 
         public User LoggedInUser { get; set; }
 
-        private readonly OwnerRepository _repository;
+        private readonly HotelRepository _repository;
 
         public OwnerOverview(User user)
         {
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
-            _repository = new OwnerRepository();
-            
+            _repository = new HotelRepository();
         }
 
-        
+        private void OpenOwnerForm(object sender, RoutedEventArgs e)
+        {
+            OwnerForm createOwnerForm = new OwnerForm(LoggedInUser);
+            createOwnerForm.Show();
+        }
 
-        
+
     }
 }

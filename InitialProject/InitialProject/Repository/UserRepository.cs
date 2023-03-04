@@ -1,9 +1,9 @@
-﻿using InitialProject.Model;
-using InitialProject.Serializer;
+﻿using TravelAgency.Model;
+using TravelAgency.Serializer;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace InitialProject.Repository
+namespace TravelAgency.Repository
 {
     public class UserRepository
     {
