@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Xml.Linq;
+using System.Windows.Controls;
 
 namespace TravelAgency.Forms
 {
@@ -20,104 +21,6 @@ namespace TravelAgency.Forms
 
         private readonly HotelRepository _repository;
 
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _city;
-        public string City
-        {
-            get => _city;
-            set
-            {
-                if (value != _city)
-                {
-                    _city = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _country;
-        public string Country
-        {
-            get => _country;
-            set
-            {
-                if (value != _country)
-                {
-                    _country = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _type;
-        public string Type
-        {
-            get => _type;
-            set
-            {
-                if (value != _type)
-                {
-                    _type = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _max;
-        public int Max
-        {
-            get => _max;
-            set
-            {
-                if (value != _max)
-                {
-                    _max = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _min;
-        public int Min  
-        {
-            get => _min;
-            set
-            {
-                if (value != _min)
-                {
-                    _min = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _cancelD;
-        public int CancelD
-        {
-            get => _cancelD;
-            set
-            {
-                if (value != _cancelD)
-                {
-                    _cancelD = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -131,7 +34,7 @@ namespace TravelAgency.Forms
             Title = "Create new hotel";
             DataContext = this;
             LoggedInUser = user;
-           // _repository = new HotelRepository();
+            _repository = new HotelRepository();
         }
 
 
@@ -140,18 +43,21 @@ namespace TravelAgency.Forms
             
              if (SelectedHotel != null)
              {
-                 SelectedHotel.Name = Name;
-                 SelectedHotel.City = City;
-                 SelectedHotel.Country = Country;
-                 SelectedHotel.TypeOfHotel = Type;
-                 SelectedHotel.MaxNumberOfGusets = Max;
-                 SelectedHotel.MinNumberOfGusets = Min;
-                 SelectedHotel.NumberOfDaysToCancel = CancelD;
+                 SelectedHotel.Id = Convert.ToInt32(txtId.Text);
+                 SelectedHotel.Name = txtName.Text;
+                 SelectedHotel.City = txtCity.Text;
+                 SelectedHotel.Country = txtCountry.Text;
+                 if(RadioHouse.IsChecked == true) { SelectedHotel.TypeOfHotel = "House"; }
+                 else if(RadioHotel.IsChecked == true) { SelectedHotel.TypeOfHotel = "Hotel"; }
+                 else if(RadioHut.IsChecked == true) { SelectedHotel.TypeOfHotel = "Hut"; }
+                 else if(RadioApartment.IsChecked == true) { SelectedHotel.TypeOfHotel = "Apartment"; }
+                 SelectedHotel.MaxNumberOfGusets = Convert.ToInt32( brMax.Text);
+                 SelectedHotel.MinNumberOfGusets = Convert.ToInt32(brMin.Text);
+                 SelectedHotel.NumberOfDaysToCancel = Convert.ToInt32(brDaysLeft.Text);
 
                  Hotel updatedHotel = _repository.Update(SelectedHotel);
                  if (updatedHotel != null)
                  {
-                     // Update observable collection
                      int index = OwnerOverview.Hotels.IndexOf(SelectedHotel);
                      OwnerOverview.Hotels.Remove(SelectedHotel);
                      OwnerOverview.Hotels.Insert(index, updatedHotel);
@@ -159,10 +65,11 @@ namespace TravelAgency.Forms
              }
              else
              {
-                 Hotel newHotel = new Hotel(Name,City,Country,Type,Max,Min,CancelD);
-                 Hotel savedHotel = _repository.Save(newHotel); //NEKA GRESKA
-                 OwnerOverview.Hotels.Add(savedHotel);
-             }
+                 Hotel newHotel = new Hotel(Convert.ToInt32(txtId.Text),txtName.Text,txtCity.Text, txtCountry.Text, "House" , Convert.ToInt32(brMax.Text), Convert.ToInt32(brMin.Text), Convert.ToInt32(brDaysLeft.Text));
+                 Hotel savedHotel = _repository.Save(newHotel);
+                 OwnerOverview ownerOverview = new OwnerOverview();
+                 //Treba impelementirati DA SE POKAZE PODATATAK U DATAGRIP-u
+            }
 
              Close();
         
@@ -173,9 +80,5 @@ namespace TravelAgency.Forms
             this.Close();
         }
 
-        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
-        }
     }
 }

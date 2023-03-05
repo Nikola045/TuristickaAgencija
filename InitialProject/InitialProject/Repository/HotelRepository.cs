@@ -30,10 +30,21 @@ namespace TravelAgency.Repository
 
         public Hotel Save(Hotel hotel)
         {
+            hotel.Id = NextId();
             _hotels = _serializer.FromCSV(FilePath);
             _hotels.Add(hotel);
             _serializer.ToCSV(FilePath, _hotels);
             return hotel;
+        }
+
+        public int NextId()
+        {
+            _hotels = _serializer.FromCSV(FilePath);
+            if (_hotels.Count < 1)
+            {
+                return 1;
+            }
+            return _hotels.Max(h => h.Id) + 1;
         }
 
         public void Delete(Hotel hotel)
@@ -54,6 +65,8 @@ namespace TravelAgency.Repository
             _serializer.ToCSV(FilePath, _hotels);
             return hotel;
         }
+
+
 
     }
 }

@@ -1,5 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
+using System.Windows.Documents;
 using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Repository;
@@ -26,6 +30,11 @@ namespace TravelAgency.Forms
             DataContext = this;
             LoggedInUser = user;
             _repository = new HotelRepository();
+            
+        }
+
+        public OwnerOverview()
+        {
         }
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)

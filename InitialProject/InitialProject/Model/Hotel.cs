@@ -11,6 +11,7 @@ namespace TravelAgency.Model
 {
     public class Hotel : TravelAgency.Serializer.ISerializable
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
@@ -21,8 +22,9 @@ namespace TravelAgency.Model
 
         public Hotel() { }
         
-        public Hotel(string name, string city, string country, string typeOfHotel, int maxNumberOfGusets, int minNumberOfGuests, int numberOfDaysToCancel)
+        public Hotel(int id, string name, string city, string country, string typeOfHotel, int maxNumberOfGusets, int minNumberOfGuests, int numberOfDaysToCancel)
         {
+            Id = id;
             Name = name;
             City = city;
             Country = country;
@@ -34,19 +36,20 @@ namespace TravelAgency.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Name, City, Country, TypeOfHotel, MaxNumberOfGusets.ToString(), MinNumberOfGusets.ToString(), NumberOfDaysToCancel.ToString() };
+            string[] csvValues = { Id.ToString() , Name, City, Country, TypeOfHotel, MaxNumberOfGusets.ToString(), MinNumberOfGusets.ToString(), NumberOfDaysToCancel.ToString() };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            Name = values[0];
-            City = values[1];
-            Country = values[2];
-            TypeOfHotel = values[3];
-            MaxNumberOfGusets = Convert.ToInt32(values[4]);
-            MinNumberOfGusets = Convert.ToInt32(values[5]);
-            NumberOfDaysToCancel = Convert.ToInt32(values[6]);
+            Id = Convert.ToInt32(values[0]);
+            Name = values[1];
+            City = values[2];
+            Country = values[3];
+            TypeOfHotel = values[4];
+            MaxNumberOfGusets = Convert.ToInt32(values[5]);
+            MinNumberOfGusets = Convert.ToInt32(values[6]);
+            NumberOfDaysToCancel = Convert.ToInt32(values[7]);
 
         }
 

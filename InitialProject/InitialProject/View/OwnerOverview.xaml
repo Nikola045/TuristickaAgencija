@@ -21,17 +21,18 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <DataGrid ItemsSource="{Binding Comments}"
-                      SelectedItem="{Binding Path=SelectedComment}"
+            <DataGrid  x:Name="DataPanel"    ItemsSource="{Binding Hotels}"
+                      SelectedItem="{Binding Path=SelectedHotel}"
                       IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding CreationTime}" Width="200"/>
-                    <DataGridTextColumn Header="Location" Binding="{Binding Text}" Width="*"/>
-                    <DataGridTextColumn Header="Type" Binding="{Binding Text}" Width="*"/>
-                    <DataGridTextColumn Header="Max Gusets" Binding="{Binding Text}" Width="*"/>
-                    <DataGridTextColumn Header="Min Gusets" Binding="{Binding Text}" Width="*"/>
-                    <DataGridTextColumn Header="Canacle days" Binding="{Binding Text}" Width="*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
+                    <DataGridTextColumn Header="Country" Binding="{Binding Countryn}" Width="*"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
+                    <DataGridTextColumn Header="Max Gusets" Binding="{Binding Max}" Width="*"/>
+                    <DataGridTextColumn Header="Min Gusets" Binding="{Binding Min}" Width="*"/>
+                    <DataGridTextColumn Header="Canacle days" Binding="{Binding CancelD}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
