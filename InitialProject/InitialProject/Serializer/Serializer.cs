@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Data;
 
-namespace InitialProject.Serializer
+namespace TravelAgency.Serializer
 {
     class Serializer<T> where T: ISerializable, new()
     {
