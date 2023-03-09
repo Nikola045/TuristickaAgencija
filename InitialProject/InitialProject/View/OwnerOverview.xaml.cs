@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Graph;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Windows.Documents;
 using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Repository;
+using TravelAgency.View;
 
 namespace TravelAgency.Forms
 {
@@ -39,10 +41,15 @@ namespace TravelAgency.Forms
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)
         {
-            OwnerForm createOwnerForm = new OwnerForm(LoggedInUser);
+            OwnerForm createOwnerForm = new OwnerForm();
             createOwnerForm.Show();
         }
 
-
+        // Todo: dodaj funkciju koja ce da izbacuje massagebox nardenih 5 dana od isteka rezervacije nekom gostu
+        private void OpenGradeForm(object sender, RoutedEventArgs e)
+        {
+            GradeForm createGradeForm = new GradeForm();
+            createGradeForm.Show();
+        }
     }
 }

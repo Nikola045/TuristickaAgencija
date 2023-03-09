@@ -30,3 +30,6 @@ C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\Init
 C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\obj\Debug\net6.0-windows\View\OwnerForm.baml
 C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\bin\Debug\net6.0-windows\Cake.Core.dll
 C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\obj\Debug\net6.0-windows\TravelAgency.csproj.CopyComplete
+C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\bin\Debug\net6.0-windows\CsvHelper.dll
+C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\obj\Debug\net6.0-windows\View\GradeForm.g.cs
+C:\Users\kojic\Desktop\TuristickaAgencija\TuristickaAgencija\InitialProject\InitialProject\obj\Debug\net6.0-windows\View\GradeForm.baml

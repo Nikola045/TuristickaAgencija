@@ -46,6 +46,14 @@
             "Cake.Core": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[30.0.1, )"
+            },
+            "Microsoft.Graph": {
+              "target": "Package",
+              "version": "[5.1.0, )"
             }
           },
           "imports": [

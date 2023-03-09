@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TravelAgency.Forms"
         xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Model" x:Class="TravelAgency.Forms.OwnerForm"
         mc:Ignorable="d"
-        Title="Create new accommodation" Height="300" Width="500" WindowStartupLocation="CenterScreen">
+        Title="Create new accommodation" Height="350" Width="1000" WindowStartupLocation="CenterScreen">
     <Canvas>
         <Label Content="Name:" Canvas.Left="10" Canvas.Top="34" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Location:" Canvas.Left="10" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -17,16 +17,15 @@
         <TextBox x:Name="txtName" Canvas.Left="59" TextWrapping="Wrap" Canvas.Top="42" Width="120"
                  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCity" Canvas.Left="44" TextWrapping="Wrap" Canvas.Top="95" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                 Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}">
-        </TextBox>
+                 Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="brMax" Canvas.Left="89" TextWrapping="Wrap" Canvas.Top="151" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
                  Text="{Binding Path=Max, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="brMin" Canvas.Left="87" TextWrapping="Wrap" Canvas.Top="182" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
                  Text="{Binding Path=Min, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="brDaysLeft" Canvas.Left="139" TextWrapping="Wrap" Canvas.Top="213" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
                  Text="{Binding Path=DaysLeft, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Click="Save" Content="Save" Canvas.Left="402" Canvas.Top="241" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <Button Content="Cancel" Canvas.Left="447" Canvas.Top="241" Click="Cancel"/>
+        <Button Click="Save" Content="Save" Canvas.Left="17" Canvas.Top="247" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Button Content="Cancel" Canvas.Left="62" Canvas.Top="247" Click="Cancel"/>
         <RadioButton x:Name="RadioHouse" Content="House" Canvas.Left="62" Canvas.Top="122" GroupName="type" HorizontalAlignment="Center" VerticalAlignment="Top">
         </RadioButton>
         <RadioButton x:Name="RadioHotel" Content="Hotel" Canvas.Left="186" Canvas.Top="122" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
@@ -39,6 +38,18 @@
         <Label Content="Country:" Canvas.Left="166" Canvas.Top="91" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCountry" Canvas.Left="228" TextWrapping="Wrap" Canvas.Top="95" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBox>
         <Label Content="Id:" Canvas.Left="10" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtId" Canvas.Left="38" TextWrapping="Wrap" Text="TextBox" Canvas.Top="20" Width="120"/>
+        <TextBox x:Name="txtId" Canvas.Left="38" TextWrapping="Wrap" Text="" Canvas.Top="20" Width="120"/>
+        <DataGrid Height="264" Width="622" x:Name="DataPanel" Canvas.Left="368" Canvas.Top="10"   
+                  ItemsSource="{Binding Path = Hotels}" SelectedItem="{Binding Path=SelectedHotel}" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Countryn}" Width="*"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
+                <DataGridTextColumn Header="Max Gusets" Binding="{Binding Max}" Width="*"/>
+                <DataGridTextColumn Header="Min Gusets" Binding="{Binding Min}" Width="*"/>
+                <DataGridTextColumn Header="Canacle days" Binding="{Binding CancelD}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Canvas>
 </Window>

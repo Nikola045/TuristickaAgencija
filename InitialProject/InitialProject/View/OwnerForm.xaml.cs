@@ -6,6 +6,12 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Xml.Linq;
 using System.Windows.Controls;
+using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.IO;
+using System.Globalization;
+using CsvHelper;
+using System.Linq;
 
 namespace TravelAgency.Forms
 {
@@ -14,9 +20,6 @@ namespace TravelAgency.Forms
     /// </summary>
     public partial class OwnerForm : Window
     {
-
-        public User LoggedInUser { get; set; }
-
         public Hotel SelectedHotel { get; set; }
 
         private readonly HotelRepository _repository;
@@ -28,15 +31,13 @@ namespace TravelAgency.Forms
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }        
 
-        public OwnerForm(User user)
+        public OwnerForm()
         {
             InitializeComponent();
             Title = "Create new hotel";
             DataContext = this;
-            LoggedInUser = user;
             _repository = new HotelRepository();
         }
-
 
         private void Save(object sender, RoutedEventArgs e)
         {
@@ -65,10 +66,23 @@ namespace TravelAgency.Forms
              }
              else
              {
-                 Hotel newHotel = new Hotel(Convert.ToInt32(txtId.Text),txtName.Text,txtCity.Text, txtCountry.Text, "House" , Convert.ToInt32(brMax.Text), Convert.ToInt32(brMin.Text), Convert.ToInt32(brDaysLeft.Text));
+                 string typeOfHotel = null;
+                 if (RadioHouse.IsChecked == true) typeOfHotel = "House";
+                 else if (RadioHotel.IsChecked == true) typeOfHotel = "Hotel";
+                 else if (RadioHut.IsChecked == true) typeOfHotel = "Hut";
+                 else if (RadioApartment.IsChecked == true) typeOfHotel = "Apartment";
+
+                 Hotel newHotel = new Hotel(
+                     Convert.ToInt32(txtId.Text),
+                     txtName.Text,
+                     txtCity.Text,
+                     txtCountry.Text,
+                     typeOfHotel,
+                     Convert.ToInt32(brMax.Text),
+                     Convert.ToInt32(brMin.Text),
+                     Convert.ToInt32(brDaysLeft.Text));
                  Hotel savedHotel = _repository.Save(newHotel);
-                 OwnerOverview ownerOverview = new OwnerOverview();
-                 //Treba impelementirati DA SE POKAZE PODATATAK U DATAGRIP-u
+                
             }
 
              Close();
