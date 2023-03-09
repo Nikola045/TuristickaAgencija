@@ -4,6 +4,7 @@ using TravelAgency.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using TravelAgency.View;
 
 namespace TravelAgency
 {
@@ -65,8 +66,8 @@ namespace TravelAgency
                     }
                     if (user.LoginRole == "Guest1")
                     {
-                        OwnerOverview commentsOverview = new OwnerOverview(user);
-                        commentsOverview.Show();
+                        Guest1Overview guest1Overview = new Guest1Overview(user);
+                        guest1Overview.Show();
                         Close();
                     }
                     if (user.LoginRole == "Guset2")
