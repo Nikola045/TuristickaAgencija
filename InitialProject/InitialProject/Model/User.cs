@@ -1,8 +1,8 @@
-﻿using InitialProject.Serializer;
+﻿using TravelAgency.Serializer;
 using System;
 using System.DirectoryServices.ActiveDirectory;
 
-namespace InitialProject.Model
+namespace TravelAgency.Model
 {
     public class User : ISerializable
     {
