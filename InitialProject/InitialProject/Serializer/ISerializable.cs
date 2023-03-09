@@ -1,4 +1,4 @@
-﻿namespace InitialProject.Serializer
+﻿namespace TravelAgency.Serializer
 {
     public interface ISerializable
     {
