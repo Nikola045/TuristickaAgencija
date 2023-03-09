@@ -61,7 +61,7 @@ namespace TravelAgency {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TravelAgency;V1.0.0.0;component/view/signinform.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TravelAgency;component/view/signinform.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\SignInForm.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
