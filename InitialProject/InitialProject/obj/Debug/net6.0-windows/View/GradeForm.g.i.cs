@@ -77,7 +77,7 @@ namespace TravelAgency.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TravelAgency;component/view/gradeform.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TravelAgency;V1.0.0.0;component/view/gradeform.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\GradeForm.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -53,7 +53,7 @@ namespace TravelAgency.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TravelAgency;component/view/guest1overview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TravelAgency;V1.0.0.0;component/view/guest1overview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\Guest1Overview.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
