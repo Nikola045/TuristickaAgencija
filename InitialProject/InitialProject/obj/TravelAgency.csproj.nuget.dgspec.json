@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj": {}
+    "C:\\Users\\Rista\\Desktop\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj": {
+    "C:\\Users\\Rista\\Desktop\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj",
+        "projectUniqueName": "C:\\Users\\Rista\\Desktop\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj",
         "projectName": "TravelAgency",
-        "projectPath": "C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj",
-        "packagesPath": "C:\\Users\\kojic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\obj\\",
+        "projectPath": "C:\\Users\\Rista\\Desktop\\TuristickaAgencija\\InitialProject\\InitialProject\\TravelAgency.csproj",
+        "packagesPath": "C:\\Users\\Rista\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rista\\Desktop\\TuristickaAgencija\\InitialProject\\InitialProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\kojic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rista\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,7 +75,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

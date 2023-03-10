@@ -13,7 +13,7 @@
     ],
     "additionalProbingPaths": [
       "C:\\Users\\kojic\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\kojic\\.nuget\\packages",
+      "C:\\Users\\Rista\\.nuget\\packages",
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
     ],
     "configProperties": {
