@@ -21,6 +21,20 @@ namespace TravelAgency.View
     {
         public GuideOverview()
         {
+            public User LoggedInUser { get; set; }
+
+         public GudieOverview(User user)
+        {
+            InitializeComponent();
+            DataContext = this;
+            LoggedInUser = user;
+            _repository = new HotelRepository();
+            
+        }
+
+        public GuideOverview()
+        {
+        }
             InitializeComponent();
         }
     }
