@@ -12,6 +12,7 @@ using System.IO;
 using System.Globalization;
 using CsvHelper;
 using System.Linq;
+using TravelAgency.Serializer;
 
 namespace TravelAgency.Forms
 {
@@ -94,5 +95,26 @@ namespace TravelAgency.Forms
             this.Close();
         }
 
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            string FilePath = "../../../Resources/Data/hotels.csv";
+            List<Hotel> _hotels;
+            Serializer<Hotel> _serializer;
+            _serializer = new Serializer<Hotel>();
+            _hotels = _serializer.FromCSV(FilePath);
+            int i = 0;
+            string EOF = "EOF";
+            string provera = null;
+            while (provera != "EOF")
+            {
+
+                DataPanel.Items.Add(_hotels[i]);
+                i++;
+               // if(provera = prazna linija){
+                    provera = EOF;
+                }
+            }
+            
+        }
     }
 }
