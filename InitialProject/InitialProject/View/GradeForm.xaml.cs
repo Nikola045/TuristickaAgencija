@@ -25,16 +25,6 @@ namespace TravelAgency.View
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void GusetLoaded(object sender, RoutedEventArgs e)
         {
             Guest1 guest1 = new Guest1();
@@ -57,6 +47,11 @@ namespace TravelAgency.View
             CB2.Items.Add("3");
             CB2.Items.Add("4");
             CB2.Items.Add("5");
+        }
+
+        private void SaveGrade(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

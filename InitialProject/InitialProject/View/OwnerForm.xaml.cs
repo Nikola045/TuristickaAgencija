@@ -12,12 +12,17 @@ using System.IO;
 using System.Globalization;
 using CsvHelper;
 using System.Linq;
+using TravelAgency.Serializer;
+using System.Data;
+using Cake.Core.IO;
+using Microsoft.Graph.Models;
+using System.Windows.Data;
 
 namespace TravelAgency.Forms
 {
-    /// <summary>
-    /// Interaction logic for CommentForm.xaml
-    /// </summary>
+
+
+
     public partial class OwnerForm : Window
     {
         public Hotel SelectedHotel { get; set; }
@@ -44,7 +49,7 @@ namespace TravelAgency.Forms
             
              if (SelectedHotel != null)
              {
-                 SelectedHotel.Id = Convert.ToInt32(txtId.Text);
+                 SelectedHotel.Id = _repository.NextId();
                  SelectedHotel.Name = txtName.Text;
                  SelectedHotel.City = txtCity.Text;
                  SelectedHotel.Country = txtCountry.Text;
@@ -72,21 +77,26 @@ namespace TravelAgency.Forms
                  else if (RadioHut.IsChecked == true) typeOfHotel = "Hut";
                  else if (RadioApartment.IsChecked == true) typeOfHotel = "Apartment";
 
-                 Hotel newHotel = new Hotel(
-                     Convert.ToInt32(txtId.Text),
-                     txtName.Text,
-                     txtCity.Text,
-                     txtCountry.Text,
-                     typeOfHotel,
-                     Convert.ToInt32(brMax.Text),
-                     Convert.ToInt32(brMin.Text),
-                     Convert.ToInt32(brDaysLeft.Text));
+                Hotel newHotel = new Hotel(
+                    _repository.NextId(),
+                    txtName.Text,
+                    txtCity.Text,
+                    txtCountry.Text,
+                    typeOfHotel,
+                    Convert.ToInt32(brMax.Text),
+                    Convert.ToInt32(brMin.Text),
+                    Convert.ToInt32(brDaysLeft.Text));
                  Hotel savedHotel = _repository.Save(newHotel);
-                
+
+                txtName.Clear();
+                txtCity.Clear();
+                txtCountry.Clear();
+                brMax.Clear();
+                brMin.Clear();
+                brDaysLeft.Clear();
             }
 
-             Close();
-        
+            
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
@@ -94,5 +104,15 @@ namespace TravelAgency.Forms
             this.Close();
         }
 
+        
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            Owner owner = new Owner();
+            List<Hotel> hotels = new List<Hotel>();
+            hotels = owner.ReadFromHotelsCsv("C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\Resources\\Data\\hotels.csv");
+            DataPanel.ItemsSource = hotels;
+
+        }
     }
 }

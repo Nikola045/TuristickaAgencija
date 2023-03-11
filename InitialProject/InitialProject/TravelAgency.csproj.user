@@ -8,12 +8,24 @@
     <Compile Update="View\Guest1Overview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\GuideForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\GuideOverview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\GradeForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1Overview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\GuideForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\GuideOverview.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
