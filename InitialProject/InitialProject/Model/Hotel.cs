@@ -52,10 +52,5 @@ namespace TravelAgency.Model
             MinNumberOfGusets = Convert.ToInt32(values[6]);
             NumberOfDaysToCancel = Convert.ToInt32(values[7]);
         }
-
-
-
-
-
     }
 }

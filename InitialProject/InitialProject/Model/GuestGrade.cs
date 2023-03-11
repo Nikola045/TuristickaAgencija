@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.Model
 {
-    internal class GuestGrade
+    internal class GuestGrade : TravelAgency.Serializer.ISerializable
     {
         public int GuestId { get; set; }
         public int Cleanliness { get; set; }

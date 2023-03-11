@@ -104,15 +104,11 @@ namespace TravelAgency.Forms
             this.Close();
         }
 
-        
-
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            Owner owner = new Owner();
             List<Hotel> hotels = new List<Hotel>();
-            hotels = owner.ReadFromHotelsCsv("C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\Resources\\Data\\hotels.csv");
+            hotels = _repository.ReadFromHotelsCsv("C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\Resources\\Data\\hotels.csv");
             DataPanel.ItemsSource = hotels;
-
         }
     }
 }
