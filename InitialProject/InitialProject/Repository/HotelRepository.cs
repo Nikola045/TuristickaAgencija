@@ -97,6 +97,38 @@ namespace TravelAgency.Repository
             return hotels;
         }
 
+
+        public List<Hotel> FindHotelByName(string FileName,string name,string city)
+        {
+            List<Hotel> hotels = new List<Hotel>();
+
+            using (StreamReader sr = new StreamReader(FileName))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    Hotel hotel = new Hotel();
+                    hotel.Id = Convert.ToInt32(fields[0]);
+                    hotel.Name = fields[1];
+                    hotel.City = fields[2];
+                    hotel.Country = fields[3];
+                    hotel.TypeOfHotel = fields[4];
+                    hotel.MaxNumberOfGuests = Convert.ToInt32(fields[5]);
+                    hotel.MinNumberOfDays = Convert.ToInt32(fields[6]);
+                    hotel.NumberOfDaysToCancel = Convert.ToInt32(fields[7]);
+
+                    if (fields[1].Equals(name) || fields[2].Equals(city))
+                    {
+                        hotels.Add(hotel);
+                    }
+                }
+            }
+            return hotels;
+        }
+        
+
     }
 }
 
