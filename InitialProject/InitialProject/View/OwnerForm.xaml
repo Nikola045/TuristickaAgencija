@@ -13,7 +13,7 @@
         <Label Content="Type:" Canvas.Left="11" Canvas.Top="116" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Max Guests:" Canvas.Left="10" Canvas.Top="147" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Min Days:" Canvas.Left="10" Canvas.Top="178" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Nuber of cancle days:" Canvas.Left="10" Canvas.Top="209" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Number of cancel days:" Canvas.Left="10" Canvas.Top="209" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtName" Canvas.Left="59" TextWrapping="Wrap" Canvas.Top="42" Width="120"
                  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCity" Canvas.Left="44" TextWrapping="Wrap" Canvas.Top="95" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" 
@@ -22,7 +22,7 @@
                  Text="{Binding Path=Max, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="brMin" Canvas.Left="87" TextWrapping="Wrap" Canvas.Top="182" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
                  Text="{Binding Path=Min, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="brDaysLeft" Canvas.Left="139" TextWrapping="Wrap" Canvas.Top="213" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
+        <TextBox x:Name="brDaysLeft" Canvas.Left="144" TextWrapping="Wrap" Canvas.Top="213" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"
                  Text="{Binding Path=DaysLeft, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Click="Save" Content="Save" Canvas.Left="17" Canvas.Top="247" HorizontalAlignment="Left" VerticalAlignment="Top" />
         <Button Content="Cancel" Canvas.Left="62" Canvas.Top="247" Click="Cancel"/>
