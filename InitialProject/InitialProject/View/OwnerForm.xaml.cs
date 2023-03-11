@@ -57,8 +57,8 @@ namespace TravelAgency.Forms
                  else if(RadioHotel.IsChecked == true) { SelectedHotel.TypeOfHotel = "Hotel"; }
                  else if(RadioHut.IsChecked == true) { SelectedHotel.TypeOfHotel = "Hut"; }
                  else if(RadioApartment.IsChecked == true) { SelectedHotel.TypeOfHotel = "Apartment"; }
-                 SelectedHotel.MaxNumberOfGusets = Convert.ToInt32( brMax.Text);
-                 SelectedHotel.MinNumberOfGusets = Convert.ToInt32(brMin.Text);
+                 SelectedHotel.MaxNumberOfGuests = Convert.ToInt32( brMax.Text);
+                 SelectedHotel.MinNumberOfDays = Convert.ToInt32(brMin.Text);
                  SelectedHotel.NumberOfDaysToCancel = Convert.ToInt32(brDaysLeft.Text);
 
                  Hotel updatedHotel = _repository.Update(SelectedHotel);
@@ -106,8 +106,9 @@ namespace TravelAgency.Forms
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
+            const string FilePath = "../../../Resources/Data/hotels.csv";
             List<Hotel> hotels = new List<Hotel>();
-            hotels = _repository.ReadFromHotelsCsv("C:\\Users\\kojic\\Desktop\\TuristickaAgencija\\TuristickaAgencija\\InitialProject\\InitialProject\\Resources\\Data\\hotels.csv");
+            hotels = _repository.ReadFromHotelsCsv(FilePath);
             DataPanel.ItemsSource = hotels;
         }
     }
