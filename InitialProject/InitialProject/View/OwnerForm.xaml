@@ -11,8 +11,8 @@
         <Label Content="Name:" Canvas.Left="10" Canvas.Top="34" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Location:" Canvas.Left="10" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Type:" Canvas.Left="11" Canvas.Top="116" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Max Gusets:" Canvas.Left="10" Canvas.Top="147" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Min Gusets:" Canvas.Left="10" Canvas.Top="178" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Max Guests:" Canvas.Left="10" Canvas.Top="147" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Min Days:" Canvas.Left="10" Canvas.Top="178" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Nuber of cancle days:" Canvas.Left="10" Canvas.Top="209" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtName" Canvas.Left="59" TextWrapping="Wrap" Canvas.Top="42" Width="120"
                  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -30,7 +30,7 @@
         </RadioButton>
         <RadioButton x:Name="RadioHotel" Content="Hotel" Canvas.Left="186" Canvas.Top="122" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
         </RadioButton>
-        <RadioButton x:Name="RadioApartment" Content="Apartmant" Canvas.Left="250" Canvas.Top="122" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
+        <RadioButton x:Name="RadioApartment" Content="Apartment" Canvas.Left="250" Canvas.Top="122" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
         </RadioButton>
         <RadioButton x:Name="RadioHut" Content="Hut" Canvas.Left="130" Canvas.Top="122" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
         </RadioButton>
