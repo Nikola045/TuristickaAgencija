@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using TravelAgency.Serializer;
+using System.IO;
 
 namespace TravelAgency.Model
 {
@@ -50,8 +51,6 @@ namespace TravelAgency.Model
             MaxNumberOfGusets = Convert.ToInt32(values[5]);
             MinNumberOfGusets = Convert.ToInt32(values[6]);
             NumberOfDaysToCancel = Convert.ToInt32(values[7]);
-
         }
-
     }
 }
