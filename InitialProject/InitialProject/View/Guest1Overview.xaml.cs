@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Graph.Models.Security;
+using TravelAgency.Forms;
 using TravelAgency.Model;
 using TravelAgency.Repository;
 
@@ -26,6 +27,18 @@ namespace TravelAgency.View
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
+        }
+
+        private void OpenGuest1Form(object sender, RoutedEventArgs e)
+        {
+            Guest1Form createGuest1Form = new Guest1Form();
+            createGuest1Form.Show();
+        }
+
+        private void OpenReserveForm(object sender, RoutedEventArgs e)
+        {
+            ReservationForm createReservationForm = new ReservationForm();
+            createReservationForm.Show();
         }
     }
 }

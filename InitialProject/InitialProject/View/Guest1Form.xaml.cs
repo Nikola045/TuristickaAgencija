@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelAgency.Model;
+using TravelAgency.Repository;
 
 namespace TravelAgency.View
 {
@@ -19,9 +21,34 @@ namespace TravelAgency.View
     /// </summary>
     public partial class Guest1Form : Window
     {
+        private readonly HotelRepository _repository;
+
+        const string FilePath = "../../../Resources/Data/hotels.csv";
         public Guest1Form()
         {
             InitializeComponent();
+            Title = "Search hotel";
+            DataContext = this;
+            _repository = new HotelRepository();
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            List<Hotel> hotels = new List<Hotel>();
+            hotels = _repository.ReadFromHotelsCsv(FilePath);
+            DataPanel.ItemsSource = hotels;
+        }
+
+        private void Search(object sender, RoutedEventArgs e)
+        {
+            List<Hotel> hotels = new List<Hotel>();
+            hotels = _repository.FindHotelByName(FilePath, txtName.Text,txtCity.Text);
+            DataPanel.ItemsSource = hotels;
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
