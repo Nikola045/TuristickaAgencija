@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.IdentityModel.Tokens;
 
 namespace TravelAgency.Repository
 {
@@ -98,7 +99,7 @@ namespace TravelAgency.Repository
         }
 
 
-        public List<Hotel> FindHotelByName(string FileName,string name,string city)
+        public List<Hotel> FindHotel(string FileName, string name, string city, string country, string type, string max, string cancel)
         {
             List<Hotel> hotels = new List<Hotel>();
 
@@ -119,16 +120,57 @@ namespace TravelAgency.Repository
                     hotel.MinNumberOfDays = Convert.ToInt32(fields[6]);
                     hotel.NumberOfDaysToCancel = Convert.ToInt32(fields[7]);
 
-                    if (fields[1].Equals(name) || fields[2].Equals(city))
+
+                    if (name != "")
                     {
-                        hotels.Add(hotel);
+                        if (fields[1] == name) 
+                        {
+                            hotels.Add(hotel);
+                        }
                     }
+                    if (city != "")
+                    {
+                        if (fields[2] == city)
+                        {
+                            hotels.Add(hotel);
+                        }
+                    }
+                    if (country != "")
+                    {
+                        if (fields[3] == country)
+                        {
+                            hotels.Add(hotel);
+                        }
+                    }
+                    if (type != "")
+                    {
+                        if (fields[4] == type)
+                        {
+                            hotels.Add(hotel);
+                        }
+                    }
+                    if (max != "")
+                    {
+                        if (fields[5] == max)
+                        {
+                            hotels.Add(hotel);
+                        }
+                    }
+                    if (cancel != "")
+                    {
+                        if (fields[7] == cancel)
+                        {
+                            hotels.Add(hotel);
+                        }
+                    }
+
+
                 }
             }
+            hotels = hotels.Distinct().ToList();
             return hotels;
         }
         
-
     }
 }
 

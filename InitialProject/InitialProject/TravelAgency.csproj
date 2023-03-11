@@ -35,4 +35,8 @@
     <PackageReference Include="Microsoft.Graph" Version="5.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="View\Guset2\" />
+  </ItemGroup>
+
 </Project>

@@ -50,6 +50,9 @@ namespace TravelAgency.View
         {
             Guest1 guest1 = new Guest1();
             //popuni combobox sa id-ma od gostiju kojima je rezervacija istekla pre najvise 5 dana
+            //procitam iz rservation.csv sve rezervacije 
+            //napuni kombo box samo sa onim kojima polje endDate < danasnjeg datuma
+            //napravi if koji proverava da li je proslo 5 dana od rezervacije endDate+5 < danasnjeg datuma
             //privremeno resenje:
             GuestsCB.Items.Add("1");
             GuestsCB.Items.Add("2");
