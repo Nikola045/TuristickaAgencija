@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace TravelAgency.Repository
 {
@@ -88,11 +89,14 @@ namespace TravelAgency.Repository
                     hotel.MinNumberOfDays = Convert.ToInt32(fields[6]);
                     hotel.NumberOfDaysToCancel = Convert.ToInt32(fields[7]);
 
+                    
                     hotels.Add(hotel);
+
                 }
             }
             return hotels;
         }
+
 
         public List<Hotel> FindHotelByName(string FileName,string name,string city)
         {
@@ -124,6 +128,7 @@ namespace TravelAgency.Repository
             return hotels;
         }
         
+
     }
 }
 

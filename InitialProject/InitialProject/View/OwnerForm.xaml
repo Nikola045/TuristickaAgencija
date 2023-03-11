@@ -22,6 +22,7 @@
                  Text="{Binding Path=Max, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="brMin" Canvas.Left="87" TextWrapping="Wrap" Canvas.Top="182" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
                  Text="{Binding Path=Min, UpdateSourceTrigger=PropertyChanged}"/>
+
         <TextBox x:Name="brDaysLeft" Canvas.Left="143" TextWrapping="Wrap" Canvas.Top="213" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"
                  Text="{Binding Path=DaysLeft, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Click="Save" Content="Save" Canvas.Left="17" Canvas.Top="247" HorizontalAlignment="Left" VerticalAlignment="Top" />
