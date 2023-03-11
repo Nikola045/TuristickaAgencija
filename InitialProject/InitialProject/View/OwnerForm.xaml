@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TravelAgency.Forms"
         xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Model" x:Class="TravelAgency.Forms.OwnerForm"
         mc:Ignorable="d"
-        Title="Create new accommodation" Height="350" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="Create new accommodation" Height="350" Width="1085" WindowStartupLocation="CenterScreen">
     <Canvas>
         <Label Content="Name:" Canvas.Left="10" Canvas.Top="34" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Location:" Canvas.Left="10" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -37,19 +37,9 @@
         <Label Content="City:" Canvas.Left="11" Canvas.Top="91" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Country:" Canvas.Left="166" Canvas.Top="91" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCountry" Canvas.Left="228" TextWrapping="Wrap" Canvas.Top="95" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBox>
-        <Label Content="Id:" Canvas.Left="10" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtId" Canvas.Left="38" TextWrapping="Wrap" Text="" Canvas.Top="20" Width="120"/>
-        <DataGrid x:Name="DataPanel" Height="264" Width="622" Canvas.Left="368" Canvas.Top="10"   
+        <DataGrid x:Name="DataPanel" AutoGenerateColumns="True" Height="264" Width="674" Canvas.Left="368" Canvas.Top="10"   
                   ItemsSource="{Binding Path = Hotels}" SelectedItem="{Binding Path=SelectedHotel}" HorizontalAlignment="Left" VerticalAlignment="Center" Loaded="OnLoad">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
-                <DataGridTextColumn Header="Country" Binding="{Binding Countryn}" Width="*"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
-                <DataGridTextColumn Header="Max Gusets" Binding="{Binding Max}" Width="*"/>
-                <DataGridTextColumn Header="Min Gusets" Binding="{Binding Min}" Width="*"/>
-                <DataGridTextColumn Header="Canacle days" Binding="{Binding CancelD}" Width="*"/>
-            </DataGrid.Columns>
+
         </DataGrid>
     </Canvas>
 </Window>

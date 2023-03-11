@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Comments" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Loaded="GradeAlert">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="760"/>
