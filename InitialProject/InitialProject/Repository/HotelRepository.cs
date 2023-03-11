@@ -84,8 +84,8 @@ namespace TravelAgency.Repository
                     hotel.City = fields[2];
                     hotel.Country = fields[3];
                     hotel.TypeOfHotel = fields[4];
-                    hotel.MaxNumberOfGusets = Convert.ToInt32(fields[5]);
-                    hotel.MinNumberOfGusets = Convert.ToInt32(fields[6]);
+                    hotel.MaxNumberOfGuests = Convert.ToInt32(fields[5]);
+                    hotel.MinNumberOfDays = Convert.ToInt32(fields[6]);
                     hotel.NumberOfDaysToCancel = Convert.ToInt32(fields[7]);
 
                     hotels.Add(hotel);
