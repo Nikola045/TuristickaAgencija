@@ -42,7 +42,12 @@ namespace TravelAgency.View
         private void Search(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = _repository.FindHotelByName(FilePath, txtName.Text,txtCity.Text);
+            string RadioChoice = null;
+            if (RadioHouse.IsChecked == true) { RadioChoice = "House"; }
+            else if (RadioHotel.IsChecked == true) { RadioChoice = "Hotel"; }
+            else if (RadioHut.IsChecked == true) { RadioChoice = "Hut"; }
+            else if (RadioApartment.IsChecked == true) { RadioChoice = "Apartment"; }
+            hotels = _repository.FindHotel(FilePath, txtName.Text, txtCity.Text, txtCountry.Text, RadioChoice, brMax.Text, brDaysLeft.Text);
             DataPanel.ItemsSource = hotels;
         }
 
