@@ -76,8 +76,6 @@ namespace TravelAgency
                         commentsOverview.Show();
                         Close();
                     }
-
-
                 } 
                 else
                 {
