@@ -88,6 +88,8 @@ namespace TravelAgency.Forms
                     Convert.ToInt32(brDaysLeft.Text));
                  Hotel savedHotel = _repository.Save(newHotel);
 
+                MessageBox.Show("Uspesno unet smestaj");
+
                 txtName.Clear();
                 txtCity.Clear();
                 txtCountry.Clear();

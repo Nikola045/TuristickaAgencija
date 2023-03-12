@@ -25,8 +25,8 @@
 
         <TextBox x:Name="brDaysLeft" Canvas.Left="143" TextWrapping="Wrap" Canvas.Top="213" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"
                  Text="{Binding Path=DaysLeft, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Click="Save" Content="Save" Canvas.Left="17" Canvas.Top="247" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <Button Content="Cancel" Canvas.Left="62" Canvas.Top="247" Click="Cancel"/>
+        <Button Click="Save" Content="Save" Canvas.Left="15" Canvas.Top="289" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Button Content="Cancel" Canvas.Left="59" Canvas.Top="289" Click="Cancel"/>
         <RadioButton x:Name="RadioHouse" Content="House" Canvas.Left="62" Canvas.Top="122" GroupName="type" HorizontalAlignment="Center" VerticalAlignment="Top">
         </RadioButton>
         <RadioButton x:Name="RadioHotel" Content="Hotel" Canvas.Left="186" Canvas.Top="122" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type">
@@ -42,5 +42,7 @@
                   ItemsSource="{Binding Path = Hotels}" SelectedItem="{Binding Path=SelectedHotel}" HorizontalAlignment="Left" VerticalAlignment="Center" Loaded="OnLoad">
 
         </DataGrid>
+        <Label Content="Insert Picture URL:" Canvas.Left="11" Canvas.Top="235"/>
+        <TextBox Canvas.Left="120" TextWrapping="Wrap" Text="" Canvas.Top="239" Width="168" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Canvas>
 </Window>
