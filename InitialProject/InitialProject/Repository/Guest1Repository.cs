@@ -8,5 +8,6 @@ namespace TravelAgency.Repository
 {
     public class Guest1Repository
     {
+
     }
 }

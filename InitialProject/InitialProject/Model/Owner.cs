@@ -5,6 +5,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TravelAgency.Model
 {
@@ -34,5 +35,7 @@ namespace TravelAgency.Model
             Username = values[1];
             Password = values[2];
         }
+
+        
     }
 }

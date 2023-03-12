@@ -70,14 +70,12 @@ namespace TravelAgency
                         guest1Overview.Show();
                         Close();
                     }
-                    if (user.LoginRole == "Guset2")
+                    if (user.LoginRole == "Guest2")
                     {
                         OwnerOverview commentsOverview = new OwnerOverview(user);
                         commentsOverview.Show();
                         Close();
                     }
-
-
                 } 
                 else
                 {
