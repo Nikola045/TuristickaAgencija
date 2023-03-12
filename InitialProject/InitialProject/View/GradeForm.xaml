@@ -5,19 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View"
         mc:Ignorable="d"
-        Title="GradeForm" Height="448" Width="450">
-    <Grid Margin="10,23,10,4">
+        Title="GradeForm" Height="482" Width="450" Loaded="Window_Loaded">
+    <Grid Margin="10,23,10,-42">
         <Label Grid.Column="1" Content="Cleanliness of the guest:" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top"></Label>
         <Label Grid.Column="1" Content="Respecting the rules:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
 
         <Label Grid.Column="1" Content="Comment:" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top"/>
         <Label Content="Enter ID of guest:" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="GuestsCB" HorizontalAlignment="Left" Margin="110,51,0,0" VerticalAlignment="Top" Width="120" Loaded="GusetLoaded"/>
-        <TextBox HorizontalAlignment="Left" Margin="14,183,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="296" Height="62"/>
-        <Button Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="202,370,0,0" VerticalAlignment="Top" Height="31" Width="79"/>
-        <Button Content="Grade Guest" HorizontalAlignment="Left" Margin="301,367,0,0" VerticalAlignment="Top" Height="34" Width="99" Grid.Column="1" Click="Button_Click"/>
+        <TextBox x:Name="CommentText" HorizontalAlignment="Left" Margin="14,183,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="369" Height="103"/>
+        <Button Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="202,370,0,0" VerticalAlignment="Top" Height="31" Width="79" Click="Close"/>
+        <Button x:Name="SaveGrade" Content="Grade Guest" HorizontalAlignment="Left" Margin="301,367,0,0" VerticalAlignment="Top" Height="34" Width="99" Grid.Column="1" Click="SaveGrade_Click"/>
         <ComboBox x:Name="CB1" HorizontalAlignment="Left" Margin="153,82,0,0" VerticalAlignment="Top" Width="120" Loaded="Fill"/>
         <ComboBox x:Name="CB2" HorizontalAlignment="Left" Margin="134,121,0,0" VerticalAlignment="Top" Width="120" Loaded="Fill1"/>
+        <Label x:Name="TimeLeft" Content="" HorizontalAlignment="Left" Margin="235,49,0,0" VerticalAlignment="Top" Width="165"/>
     </Grid>
 
 </Window>
