@@ -120,7 +120,6 @@ namespace TravelAgency.Repository
                     hotel.MinNumberOfDays = Convert.ToInt32(fields[6]);
                     hotel.NumberOfDaysToCancel = Convert.ToInt32(fields[7]);
 
-
                     if (name != "")
                     {
                         if (fields[1] == name) 
@@ -163,8 +162,6 @@ namespace TravelAgency.Repository
                             hotels.Add(hotel);
                         }
                     }
-
-
                 }
             }
             hotels = hotels.Distinct().ToList();

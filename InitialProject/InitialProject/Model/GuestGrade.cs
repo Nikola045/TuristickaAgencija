@@ -9,16 +9,16 @@ namespace TravelAgency.Model
 {
     internal class GuestGrade : TravelAgency.Serializer.ISerializable
     {
-        public int GuestId { get; set; }
+        public string GuestUserName { get; set; }
         public int Cleanliness { get; set; }
         public int Respecting { get; set; }
         public string CommentText { get; set; }
 
         public GuestGrade() { }
 
-        public GuestGrade(int guestId, int cleanilness, int respecting, string commentText)
+        public GuestGrade(string guestUserName, int cleanilness, int respecting, string commentText)
         {
-            GuestId = guestId;
+            GuestUserName = guestUserName;
             Cleanliness = cleanilness;  
             Respecting = respecting;
             CommentText = commentText;
@@ -26,13 +26,13 @@ namespace TravelAgency.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { GuestId.ToString(), Cleanliness.ToString(), Respecting.ToString(), CommentText};
+            string[] csvValues = { GuestUserName, Cleanliness.ToString(), Respecting.ToString(), CommentText};
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            GuestId = Convert.ToInt32(values[0]);
+            GuestUserName = values[0];
             Cleanliness = Convert.ToInt32(values[1]);
             Respecting = Convert.ToInt32(values[2]);
             CommentText = values[3];

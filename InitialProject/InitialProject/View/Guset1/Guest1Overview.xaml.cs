@@ -37,7 +37,7 @@ namespace TravelAgency.View
 
         private void OpenReserveForm(object sender, RoutedEventArgs e)
         {
-            ReservationForm createReservationForm = new ReservationForm();
+            ReservationForm createReservationForm = new ReservationForm(LoggedInUser);
             createReservationForm.Show();
         }
     }

@@ -10,7 +10,7 @@ namespace TravelAgency.Repository
 {
     class GradeGuest1Repository
     {
-        private const string FilePath = "../../../Resources/Data/GuestRating.csv";
+        private const string FilePath = "../../../Resources/Data/guestRating.csv";
 
         private readonly Serializer<GuestGrade> _serializer;
 
