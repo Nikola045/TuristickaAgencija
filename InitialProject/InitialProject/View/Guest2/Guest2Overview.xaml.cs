@@ -35,5 +35,12 @@ namespace TravelAgency.View.Guest2
         public Guest2Overview(Model.User user)
         {
         }
+
+        private void OpenGuest2Form(object sender, RoutedEventArgs e)
+        {
+            Guest2Form createGuest2Form = new Guest2Form();
+            createGuest2Form.Show();
+
+        }
     }
 }
