@@ -111,7 +111,7 @@ namespace TravelAgency.View
                 DateTime dateTimeNow = DateTime.Now;
                     if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow)
                     {
-                        MessageBox.Show("You have " + (dateTimeNow.Day - reservations[i].EndDate.Day).ToString() + " days left to grade " + reservations[i].GuestUserName);
+                        MessageBox.Show("You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName);
                     }
             }
         }

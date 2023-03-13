@@ -28,9 +28,9 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         Description = description;
         Lenguage = lenguage;
         MaxNumberOfGuests = maxNumberOfGuests;
-        CheckPoints = checkPoints;
         StartTime = startTime;
         TourDuration = tourDuration;
+        CheckPoints = checkPoints;
     }
 
     public string[] ToCSV()
@@ -48,12 +48,12 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         Description = values[4];
         Lenguage = values[5];
         MaxNumberOfGuests = Convert.ToInt32(values[6]);
+        StartTime = Convert.ToDateTime(values[7]);
+        TourDuration = Convert.ToInt32(values[8]);
         for (int i = 0; i < CheckPoints.Count; i++)
         {
-            CheckPoints[i].Id = Convert.ToInt32(values[7]);
-            CheckPoints[i].Name = values[8];
+            CheckPoints[i].Id = Convert.ToInt32(values[i+9]);
+            CheckPoints[i].Name = values[i+10];
         }
-        StartTime = Convert.ToDateTime(values[9]);
-        TourDuration = Convert.ToInt32(values[10]);
     }
 }
