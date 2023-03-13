@@ -81,7 +81,7 @@ namespace TravelAgency.Repository
             return tours;
         }
 
-        public List<Hotel> FindTour(string FileName, string city, string country, string duration, string leng, string num)
+        public List<Tour> FindTour(string FileName, string city, string country, string duration, string leng, string num)
         {
             List<Tour> tours = new List<Tour>();
 
