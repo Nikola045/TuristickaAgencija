@@ -24,8 +24,6 @@ namespace TravelAgency.View
     public partial class GuideForm : Window
     {
 
-        GuideForm NewGrade = new GuideForm();
-
         private readonly TourRepository _repository;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,7 +42,7 @@ namespace TravelAgency.View
 
         private void SaveTour(object sender, RoutedEventArgs e)
         {
-            GuideForm newTour = new GuideForm(/*mora forma da se napravi na xaml file*/);
+            //GuideForm newTour = new GuideForm(/*mora forma da se napravi na xaml file*/);
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

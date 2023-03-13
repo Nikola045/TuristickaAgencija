@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View"
         mc:Ignorable="d"
-        Title="GuideForm" Height="450" Width="800">
+        Title="GuideForm" Height="380" Width="799">
     <Grid>
-        
+        <Button Content="Save" HorizontalAlignment="Left" Margin="106,291,0,0" VerticalAlignment="Top" Click="SaveTour"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="166,291,0,0" VerticalAlignment="Top" Click="Cancel"/>
+        <TextBox HorizontalAlignment="Left" Margin="106,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="106,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="106,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="106,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="106,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="106,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="106,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="106,231,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <DatePicker HorizontalAlignment="Left" Margin="115,202,0,0" VerticalAlignment="Top"/>
+        <ListBox Margin="240,47,380,208"/>
+        <Button Content="Add Check Point" HorizontalAlignment="Left" Margin="240,229,0,0" VerticalAlignment="Top" Width="114"/>
+
     </Grid>
 </Window>
