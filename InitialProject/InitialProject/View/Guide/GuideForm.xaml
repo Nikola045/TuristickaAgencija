@@ -7,6 +7,26 @@
         mc:Ignorable="d"
         Title="GuideForm" Height="450" Width="800">
     <Grid>
-        
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="82,58,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="73,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="264,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="108,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtLenguage" HorizontalAlignment="Left" Margin="100,189,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.515,0.55"/>
+        <TextBox x:Name="txtMaxGuests" HorizontalAlignment="Left" Margin="108,221,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.522,0.741"/>
+        <TextBox x:Name="txtCheckPoints" HorizontalAlignment="Left" Margin="115,252,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtStartTime" HorizontalAlignment="Left" Margin="99,283,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="35,54,0,0" VerticalAlignment="Top"/>
+        <Label Content="Location:" HorizontalAlignment="Left" Margin="35,87,0,0" VerticalAlignment="Top" Width="98"/>
+        <Label Content="City:" HorizontalAlignment="Left" Margin="35,118,0,0" VerticalAlignment="Top"/>
+        <Label Content="Country:" HorizontalAlignment="Left" Margin="207,118,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.423,0.201"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="35,154,0,0" VerticalAlignment="Top"/>
+        <Label Content="Language:" HorizontalAlignment="Left" Margin="35,185,0,0" VerticalAlignment="Top"/>
+        <Label Content="Max Guests:" HorizontalAlignment="Left" Margin="35,217,0,0" VerticalAlignment="Top"/>
+        <Label Content="Check Points:" HorizontalAlignment="Left" Margin="35,248,0,0" VerticalAlignment="Top"/>
+        <Label Content="Start time:" HorizontalAlignment="Left" Margin="35,279,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtTourDuration" HorizontalAlignment="Left" Margin="114,314,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="TourDuration:" HorizontalAlignment="Left" Margin="35,310,0,0" VerticalAlignment="Top"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,335,0,0" VerticalAlignment="Top" Height="47" Width="108"/>
+
     </Grid>
 </Window>
