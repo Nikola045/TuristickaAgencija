@@ -5,6 +5,9 @@
     <Compile Update="View\GradeForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest2\Guest2Overview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guset1\Guest1Overview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -20,6 +23,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\GradeForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\Guest2Overview.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guset1\Guest1Overview.xaml">
