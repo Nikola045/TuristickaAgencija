@@ -1,0 +1,25 @@
+﻿<Window x:Class="TravelAgency.View.GuideForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelAgency.View"
+        mc:Ignorable="d"
+        Title="GuideForm" Height="380" Width="799">
+    <Grid>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="106,291,0,0" VerticalAlignment="Top" Click="SaveTour"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="166,291,0,0" VerticalAlignment="Top" Click="Cancel"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="106,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="106,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="106,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="106,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtLangueg" HorizontalAlignment="Left" Margin="106,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtMaxNumberOfGuests" HorizontalAlignment="Left" Margin="106,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtTourDuration" HorizontalAlignment="Left" Margin="106,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="StartDateBox" HorizontalAlignment="Left" Margin="115,202,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="ListCheckPoints" Margin="240,47,380,208"/>
+        <Button  Content="Add Check Point" HorizontalAlignment="Left" Margin="240,229,0,0" VerticalAlignment="Top" Width="114" Click="AddhecjPointToList"/>
+        <ComboBox x:Name="CheckPointsCB" HorizontalAlignment="Left" Margin="106,229,0,0" VerticalAlignment="Top" Width="120" Loaded="LoadChackPoints"/>
+
+    </Grid>
+</Window>

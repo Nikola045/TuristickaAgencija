@@ -26,13 +26,14 @@ namespace TravelAgency.Forms
 
         private readonly HotelRepository _repository;
 
+        public int DaysLeftForGrade = 5;
+
         public OwnerOverview(User user)
         {
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
             _repository = new HotelRepository();
-            
         }
 
         public OwnerOverview()
@@ -41,7 +42,7 @@ namespace TravelAgency.Forms
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)
         {
-            OwnerForm createOwnerForm = new OwnerForm();
+            Guest2Form createOwnerForm = new Guest2Form();
             createOwnerForm.Show();
         }
 
@@ -50,6 +51,11 @@ namespace TravelAgency.Forms
         {
             GradeForm createGradeForm = new GradeForm();
             createGradeForm.Show();
+        }
+
+        private void GradeAlert(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

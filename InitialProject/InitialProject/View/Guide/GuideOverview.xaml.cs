@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,21 +11,33 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Microsoft.Graph.Models.Security;
 using TravelAgency.Model;
-using TravelAgency.Repository;
 
 namespace TravelAgency.View
 {
-    public partial class Guest1Overview : Window
+    /// <summary>
+    /// Interaction logic for GuideOverview.xaml
+    /// </summary>
+    public partial class GuideOverview : Window
     {
-        public User LoggedInUser { get; set; }
-        public Guest1Overview(User user)
+        public GuideOverview()
+        {
+        }
+            public User LoggedInUser { get; set; }
+
+        public GuideOverview(User user)
         {
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
         }
+
+        private void OpenGuideForm(object sender, RoutedEventArgs e)
+        {
+            GuideForm createGuideForm = new GuideForm();
+            createGuideForm.Show();
+        }
     }
 }
+
 

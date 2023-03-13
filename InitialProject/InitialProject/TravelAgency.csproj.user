@@ -5,7 +5,19 @@
     <Compile Update="View\GradeForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Guest1Overview.xaml.cs">
+    <Compile Update="View\Guest2\Guest2Overview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guset1\Guest1Overview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guide\GuideForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guide\GuideOverview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ReservationForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -13,7 +25,19 @@
     <Page Update="View\GradeForm.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Guest1Overview.xaml">
+    <Page Update="View\Guest2\Guest2Overview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guset1\Guest1Overview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guide\GuideForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guide\GuideOverview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ReservationForm.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

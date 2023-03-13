@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="View\Guset2\**" />
+    <EmbeddedResource Remove="View\Guset2\**" />
+    <None Remove="View\Guset2\**" />
+    <Page Remove="View\Guset2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
