@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TravelAgency.View"
         mc:Ignorable="d"
         Title="GuideOverview" Height="450" Width="800">
-    <Grid Loaded="GradeAlert">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="760"/>
@@ -28,7 +28,7 @@
                 </StackPanel>
             </Button>
             <Separator/>
-            <Button Click="" >
+            <Button>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../Resources/Images/add.png" Width="20" Height="25"/>
                     <TextBlock Text="LiveTour" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="46" />

@@ -61,8 +61,8 @@ namespace TravelAgency
                     }
                     if (user.LoginRole == "Guide")
                     {
-                        OwnerOverview commentsOverview = new OwnerOverview(user);
-                        commentsOverview.Show();
+                        GuideOverview guideOverview = new GuideOverview(user);
+                        guideOverview.Show();
                         Close();
                     }
                     if (user.LoginRole == "Guest1")
