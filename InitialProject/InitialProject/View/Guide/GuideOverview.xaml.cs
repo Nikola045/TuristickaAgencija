@@ -23,5 +23,10 @@ namespace TravelAgency.View
         {
             InitializeComponent();
         }
+
+        private void OpenGuideForm(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
