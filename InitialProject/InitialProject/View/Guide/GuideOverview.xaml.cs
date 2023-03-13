@@ -23,7 +23,7 @@ namespace TravelAgency.View
         public GuideOverview()
         {
         }
-            public User LoggedInUser { get; set; }
+        public User LoggedInUser { get; set; }
 
         public GuideOverview(User user)
         {
