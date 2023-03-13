@@ -55,7 +55,7 @@ namespace TravelAgency.View.Guest2
         {
             List<Tour> tours = new List<Tour>();
             
-            tours = _repository.FindTour(FilePath, txtCity.Text, txtCountry.Text, txtDuration, txtLeng.Text, txtNum.Text);
+            tours = _repository.FindTour(FilePath, txtCity.Text, txtCountry.Text, txtDuration.Text, txtLeng.Text, txtNum.Text);
             DataPanel.ItemsSource = tours;
         }
 

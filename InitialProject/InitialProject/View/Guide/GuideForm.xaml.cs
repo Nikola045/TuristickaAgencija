@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -11,10 +12,13 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Repository;
+using static Azure.Core.HttpHeader;
 
 namespace TravelAgency.View
 {
@@ -24,9 +28,12 @@ namespace TravelAgency.View
     public partial class GuideForm : Window
     {
 
-        private readonly TourRepository _repository;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private readonly TourRepository tourRepository;
+
+        private readonly CheckPointRepository checkPointRepository;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -37,17 +44,51 @@ namespace TravelAgency.View
             InitializeComponent();
             Title = "Create new tour";
             DataContext = this;
-            _repository = new TourRepository();
+            tourRepository = new TourRepository();
+            checkPointRepository = new CheckPointRepository();
         }
 
         private void SaveTour(object sender, RoutedEventArgs e)
         {
-            //GuideForm newTour = new GuideForm(/*mora forma da se napravi na xaml file*/);
+            /*Tour newTour = new Tour(
+                    tourRepository.NextId(),
+                    txtName.Text,
+                    txtCity.Text,
+                    txtCountry.Text,
+                    txtDescription.Text,
+                    txtLangueg.Text,
+                    Convert.ToInt32(txtMaxNumberOfGuests.Text),
+                    Convert.ToDateTime(StartDateBox.Text),
+                    Convert.ToInt32(txtTourDuration.Text)
+                    //treba dodati jos iz usnosa cekpointa
+                    );
+            Tour savedTour= tourRepository.Save(newTour);
+
+            MessageBox.Show("Uspesno uneta tura");*/
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void AddhecjPointToList(object sender, RoutedEventArgs e)
+        {
+            ListCheckPoints.Items.Add(CheckPointsCB.Text);
+        }
+
+        private void LoadChackPoints(object sender, RoutedEventArgs e)
+        {
+            List<CheckPoint> checkPoints = new List<CheckPoint>();
+            string FilePath = "../../../Resources/Data/checkPoints.csv";
+            checkPoints = checkPointRepository.ReadFromCheckPointsCsv(FilePath);
+
+            for (int i = 0; i < checkPoints.Count; i++)
+            {
+                
+                CheckPointsCB.Items.Add(checkPoints[i].Name);
+            }
+
         }
     }
 }
