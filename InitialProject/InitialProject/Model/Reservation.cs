@@ -11,6 +11,7 @@ namespace TravelAgency.Model
 {
     internal class Reservation : TravelAgency.Serializer.ISerializable { 
         public int Id { get; set; }
+        public string GuestUserName { get; set; }
         public string HotelName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -19,18 +20,10 @@ namespace TravelAgency.Model
 
         public Reservation() { }
 
-        public Reservation(int id, string hotelName, DateTime startDate, DateTime endDate, int numberOfDays, int numberOfGuests)
+        public Reservation(int id,string guestUserName, string hotelName, DateTime startDate, DateTime endDate, int numberOfDays, int numberOfGuests)
         {
             Id = id;
-            HotelName = hotelName;
-            StartDate = startDate;
-            EndDate = endDate;
-            NumberOfDays = numberOfDays;
-            NumberOfGuests = numberOfGuests;
-        }
-
-        public Reservation(string hotelName, DateTime startDate, DateTime endDate, int numberOfDays, int numberOfGuests)
-        {
+            GuestUserName = guestUserName;
             HotelName = hotelName;
             StartDate = startDate;
             EndDate = endDate;
@@ -40,7 +33,7 @@ namespace TravelAgency.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), HotelName, StartDate.ToString(), EndDate.ToString(), NumberOfDays.ToString(), NumberOfGuests.ToString() };
+            string[] csvValues = { Id.ToString(), GuestUserName, HotelName, StartDate.ToString(), EndDate.ToString(), NumberOfDays.ToString(), NumberOfGuests.ToString() };
             return csvValues;
         }
 
@@ -48,10 +41,11 @@ namespace TravelAgency.Model
         {
             Id = Convert.ToInt32(values[0]);
             HotelName = values[1];
-            StartDate = Convert.ToDateTime(values[2]);
-            EndDate = Convert.ToDateTime(values[3]);
-            NumberOfDays = Convert.ToInt32(values[4]);
-            NumberOfGuests = Convert.ToInt32(values[5]);
+            GuestUserName= values[2];  
+            StartDate = Convert.ToDateTime(values[3]);
+            EndDate = Convert.ToDateTime(values[4]);
+            NumberOfDays = Convert.ToInt32(values[5]);
+            NumberOfGuests = Convert.ToInt32(values[6]);
         }
     }
 }

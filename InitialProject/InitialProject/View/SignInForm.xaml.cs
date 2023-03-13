@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using TravelAgency.View;
+using TravelAgency.View.Guest2;
 
 namespace TravelAgency
 {
@@ -60,8 +61,8 @@ namespace TravelAgency
                     }
                     if (user.LoginRole == "Guide")
                     {
-                        OwnerOverview commentsOverview = new OwnerOverview(user);
-                        commentsOverview.Show();
+                        GuideOverview guideOverview = new GuideOverview(user);
+                        guideOverview.Show();
                         Close();
                     }
                     if (user.LoginRole == "Guest1")
@@ -72,12 +73,10 @@ namespace TravelAgency
                     }
                     if (user.LoginRole == "Guest2")
                     {
-                        OwnerOverview commentsOverview = new OwnerOverview(user);
-                        commentsOverview.Show();
+                        Guest2Overview guest2Overview = new Guest2Overview(user);
+                        guest2Overview.Show();
                         Close();
                     }
-
-
                 } 
                 else
                 {

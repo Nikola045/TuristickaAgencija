@@ -13,31 +13,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Model;
 
-namespace TravelAgency.View
+namespace TravelAgency.View.Guest2
 {
     /// <summary>
-    /// Interaction logic for GuideOverview.xaml
+    /// Interaction logic for Guest2Overview.xaml
     /// </summary>
-    public partial class GuideOverview : Window
+    public partial class Guest2Overview : Window
     {
-        public GuideOverview()
+        public Guest2Overview()
         {
         }
         public User LoggedInUser { get; set; }
 
-        public GuideOverview(User user)
+        public Guest2Overview(User user)
         {
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
         }
 
-        private void OpenGuideForm(object sender, RoutedEventArgs e)
+        private void OpenGuest2Form(object sender, RoutedEventArgs e)
         {
-            GuideForm createGuideForm = new GuideForm();
-            createGuideForm.Show();
+            Guest2Form createGuest2Form = new Guest2Form();
+            createGuest2Form.Show();
         }
     }
 }
-
-

@@ -27,7 +27,8 @@ namespace TravelAgency.View
     {
         GuestGrade NewGrade = new GuestGrade();
 
-        private readonly GradeGuest1Repository _repository;
+        private readonly GradeGuest1Repository _repository; 
+        private readonly ReservationRepository reservationRepository;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,20 +45,23 @@ namespace TravelAgency.View
             Title = "Create new comment";
             DataContext = this;
             _repository = new GradeGuest1Repository();
+            reservationRepository = new ReservationRepository();
         }
 
-            private void GusetLoaded(object sender, RoutedEventArgs e)
+        private void GusetLoaded(object sender, RoutedEventArgs e)
         {
-            Guest1 guest1 = new Guest1();
-            //popuni combobox sa id-ma od gostiju kojima je rezervacija istekla pre najvise 5 dana
-            //procitam iz rservation.csv sve rezervacije 
-            //napuni kombo box samo sa onim kojima polje endDate < danasnjeg datuma
-            //napravi if koji proverava da li je proslo 5 dana od rezervacije endDate+5 < danasnjeg datuma
-            //privremeno resenje:
-            GuestsCB.Items.Add("1");
-            GuestsCB.Items.Add("2");
-            GuestsCB.Items.Add("3");
+            List<Reservation> reservations = new List<Reservation>();
+            string FilePath = "../../../Resources/Data/reservations.csv";
+            reservations = reservationRepository.ReadFromReservationsCsv(FilePath);
 
+            for (int i = 0; i < reservations.Count; i++)
+            {
+                DateTime dateTimeNow = DateTime.Now;
+                if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow)
+                {
+                    GuestsCB.Items.Add(reservations[i].GuestUserName);
+                }
+            }
         }
 
         private void Fill(object sender, RoutedEventArgs e)
@@ -82,13 +86,39 @@ namespace TravelAgency.View
         {
 
             GuestGrade newGrade = new GuestGrade(
-                Convert.ToInt32(GuestsCB.Text),
+                GuestsCB.Text,
                 Convert.ToInt32(CB1.Text),
                 Convert.ToInt32(CB2.Text),
                 CommentText.Text);
             _repository.Save(newGrade);
 
             CommentText.Clear();
+            object selectedItem = GuestsCB.SelectedItem;
+            if (GuestsCB.Items.Contains(selectedItem))
+            {
+                GuestsCB.Items.Remove(selectedItem);
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Reservation> reservations = new List<Reservation>();
+            string FilePath = "../../../Resources/Data/reservations.csv";
+            reservations = reservationRepository.ReadFromReservationsCsv(FilePath);
+
+            for (int i = 0; i < reservations.Count; i++)
+            {
+                DateTime dateTimeNow = DateTime.Now;
+                    if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow)
+                    {
+                        MessageBox.Show("You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName);
+                    }
+            }
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

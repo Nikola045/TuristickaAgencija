@@ -23,7 +23,7 @@ namespace TravelAgency.Forms
 
 
 
-    public partial class OwnerForm : Window
+    public partial class Guest2Form : Window
     {
         public Hotel SelectedHotel { get; set; }
 
@@ -36,7 +36,7 @@ namespace TravelAgency.Forms
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }        
 
-        public OwnerForm()
+        public Guest2Form()
         {
             InitializeComponent();
             Title = "Create new hotel";
@@ -87,6 +87,8 @@ namespace TravelAgency.Forms
                     Convert.ToInt32(brMin.Text),
                     Convert.ToInt32(brDaysLeft.Text));
                  Hotel savedHotel = _repository.Save(newHotel);
+
+                MessageBox.Show("Uspesno unet smestaj");
 
                 txtName.Clear();
                 txtCity.Clear();
