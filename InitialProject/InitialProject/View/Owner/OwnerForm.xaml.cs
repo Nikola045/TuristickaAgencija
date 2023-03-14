@@ -20,14 +20,11 @@ using System.Windows.Data;
 
 namespace TravelAgency.Forms
 {
-
-
-
     public partial class Guest2Form : Window
     {
-        public Hotel SelectedHotel { get; set; }
+        private const string FilePath = "../../../Resources/Data/hotels.csv";
 
-        private readonly HotelRepository _repository;
+        private readonly HotelRepository hotelRepository;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -41,36 +38,11 @@ namespace TravelAgency.Forms
             InitializeComponent();
             Title = "Create new hotel";
             DataContext = this;
-            _repository = new HotelRepository();
+            hotelRepository = new HotelRepository();
         }
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            
-             if (SelectedHotel != null)
-             {
-                 SelectedHotel.Id = _repository.NextId();
-                 SelectedHotel.Name = txtName.Text;
-                 SelectedHotel.City = txtCity.Text;
-                 SelectedHotel.Country = txtCountry.Text;
-                 if(RadioHouse.IsChecked == true) { SelectedHotel.TypeOfHotel = "House"; }
-                 else if(RadioHotel.IsChecked == true) { SelectedHotel.TypeOfHotel = "Hotel"; }
-                 else if(RadioHut.IsChecked == true) { SelectedHotel.TypeOfHotel = "Hut"; }
-                 else if(RadioApartment.IsChecked == true) { SelectedHotel.TypeOfHotel = "Apartment"; }
-                 SelectedHotel.MaxNumberOfGuests = Convert.ToInt32( brMax.Text);
-                 SelectedHotel.MinNumberOfDays = Convert.ToInt32(brMin.Text);
-                 SelectedHotel.NumberOfDaysToCancel = Convert.ToInt32(brDaysLeft.Text);
-
-                 Hotel updatedHotel = _repository.Update(SelectedHotel);
-                 if (updatedHotel != null)
-                 {
-                     int index = OwnerOverview.Hotels.IndexOf(SelectedHotel);
-                     OwnerOverview.Hotels.Remove(SelectedHotel);
-                     OwnerOverview.Hotels.Insert(index, updatedHotel);
-                 }
-             }
-             else
-             {
                  string typeOfHotel = null;
                  if (RadioHouse.IsChecked == true) typeOfHotel = "House";
                  else if (RadioHotel.IsChecked == true) typeOfHotel = "Hotel";
@@ -78,7 +50,7 @@ namespace TravelAgency.Forms
                  else if (RadioApartment.IsChecked == true) typeOfHotel = "Apartment";
 
                 Hotel newHotel = new Hotel(
-                    _repository.NextId(),
+                    hotelRepository.NextId(),
                     txtName.Text,
                     txtCity.Text,
                     txtCountry.Text,
@@ -86,7 +58,7 @@ namespace TravelAgency.Forms
                     Convert.ToInt32(brMax.Text),
                     Convert.ToInt32(brMin.Text),
                     Convert.ToInt32(brDaysLeft.Text));
-                 Hotel savedHotel = _repository.Save(newHotel);
+                 Hotel savedHotel = hotelRepository.Save(newHotel);
 
                 MessageBox.Show("Uspesno unet smestaj");
 
@@ -95,23 +67,26 @@ namespace TravelAgency.Forms
                 txtCountry.Clear();
                 brMax.Clear();
                 brMin.Clear();
-                brDaysLeft.Clear();
-            }
+                brDaysLeft.Clear();  
+        }
 
-            
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {         
+            List<Hotel> hotels = new List<Hotel>();
+            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
+            DataPanel.ItemsSource = hotels;
+        }
+
+        private void AddImage(object sender, RoutedEventArgs e)
+        {
+            ListImg.Items.Add(txtImg.Text);
+            MessageBox.Show("Slika dodata");
+            txtImg.Clear();
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {
-            const string FilePath = "../../../Resources/Data/hotels.csv";
-            List<Hotel> hotels = new List<Hotel>();
-            hotels = _repository.ReadFromHotelsCsv(FilePath);
-            DataPanel.ItemsSource = hotels;
         }
     }
 }

@@ -12,16 +12,8 @@ using TravelAgency.View;
 
 namespace TravelAgency.Forms
 {
-    /// <summary>
-    /// Interaction logic for CommentsOverview.xaml
-    /// </summary>
     public partial class OwnerOverview : Window
     {
-
-        public static ObservableCollection<Hotel> Hotels { get; set; }
-
-        public Owner SelectedHotel { get; set; }
-
         public User LoggedInUser { get; set; }
 
         private readonly HotelRepository _repository;
@@ -36,9 +28,7 @@ namespace TravelAgency.Forms
             _repository = new HotelRepository();
         }
 
-        public OwnerOverview()
-        {
-        }
+        public OwnerOverview(){}
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)
         {
@@ -46,16 +36,10 @@ namespace TravelAgency.Forms
             createOwnerForm.Show();
         }
 
-        // Todo: dodaj funkciju koja ce da izbacuje massagebox nardenih 5 dana od isteka rezervacije nekom gostu
         private void OpenGradeForm(object sender, RoutedEventArgs e)
         {
             GradeForm createGradeForm = new GradeForm();
             createGradeForm.Show();
-        }
-
-        private void GradeAlert(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
