@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TravelAgency.Model;
 
 internal class Tour : TravelAgency.Serializer.ISerializable
@@ -19,7 +21,7 @@ internal class Tour : TravelAgency.Serializer.ISerializable
     public int TourDuration { get; set; }
 
     public Tour() { }
-    public Tour(int id, string name, string city, string country, string description, string lenguage, int maxNumberOfGuests, List<CheckPoint> checkPoints, DateTime startTime, int tourDuration)
+    public Tour(int id, string name, string city, string country, string description, string lenguage, int maxNumberOfGuests, DateTime startTime, int tourDuration, List<CheckPoint> checkPoints)
     {
         Id = id;
         Name = name;
@@ -35,8 +37,21 @@ internal class Tour : TravelAgency.Serializer.ISerializable
 
     public string[] ToCSV()
     {
-        string[] csvValues = { Id.ToString(), Name, City, Country, Description, Lenguage, MaxNumberOfGuests.ToString(), CheckPoints.ToString(), StartTime.ToString(), TourDuration.ToString() };
+        string CheckPointsList = null;
+        foreach (CheckPoint point in CheckPoints) //pravi problem posle prvog unosa
+        {
+            CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + "|"; // nekako na kraju da se ne unese poslednja "|"
+        }
+        string[] csvValues = { Id.ToString(), Name, City, Country, Description, Lenguage, MaxNumberOfGuests.ToString(), StartTime.ToString(), TourDuration.ToString(), CheckPointsList };
         return csvValues;
+    }
+
+    public CheckPoint ConvertToCheckPoint(int id, string name)
+    {
+        CheckPoint checkPoint = new CheckPoint();
+        checkPoint.Id = id;
+        checkPoint.Name = name;
+        return checkPoint;
     }
 
     public void FromCSV(string[] values)
@@ -50,10 +65,7 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         MaxNumberOfGuests = Convert.ToInt32(values[6]);
         StartTime = Convert.ToDateTime(values[7]);
         TourDuration = Convert.ToInt32(values[8]);
-        for (int i = 0; i < CheckPoints.Count; i++)
-        {
-            CheckPoints[i].Id = Convert.ToInt32(values[i+9]);
-            CheckPoints[i].Name = values[i+10];
-        }
+        //fali da se uvede petlja ali foreach ne radi
+        CheckPoints.Add(ConvertToCheckPoint(Convert.ToInt32(values[9]), values[10]));
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Guest2Form" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="DataPanel" Margin="314,108,25,108" />
+        <DataGrid x:Name="DataPanel" Margin="314,108,25,108" Loaded="LoadData" />
         <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="60,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="60,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Margin="60,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
