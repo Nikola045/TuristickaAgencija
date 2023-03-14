@@ -50,7 +50,21 @@ namespace TravelAgency.View
 
         private void SaveTour(object sender, RoutedEventArgs e)
         {
-            /*Tour newTour = new Tour(
+            string FilePath = "../../../Resources/Data/checkPoints.csv";
+
+            List<CheckPoint> checkPoints = new List<CheckPoint>();
+            foreach (string item in ListCheckPoints.Items)
+            {
+                CheckPoint checkPoint = new CheckPoint();
+                checkPoint.Name = item.ToString();
+                checkPoint.Id = checkPointRepository.GetByName(FilePath, checkPoint.Name).Id;
+                checkPoints.Add(checkPoint);
+            }
+            if (ListCheckPoints.Items.Count < 2)
+                MessageBox.Show("Morate uneti bar dve Kljucne tacke Pocetnu i krajnju");
+            
+
+            Tour newTour = new Tour(
                     tourRepository.NextId(),
                     txtName.Text,
                     txtCity.Text,
@@ -59,12 +73,12 @@ namespace TravelAgency.View
                     txtLangueg.Text,
                     Convert.ToInt32(txtMaxNumberOfGuests.Text),
                     Convert.ToDateTime(StartDateBox.Text),
-                    Convert.ToInt32(txtTourDuration.Text)
-                    //treba dodati jos iz usnosa cekpointa
+                    Convert.ToInt32(txtTourDuration.Text),
+                    checkPoints
                     );
             Tour savedTour= tourRepository.Save(newTour);
 
-            MessageBox.Show("Uspesno uneta tura");*/
+            MessageBox.Show("Uspesno uneta tura");
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

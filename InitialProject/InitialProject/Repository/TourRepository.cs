@@ -44,6 +44,9 @@ namespace TravelAgency.Repository
             return _tours.Max(t => t.Id) + 1;
         }
 
+
+
+
         public List<Tour> ReadFromToursCsv(string FileName)
         {
             List<Tour> tours = new List<Tour>();
@@ -67,21 +70,26 @@ namespace TravelAgency.Repository
                     tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
                     tour.StartTime = Convert.ToDateTime(fields[7]);
                     tour.TourDuration = Convert.ToInt32(fields[8]);
-                    for (int i = 0; i < tour.CheckPoints.Count; i++)
+                    int i = 9;
+                    int j = 10;
+                    List<CheckPoint> checkPoints = new List<CheckPoint>();
+                    while (j <= fields.Count())
                     {
-                        tour.CheckPoints[i].Id = Convert.ToInt32(fields[i+9]);
-                        tour.CheckPoints[i].Name = fields[i+10];
+                        CheckPoint checkPoint = new CheckPoint();
+                        checkPoint.Id = Convert.ToInt32(fields[i]);
+                        checkPoint.Name = fields[j];
+                        checkPoints.Add(checkPoint);
+                        i = i + 2;
+                        j = j + 2;
                     }
-
-
+                    tour.CheckPoints = checkPoints;
                     tours.Add(tour);
-
                 }
             }
             return tours;
         }
 
-        public List<Tour> FindTour(string FileName, string city, string country, string duration, string leng, string num)
+        public List<Tour> FindTour(string FileName, string city, string country, string leng, string duration, string num) //ne radi kako treba
         {
             List<Tour> tours = new List<Tour>();
 
@@ -102,11 +110,20 @@ namespace TravelAgency.Repository
                     tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
                     tour.StartTime = Convert.ToDateTime(fields[7]);
                     tour.TourDuration = Convert.ToInt32(fields[8]);
-                    for (int i = 0; i < tour.CheckPoints.Count; i++)
+                    
+                    int i = 9;
+                    int j = 10;
+                    List<CheckPoint> checkPoints = new List<CheckPoint>();
+                    while (j <= fields.Count())
                     {
-                        tour.CheckPoints[i].Id = Convert.ToInt32(fields[i + 9]);
-                        tour.CheckPoints[i].Name = fields[i + 10];
+                        CheckPoint checkPoint = new CheckPoint();
+                        checkPoint.Id = Convert.ToInt32(fields[i]);
+                        checkPoint.Name = fields[j];
+                        checkPoints.Add(checkPoint);
+                        i = i + 2;
+                        j = j + 2;
                     }
+                    tour.CheckPoints = checkPoints;
 
                     if (city != "")
                     {

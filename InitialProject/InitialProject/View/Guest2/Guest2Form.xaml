@@ -5,16 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
-        Title="Guest2Form" Height="450" Width="800">
-    <Grid>
-        <DataGrid x:Name="DataPanel" Margin="314,108,25,108" />
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="60,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="60,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Margin="60,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtLeng" HorizontalAlignment="Left" Margin="60,185,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtNum" HorizontalAlignment="Left" Margin="60,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="120"/>
+        Title="Guest2Form" Height="450" Width="1190">
+    <Grid Margin="0,0,36,0">
+        <DataGrid x:Name="DataPanel" Margin="314,108,25,108" Loaded="LoadData" >
+            
+        </DataGrid>
+
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="148,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="148,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Margin="148,185,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtLeng" HorizontalAlignment="Left" Margin="148,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtNum" HorizontalAlignment="Left" Margin="148,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="34,266,0,0" VerticalAlignment="Top" Click="Search"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="100,266,0,0" VerticalAlignment="Top" Click="Cancel"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="100,112,0,0" VerticalAlignment="Top"/>
+        <Label Content="Duration" HorizontalAlignment="Left" Margin="85,181,0,0" VerticalAlignment="Top"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="87,135,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lenguage" HorizontalAlignment="Left" Margin="77,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Max Nuber of Guests" HorizontalAlignment="Left" Margin="17,213,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
