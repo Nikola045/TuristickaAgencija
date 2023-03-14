@@ -32,5 +32,9 @@ namespace TravelAgency.Model
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
         }
+
+        public override string ToString() {
+            return Id + "|" + Name;
+        }
     }
 }
