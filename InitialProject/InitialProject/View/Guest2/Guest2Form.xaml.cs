@@ -28,7 +28,7 @@ namespace TravelAgency.View.Guest2
     {
         private readonly TourRepository _repository;
 
-        const string FilePath = "../../../Resources/Data/hotels.csv";
+        const string FilePath = "../../../Resources/Data/tours.csv";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -55,7 +55,7 @@ namespace TravelAgency.View.Guest2
         {
             List<Tour> tours = new List<Tour>();
             
-            tours = _repository.FindTour(FilePath, txtCity.Text, txtCountry.Text, txtDuration.Text, txtLeng.Text, txtNum.Text);
+            tours = _repository.FindTour(FilePath, txtCity.Text, txtCountry.Text, txtLeng.Text, txtDuration.Text, txtNum.Text);
             DataPanel.ItemsSource = tours;
         }
 

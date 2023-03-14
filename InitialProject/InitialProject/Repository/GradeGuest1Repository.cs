@@ -14,19 +14,19 @@ namespace TravelAgency.Repository
 
         private readonly Serializer<GuestGrade> _serializer;
 
-        private List<GuestGrade> _grades;
+        private List<GuestGrade> grades;
 
         public GradeGuest1Repository()
         {
             _serializer = new Serializer<GuestGrade>();
-            _grades = _serializer.FromCSV(FilePath);
+            grades = _serializer.FromCSV(FilePath);
         }
 
         public GuestGrade Save(GuestGrade grade)
         {
-            _grades = _serializer.FromCSV(FilePath);
-            _grades.Add(grade);
-            _serializer.ToCSV(FilePath, _grades);
+            grades = _serializer.FromCSV(FilePath);
+            grades.Add(grade);
+            _serializer.ToCSV(FilePath, grades);
             return grade;
         }
     }

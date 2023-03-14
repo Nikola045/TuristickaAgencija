@@ -38,24 +38,35 @@ internal class Tour : TravelAgency.Serializer.ISerializable
     public string[] ToCSV()
     {
         string CheckPointsList = null;
-        foreach (CheckPoint point in CheckPoints) //pravi problem posle prvog unosa
+        int currentIndex = 0;
+        foreach (CheckPoint point in CheckPoints) 
         {
-            CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + "|"; // nekako na kraju da se ne unese poslednja "|"
+            string delimiter = "|";
+            if (currentIndex == CheckPoints.Count-1) delimiter = "";
+            CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + delimiter;
+            currentIndex++;
         }
         string[] csvValues = { Id.ToString(), Name, City, Country, Description, Lenguage, MaxNumberOfGuests.ToString(), StartTime.ToString(), TourDuration.ToString(), CheckPointsList };
         return csvValues;
     }
 
-    public CheckPoint ConvertToCheckPoint(int id, string name)
-    {
-        CheckPoint checkPoint = new CheckPoint();
-        checkPoint.Id = id;
-        checkPoint.Name = name;
-        return checkPoint;
-    }
+
 
     public void FromCSV(string[] values)
     {
+        int i = 9;
+        int j = 10;
+        List<CheckPoint> checkPoints = new List<CheckPoint>();
+        while (j <= values.Count())
+        {
+            CheckPoint checkPoint = new CheckPoint();
+            checkPoint.Id = Convert.ToInt32(values[i]);
+            checkPoint.Name = values[j];
+            checkPoints.Add(checkPoint);
+            i = i + 2;
+            j = j + 2;
+        }
+        CheckPoints = checkPoints;
         Id = Convert.ToInt32(values[0]);
         Name = values[1];
         City = values[2];
@@ -65,7 +76,5 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         MaxNumberOfGuests = Convert.ToInt32(values[6]);
         StartTime = Convert.ToDateTime(values[7]);
         TourDuration = Convert.ToInt32(values[8]);
-        //fali da se uvede petlja ali foreach ne radi
-        CheckPoints.Add(ConvertToCheckPoint(Convert.ToInt32(values[9]), values[10]));
     }
 }
