@@ -59,5 +59,12 @@ namespace TravelAgency.View.Guest2
             DataPanel.ItemsSource = tours;
         }
 
+        private void LoadData(object sender, RoutedEventArgs e)
+        {
+            const string FilePath = "../../../Resources/Data/tours.csv";
+            List<Tour> tours = new List<Tour>();
+            tours = _repository.ReadFromToursCsv(FilePath);
+            DataPanel.ItemsSource = tours;
+        }
     }
 }
