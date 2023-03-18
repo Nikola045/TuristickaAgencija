@@ -32,7 +32,7 @@ namespace TravelAgency.Forms
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)
         {
-            Guest2Form createOwnerForm = new Guest2Form();
+            OwnerForm createOwnerForm = new OwnerForm();
             createOwnerForm.Show();
         }
 
