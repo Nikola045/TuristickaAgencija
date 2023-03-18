@@ -40,8 +40,8 @@ namespace TravelAgency.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            HotelName = values[1];
-            GuestUserName= values[2];  
+            GuestUserName = values[1];
+            HotelName = values[2];
             StartDate = Convert.ToDateTime(values[3]);
             EndDate = Convert.ToDateTime(values[4]);
             NumberOfDays = Convert.ToInt32(values[5]);
