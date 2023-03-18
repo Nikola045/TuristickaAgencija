@@ -45,5 +45,26 @@ namespace TravelAgency.Repository
             }
             return checkPoints;
         }
+
+        public CheckPoint GetByName(string FileName,string name)
+        {
+            using (StreamReader sr = new StreamReader(FileName))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    CheckPoint checkPoint = new CheckPoint();
+                    checkPoint.Id = Convert.ToInt32(fields[0]);
+                    checkPoint.Name = fields[1];
+
+                    if(checkPoint.Name == name)
+                    return checkPoint;
+
+                }
+            }
+            return null;
+        }
     }
 }

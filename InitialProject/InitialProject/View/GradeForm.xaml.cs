@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -20,14 +21,12 @@ using TravelAgency.Repository;
 
 namespace TravelAgency.View
 {
-    /// <summary>
-    /// Interaction logic for GradeForm.xaml
-    /// </summary>
     public partial class GradeForm : Window
     {
-        GuestGrade NewGrade = new GuestGrade();
+        private const string FilePath = "../../../Resources/Data/reservations.csv";
 
-        private readonly GradeGuest1Repository _repository; 
+        private readonly GradeGuest1Repository gradeGuest1Repository; 
+
         private readonly ReservationRepository reservationRepository;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -37,21 +36,19 @@ namespace TravelAgency.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
-
         public GradeForm()
         {
             InitializeComponent();
             Title = "Create new comment";
             DataContext = this;
-            _repository = new GradeGuest1Repository();
+            gradeGuest1Repository = new GradeGuest1Repository();
             reservationRepository = new ReservationRepository();
         }
 
         private void GusetLoaded(object sender, RoutedEventArgs e)
         {
             List<Reservation> reservations = new List<Reservation>();
-            string FilePath = "../../../Resources/Data/reservations.csv";
+            
             reservations = reservationRepository.ReadFromReservationsCsv(FilePath);
 
             for (int i = 0; i < reservations.Count; i++)
@@ -59,7 +56,8 @@ namespace TravelAgency.View
                 DateTime dateTimeNow = DateTime.Now;
                 if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow)
                 {
-                    GuestsCB.Items.Add(reservations[i].GuestUserName);
+                    string reservationForm = reservations[i].Id.ToString() + " " + reservations[i].GuestUserName;
+                    GuestsCB.Items.Add(reservationForm);
                 }
             }
         }
@@ -84,26 +82,32 @@ namespace TravelAgency.View
 
         private void SaveGrade_Click(object sender, RoutedEventArgs e)
         {
-
             GuestGrade newGrade = new GuestGrade(
                 GuestsCB.Text,
                 Convert.ToInt32(CB1.Text),
                 Convert.ToInt32(CB2.Text),
                 CommentText.Text);
-            _repository.Save(newGrade);
+            gradeGuest1Repository.Save(newGrade);
 
             CommentText.Clear();
             object selectedItem = GuestsCB.SelectedItem;
+            Reservation oldReservation = new Reservation();
+            int id;
+            string line = selectedItem.ToString();
+            string[] fields = line.Split(' ');
+            id = Convert.ToInt32(fields[0]);
+
+            oldReservation = reservationRepository.FindReservationByID(id);
             if (GuestsCB.Items.Contains(selectedItem))
             {
                 GuestsCB.Items.Remove(selectedItem);
+                reservationRepository.Delete(oldReservation);
             }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             List<Reservation> reservations = new List<Reservation>();
-            string FilePath = "../../../Resources/Data/reservations.csv";
             reservations = reservationRepository.ReadFromReservationsCsv(FilePath);
 
             for (int i = 0; i < reservations.Count; i++)
