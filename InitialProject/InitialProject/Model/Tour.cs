@@ -16,11 +16,14 @@ internal class Tour : TravelAgency.Serializer.ISerializable
     public string Description { get; set; }
     public string Lenguage { get; set; }
     public int MaxNumberOfGuests { get; set; }
+    public int CurentNumberOfGuests { get; set; }
     public List<CheckPoint> CheckPoints { get; set; }
     public DateTime StartTime { get; set; }
     public int TourDuration { get; set; }
 
-    public Tour() { }
+    public Tour() {
+        CurentNumberOfGuests = 0;
+    }
     public Tour(int id, string name, string city, string country, string description, string lenguage, int maxNumberOfGuests, DateTime startTime, int tourDuration, List<CheckPoint> checkPoints)
     {
         Id = id;
@@ -30,6 +33,7 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         Description = description;
         Lenguage = lenguage;
         MaxNumberOfGuests = maxNumberOfGuests;
+        CurentNumberOfGuests = 0;
         StartTime = startTime;
         TourDuration = tourDuration;
         CheckPoints = checkPoints;
@@ -46,7 +50,7 @@ internal class Tour : TravelAgency.Serializer.ISerializable
             CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + delimiter;
             currentIndex++;
         }
-        string[] csvValues = { Id.ToString(), Name, City, Country, Description, Lenguage, MaxNumberOfGuests.ToString(), StartTime.ToString(), TourDuration.ToString(), CheckPointsList };
+        string[] csvValues = { Id.ToString(), Name, City, Country, Description, Lenguage, MaxNumberOfGuests.ToString(), CurentNumberOfGuests.ToString(), StartTime.ToString(), TourDuration.ToString(), CheckPointsList };
         return csvValues;
     }
 
@@ -54,8 +58,8 @@ internal class Tour : TravelAgency.Serializer.ISerializable
 
     public void FromCSV(string[] values)
     {
-        int i = 9;
-        int j = 10;
+        int i = 10;
+        int j = 11;
         List<CheckPoint> checkPoints = new List<CheckPoint>();
         while (j <= values.Count())
         {
@@ -74,7 +78,8 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         Description = values[4];
         Lenguage = values[5];
         MaxNumberOfGuests = Convert.ToInt32(values[6]);
-        StartTime = Convert.ToDateTime(values[7]);
-        TourDuration = Convert.ToInt32(values[8]);
+        CurentNumberOfGuests = Convert.ToInt32(values[7]);
+        StartTime = Convert.ToDateTime(values[8]);
+        TourDuration = Convert.ToInt32(values[9]);
     }
 }
