@@ -58,6 +58,7 @@ namespace TravelAgency.View
                 CheckPoint checkPoint = new CheckPoint();
                 checkPoint.Name = item.ToString();
                 checkPoint.Id = checkPointRepository.GetByName(FilePath, checkPoint.Name).Id;
+                checkPoint.Status = "Neaktivna";
                 checkPoints.Add(checkPoint);
             }
             if (ListCheckPoints.Items.Count < 2)
@@ -86,12 +87,12 @@ namespace TravelAgency.View
             this.Close();
         }
 
-        private void AddhecjPointToList(object sender, RoutedEventArgs e)
+        private void AddCheckPointToList(object sender, RoutedEventArgs e)
         {
             ListCheckPoints.Items.Add(CheckPointsCB.Text);
         }
 
-        private void LoadChackPoints(object sender, RoutedEventArgs e)
+        private void LoadCheckPoints(object sender, RoutedEventArgs e)
         {
             List<CheckPoint> checkPoints = new List<CheckPoint>();
             string FilePath = "../../../Resources/Data/checkPoints.csv";
