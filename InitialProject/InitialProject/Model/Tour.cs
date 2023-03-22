@@ -21,8 +21,11 @@ internal class Tour : TravelAgency.Serializer.ISerializable
     public DateTime StartTime { get; set; }
     public int TourDuration { get; set; }
 
+    public string TourStatus { get; set; }
+
     public Tour() {
         CurentNumberOfGuests = 0;
+        TourStatus = "Nezapoceta";
     }
     public Tour(int id, string name, string city, string country, string description, string lenguage, int maxNumberOfGuests, DateTime startTime, int tourDuration, List<CheckPoint> checkPoints)
     {
@@ -37,6 +40,8 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         StartTime = startTime;
         TourDuration = tourDuration;
         CheckPoints = checkPoints;
+        TourStatus = "Nezapoceta";
+
     }
 
     public string[] ToCSV()
@@ -47,10 +52,10 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         {
             string delimiter = "|";
             if (currentIndex == CheckPoints.Count-1) delimiter = "";
-            CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + delimiter;
+            CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + "|" + point.Status + delimiter;
             currentIndex++;
         }
-        string[] csvValues = { Id.ToString(), Name, City, Country, Description, Lenguage, MaxNumberOfGuests.ToString(), CurentNumberOfGuests.ToString(), StartTime.ToString(), TourDuration.ToString(), CheckPointsList };
+        string[] csvValues = { Id.ToString(), Name, City, Country, Description, Lenguage, MaxNumberOfGuests.ToString(), CurentNumberOfGuests.ToString(), StartTime.ToString(), TourDuration.ToString(), TourStatus, CheckPointsList};
         return csvValues;
     }
 
@@ -58,17 +63,20 @@ internal class Tour : TravelAgency.Serializer.ISerializable
 
     public void FromCSV(string[] values)
     {
-        int i = 10;
-        int j = 11;
+        int i = 11;
+        int j = 12;
+        int k = 13;
         List<CheckPoint> checkPoints = new List<CheckPoint>();
-        while (j <= values.Count())
+        while (k <= values.Count())
         {
             CheckPoint checkPoint = new CheckPoint();
             checkPoint.Id = Convert.ToInt32(values[i]);
             checkPoint.Name = values[j];
+            checkPoint.Status = values[k];
             checkPoints.Add(checkPoint);
-            i = i + 2;
-            j = j + 2;
+            i = i + 3;
+            j = j + 3;
+            k = k + 3;
         }
         CheckPoints = checkPoints;
         Id = Convert.ToInt32(values[0]);
@@ -81,5 +89,6 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         CurentNumberOfGuests = Convert.ToInt32(values[7]);
         StartTime = Convert.ToDateTime(values[8]);
         TourDuration = Convert.ToInt32(values[9]);
+        TourStatus = values[10];
     }
 }
