@@ -8,7 +8,10 @@
     <Compile Update="View\Guest2\Guest2Overview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Guest1\Guest1Overview.xaml.cs">
+    <Compile Update="View\Guide\GuideLiveTour.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guset1\Guest1Overview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guide\GuideForm.xaml.cs">
@@ -28,7 +31,10 @@
     <Page Update="View\Guest2\Guest2Overview.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Guest1\Guest1Overview.xaml">
+    <Page Update="View\Guide\GuideLiveTour.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guset1\Guest1Overview.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guide\GuideForm.xaml">
