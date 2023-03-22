@@ -13,17 +13,20 @@ namespace TravelAgency.Model
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public string Status { get; set; }
+
         public CheckPoint() { }
-        public CheckPoint(int id, string name)
+        public CheckPoint(int id, string name, string status)
         {
 
             Id = id;
             Name = name;
+            Status = status;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name };
+            string[] csvValues = { Id.ToString(), Name, Status };
             return csvValues;
         }
 
@@ -31,10 +34,11 @@ namespace TravelAgency.Model
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
+            Status = values[2];
         }
 
         public override string ToString() {
-            return Id + "|" + Name;
+            return Id + "|" + Name + "|" + Status;
         }
     }
 }

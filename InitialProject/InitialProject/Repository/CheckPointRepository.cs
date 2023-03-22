@@ -37,6 +37,7 @@ namespace TravelAgency.Repository
                     CheckPoint checkPoint = new CheckPoint();
                     checkPoint.Id = Convert.ToInt32(fields[0]);
                     checkPoint.Name = fields[1];
+                    checkPoint.Status = fields[2];
 
 
                     checkPoints.Add(checkPoint);
@@ -58,6 +59,7 @@ namespace TravelAgency.Repository
                     CheckPoint checkPoint = new CheckPoint();
                     checkPoint.Id = Convert.ToInt32(fields[0]);
                     checkPoint.Name = fields[1];
+                    checkPoint.Status = fields[2];  
 
                     if(checkPoint.Name == name)
                     return checkPoint;
