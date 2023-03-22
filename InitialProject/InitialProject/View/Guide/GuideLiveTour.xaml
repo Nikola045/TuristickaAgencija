@@ -7,10 +7,8 @@
         mc:Ignorable="d"
         Title="GuideLiveTour" Height="450" Width="800">
     <Grid>
-        <DatePicker HorizontalAlignment="Left" Margin="92,123,0,0" VerticalAlignment="Top"/>
-        <DataGrid  Margin="358,43,82,143"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="102,167,0,0" VerticalAlignment="Top" Height="35" Width="82"/>
-        <Label Content="Izaberi datum:" HorizontalAlignment="Left" Margin="100,86,0,0" VerticalAlignment="Top" Width="86"/>
+        <DataGrid x:Name="DataPanel" Margin="358,43,82,143" Loaded="OnLoad" SelectionChanged="DataPanel_SelectionChanged"/>
+        <Button Click="ShowTours" Content="Show Todays Tours" HorizontalAlignment="Left" Margin="102,167,0,0" VerticalAlignment="Top" Height="35" Width="117"/>
 
     </Grid>
 </Window>

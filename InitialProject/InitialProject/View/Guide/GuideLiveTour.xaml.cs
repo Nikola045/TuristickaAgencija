@@ -25,6 +25,8 @@ namespace TravelAgency.View.Guide
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private readonly TourRepository tourRepository;
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -34,6 +36,29 @@ namespace TravelAgency.View.Guide
             InitializeComponent();
             Title = "Create new tour";
             DataContext = this;
+            tourRepository = new TourRepository();
+        }
+
+        private void ShowTours(object sender, RoutedEventArgs e)
+        {
+            const string FilePath = "../../../Resources/Data/tours.csv";
+            List<Tour> tours = new List<Tour>();
+            tours = tourRepository.GetTodaysTours(FilePath);
+            DataPanel.ItemsSource = tours;
+
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            const string FilePath = "../../../Resources/Data/tours.csv";
+            List<Tour> tours = new List<Tour>();
+            tours = tourRepository.ReadFromToursCsv(FilePath);
+            DataPanel.ItemsSource = tours;
+        }
+
+        private void DataPanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         /*private void LoadCheckPoints(object sender, RoutedEventArgs e)
