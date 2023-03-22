@@ -69,20 +69,23 @@ namespace TravelAgency.Repository
                     tour.Description = fields[4];
                     tour.Lenguage = fields[5];
                     tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
-                    tour.MaxNumberOfGuests = Convert.ToInt32(fields[7]);
+                    tour.CurentNumberOfGuests = Convert.ToInt32(fields[7]);
                     tour.StartTime = Convert.ToDateTime(fields[8]);
                     tour.TourDuration = Convert.ToInt32(fields[9]);
                     int i = 10;
                     int j = 11;
+                    int k = 12;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
                     while (j <= fields.Count())
                     {
                         CheckPoint checkPoint = new CheckPoint();
                         checkPoint.Id = Convert.ToInt32(fields[i]);
                         checkPoint.Name = fields[j];
+                        checkPoint.Status = fields[k];
                         checkPoints.Add(checkPoint);
-                        i = i + 2;
-                        j = j + 2;
+                        i = i + 3;
+                        j = j + 3;
+                        k = k + 3;
                     }
                     tour.CheckPoints = checkPoints;
                     tours.Add(tour);

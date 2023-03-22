@@ -47,7 +47,7 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         {
             string delimiter = "|";
             if (currentIndex == CheckPoints.Count-1) delimiter = "";
-            CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + delimiter;
+            CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + "|" + point.Status + delimiter;
             currentIndex++;
         }
         string[] csvValues = { Id.ToString(), Name, City, Country, Description, Lenguage, MaxNumberOfGuests.ToString(), CurentNumberOfGuests.ToString(), StartTime.ToString(), TourDuration.ToString(), CheckPointsList };
@@ -60,15 +60,18 @@ internal class Tour : TravelAgency.Serializer.ISerializable
     {
         int i = 10;
         int j = 11;
+        int k = 12;
         List<CheckPoint> checkPoints = new List<CheckPoint>();
         while (j <= values.Count())
         {
             CheckPoint checkPoint = new CheckPoint();
             checkPoint.Id = Convert.ToInt32(values[i]);
             checkPoint.Name = values[j];
+            checkPoint.Status = values[k];
             checkPoints.Add(checkPoint);
-            i = i + 2;
-            j = j + 2;
+            i = i + 3;
+            j = j + 3;
+            k = k + 3;
         }
         CheckPoints = checkPoints;
         Id = Convert.ToInt32(values[0]);
