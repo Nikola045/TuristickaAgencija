@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Model;
+using TravelAgency.View.Guide;
 
 namespace TravelAgency.View
 {
@@ -36,6 +37,12 @@ namespace TravelAgency.View
         {
             GuideForm createGuideForm = new GuideForm();
             createGuideForm.Show();
+        }
+
+        private void OpenLiveTourForm(object sender, RoutedEventArgs e)
+        {
+            GuideLiveTour createLiveTourForm = new GuideLiveTour();
+            createLiveTourForm.Show();
         }
     }
 }

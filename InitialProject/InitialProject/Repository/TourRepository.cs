@@ -72,11 +72,12 @@ namespace TravelAgency.Repository
                     tour.CurentNumberOfGuests = Convert.ToInt32(fields[7]);
                     tour.StartTime = Convert.ToDateTime(fields[8]);
                     tour.TourDuration = Convert.ToInt32(fields[9]);
-                    int i = 10;
-                    int j = 11;
-                    int k = 12;
+                    tour.TourStatus = fields[10];
+                    int i = 11;
+                    int j = 12;
+                    int k = 13;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
-                    while (j <= fields.Count())
+                    while (k <= fields.Count())
                     {
                         CheckPoint checkPoint = new CheckPoint();
                         checkPoint.Id = Convert.ToInt32(fields[i]);
@@ -130,6 +131,21 @@ namespace TravelAgency.Repository
             return tours;
         }
 
+        public List<Tour> GetTodaysTours(string FileName)
+        {
+            List<Tour> allTours = ReadFromToursCsv(FileName);
+            List<Tour> tours = new List<Tour>();
+            DateTime dateTime = DateTime.Today;
+            for (int i = 0; i < allTours.Count; i++)
+            {
+                if (allTours[i].StartTime == dateTime)
+                {
+                    Tour tour = allTours[i];
+                    tours.Add(tour);
+                }
+            }
+            return tours;
+        }
     }
 
 }
