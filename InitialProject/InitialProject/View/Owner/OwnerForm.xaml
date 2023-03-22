@@ -25,7 +25,7 @@
         <TextBox x:Name="brDaysLeft" Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="411" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="CancelDaysValidation"
                  Text="{Binding Path=DaysLeft, UpdateSourceTrigger=PropertyChanged}" Height="36"/>
         <Button x:Name="saveBTN" Click="Save" Content="Save" Canvas.Left="41" Canvas.Top="563" HorizontalAlignment="Center" VerticalAlignment="Top" Height="69" Width="89" />
-        <Button Content="Cancel" Canvas.Left="151" Canvas.Top="563" Click="Cancel" Height="67" Width="85" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Cancel" Canvas.Left="239" Canvas.Top="565" Click="Cancel" Height="67" Width="85" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <RadioButton x:Name="RadioHouse" Content="House" Canvas.Left="62" Canvas.Top="231" GroupName="type" HorizontalAlignment="Center" VerticalAlignment="Top" Height="21" Checked="HouseCheckValidation">
         </RadioButton>
         <RadioButton x:Name="RadioHotel" Content="Hotel" Canvas.Left="186" Canvas.Top="231" HorizontalAlignment="Center" VerticalAlignment="Top" GroupName="type" Height="21" Checked="HotelCheckValidation">
@@ -43,6 +43,7 @@
         <Label Content="Insert Picture URL:" Canvas.Left="12" Canvas.Top="480" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top"/>
         <TextBox x:Name="txtImg" Canvas.Left="121" TextWrapping="Wrap" Text="" Canvas.Top="480" Width="168" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" TextChanged="UrlValidation"/>
         <Button x:Name="AddImgButton" Content="Add" IsEnabled ="False" Canvas.Left="294" Canvas.Top="480" Click="AddImage" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top"/>
+        <Button Content="Start Demo" Height="69" Width="72" HorizontalAlignment="Left" Canvas.Top="563" VerticalAlignment="Center" Canvas.Left="153"></Button>
         <ListBox Height="148" Width="646" x:Name="ImageList" Canvas.Left="368" Canvas.Top="532" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button Content="Delete" Canvas.Left="325" Canvas.Top="480" Click="DeleteImage" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label x:Name="LabelNameValidator" Content="" Canvas.Left="56" Canvas.Top="93" Height="21" Width="140" HorizontalAlignment="Left" Foreground="Red"/>
