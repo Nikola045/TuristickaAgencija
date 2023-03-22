@@ -117,6 +117,11 @@ namespace TravelAgency.View
                     {
                         MessageBox.Show("You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName);
                     }
+
+                if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) < dateTimeNow)
+                {
+                    reservationRepository.Delete(reservations[i]);
+                }
             }
         }
 
