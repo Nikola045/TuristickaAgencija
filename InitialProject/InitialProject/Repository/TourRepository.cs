@@ -69,10 +69,11 @@ namespace TravelAgency.Repository
                     tour.Description = fields[4];
                     tour.Lenguage = fields[5];
                     tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
-                    tour.StartTime = Convert.ToDateTime(fields[7]);
-                    tour.TourDuration = Convert.ToInt32(fields[8]);
-                    int i = 9;
-                    int j = 10;
+                    tour.MaxNumberOfGuests = Convert.ToInt32(fields[7]);
+                    tour.StartTime = Convert.ToDateTime(fields[8]);
+                    tour.TourDuration = Convert.ToInt32(fields[9]);
+                    int i = 10;
+                    int j = 11;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
                     while (j <= fields.Count())
                     {
@@ -92,7 +93,7 @@ namespace TravelAgency.Repository
 
         public List<Tour> FindTour(string FileName, string city, string country, string leng, string duration, string num)
         {
-            List<Tour> allTours = ReadAllTours(FileName);
+            List<Tour> allTours = ReadFromToursCsv(FileName);
             List<Tour> tours = new List<Tour>();
 
             for (int i = 0; i < allTours.Count; i++)
@@ -112,7 +113,7 @@ namespace TravelAgency.Repository
                         {
                             if (Convert.ToString(allTours[i].TourDuration) == duration || duration == "")
                             {
-                                if (Convert.ToString(allTours[i].MaxNumberOfGuests) == num || num == "")//////uslov
+                                if (allTours[i].CurentNumberOfGuests + Convert.ToInt32(num) <= allTours[i].MaxNumberOfGuests || num == "")//////uslov
                                 {
                                     Tour tour = allTours[i];
                                     tours.Add(tour);
@@ -125,7 +126,7 @@ namespace TravelAgency.Repository
             }
             return tours;
         }
-
+        /*
         public List<Tour> ReadAllTours(string FileName)
         {
             List<Tour> allTours = new List<Tour>();
@@ -145,11 +146,12 @@ namespace TravelAgency.Repository
                     tour.Description = fields[4];
                     tour.Lenguage = fields[5];
                     tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
-                    tour.StartTime = Convert.ToDateTime(fields[7]);
-                    tour.TourDuration = Convert.ToInt32(fields[8]);
+                    tour.MaxNumberOfGuests = Convert.ToInt32(fields[7]);
+                    tour.StartTime = Convert.ToDateTime(fields[8]);
+                    tour.TourDuration = Convert.ToInt32(fields[9]);
 
-                    int i = 9;
-                    int j = 10;
+                    int i = 10;
+                    int j = 11;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
                     while (j <= fields.Count())
                     {
@@ -168,7 +170,7 @@ namespace TravelAgency.Repository
             }
             allTours = allTours.Distinct().ToList();
             return allTours;
-        }
+        }*/
     }
 
 }
