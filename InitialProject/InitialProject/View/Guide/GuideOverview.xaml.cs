@@ -11,9 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TravelAgency.Forms;
 using TravelAgency.Model;
-using TravelAgency.Repository;
 
 namespace TravelAgency.View
 {
@@ -22,6 +20,9 @@ namespace TravelAgency.View
     /// </summary>
     public partial class GuideOverview : Window
     {
+        public GuideOverview()
+        {
+        }
         public User LoggedInUser { get; set; }
 
         public GuideOverview(User user)
@@ -31,9 +32,6 @@ namespace TravelAgency.View
             LoggedInUser = user;
         }
 
-        public GuideOverview()
-        {
-        }
         private void OpenGuideForm(object sender, RoutedEventArgs e)
         {
             GuideForm createGuideForm = new GuideForm();
@@ -41,3 +39,5 @@ namespace TravelAgency.View
         }
     }
 }
+
+

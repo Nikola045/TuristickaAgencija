@@ -1,6 +1,4 @@
-﻿using Microsoft.Graph.Models;
-using Microsoft.Graph.Models.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TravelAgency.Repository;
+using TravelAgency.Model;
 
 namespace TravelAgency.View.Guest2
 {
@@ -22,8 +20,10 @@ namespace TravelAgency.View.Guest2
     /// </summary>
     public partial class Guest2Overview : Window
     {
+        public Guest2Overview()
+        {
+        }
         public User LoggedInUser { get; set; }
-
 
         public Guest2Overview(User user)
         {
@@ -32,8 +32,10 @@ namespace TravelAgency.View.Guest2
             LoggedInUser = user;
         }
 
-        public Guest2Overview(Model.User user)
+        private void OpenGuest2Form(object sender, RoutedEventArgs e)
         {
+            Guest2Form createGuest2Form = new Guest2Form();
+            createGuest2Form.Show();
         }
     }
 }
