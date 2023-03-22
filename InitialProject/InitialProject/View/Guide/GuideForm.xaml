@@ -18,8 +18,8 @@
         <TextBox x:Name="txtTourDuration" HorizontalAlignment="Left" Margin="106,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <DatePicker x:Name="StartDateBox" HorizontalAlignment="Left" Margin="115,202,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="ListCheckPoints" Margin="240,47,380,208"/>
-        <Button  Content="Add Check Point" HorizontalAlignment="Left" Margin="272,230,0,0" VerticalAlignment="Top" Width="114" Click="AddhecjPointToList"/>
-        <ComboBox x:Name="CheckPointsCB" HorizontalAlignment="Left" Margin="135,229,0,0" VerticalAlignment="Top" Width="120" Loaded="LoadChackPoints"/>
+        <Button  Content="Add Check Point" HorizontalAlignment="Left" Margin="272,230,0,0" VerticalAlignment="Top" Width="114" Click="AddCheckPointToList"/>
+        <ComboBox x:Name="CheckPointsCB" HorizontalAlignment="Left" Margin="135,229,0,0" VerticalAlignment="Top" Width="120" Loaded="LoadCheckPoints"/>
         <Label HorizontalAlignment="Left" Margin="58,89,0,0" VerticalAlignment="Top"/>
         <Label Content="Name" HorizontalAlignment="Left" Margin="58,42,0,0" VerticalAlignment="Top"/>
         <Label Content="Description" HorizontalAlignment="Left" Margin="29,111,0,0" VerticalAlignment="Top"/>
