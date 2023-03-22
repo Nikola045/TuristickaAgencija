@@ -146,6 +146,59 @@ namespace TravelAgency.Repository
             }
             return tours;
         }
+
+
+        public Tour UpdateSelectedTour(string FileName, int id, string num) {
+
+            bool check = false;
+            Tour finalTour = new Tour();
+
+            using (StreamReader sr = new StreamReader(FileName))
+            {
+                while (!sr.EndOfStream || !check)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    Tour tour = new Tour();
+
+
+                    tour.Id = Convert.ToInt32(fields[0]);
+                    tour.Name = fields[1];
+                    tour.City = fields[2];
+                    tour.Country = fields[3];
+                    tour.Description = fields[4];
+                    tour.Lenguage = fields[5];
+                    tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
+                    tour.CurentNumberOfGuests = Convert.ToInt32(fields[7]);
+                    tour.StartTime = Convert.ToDateTime(fields[8]);
+                    tour.TourDuration = Convert.ToInt32(fields[9]);
+                    tour.TourStatus = fields[10];
+                    int i = 11;
+                    int j = 12;
+                    int k = 13;
+                    List<CheckPoint> checkPoints = new List<CheckPoint>();
+                    while (k <= fields.Count())
+                    {
+                        CheckPoint checkPoint = new CheckPoint();
+                        checkPoint.Id = Convert.ToInt32(fields[i]);
+                        checkPoint.Name = fields[j];
+                        checkPoint.Status = fields[k];
+                        checkPoints.Add(checkPoint);
+                        i = i + 3;
+                        j = j + 3;
+                        k = k + 3;
+                    }
+
+                    if(tour.Id == id)
+                    {
+                        fields[7] = fields[7] + Convert.ToInt32(num);
+                        check = true;
+                    }
+                }
+            }
+            return finalTour;
+        }
     }
 
 }
