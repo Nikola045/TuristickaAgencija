@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TravelAgency.Model;
 using TravelAgency.Serializer;
 
@@ -89,9 +90,45 @@ namespace TravelAgency.Repository
             return tours;
         }
 
-        public List<Tour> FindTour(string FileName, string city, string country, string leng, string duration, string num) //ne radi kako treba
+        public List<Tour> FindTour(string FileName, string city, string country, string leng, string duration, string num)
         {
+            List<Tour> allTours = ReadAllTours(FileName);
             List<Tour> tours = new List<Tour>();
+
+            for (int i = 0; i < allTours.Count; i++)
+            {
+                /*
+                if (city == "" || country == "" || leng == "" || duration == "" || num == "")
+                {
+
+                }
+                */
+
+                if (allTours[i].City == city || city == "")
+                {
+                    if (allTours[i].Country == country || country == "")
+                    {
+                        if (allTours[i].Lenguage == leng || leng == "")
+                        {
+                            if (Convert.ToString(allTours[i].TourDuration) == duration || duration == "")
+                            {
+                                if (Convert.ToString(allTours[i].MaxNumberOfGuests) == num || num == "")//////uslov
+                                {
+                                    Tour tour = allTours[i];
+                                    tours.Add(tour);
+                                }
+                            }
+                        }
+                    }
+                }
+                //allTours.Add(tour);
+            }
+            return tours;
+        }
+
+        public List<Tour> ReadAllTours(string FileName)
+        {
+            List<Tour> allTours = new List<Tour>();
 
             using (StreamReader sr = new StreamReader(FileName))
             {
@@ -100,7 +137,7 @@ namespace TravelAgency.Repository
                     string line = sr.ReadLine();
 
                     string[] fields = line.Split('|');
-                    Tour tour = new Tour(); 
+                    Tour tour = new Tour();
                     tour.Id = Convert.ToInt32(fields[0]);
                     tour.Name = fields[1];
                     tour.City = fields[2];
@@ -110,7 +147,7 @@ namespace TravelAgency.Repository
                     tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
                     tour.StartTime = Convert.ToDateTime(fields[7]);
                     tour.TourDuration = Convert.ToInt32(fields[8]);
-                    
+
                     int i = 9;
                     int j = 10;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
@@ -125,49 +162,13 @@ namespace TravelAgency.Repository
                     }
                     tour.CheckPoints = checkPoints;
 
-                    if (city != "")
-                    {
-                        if (fields[1] == city)
-                        {
-                            tours.Add(tour);
-                        }
-                    }
-                    if (country != "")
-                    {
-                        if (fields[3] == country)
-                        {
-                            tours.Add(tour);
-                        }
-                    }
-                    if (duration != "")
-                    {
-                        if (fields[4] == duration)
-                        {
-                            tours.Add(tour);
-                        }
-                    }
-                    if (leng != "")
-                    {
-                        if (fields[5] == leng)
-                        {
-                            tours.Add(tour);
-                        }
-                    }
-                    if (num != "")
-                    {
-                        if (fields[7] == num)
-                        {
-                            tours.Add(tour);
-                        }
-                    }
+                    allTours.Add(tour);
+
                 }
             }
-            tours = tours.Distinct().ToList();
-            return tours;
+            allTours = allTours.Distinct().ToList();
+            return allTours;
         }
-
-
     }
-
 
 }
