@@ -70,77 +70,63 @@ namespace TravelAgency.Repository
             return hotels;
         }
 
-        //Promeni logiku pretrage + refaktorisi funkciju za pretragu
-        public List<Hotel> FindHotel(string FileName, string name, string city, string country, string type, string max, string cancel)
+        public List<Hotel> FindHotel(string FileName, string name, string city, string country, string type, string max, string days)
         {
-            List<Hotel> hotels = new List<Hotel>();
-
-            using (StreamReader sr = new StreamReader(FileName))
+            var hotels = new List<Hotel>();
+            using (var sr = new StreamReader(FileName))
             {
                 while (!sr.EndOfStream)
                 {
-                    string line = sr.ReadLine();
+                    var line = sr.ReadLine();
+                    var fields = line.Split('|');
+                    var hotel = new Hotel
+                    {
+                        Id = int.Parse(fields[0]),
+                        Name = fields[1],
+                        City = fields[2],
+                        Country = fields[3],
+                        TypeOfHotel = fields[4],
+                        MaxNumberOfGuests = int.Parse(fields[5]),
+                        MinNumberOfDays = int.Parse(fields[6]),
+                        NumberOfDaysToCancel = int.Parse(fields[7])
+                    };
 
-                    string[] fields = line.Split('|');
-                    Hotel hotel = new Hotel();
-                    hotel.Id = Convert.ToInt32(fields[0]);
-                    hotel.Name = fields[1];
-                    hotel.City = fields[2];
-                    hotel.Country = fields[3];
-                    hotel.TypeOfHotel = fields[4];
-                    hotel.MaxNumberOfGuests = Convert.ToInt32(fields[5]);
-                    hotel.MinNumberOfDays = Convert.ToInt32(fields[6]);
-                    hotel.NumberOfDaysToCancel = Convert.ToInt32(fields[7]);
+                    bool requirementsMet = true;
+                    if (!string.IsNullOrEmpty(name) && fields[1] != name)
+                    {
+                        requirementsMet = false;
+                    }
+                    if (!string.IsNullOrEmpty(city) && fields[2] != city)
+                    {
+                        requirementsMet = false;
+                    }
+                    if (!string.IsNullOrEmpty(country) && fields[3] != country)
+                    {
+                        requirementsMet = false;
+                    }
+                    if (!string.IsNullOrEmpty(type) && fields[4] != type)
+                    {
+                        requirementsMet = false;
+                    }
+                    if (!string.IsNullOrEmpty(max) && int.Parse(fields[5]) < int.Parse(max))
+                    {
+                        requirementsMet = false;
+                    }
+                    if (!string.IsNullOrEmpty(days) && int.Parse(fields[6]) > int.Parse(days))
+                    {
+                        requirementsMet = false;
+                    }
 
-                    if (name != "")
+                    if (requirementsMet)
                     {
-                        if (fields[1] == name) 
-                        {
-                            hotels.Add(hotel);
-                        }
-                    }
-                    if (city != "")
-                    {
-                        if (fields[2] == city)
-                        {
-                            hotels.Add(hotel);
-                        }
-                    }
-                    if (country != "")
-                    {
-                        if (fields[3] == country)
-                        {
-                            hotels.Add(hotel);
-                        }
-                    }
-                    if (type != "")
-                    {
-                        if (fields[4] == type)
-                        {
-                            hotels.Add(hotel);
-                        }
-                    }
-                    if (max != "")
-                    {
-                        if (fields[5] == max)
-                        {
-                            hotels.Add(hotel);
-                        }
-                    }
-                    if (cancel != "")
-                    {
-                        if (fields[7] == cancel)
-                        {
-                            hotels.Add(hotel);
-                        }
+                        hotels.Add(hotel);
                     }
                 }
             }
 
-            hotels = hotels.Distinct().ToList();
-            return hotels;
+            return hotels.Distinct().ToList();
         }
-        
+
     }
 }
 

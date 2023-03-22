@@ -47,10 +47,16 @@ namespace TravelAgency.View
             else if (RadioHotel.IsChecked == true) { RadioChoice = "Hotel"; }
             else if (RadioHut.IsChecked == true) { RadioChoice = "Hut"; }
             else if (RadioApartment.IsChecked == true) { RadioChoice = "Apartment"; }
-            hotels = _repository.FindHotel(FilePath, txtName.Text, txtCity.Text, txtCountry.Text, RadioChoice, brMax.Text, brDaysLeft.Text);
+            hotels = _repository.FindHotel(FilePath, txtName.Text, txtCity.Text, txtCountry.Text, RadioChoice, txtNoGuests.Text, txtNoDays.Text);
             DataPanel.ItemsSource = hotels;
         }
-
+        private void DataPanel_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "NumberOfDaysToCancel")
+            {
+                e.Cancel = true;
+            }
+        }
         private void Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
