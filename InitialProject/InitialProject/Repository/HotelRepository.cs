@@ -18,61 +18,36 @@ namespace TravelAgency.Repository
 
         private readonly Serializer<Hotel> _serializer;
 
-        private List<Hotel> _hotels;
+        private List<Hotel> hotels;
 
         public HotelRepository()
         {
             _serializer = new Serializer<Hotel>();
-            _hotels = _serializer.FromCSV(FilePath);
-        }
-
-        public List<Hotel> GetAll()
-        {
-            return _serializer.FromCSV(FilePath);
+            hotels = _serializer.FromCSV(FilePath);
         }
 
         public Hotel Save(Hotel hotel)
         {
             hotel.Id = NextId();
-            _hotels = _serializer.FromCSV(FilePath);
-            _hotels.Add(hotel);
-            _serializer.ToCSV(FilePath, _hotels);
+            hotels = _serializer.FromCSV(FilePath);
+            hotels.Add(hotel);
+            _serializer.ToCSV(FilePath, hotels);
             return hotel;
         }
 
         public int NextId()
         {
-            _hotels = _serializer.FromCSV(FilePath);
-            if (_hotels.Count < 1)
+            hotels = _serializer.FromCSV(FilePath);
+            if (hotels.Count < 1)
             {
                 return 1;
             }
-            return _hotels.Max(h => h.Id) + 1;
-        }
-
-        public void Delete(Hotel hotel)
-        {
-            _hotels = _serializer.FromCSV(FilePath);
-            Hotel founded = _hotels.Find(c => c.Name == hotel.Name);
-            _hotels.Remove(founded);
-            _serializer.ToCSV(FilePath, _hotels);
-        }
-
-        public Hotel Update(Hotel hotel)
-        {
-            _hotels = _serializer.FromCSV(FilePath);
-            Hotel current = _hotels.Find(c => c.Name == hotel.Name);
-            int index = _hotels.IndexOf(current);
-            _hotels.Remove(current);
-            _hotels.Insert(index, hotel);       // keep ascending order of ids in file 
-            _serializer.ToCSV(FilePath, _hotels);
-            return hotel;
+            return hotels.Max(h => h.Id) + 1;
         }
 
         public List<Hotel> ReadFromHotelsCsv(string FileName)
         {
             List<Hotel> hotels = new List<Hotel>();
-
             using (StreamReader sr = new StreamReader(FileName))
             {
                 while (!sr.EndOfStream)
@@ -89,16 +64,13 @@ namespace TravelAgency.Repository
                     hotel.MaxNumberOfGuests = Convert.ToInt32(fields[5]);
                     hotel.MinNumberOfDays = Convert.ToInt32(fields[6]);
                     hotel.NumberOfDaysToCancel = Convert.ToInt32(fields[7]);
-
-                    
                     hotels.Add(hotel);
-
                 }
             }
             return hotels;
         }
 
-
+        //Promeni logiku pretrage + refaktorisi funkciju za pretragu
         public List<Hotel> FindHotel(string FileName, string name, string city, string country, string type, string max, string cancel)
         {
             List<Hotel> hotels = new List<Hotel>();
@@ -164,6 +136,7 @@ namespace TravelAgency.Repository
                     }
                 }
             }
+
             hotels = hotels.Distinct().ToList();
             return hotels;
         }
