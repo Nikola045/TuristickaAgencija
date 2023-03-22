@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Serializer;
 using TravelAgency.View;
@@ -69,5 +70,34 @@ namespace TravelAgency.Repository
             return reservations;
         }
 
+        public void Delete(Reservation reservation)
+        {
+            _reservations = _serializer.FromCSV(FilePath);
+            Reservation founded = _reservations.Find(c => c.Id == reservation.Id);
+            _reservations.Remove(founded);
+            _serializer.ToCSV(FilePath, _reservations);
+        }
+
+        public Reservation FindReservationByID(int id)
+        {
+            List<Reservation> reservations = new List<Reservation>();
+            using (StreamReader sr = new StreamReader(FilePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    Reservation reservation = new Reservation();
+                    reservation.Id = Convert.ToInt32(fields[0]);
+                    if(reservation.Id == id)
+                    {
+                        return reservation;
+                    }
+                    
+                }
+            }
+            return null;
+        }
     }
 }

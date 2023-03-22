@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -55,7 +56,8 @@ namespace TravelAgency.View
                 DateTime dateTimeNow = DateTime.Now;
                 if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow)
                 {
-                    GuestsCB.Items.Add(reservations[i].GuestUserName);
+                    string reservationForm = reservations[i].Id.ToString() + " " + reservations[i].GuestUserName;
+                    GuestsCB.Items.Add(reservationForm);
                 }
             }
         }
@@ -89,9 +91,17 @@ namespace TravelAgency.View
 
             CommentText.Clear();
             object selectedItem = GuestsCB.SelectedItem;
+            Reservation oldReservation = new Reservation();
+            int id;
+            string line = selectedItem.ToString();
+            string[] fields = line.Split(' ');
+            id = Convert.ToInt32(fields[0]);
+
+            oldReservation = reservationRepository.FindReservationByID(id);
             if (GuestsCB.Items.Contains(selectedItem))
             {
                 GuestsCB.Items.Remove(selectedItem);
+                reservationRepository.Delete(oldReservation);
             }
         }
 
