@@ -75,11 +75,11 @@ namespace TravelAgency.View.Guest2
             DataPanel.ItemsSource = tours;
         }
 
-        private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
+       /* private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
         {
             /*if(DataPanel.SelectedItem == null) {
                 MessageBox.Show("Please select a tour you want to go on.");
-            }*/
+            }
             selectedTour = (Tour)DataPanel.SelectedItem;
             int tourId = selectedTour.Id;
             const string FilePath = "../../../Resources/Data/tours.csv";
@@ -90,6 +90,6 @@ namespace TravelAgency.View.Guest2
             {
                 MessageBox.Show("Not updated.");
             }
-        }
+        }*/
     }
 }
