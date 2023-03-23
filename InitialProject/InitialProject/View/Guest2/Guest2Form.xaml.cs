@@ -28,6 +28,10 @@ namespace TravelAgency.View.Guest2
     {
         private readonly TourRepository _repository;
 
+
+
+        Model.User LogedUser = new Model.User();
+
         const string FilePath = "../../../Resources/Data/tours.csv";
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -77,18 +81,16 @@ namespace TravelAgency.View.Guest2
 
         private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
         {
-            /*if(DataPanel.SelectedItem == null) {
-                MessageBox.Show("Please select a tour you want to go on.");
-            }*/
             selectedTour = (Tour)DataPanel.SelectedItem;
             int tourId = selectedTour.Id;
-            const string FilePath = "../../../Resources/Data/tours.csv";
-            if (_repository.UpdateSelectedTour(FilePath, tourId, txtNumOfGuests.Text)) {
-                MessageBox.Show("Updated.");
+            const string FilePath = "../../../Resources/Data/guestOnTour.csv";
+            string num = txtNumOfGuests.Text;
+            if (/*_repository.ReserveTour(FilePath, tourId, LogedUser.Username) &&*/ _repository.UpdateNumberOfGuests(tourId, num) ){
+                MessageBox.Show("Reserved.");
             }
             else
             {
-                MessageBox.Show("Not updated.");
+                MessageBox.Show("Not reserved.");
             }
         }
     }

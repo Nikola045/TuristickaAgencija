@@ -88,5 +88,6 @@ public class Tour : TravelAgency.Serializer.ISerializable
         StartTime = Convert.ToDateTime(values[8]);
         TourDuration = Convert.ToInt32(values[9]);
         TourStatus = values[10];
+
     }
 }
