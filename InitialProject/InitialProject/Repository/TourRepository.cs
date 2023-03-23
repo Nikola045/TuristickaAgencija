@@ -1,4 +1,4 @@
-﻿using Cake.Core.IO;
+using Cake.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Serializer;
 
@@ -159,14 +160,23 @@ namespace TravelAgency.Repository
         }
 
 
-        public bool UpdateSelectedTour(string FileName, int id, string num) {
+        public Tour Update(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour current = _tours.Find(c => c.Id == tour.Id);
+            int index = _tours.IndexOf(current);
+            _tours.Remove(current);
+            _tours.Insert(index, tour);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, _tours);
+            return tour;
+        }
 
-            bool check = false;
-            Tour finalTour = new Tour();
-
-            using (StreamReader sr = new StreamReader(FileName))
+        public List<CheckPoint> FindAllCheckPoints()
+        {
+            List<CheckPoint> checkPoints= new List<CheckPoint>();
+            using (StreamReader sr = new StreamReader(FilePath))
             {
-                while (!sr.EndOfStream || !check)
+                while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
 
@@ -188,7 +198,8 @@ namespace TravelAgency.Repository
                     int i = 11;
                     int j = 12;
                     int k = 13;
-                    List<CheckPoint> checkPoints = new List<CheckPoint>();
+
+
                     while (k <= fields.Count())
                     {
                         CheckPoint checkPoint = new CheckPoint();
@@ -201,21 +212,35 @@ namespace TravelAgency.Repository
                         k = k + 3;
                     }
 
-                    if(tour.Id == id)
-                    {
-                        int newNum = Convert.ToInt32(fields[7]) + Convert.ToInt32(num);
-                        fields[7] = Convert.ToString(newNum);
-                        check = true;
-                    }
-
-                    if (!sr.EndOfStream)
-                    {
-                        return false;
-                    }
+                    tour.CheckPoints = checkPoints;
+                    return checkPoints;
                 }
             }
-            return true;
+            return null;
+
         }
+
+        public bool IsStarted()
+        {
+            int countStartedTours = 0;
+            List<Tour> tours = ReadFromToursCsv(FilePath);
+            foreach(Tour tour in tours)
+            {
+                if(tour.TourStatus == "Zapoceta")
+                    countStartedTours++;
+            }
+            if(countStartedTours != 0) {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+
+
     }
 
 }
