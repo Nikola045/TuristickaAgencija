@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Serializer;
 
@@ -72,11 +73,12 @@ namespace TravelAgency.Repository
                     tour.CurentNumberOfGuests = Convert.ToInt32(fields[7]);
                     tour.StartTime = Convert.ToDateTime(fields[8]);
                     tour.TourDuration = Convert.ToInt32(fields[9]);
-                    int i = 10;
-                    int j = 11;
-                    int k = 12;
+                    tour.TourStatus = fields[10];
+                    int i = 11;
+                    int j = 12;
+                    int k = 13;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
-                    while (j <= fields.Count())
+                    while (k <= fields.Count())
                     {
                         CheckPoint checkPoint = new CheckPoint();
                         checkPoint.Id = Convert.ToInt32(fields[i]);
@@ -129,6 +131,99 @@ namespace TravelAgency.Repository
             }
             return tours;
         }
+
+        public List<Tour> GetTodaysTours(string FileName)
+        {
+            List<Tour> allTours = ReadFromToursCsv(FileName);
+            List<Tour> tours = new List<Tour>();
+            DateTime dateTime = DateTime.Today;
+            for (int i = 0; i < allTours.Count; i++)
+            {
+                if (allTours[i].StartTime == dateTime)
+                {
+                    Tour tour = allTours[i];
+                    tours.Add(tour);
+                }
+            }
+            return tours;
+        }
+
+        public Tour Update(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour current = _tours.Find(c => c.Id == tour.Id);
+            int index = _tours.IndexOf(current);
+            _tours.Remove(current);
+            _tours.Insert(index, tour);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, _tours);
+            return tour;
+        }
+
+        public List<CheckPoint> FindAllCheckPoints()
+        {
+            List<CheckPoint> checkPoints= new List<CheckPoint>();
+            using (StreamReader sr = new StreamReader(FilePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    Tour tour = new Tour();
+
+
+                    tour.Id = Convert.ToInt32(fields[0]);
+                    tour.Name = fields[1];
+                    tour.City = fields[2];
+                    tour.Country = fields[3];
+                    tour.Description = fields[4];
+                    tour.Lenguage = fields[5];
+                    tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
+                    tour.CurentNumberOfGuests = Convert.ToInt32(fields[7]);
+                    tour.StartTime = Convert.ToDateTime(fields[8]);
+                    tour.TourDuration = Convert.ToInt32(fields[9]);
+                    tour.TourStatus = fields[10];
+                    int i = 11;
+                    int j = 12;
+                    int k = 13;
+                    while (k <= fields.Count())
+                    {
+                        CheckPoint checkPoint = new CheckPoint();
+                        checkPoint.Id = Convert.ToInt32(fields[i]);
+                        checkPoint.Name = fields[j];
+                        checkPoint.Status = fields[k];
+                        checkPoints.Add(checkPoint);
+                        i = i + 3;
+                        j = j + 3;
+                        k = k + 3;
+                    }
+                    tour.CheckPoints = checkPoints;
+                    return checkPoints;
+                }
+            }
+            return null;
+
+        }
+
+        public bool IsStarted()
+        {
+            int countStartedTours = 0;
+            List<Tour> tours = ReadFromToursCsv(FilePath);
+            foreach(Tour tour in tours)
+            {
+                if(tour.TourStatus == "Zapoceta")
+                    countStartedTours++;
+            }
+            if(countStartedTours != 0) {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
 
     }
 

@@ -16,12 +16,12 @@ namespace TravelAgency.Model
         public string Status { get; set; }
 
         public CheckPoint() { }
-        public CheckPoint(int id, string name, string status)
+        public CheckPoint(int id, string name)
         {
 
             Id = id;
             Name = name;
-            Status = status;
+            Status = "Neaktivna";
         }
 
         public string[] ToCSV()

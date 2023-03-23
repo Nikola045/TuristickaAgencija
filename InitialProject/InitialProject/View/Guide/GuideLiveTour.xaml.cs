@@ -25,6 +25,12 @@ namespace TravelAgency.View.Guide
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        Tour CurrentSelectedTour = new Tour();
+
+        private readonly TourRepository tourRepository;
+
+        private readonly CheckPointRepository checkPointRepository;
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -34,6 +40,122 @@ namespace TravelAgency.View.Guide
             InitializeComponent();
             Title = "Create new tour";
             DataContext = this;
+            tourRepository = new TourRepository();
+            checkPointRepository = new CheckPointRepository();
+        }
+
+        private void ShowTours(object sender, RoutedEventArgs e)
+        {
+            const string FilePath = "../../../Resources/Data/tours.csv";
+            List<Tour> tours = new List<Tour>();
+            tours = tourRepository.GetTodaysTours(FilePath);
+            DataPanel.ItemsSource = tours;
+
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            const string FilePath = "../../../Resources/Data/tours.csv";
+            DateTime dateTimeNow = DateTime.Now;
+            List<Tour> tours = new List<Tour>();
+            tours = tourRepository.ReadFromToursCsv(FilePath);
+            DataPanel.ItemsSource = tours;
+        }
+
+        private void StartTour(object sender, RoutedEventArgs e)
+        {
+            bool IsTourStarted = tourRepository.IsStarted();
+
+            if(IsTourStarted == true)
+            {
+                MessageBox.Show("Tour already started");
+            }
+            else
+            {
+                Tour selectedTour = new Tour();
+                if (selectedTour == null)
+                {
+                    MessageBox.Show("Please select tour");
+                }
+                else
+                {
+                    selectedTour = DataPanel.SelectedItem as Tour;
+                    selectedTour.TourStatus = "Zapoceta";
+                    selectedTour = tourRepository.Update(selectedTour);
+                    MessageBox.Show("Done");
+                    CurrentSelectedTour = selectedTour;
+                    List<CheckPoint> checkPoints = new List<CheckPoint>();
+                    int NumOfPoint = 0;
+                    foreach (CheckPoint point in selectedTour.CheckPoints)
+                    {
+                        if(NumOfPoint == 0)
+                        {
+                            point.Status = "Active";
+                            checkPointRepository.Update(point);
+                        }
+                        ListCheckPoints.Items.Add(point);
+                        NumOfPoint++;
+                    }
+
+                }
+            }
+        }
+
+        private void ActivateCheckPoint(object sender, RoutedEventArgs e)
+        {
+            CheckPoint selectedCheckPoint = new CheckPoint();
+            if(selectedCheckPoint == null)
+            {
+                MessageBox.Show("Please select checkPoint");
+            }
+            else
+            {
+                selectedCheckPoint = ListCheckPoints.SelectedItem as CheckPoint;
+                selectedCheckPoint.Status = "Active";
+                selectedCheckPoint = checkPointRepository.Update(selectedCheckPoint);
+                MessageBox.Show("Done");
+            }
+            int NumOfActivatePoints = 0;
+            foreach (CheckPoint point in ListCheckPoints.Items)
+            {
+                if (point.Status == "Active")
+                    NumOfActivatePoints++;
+            }
+
+            
+            if(NumOfActivatePoints == ListCheckPoints.Items.Count)
+            {
+                CurrentSelectedTour.TourStatus = "Finished";
+                CurrentSelectedTour = tourRepository.Update(CurrentSelectedTour);
+                CurrentSelectedTour = null;
+                foreach (CheckPoint point in ListCheckPoints.Items)
+                {
+                    if (point.Status == "Active")
+                    {
+                        point.Status = "Neaktivna";
+                        checkPointRepository.Update(point);
+                    }
+                }
+                MessageBox.Show("Tour finished");
+                ListCheckPoints.Items.Clear();
+            }
+        }
+
+        private void FinishToruForced(object sender, RoutedEventArgs e)
+        {
+            CurrentSelectedTour.TourStatus = "Finished";
+            CurrentSelectedTour = tourRepository.Update(CurrentSelectedTour);
+            CurrentSelectedTour = null;
+            foreach (CheckPoint point in ListCheckPoints.Items)
+            {
+                if (point.Status == "Active")
+                {
+                    point.Status = "Neaktivna";
+                    checkPointRepository.Update(point);
+                }
+            }
+            MessageBox.Show("Tour finished");
+            ListCheckPoints.Items.Clear();
         }
 
         /*private void LoadCheckPoints(object sender, RoutedEventArgs e)
