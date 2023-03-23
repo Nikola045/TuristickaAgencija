@@ -18,7 +18,6 @@
         <Label Content="End date:" HorizontalAlignment="Left" Margin="62,102,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="85,41,0,0" VerticalAlignment="Top" Height="30" Width="55"/>
         <Label x:Name="validationLabel" Content="*Please fill all fields in the form before reservation" HorizontalAlignment="Left" Margin="144,173,0,0" VerticalAlignment="Top" Foreground="Red" Height="27" Width="275"/>
-        <Label x:Name="labelSuggestion" Content="asdsad" HorizontalAlignment="Left" Margin="290,76,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

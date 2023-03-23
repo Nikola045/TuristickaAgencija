@@ -15,17 +15,11 @@ namespace TravelAgency.Forms
     public partial class OwnerOverview : Window
     {
         public User LoggedInUser { get; set; }
-
-        private readonly HotelRepository _repository;
-
-        public int DaysLeftForGrade = 5;
-
         public OwnerOverview(User user)
         {
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
-            _repository = new HotelRepository();
         }
 
         public OwnerOverview(){}

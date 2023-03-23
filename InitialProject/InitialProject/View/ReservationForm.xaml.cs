@@ -88,7 +88,14 @@ namespace TravelAgency.View
                         if (reservedDates[j] <= endDate1 && reservedDates[j + 1] >= startDate1)
                         {
                             MessageBox.Show("These dates are reserved");
+                            DateTime suggestedStartDate = reservedDates[j + 1].AddDays(1);
+                            DateTime suggestedEndDate = suggestedStartDate.AddDays((endDate1 - startDate1).Days);
+                            if (suggestedEndDate > DateTime.Now)
+                            {
+                                MessageBox.Show($"You can try booking between {suggestedStartDate.ToShortDateString()} and {suggestedEndDate.ToShortDateString()} instead.");
+                            }
                             requirementsMet = false;
+                            
                             break;
                         }
                     }
