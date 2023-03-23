@@ -32,6 +32,8 @@ namespace TravelAgency.View.Guest2
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Tour selectedTour;
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -44,9 +46,15 @@ namespace TravelAgency.View.Guest2
             _repository = new TourRepository();
         }
 
-
-
         private void Cancel(object sender, RoutedEventArgs e)
+        {
+            List<Tour> tours = new List<Tour>();
+            const string FilePath = "../../../Resources/Data/tours.csv";
+            tours = _repository.ReadFromToursCsv(FilePath);
+            DataPanel.ItemsSource = tours;
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -65,6 +73,23 @@ namespace TravelAgency.View.Guest2
             List<Tour> tours = new List<Tour>();
             tours = _repository.ReadFromToursCsv(FilePath);
             DataPanel.ItemsSource = tours;
+        }
+
+        private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
+        {
+            /*if(DataPanel.SelectedItem == null) {
+                MessageBox.Show("Please select a tour you want to go on.");
+            }*/
+            selectedTour = (Tour)DataPanel.SelectedItem;
+            int tourId = selectedTour.Id;
+            const string FilePath = "../../../Resources/Data/tours.csv";
+            if (_repository.UpdateSelectedTour(FilePath, tourId, txtNumOfGuests.Text)) {
+                MessageBox.Show("Updated.");
+            }
+            else
+            {
+                MessageBox.Show("Not updated.");
+            }
         }
     }
 }

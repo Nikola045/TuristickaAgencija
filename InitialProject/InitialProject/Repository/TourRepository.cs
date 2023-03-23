@@ -1,4 +1,4 @@
-﻿using Cake.Core.IO;
+using Cake.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -118,10 +118,21 @@ namespace TravelAgency.Repository
                         {
                             if (Convert.ToString(allTours[i].TourDuration) == duration || duration == "")
                             {
-                                if (allTours[i].CurentNumberOfGuests + Convert.ToInt32(num) <= allTours[i].MaxNumberOfGuests || num == "")//////uslov
+                                if (num == "")
+                                { 
+                                    if (allTours[i].CurentNumberOfGuests <= allTours[i].MaxNumberOfGuests)
+                                    {
+                                        Tour tour = allTours[i];
+                                        tours.Add(tour);
+                                    }
+                                }
+                                else
                                 {
-                                    Tour tour = allTours[i];
-                                    tours.Add(tour);
+                                    if (allTours[i].CurentNumberOfGuests + Convert.ToInt32(num) <= allTours[i].MaxNumberOfGuests)
+                                    {
+                                        Tour tour = allTours[i];
+                                        tours.Add(tour);
+                                    }
                                 }
                             }
                         }
@@ -147,6 +158,7 @@ namespace TravelAgency.Repository
             }
             return tours;
         }
+
 
         public Tour Update(Tour tour)
         {
@@ -186,6 +198,8 @@ namespace TravelAgency.Repository
                     int i = 11;
                     int j = 12;
                     int k = 13;
+
+
                     while (k <= fields.Count())
                     {
                         CheckPoint checkPoint = new CheckPoint();
@@ -197,6 +211,7 @@ namespace TravelAgency.Repository
                         j = j + 3;
                         k = k + 3;
                     }
+
                     tour.CheckPoints = checkPoints;
                     return checkPoints;
                 }
@@ -223,6 +238,7 @@ namespace TravelAgency.Repository
             }
             
         }
+
 
 
     }

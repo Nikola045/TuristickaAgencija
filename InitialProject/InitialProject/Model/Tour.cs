@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TravelAgency.Model;
 
-internal class Tour : TravelAgency.Serializer.ISerializable
+public class Tour : TravelAgency.Serializer.ISerializable
 {
     public int Id { get; set; }
     public string Name { get; set; }

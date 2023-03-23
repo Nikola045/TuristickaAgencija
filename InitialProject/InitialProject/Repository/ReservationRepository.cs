@@ -90,14 +90,39 @@ namespace TravelAgency.Repository
                     string[] fields = line.Split('|');
                     Reservation reservation = new Reservation();
                     reservation.Id = Convert.ToInt32(fields[0]);
-                    if(reservation.Id == id)
+                    if (reservation.Id == id)
                     {
                         return reservation;
                     }
-                    
+
                 }
             }
             return null;
+        }
+
+        public List<DateTime> GetReservedDates(string hotelName) 
+        {
+            List<DateTime> dates = new List<DateTime>();
+            using (StreamReader sr = new StreamReader(FilePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    Reservation reservation = new Reservation();
+                    
+                    reservation.HotelName = fields[2];
+                    if (reservation.HotelName == hotelName) 
+                    {
+                        reservation.StartDate = Convert.ToDateTime(fields[3]);
+                        reservation.EndDate = Convert.ToDateTime(fields[4]);
+                        dates.Add(reservation.StartDate);
+                        dates.Add(reservation.EndDate);
+                    }
+                }
+            }
+            return dates;
         }
     }
 }
