@@ -99,17 +99,11 @@ namespace TravelAgency.Repository
         public List<Tour> FindTour(string FileName, string city, string country, string leng, string duration, string num)
         {
             List<Tour> allTours = ReadFromToursCsv(FileName);
+
             List<Tour> tours = new List<Tour>();
 
             for (int i = 0; i < allTours.Count; i++)
             {
-                /*
-                if (city == "" || country == "" || leng == "" || duration == "" || num == "")
-                {
-
-                }
-                */
-
                 if (allTours[i].City == city || city == "")
                 {
                     if (allTours[i].Country == country || country == "")
@@ -157,6 +151,18 @@ namespace TravelAgency.Repository
                 }
             }
             return tours;
+        }
+
+
+
+        public bool UpdateNumberOfGuests(int tourId, string num)
+        {
+
+            ////////// gogaj broj gostiju u zadatu turu
+
+
+
+            return true;
         }
 
 

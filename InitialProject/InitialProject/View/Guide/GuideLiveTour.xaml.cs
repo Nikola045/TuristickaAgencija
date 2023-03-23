@@ -31,10 +31,6 @@ namespace TravelAgency.View.Guide
 
         private readonly CheckPointRepository checkPointRepository;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         public GuideLiveTour()
         {
             InitializeComponent();
