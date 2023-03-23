@@ -68,5 +68,16 @@ namespace TravelAgency.Repository
             }
             return null;
         }
+
+        public CheckPoint Update(CheckPoint checkPoint)
+        {
+            _checkPoints = _serializer.FromCSV(FilePath);
+            CheckPoint current = _checkPoints.Find(c => c.Id == checkPoint.Id);
+            int index = _checkPoints.IndexOf(current);
+            _checkPoints.Remove(current);
+            _checkPoints.Insert(index, checkPoint);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, _checkPoints);
+            return checkPoint;
+        }
     }
 }

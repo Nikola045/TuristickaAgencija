@@ -11,9 +11,6 @@
     <Compile Update="View\Guide\GuideLiveTour.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Guset1\Guest1Overview.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Guide\GuideForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -32,9 +29,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guide\GuideLiveTour.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Guset1\Guest1Overview.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guide\GuideForm.xaml">

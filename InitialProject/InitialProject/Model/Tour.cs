@@ -24,8 +24,6 @@ internal class Tour : TravelAgency.Serializer.ISerializable
     public string TourStatus { get; set; }
 
     public Tour() {
-        CurentNumberOfGuests = 0;
-        TourStatus = "Nezapoceta";
     }
     public Tour(int id, string name, string city, string country, string description, string lenguage, int maxNumberOfGuests, DateTime startTime, int tourDuration, List<CheckPoint> checkPoints)
     {
