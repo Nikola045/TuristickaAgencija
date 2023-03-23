@@ -79,7 +79,7 @@ namespace TravelAgency.View.Guest2
             DataPanel.ItemsSource = tours;
         }
 
-       /* private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
+        private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
         {
             selectedTour = (Tour)DataPanel.SelectedItem;
             int tourId = selectedTour.Id;
@@ -92,6 +92,6 @@ namespace TravelAgency.View.Guest2
             {
                 MessageBox.Show("Not reserved.");
             }
-        }*/
+        }
     }
 }
