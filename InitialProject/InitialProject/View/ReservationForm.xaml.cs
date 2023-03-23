@@ -172,10 +172,6 @@ namespace TravelAgency.View
         private void txtNumberOfGuests_TextChanged(object sender, TextChangedEventArgs e)
         {
             btnReserve.IsEnabled = AllFieldsValid();
-            if (string.IsNullOrEmpty(txtNumberOfDays.Text))
-            {
-                btnReserve.IsEnabled = false;
-            }
         }
 
         private void Date1_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
