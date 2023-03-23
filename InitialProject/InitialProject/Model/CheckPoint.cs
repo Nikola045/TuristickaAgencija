@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.Model
 {
-    internal class CheckPoint : Serializer.ISerializable
+    public class CheckPoint : Serializer.ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }

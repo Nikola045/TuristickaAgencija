@@ -32,7 +32,7 @@ namespace TravelAgency.View.Guest2
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Tour selectedTour = new Tour();
+        public Tour selectedTour;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -77,14 +77,19 @@ namespace TravelAgency.View.Guest2
 
         private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
         {
-            if(DataPanel.SelectedItem == null) {
+            /*if(DataPanel.SelectedItem == null) {
                 MessageBox.Show("Please select a tour you want to go on.");
-            }
+            }*/
             selectedTour = (Tour)DataPanel.SelectedItem;
             int tourId = selectedTour.Id;
             const string FilePath = "../../../Resources/Data/tours.csv";
-            Tour updatedTour = _repository.UpdateSelectedTour(FilePath, tourId, txtNumOfGuests.Text);
-            MessageBox.Show("Updated.");
+            if (_repository.UpdateSelectedTour(FilePath, tourId, txtNumOfGuests.Text)) {
+                MessageBox.Show("Updated.");
+            }
+            else
+            {
+                MessageBox.Show("Not updated.");
+            }
         }
     }
 }

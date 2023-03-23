@@ -117,10 +117,21 @@ namespace TravelAgency.Repository
                         {
                             if (Convert.ToString(allTours[i].TourDuration) == duration || duration == "")
                             {
-                                if (allTours[i].CurentNumberOfGuests + Convert.ToInt32(num) <= allTours[i].MaxNumberOfGuests || num == "")//////uslov
+                                if (num == "")
+                                { 
+                                    if (allTours[i].CurentNumberOfGuests <= allTours[i].MaxNumberOfGuests)
+                                    {
+                                        Tour tour = allTours[i];
+                                        tours.Add(tour);
+                                    }
+                                }
+                                else
                                 {
-                                    Tour tour = allTours[i];
-                                    tours.Add(tour);
+                                    if (allTours[i].CurentNumberOfGuests + Convert.ToInt32(num) <= allTours[i].MaxNumberOfGuests)
+                                    {
+                                        Tour tour = allTours[i];
+                                        tours.Add(tour);
+                                    }
                                 }
                             }
                         }
@@ -148,7 +159,7 @@ namespace TravelAgency.Repository
         }
 
 
-        public Tour UpdateSelectedTour(string FileName, int id, string num) {
+        public bool UpdateSelectedTour(string FileName, int id, string num) {
 
             bool check = false;
             Tour finalTour = new Tour();
@@ -192,12 +203,18 @@ namespace TravelAgency.Repository
 
                     if(tour.Id == id)
                     {
-                        fields[7] = fields[7] + Convert.ToInt32(num);
+                        int newNum = Convert.ToInt32(fields[7]) + Convert.ToInt32(num);
+                        fields[7] = Convert.ToString(newNum);
                         check = true;
+                    }
+
+                    if (!sr.EndOfStream)
+                    {
+                        return false;
                     }
                 }
             }
-            return finalTour;
+            return true;
         }
     }
 
