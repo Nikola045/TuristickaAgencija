@@ -35,7 +35,7 @@ namespace TravelAgency.View
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = _repository.ReadFromHotelsCsv(FilePath);
+            hotels = _repository.ReadFromHotelsCsv();
             DataPanel.ItemsSource = hotels;
         }
 

@@ -20,6 +20,12 @@
     <Compile Update="View\Guide\GuideOverview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Owner\MoveReservation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\ReviewForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\ReservationForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -41,6 +47,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guide\GuideOverview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\MoveReservation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\ReviewForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ReservationForm.xaml">
