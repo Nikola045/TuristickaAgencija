@@ -17,6 +17,7 @@ namespace TravelAgency.Model
         public DateTime EndDate { get; set; }
         public int NumberOfDays { get; set; }
         public int NumberOfGuests { get; set; }
+        public string GradeStatus { get; set; }
 
         public Reservation() { }
 
@@ -29,11 +30,12 @@ namespace TravelAgency.Model
             EndDate = endDate;
             NumberOfDays = numberOfDays;
             NumberOfGuests = numberOfGuests;
+            GradeStatus = "NotGraded";
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), GuestUserName, HotelName, StartDate.ToString(), EndDate.ToString(), NumberOfDays.ToString(), NumberOfGuests.ToString() };
+            string[] csvValues = { Id.ToString(), GuestUserName, HotelName, StartDate.ToString(), EndDate.ToString(), NumberOfDays.ToString(), NumberOfGuests.ToString(), GradeStatus };
             return csvValues;
         }
 
@@ -46,6 +48,7 @@ namespace TravelAgency.Model
             EndDate = Convert.ToDateTime(values[4]);
             NumberOfDays = Convert.ToInt32(values[5]);
             NumberOfGuests = Convert.ToInt32(values[6]);
+            GradeStatus = values[7];
         }
     }
 }

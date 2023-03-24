@@ -141,7 +141,7 @@ namespace TravelAgency.Forms
         private void NameValidation(object sender, TextChangedEventArgs e)
         {
             string name = txtName.Text;
-            if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(name, @"^[a-zA-Z\s]+$"))
             {
                 LabelNameValidator.Content = "";
             }
@@ -154,7 +154,7 @@ namespace TravelAgency.Forms
         private void CityValidation(object sender, TextChangedEventArgs e)
         {
             string city = txtCity.Text;
-            if (Regex.IsMatch(city, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(city, @"^[a-zA-Z\s]+$"))
             {
                 LabelCityValidator.Content = "";
             }
@@ -167,7 +167,7 @@ namespace TravelAgency.Forms
         private void CountryValidation(object sender, TextChangedEventArgs e)
         {
             string country = txtCountry.Text;
-            if (Regex.IsMatch(country, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(country, @"^[a-zA-Z\s]+$"))
             {
                 LabelCountryValidator.Content = "";
             }

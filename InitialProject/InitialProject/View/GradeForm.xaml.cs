@@ -46,12 +46,8 @@ namespace TravelAgency.View
 
             for (int i = 0; i < reservations.Count; i++)
             {
-                DateTime dateTimeNow = DateTime.Now;
-                if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow)
-                {
-                    string reservationForm = reservations[i].Id.ToString() + " " + reservations[i].GuestUserName;
-                    GuestsCB.Items.Add(reservationForm);
-                }
+                if(gradeGuest1Repository.FindGuestsForGrade(i) != null)
+                GuestsCB.Items.Add(gradeGuest1Repository.FindGuestsForGrade(i));
             }
         }
 
@@ -91,11 +87,8 @@ namespace TravelAgency.View
             id = Convert.ToInt32(fields[0]);
 
             oldReservation = reservationRepository.FindReservationByID(id);
-            if (GuestsCB.Items.Contains(selectedItem))
-            {
-                GuestsCB.Items.Remove(selectedItem);
-                reservationRepository.Delete(oldReservation);
-            }
+            GuestsCB.Items.Remove(selectedItem);
+            reservationRepository.LogicalDelete(oldReservation);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -105,16 +98,8 @@ namespace TravelAgency.View
 
             for (int i = 0; i < reservations.Count; i++)
             {
-                DateTime dateTimeNow = DateTime.Now;
-                    if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow)
-                    {
-                        MessageBox.Show("You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName);
-                    }
-
-                if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) < dateTimeNow)
-                {
-                    reservationRepository.Delete(reservations[i]);
-                }
+                gradeGuest1Repository.ShowMessageForGrade(i);
+                gradeGuest1Repository.FindAndLogicalDeleteExpiredReservation(i);
             }
         }
 
