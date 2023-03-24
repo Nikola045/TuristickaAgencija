@@ -7,22 +7,36 @@
         mc:Ignorable="d"
         Title="Guest2Form" Height="450" Width="1190">
     <Grid Margin="0,0,36,0">
-        <DataGrid x:Name="DataPanel" Margin="314,108,25,108" Loaded="LoadData" >
-            
+        <DataGrid x:Name="DataPanel" Margin="315,93,24,123" Loaded="LoadData" >
+
         </DataGrid>
 
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="148,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="148,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Margin="148,185,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtLeng" HorizontalAlignment="Left" Margin="148,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtNum" HorizontalAlignment="Left" Margin="148,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="34,266,0,0" VerticalAlignment="Top" Click="Search"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="100,266,0,0" VerticalAlignment="Top" Click="Cancel"/>
-        <Label Content="City" HorizontalAlignment="Left" Margin="100,112,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="152,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="152,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Margin="152,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtLeng" HorizontalAlignment="Left" Margin="152,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtNum" HorizontalAlignment="Left" Margin="152,207,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="78,261,0,0" VerticalAlignment="Top" Click="Search" Width="61"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="182,261,0,0" VerticalAlignment="Top" Click="Cancel" Width="60"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="108,112,0,0" VerticalAlignment="Top"/>
         <Label Content="Duration" HorizontalAlignment="Left" Margin="85,181,0,0" VerticalAlignment="Top"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="87,135,0,0" VerticalAlignment="Top"/>
-        <Label Content="Lenguage" HorizontalAlignment="Left" Margin="77,158,0,0" VerticalAlignment="Top"/>
-        <Label Content="Max Nuber of Guests" HorizontalAlignment="Left" Margin="17,213,0,0" VerticalAlignment="Top"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="87,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label Content="Lenguage" HorizontalAlignment="Left" Margin="80,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Free number of places" HorizontalAlignment="Left" Margin="14,203,0,0" VerticalAlignment="Top"/>
+        <Label Content="Search all off our tours." HorizontalAlignment="Left" Margin="54,79,0,0" VerticalAlignment="Top" Width="196" Height="28"/>
+        <Label Content="How many people are going on selected tour?" HorizontalAlignment="Left" Margin="34,338,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtNumOfGuests" HorizontalAlignment="Left" Margin="92,379,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Add people" HorizontalAlignment="Left" Margin="315,374,0,0" VerticalAlignment="Top" Width="85" Height="27"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="1083,371,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
 
     </Grid>
 </Window>

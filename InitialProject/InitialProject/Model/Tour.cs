@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TravelAgency.Model;
 
-internal class Tour : TravelAgency.Serializer.ISerializable
+public class Tour : TravelAgency.Serializer.ISerializable
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -88,5 +88,6 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         StartTime = Convert.ToDateTime(values[8]);
         TourDuration = Convert.ToInt32(values[9]);
         TourStatus = values[10];
+
     }
 }

@@ -9,7 +9,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="760"/>
+            <ColumnDefinition Width="214.794"/>
+            <ColumnDefinition Width="545.206"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -20,18 +21,18 @@
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="4" Margin="4,0,-4,0">
             <Button Click="OpenGuest2Form">
-                <StackPanel Orientation="Horizontal" Width="71">
-                    
+                <StackPanel Orientation="Horizontal" Width="67">
+
                     <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
                 </StackPanel>
             </Button>
             <Separator/>
-            <Button>
+            <Button Click="OpenGuestOnTour"  Width="69">
                 <StackPanel Orientation="Horizontal">
-                    
-                    <TextBlock Text="" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="46" />
+
+                    <TextBlock Text="My tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="62" />
                 </StackPanel>
             </Button>
             <Separator/>
