@@ -34,13 +34,16 @@ namespace TravelAgency.View.Guest2
 
         public Tour selectedTour;
 
+        Model.User LogedUser = new Model.User();
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public Guest2Form()
+        public Guest2Form(User logedUser)
         {
             InitializeComponent();
+            LogedUser = logedUser;
             Title = "Search tours";
             DataContext = this;
             _repository = new TourRepository();
@@ -75,21 +78,26 @@ namespace TravelAgency.View.Guest2
             DataPanel.ItemsSource = tours;
         }
 
-       /* private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
+        private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
         {
-            /*if(DataPanel.SelectedItem == null) {
-                MessageBox.Show("Please select a tour you want to go on.");
-            }
+
             selectedTour = (Tour)DataPanel.SelectedItem;
-            int tourId = selectedTour.Id;
-            const string FilePath = "../../../Resources/Data/tours.csv";
-            if (_repository.UpdateSelectedTour(FilePath, tourId, txtNumOfGuests.Text)) {
-                MessageBox.Show("Updated.");
+            const string FilePath = "../../../Resources/Data/guestOnTour.csv";
+            if (DataPanel.SelectedItem != null)
+            {
+                if (_repository.UpdateSelectedTour(selectedTour.Id, txtNumOfGuests.Text) && _repository.ReserveTour(selectedTour.Id, LogedUser.Username, FilePath))
+                {
+                    MessageBox.Show("Reserved.");
+                }
+                else
+                {
+                    MessageBox.Show("Not reserved.");
+                }
             }
             else
             {
-                MessageBox.Show("Not updated.");
+                MessageBox.Show("Please select a tour you want to go on.");
             }
-        }*/
+        }
     }
 }
