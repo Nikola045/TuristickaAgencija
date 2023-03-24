@@ -12,7 +12,6 @@ namespace TravelAgency.Repository
     class GradeGuest1Repository
     {
         private const string FilePathGuestRatingde = "../../../Resources/Data/guestRating.csv";
-        private const string FilePathReservation = "../../../Resources/Data/reservations.csv";
 
         private readonly Serializer<GuestGrade> _serializer;
 
@@ -38,7 +37,7 @@ namespace TravelAgency.Repository
         public void FindAndLogicalDeleteExpiredReservation(int i)
         {
             List<Reservation> reservations = new List<Reservation>();
-            reservations = reservationRepository.ReadFromReservationsCsv(FilePathReservation);
+            reservations = reservationRepository.ReadFromReservationsCsv();
             DateTime dateTimeNow = DateTime.Now;
 
             if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) < dateTimeNow)
@@ -50,7 +49,7 @@ namespace TravelAgency.Repository
         public void ShowMessageForGrade(int i)
         {
             List<Reservation> reservations = new List<Reservation>();
-            reservations = reservationRepository.ReadFromReservationsCsv(FilePathReservation);
+            reservations = reservationRepository.ReadFromReservationsCsv();
             DateTime dateTimeNow = DateTime.Now;
             if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow && reservations[i].GradeStatus == "NotGraded")
             {
@@ -61,7 +60,7 @@ namespace TravelAgency.Repository
         public string FindGuestsForGrade(int i)
         {
             List<Reservation> reservations = new List<Reservation>();
-            reservations = reservationRepository.ReadFromReservationsCsv(FilePathReservation);
+            reservations = reservationRepository.ReadFromReservationsCsv();
             DateTime dateTimeNow = DateTime.Now;
             if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow && reservations[i].GradeStatus == "NotGraded")
             {

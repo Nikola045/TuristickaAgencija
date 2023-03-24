@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Repository;
 using TravelAgency.View;
+using TravelAgency.View.Owner;
 
 namespace TravelAgency.Forms
 {
@@ -34,6 +35,25 @@ namespace TravelAgency.Forms
         {
             GradeForm createGradeForm = new GradeForm();
             createGradeForm.Show();
+        }
+
+        private void OpenMoveReservation(object sender, RoutedEventArgs e)
+        {
+            MoveReservation createMoveReservation = new MoveReservation();
+            createMoveReservation.Show();
+        }
+
+        private void OpenReviewForm(object sender, RoutedEventArgs e)
+        {
+            ReviewForm createReviewForm = new ReviewForm();
+            createReviewForm.Show();
+        }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
         }
     }
 }

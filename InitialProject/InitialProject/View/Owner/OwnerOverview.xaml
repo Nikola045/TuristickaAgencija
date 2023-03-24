@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.Forms"
         mc:Ignorable="d"
-        Title="Comments" Height="768" Width="1024" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+        Title="OwnerHome" Height="768" Width="1024" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -34,7 +34,19 @@
                 </StackPanel>
             </Button>
             <Separator/>
+            <Button Click="OpenMoveReservation" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Move Reservation" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="113" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenReviewForm" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Review Form" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="78" />
+                </StackPanel>
+            </Button>
         </ToolBar>
+        <Button Grid.Column="2" Content="Log Out" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="132" Click="LogOut"/>
 
     </Grid>
 </Window>
