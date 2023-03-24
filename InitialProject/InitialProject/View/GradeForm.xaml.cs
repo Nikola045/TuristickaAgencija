@@ -29,6 +29,13 @@ namespace TravelAgency.View
 
         private readonly ReservationRepository reservationRepository;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public GradeForm()
         {
             InitializeComponent();

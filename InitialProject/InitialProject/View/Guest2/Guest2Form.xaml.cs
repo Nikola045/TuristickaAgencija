@@ -83,7 +83,7 @@ namespace TravelAgency.View.Guest2
             selectedTour = (Tour)DataPanel.SelectedItem;
             int tourId = selectedTour.Id;
             const string FilePath = "../../../Resources/Data/tours.csv";
-            if (_repository.Update(FilePath, tourId, txtNumOfGuests.Text)) {
+            if (_repository.UpdateSelectedTour(FilePath, tourId, txtNumOfGuests.Text)) {
                 MessageBox.Show("Updated.");
             }
             else
