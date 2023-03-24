@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TravelAgency.Model;
 
-internal class Tour : TravelAgency.Serializer.ISerializable
+public class Tour : TravelAgency.Serializer.ISerializable
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -24,8 +24,6 @@ internal class Tour : TravelAgency.Serializer.ISerializable
     public string TourStatus { get; set; }
 
     public Tour() {
-        CurentNumberOfGuests = 0;
-        TourStatus = "Nezapoceta";
     }
     public Tour(int id, string name, string city, string country, string description, string lenguage, int maxNumberOfGuests, DateTime startTime, int tourDuration, List<CheckPoint> checkPoints)
     {
@@ -90,5 +88,6 @@ internal class Tour : TravelAgency.Serializer.ISerializable
         StartTime = Convert.ToDateTime(values[8]);
         TourDuration = Convert.ToInt32(values[9]);
         TourStatus = values[10];
+
     }
 }

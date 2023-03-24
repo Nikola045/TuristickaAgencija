@@ -1,4 +1,4 @@
-﻿using Cake.Core.IO;
+using Cake.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 using TravelAgency.Model;
 using TravelAgency.Serializer;
 
@@ -98,17 +99,11 @@ namespace TravelAgency.Repository
         public List<Tour> FindTour(string FileName, string city, string country, string leng, string duration, string num)
         {
             List<Tour> allTours = ReadFromToursCsv(FileName);
+
             List<Tour> tours = new List<Tour>();
 
             for (int i = 0; i < allTours.Count; i++)
             {
-                /*
-                if (city == "" || country == "" || leng == "" || duration == "" || num == "")
-                {
-
-                }
-                */
-
                 if (allTours[i].City == city || city == "")
                 {
                     if (allTours[i].Country == country || country == "")
@@ -117,10 +112,21 @@ namespace TravelAgency.Repository
                         {
                             if (Convert.ToString(allTours[i].TourDuration) == duration || duration == "")
                             {
-                                if (allTours[i].CurentNumberOfGuests + Convert.ToInt32(num) <= allTours[i].MaxNumberOfGuests || num == "")//////uslov
+                                if (num == "")
+                                { 
+                                    if (allTours[i].CurentNumberOfGuests <= allTours[i].MaxNumberOfGuests)
+                                    {
+                                        Tour tour = allTours[i];
+                                        tours.Add(tour);
+                                    }
+                                }
+                                else
                                 {
-                                    Tour tour = allTours[i];
-                                    tours.Add(tour);
+                                    if (allTours[i].CurentNumberOfGuests + Convert.ToInt32(num) <= allTours[i].MaxNumberOfGuests)
+                                    {
+                                        Tour tour = allTours[i];
+                                        tours.Add(tour);
+                                    }
                                 }
                             }
                         }
@@ -146,6 +152,101 @@ namespace TravelAgency.Repository
             }
             return tours;
         }
+
+
+
+        public bool UpdateNumberOfGuests(int tourId, string num)
+        {
+
+            ////////// gogaj broj gostiju u zadatu turu
+
+
+
+            return true;
+        }
+
+
+        public Tour Update(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour current = _tours.Find(c => c.Id == tour.Id);
+            int index = _tours.IndexOf(current);
+            _tours.Remove(current);
+            _tours.Insert(index, tour);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, _tours);
+            return tour;
+        }
+
+        public List<CheckPoint> FindAllCheckPoints()
+        {
+            List<CheckPoint> checkPoints= new List<CheckPoint>();
+            using (StreamReader sr = new StreamReader(FilePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    Tour tour = new Tour();
+
+
+                    tour.Id = Convert.ToInt32(fields[0]);
+                    tour.Name = fields[1];
+                    tour.City = fields[2];
+                    tour.Country = fields[3];
+                    tour.Description = fields[4];
+                    tour.Lenguage = fields[5];
+                    tour.MaxNumberOfGuests = Convert.ToInt32(fields[6]);
+                    tour.CurentNumberOfGuests = Convert.ToInt32(fields[7]);
+                    tour.StartTime = Convert.ToDateTime(fields[8]);
+                    tour.TourDuration = Convert.ToInt32(fields[9]);
+                    tour.TourStatus = fields[10];
+                    int i = 11;
+                    int j = 12;
+                    int k = 13;
+
+
+                    while (k <= fields.Count())
+                    {
+                        CheckPoint checkPoint = new CheckPoint();
+                        checkPoint.Id = Convert.ToInt32(fields[i]);
+                        checkPoint.Name = fields[j];
+                        checkPoint.Status = fields[k];
+                        checkPoints.Add(checkPoint);
+                        i = i + 3;
+                        j = j + 3;
+                        k = k + 3;
+                    }
+
+                    tour.CheckPoints = checkPoints;
+                    return checkPoints;
+                }
+            }
+            return null;
+
+        }
+
+        public bool IsStarted()
+        {
+            int countStartedTours = 0;
+            List<Tour> tours = ReadFromToursCsv(FilePath);
+            foreach(Tour tour in tours)
+            {
+                if(tour.TourStatus == "Zapoceta")
+                    countStartedTours++;
+            }
+            if(countStartedTours != 0) {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+
+
     }
 
 }

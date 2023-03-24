@@ -27,16 +27,9 @@ namespace TravelAgency.Forms
     public partial class OwnerForm : Window
     {
         private const string FilePath = "../../../Resources/Data/hotels.csv";
-
         private readonly HotelRepository hotelRepository;
         private readonly HotelImageRepository hotelImageRepository;
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }        
 
         public OwnerForm()
         {
@@ -75,16 +68,16 @@ namespace TravelAgency.Forms
 
             if (ButtonActivator())
             {
-                Hotel newHotel = new Hotel(
-               hotelRepository.NextId(),
-               txtName.Text,
-               txtCity.Text,
-               txtCountry.Text,
-               typeOfHotel,
-               Convert.ToInt32(brMax.Text),
-               Convert.ToInt32(brMin.Text),
-               Convert.ToInt32(brDaysLeft.Text));
-                Hotel savedHotel = hotelRepository.Save(newHotel);
+               Hotel newHotel = new Hotel(
+                    hotelRepository.NextId(),
+                    txtName.Text,
+                    txtCity.Text,
+                    txtCountry.Text,
+                    typeOfHotel,
+                    Convert.ToInt32(brMax.Text),
+                    Convert.ToInt32(brMin.Text),
+                    Convert.ToInt32(brDaysLeft.Text));
+               Hotel savedHotel = hotelRepository.Save(newHotel);
 
                 MessageBox.Show("Accommodation successfully created");
 
@@ -144,18 +137,17 @@ namespace TravelAgency.Forms
             this.Close();
         }
 
+        //Validation 
         private void NameValidation(object sender, TextChangedEventArgs e)
         {
             string name = txtName.Text;
             if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
             {
                 LabelNameValidator.Content = "";
-                saveBTN.IsEnabled = true;
             }
             else
             {
                 LabelNameValidator.Content = "Please enter valid value";
-                saveBTN.IsEnabled = false;
             }
         }
 
