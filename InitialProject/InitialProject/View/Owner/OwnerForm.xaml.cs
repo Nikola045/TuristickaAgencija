@@ -144,12 +144,10 @@ namespace TravelAgency.Forms
             if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
             {
                 LabelNameValidator.Content = "";
-                saveBTN.IsEnabled = true;
             }
             else
             {
                 LabelNameValidator.Content = "Please enter valid value";
-                saveBTN.IsEnabled = false;
             }
         }
 
