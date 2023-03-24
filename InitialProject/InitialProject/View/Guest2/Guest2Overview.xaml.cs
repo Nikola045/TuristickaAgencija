@@ -34,7 +34,7 @@ namespace TravelAgency.View.Guest2
 
         private void OpenGuest2Form(object sender, RoutedEventArgs e)
         {
-            Guest2Form createGuest2Form = new Guest2Form();
+            Guest2Form createGuest2Form = new Guest2Form(LoggedInUser);
             createGuest2Form.Show();
         }
 
