@@ -26,7 +26,6 @@ namespace TravelAgency.Forms
 {
     public partial class OwnerForm : Window
     {
-        private const string FilePath = "../../../Resources/Data/hotels.csv";
         private readonly HotelRepository hotelRepository;
         private readonly HotelImageRepository hotelImageRepository;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -97,7 +96,7 @@ namespace TravelAgency.Forms
         private void OnLoad(object sender, RoutedEventArgs e)
         {         
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
+            hotels = hotelRepository.ReadFromHotelsCsv();
             DataPanel.ItemsSource = hotels;
         }
 
