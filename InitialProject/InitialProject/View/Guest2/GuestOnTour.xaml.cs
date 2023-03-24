@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelAgency.Repository;
 
 namespace TravelAgency.View.Guest2
 {
@@ -20,10 +21,27 @@ namespace TravelAgency.View.Guest2
     public partial class GuestOnTour : Window
     {
         Model.User LogedUser = new Model.User();
+
+        const string FilePath = "../../../Resources/Data/tours.csv";
+
+        private readonly TourRepository _repository;
         public GuestOnTour(Model.User logedUser)
         {
             InitializeComponent();
             LogedUser = logedUser;
+            _repository = new TourRepository();
+        }
+
+        private void LoadData(object sender, RoutedEventArgs e)
+        { 
+            List<Tour> tours = new List<Tour>();
+            tours = _repository.ReadFromToursCsv(FilePath);
+            DataPanel.ItemsSource = tours;
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

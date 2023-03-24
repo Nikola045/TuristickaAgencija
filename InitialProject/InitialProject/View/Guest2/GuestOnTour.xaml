@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="GuestOnTour" Height="450" Width="800">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="198" Margin="294,53,0,0" VerticalAlignment="Top" Width="458" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <DataGrid x:Name="DataPanel" HorizontalAlignment="Center" Height="198" Margin="0,82,0,0" VerticalAlignment="Top" Width="458" Loaded="LoadData"/>
+        <Label Content="Select a tour to start." HorizontalAlignment="Center" Height="28" Margin="0,36,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Start a tour" HorizontalAlignment="Center" Height="29" Margin="0,309,0,0" VerticalAlignment="Top" Width="96" RenderTransformOrigin="1.708,0.439"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Height="27" Margin="687,367,0,0" VerticalAlignment="Top" Click="Exit" Width="61"/>
 
     </Grid>
 </Window>
