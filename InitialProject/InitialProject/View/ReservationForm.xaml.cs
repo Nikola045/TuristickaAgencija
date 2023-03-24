@@ -75,29 +75,34 @@ namespace TravelAgency.View
                         MessageBox.Show("Return date must be greater than departure date");
                         requirementsMet = false;
                     }
-                    if ((Convert.ToDateTime(Date2.Text).Day - Convert.ToDateTime(Date1.Text).Day) < hotels[i].MinNumberOfDays)
+                    DateTime startDate = (DateTime)Date1.SelectedDate;
+                    DateTime endDate = (DateTime)Date2.SelectedDate;
+
+                    int numberOfDays = (int)(endDate - startDate).TotalDays;
+
+                    if (numberOfDays < hotels[i].MinNumberOfDays)
                     {
-                        MessageBox.Show("Minimum number of days for " + hotels[i].Name + " must be greater than " + Convert.ToInt32(hotels[i].MinNumberOfDays));
+                        MessageBox.Show("Minimum number of days for " + hotels[i].Name + " must be greater than " + hotels[i].MinNumberOfDays);
                         requirementsMet = false;
+                        break;
                     }
+
                     List<DateTime> reservedDates = _repository.GetReservedDates(hotels[i].Name);
-                    for (int j = 0; j < reservedDates.Count - 1; j++)
+                    bool isReserved = false;
+
+                    foreach (DateTime reservedDate in reservedDates)
                     {
-                        DateTime startDate1 = Convert.ToDateTime(Date1.Text);
-                        DateTime endDate1 = Convert.ToDateTime(Date2.Text);
-                        if (reservedDates[j] <= endDate1 && reservedDates[j + 1] >= startDate1)
+                        if (startDate <= reservedDate && reservedDate <= endDate)
                         {
-                            MessageBox.Show("These dates are reserved");
-                            DateTime suggestedStartDate = reservedDates[j + 1].AddDays(1);
-                            DateTime suggestedEndDate = suggestedStartDate.AddDays((endDate1 - startDate1).Days);
-                            if (suggestedEndDate > DateTime.Now)
-                            {
-                                MessageBox.Show($"You can try booking between {suggestedStartDate.ToShortDateString()} and {suggestedEndDate.ToShortDateString()} instead.");
-                            }
-                            requirementsMet = false;
-                            
+                            isReserved = true;
                             break;
                         }
+                    }
+
+                    if (isReserved)
+                    {
+                        MessageBox.Show("Already reserved in that period.");
+                        requirementsMet = false;
                     }
                 }
             }
