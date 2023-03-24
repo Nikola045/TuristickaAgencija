@@ -23,8 +23,6 @@ namespace TravelAgency.View
 {
     public partial class GradeForm : Window
     {
-        private const string FilePath = "../../../Resources/Data/reservations.csv";
-
         private readonly GradeGuest1Repository gradeGuest1Repository; 
 
         private readonly ReservationRepository reservationRepository;
@@ -42,7 +40,7 @@ namespace TravelAgency.View
         {
             List<Reservation> reservations = new List<Reservation>();
             
-            reservations = reservationRepository.ReadFromReservationsCsv(FilePath);
+            reservations = reservationRepository.ReadFromReservationsCsv();
 
             for (int i = 0; i < reservations.Count; i++)
             {
@@ -94,7 +92,7 @@ namespace TravelAgency.View
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             List<Reservation> reservations = new List<Reservation>();
-            reservations = reservationRepository.ReadFromReservationsCsv(FilePath);
+            reservations = reservationRepository.ReadFromReservationsCsv();
 
             for (int i = 0; i < reservations.Count; i++)
             {

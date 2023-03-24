@@ -47,11 +47,11 @@ namespace TravelAgency.Repository
             return _reservations.Max(r => r.Id) + 1;
         }
 
-        public List<Reservation> ReadFromReservationsCsv(string FileName)
+        public List<Reservation> ReadFromReservationsCsv()
         {
             List<Reservation> reservations = new List<Reservation>();
 
-            using (StreamReader sr = new StreamReader(FileName))
+            using (StreamReader sr = new StreamReader(FilePath))
             {
                 while (!sr.EndOfStream)
                 {
