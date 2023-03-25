@@ -23,6 +23,12 @@
     <Compile Update="View\Owner\MoveReservation.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Owner\OwnerHome.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\OwnerProfil.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Owner\ReviewForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -50,6 +56,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\MoveReservation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\OwnerHome.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\OwnerProfil.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\ReviewForm.xaml">
