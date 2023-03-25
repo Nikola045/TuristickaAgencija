@@ -93,12 +93,7 @@ namespace TravelAgency.Forms
             }
         }
 
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {         
-            List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv();
-            DataPanel.ItemsSource = hotels;
-        }
+
 
         private void AddImage(object sender, RoutedEventArgs e)
         {
