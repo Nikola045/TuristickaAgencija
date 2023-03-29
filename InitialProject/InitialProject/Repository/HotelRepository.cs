@@ -45,10 +45,10 @@ namespace TravelAgency.Repository
             return hotels.Max(h => h.Id) + 1;
         }
 
-        public List<Hotel> ReadFromHotelsCsv(string FileName)
+        public List<Hotel> ReadFromHotelsCsv()
         {
             List<Hotel> hotels = new List<Hotel>();
-            using (StreamReader sr = new StreamReader(FileName))
+            using (StreamReader sr = new StreamReader(FilePath))
             {
                 while (!sr.EndOfStream)
                 {

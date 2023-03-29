@@ -1,8 +1,6 @@
-
 InitialProject/.vs/TravelAgency/FileContentIndex/6576c3a4-3d24-4e36-a470-d9c96e5341ef.vsidx
 InitialProject/.vs/TravelAgency/FileContentIndex/78c1b693-8664-4ef5-8026-35d9e4fd977e.vsidx
 *.vsidx
-
 *.suo
 .vs/*
 obj
@@ -16,3 +14,5 @@ bin
 *.v2
 *.v2
 InitialProject/.vs/TravelAgency/v17/.suo
+InitialProject/.vs/ProjectEvaluation/travelagency.metadata.v6.1
+InitialProject/.vs/ProjectEvaluation/travelagency.projects.v6.1

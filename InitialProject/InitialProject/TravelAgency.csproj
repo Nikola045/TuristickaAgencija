@@ -15,13 +15,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="View\Owner\plus.png" />
+    <None Remove="View\Owner\profil.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Cake.Core" Version="3.0.0" />
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="Microsoft.Graph" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Images\" />
+    <Resource Include="View\Owner\plus.png" />
+    <Resource Include="View\Owner\profil.png" />
   </ItemGroup>
 
 </Project>

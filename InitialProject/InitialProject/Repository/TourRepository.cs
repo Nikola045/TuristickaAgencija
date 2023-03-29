@@ -154,13 +154,20 @@ namespace TravelAgency.Repository
         }
 
 
-
-        public bool UpdateNumberOfGuests(int tourId, string num)
+        public bool ReserveTour(int tourId, string guestUsername, string fileName)
         {
 
-            ////////// gogaj broj gostiju u zadatu turu
+            ///////// upisi u guestOnTour.csv
+
+            return true;
+        }
 
 
+
+        public bool UpdateSelectedTour(int tourId, string num)
+        {
+
+            ////////// dodaj broj gostiju u zadatu turu
 
             return true;
         }

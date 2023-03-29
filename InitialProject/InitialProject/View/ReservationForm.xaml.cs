@@ -56,8 +56,7 @@ namespace TravelAgency.View
         private void Reserve(object sender, RoutedEventArgs e)
         {            
             List<Hotel> hotels = new List<Hotel>();
-            string FilePath = "../../../Resources/Data/hotels.csv";
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
+            hotels = hotelRepository.ReadFromHotelsCsv();
 
             bool requirementsMet = true;
 
@@ -133,8 +132,7 @@ namespace TravelAgency.View
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            string FilePath = "../../../Resources/Data/hotels.csv";
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
+            hotels = hotelRepository.ReadFromHotelsCsv();
 
             for(int i = 0; i < hotels.Count; i++)
             {
@@ -145,8 +143,7 @@ namespace TravelAgency.View
         private void DefaultValuesForTXT(object sender, SelectionChangedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            string FilePath = "../../../Resources/Data/hotels.csv";
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
+            hotels = hotelRepository.ReadFromHotelsCsv();
 
             txtNumberOfGuests.IsEnabled = true;
 
