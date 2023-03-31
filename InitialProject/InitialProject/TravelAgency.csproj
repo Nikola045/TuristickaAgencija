@@ -20,8 +20,4 @@
     <PackageReference Include="Microsoft.Graph" Version="5.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Resources\Images\" />
-  </ItemGroup>
-
 </Project>

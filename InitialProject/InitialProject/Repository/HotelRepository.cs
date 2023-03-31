@@ -126,7 +126,51 @@ namespace TravelAgency.Repository
 
             return hotels.Distinct().ToList();
         }
+        /*
+        public List<Reservation> ReadFromReservationsCsv()
+        {
+            List<Reservation> reservations = new List<Reservation>();
 
+            using (StreamReader sr = new StreamReader(FilePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    Reservation reservation = new Reservation();
+                    reservation.Id = Convert.ToInt32(fields[0]);
+                    reservation.GuestUserName = fields[1];
+                    reservation.HotelName = fields[2];
+                    reservation.StartDate = Convert.ToDateTime(fields[3]);
+                    reservation.EndDate = Convert.ToDateTime(fields[4]);
+                    reservation.NumberOfDays = Convert.ToInt32(fields[5]);
+                    reservation.NumberOfGuests = Convert.ToInt32(fields[6]);
+                    reservation.GradeStatus = fields[7];
+                    reservations.Add(reservation);
+
+                }
+            }
+            return reservations;
+        }
+        public bool IsAvailable(string hotelName, DateTime startDate, DateTime endDate)
+        {
+            List<Reservation> reservations = ReadFromReservationsCsv();
+            Hotel hotel = ReadFromHotelsCsv().FirstOrDefault(h => h.Name == hotelName);
+
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                int reservationsForDate = reservations.Where(r => r.HotelName == hotelName && date >= r.StartDate && date <= r.EndDate).Sum(r => r.NumberOfGuests);
+
+                if (reservationsForDate >= hotel.MaxNumberOfGuests)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        */
     }
 }
 

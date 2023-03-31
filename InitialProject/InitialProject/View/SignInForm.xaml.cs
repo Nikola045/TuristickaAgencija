@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using TravelAgency.View;
 using TravelAgency.View.Guest2;
+using TravelAgency.View.Owner;
 
 namespace TravelAgency
 {
@@ -55,8 +56,8 @@ namespace TravelAgency
                     if(user.LoginRole == "Owner")
                     {
                         
-                        OwnerOverview ownerOverview = new OwnerOverview(user);
-                        ownerOverview.Show();
+                        OwnerHome ownerHome = new OwnerHome(user);
+                        ownerHome.Show();
                         Close();
                     }
                     if (user.LoginRole == "Guide")
