@@ -37,7 +37,17 @@ namespace TravelAgency.View.Owner
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            UserNameLabel.Content = LogedOwner.Username;
+            UsernameTXT.Text = LogedOwner.Username;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void SuperOwnerLabel_Loaded(object sender, RoutedEventArgs e)
+        {
+            SuperOwnerLabel.Content = "Owner";
         }
     }
 }

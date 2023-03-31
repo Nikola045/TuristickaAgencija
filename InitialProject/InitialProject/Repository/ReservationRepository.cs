@@ -99,6 +99,15 @@ namespace TravelAgency.Repository
             Update(reservation);
         }
 
+        public void LogicalDeleteExpire(Reservation reservation)
+        {
+            if (reservation.GradeStatus != "Graded" && reservation.GradeStatus != "Expired")
+            {
+                reservation.GradeStatus = "Expire";
+                Update(reservation);
+            }
+        }
+
 
         public Reservation FindReservationByID(int id)
         {
