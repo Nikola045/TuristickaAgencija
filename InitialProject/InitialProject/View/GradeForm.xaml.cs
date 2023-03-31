@@ -96,7 +96,10 @@ namespace TravelAgency.View
 
             for (int i = 0; i < reservations.Count; i++)
             {
-                gradeGuest1Repository.ShowMessageForGrade(i);
+                if(gradeGuest1Repository.ShowMessageForGrade(i) != null)
+                {
+                    MessageBox.Show(gradeGuest1Repository.ShowMessageForGrade(i));
+                }
                 gradeGuest1Repository.FindAndLogicalDeleteExpiredReservation(i);
             }
         }
