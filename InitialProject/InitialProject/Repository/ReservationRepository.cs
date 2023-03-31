@@ -23,10 +23,13 @@ namespace TravelAgency.Repository
 
         private List<Reservation> _reservations;
 
+        private HotelRepository hotelRepository;
+
         public ReservationRepository()
         {
             _serializer = new Serializer<Reservation>();
             _reservations = _serializer.FromCSV(FilePath);
+            hotelRepository = new HotelRepository();
         }
 
         public Reservation Save(Reservation reservation)
@@ -152,11 +155,11 @@ namespace TravelAgency.Repository
             }
             return dates;
         }
-        /*
+        
         public bool IsAvailable(string hotelName, DateTime startDate, DateTime endDate)
         {
             List<Reservation> reservations = ReadFromReservationsCsv();
-            Hotel hotel = ReadFromHotelsCsv().FirstOrDefault(h => h.Name == hotelName);
+            Hotel hotel = hotelRepository.ReadFromHotelsCsv().FirstOrDefault(h => h.Name == hotelName);
 
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {
@@ -169,6 +172,6 @@ namespace TravelAgency.Repository
             }
 
             return true;
-        }*/
+        }
     }
 }
