@@ -152,5 +152,23 @@ namespace TravelAgency.Repository
             }
             return dates;
         }
+        /*
+        public bool IsAvailable(string hotelName, DateTime startDate, DateTime endDate)
+        {
+            List<Reservation> reservations = ReadFromReservationsCsv();
+            Hotel hotel = ReadFromHotelsCsv().FirstOrDefault(h => h.Name == hotelName);
+
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                int reservationsForDate = reservations.Where(r => r.HotelName == hotelName && date >= r.StartDate && date <= r.EndDate).Sum(r => r.NumberOfGuests);
+
+                if (reservationsForDate >= hotel.MaxNumberOfGuests)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }*/
     }
 }
