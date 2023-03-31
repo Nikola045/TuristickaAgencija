@@ -74,18 +74,18 @@ namespace TravelAgency.View
                         MessageBox.Show("Return date must be greater than departure date");
                         requirementsMet = false;
                     }
-                    if (Convert.ToInt32(txtNumberOfGuests.Text) > hotels[i].MinNumberOfDays)
+                    if (Convert.ToInt32(txtNumberOfDays.Text) < hotels[i].MinNumberOfDays)
                     {
                         MessageBox.Show("Minimum number of days for " + hotels[i].Name + " must be greater than " + hotels[i].MinNumberOfDays);
                         requirementsMet = false;
                         break;
                     }
-                    /*if (!hotelRepository.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
+                    if (!_repository.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
                         MessageBox.Show("No available rooms for selected period");
                         requirementsMet = false;
                         break;
-                    }*/
+                    }
                 }
             }
              
