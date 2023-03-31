@@ -42,7 +42,7 @@ namespace TravelAgency.Repository
 
             if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) < dateTimeNow)
             {
-                reservationRepository.LogicalDelete(reservations[i]);
+                reservationRepository.LogicalDeleteExpire(reservations[i]);
             }
         }
 
