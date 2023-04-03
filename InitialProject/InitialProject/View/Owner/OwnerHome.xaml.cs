@@ -58,7 +58,7 @@ namespace TravelAgency.View.Owner
 
         private void OpenReviewForm(object sender, RoutedEventArgs e)
         {
-            ReviewForm createReviewForm = new ReviewForm();
+            ReviewForm createReviewForm = new ReviewForm(LoggedInUser);
             createReviewForm.Show();
         }
 

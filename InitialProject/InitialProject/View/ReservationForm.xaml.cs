@@ -74,34 +74,17 @@ namespace TravelAgency.View
                         MessageBox.Show("Return date must be greater than departure date");
                         requirementsMet = false;
                     }
-                    DateTime startDate = (DateTime)Date1.SelectedDate;
-                    DateTime endDate = (DateTime)Date2.SelectedDate;
-
-                    int numberOfDays = (int)(endDate - startDate).TotalDays;
-
-                    if (numberOfDays < hotels[i].MinNumberOfDays)
+                    if (Convert.ToInt32(txtNumberOfDays.Text) < hotels[i].MinNumberOfDays)
                     {
                         MessageBox.Show("Minimum number of days for " + hotels[i].Name + " must be greater than " + hotels[i].MinNumberOfDays);
                         requirementsMet = false;
                         break;
                     }
-
-                    List<DateTime> reservedDates = _repository.GetReservedDates(hotels[i].Name);
-                    bool isReserved = false;
-
-                    foreach (DateTime reservedDate in reservedDates)
+                    if (!_repository.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
-                        if (startDate <= reservedDate && reservedDate <= endDate)
-                        {
-                            isReserved = true;
-                            break;
-                        }
-                    }
-
-                    if (isReserved)
-                    {
-                        MessageBox.Show("Already reserved in that period.");
+                        MessageBox.Show("No available rooms for selected period");
                         requirementsMet = false;
+                        break;
                     }
                 }
             }
@@ -115,13 +98,14 @@ namespace TravelAgency.View
                     HotelNameCB.Text,
                     Convert.ToDateTime(Date1.Text),
                     Convert.ToDateTime(Date2.Text),
-                    Convert.ToDateTime(Date2.Text).Day - Convert.ToDateTime(Date1.Text).Day,
-                    Convert.ToInt32(txtNumberOfGuests.Text)); ;
+                    Convert.ToInt32(txtNumberOfDays.Text),
+                    Convert.ToInt32(txtNumberOfGuests.Text)); 
                 _repository.Save(newReservation);
                 MessageBox.Show("Reservation made succesfully!");
 
                 HotelNameCB.SelectedItem = null;
                 txtNumberOfGuests.Clear();
+                txtNumberOfDays.Clear();
                 Date1.SelectedDate = null;
                 Date2.SelectedDate = null;
                 btnReserve.IsEnabled = false;
@@ -146,12 +130,14 @@ namespace TravelAgency.View
             hotels = hotelRepository.ReadFromHotelsCsv();
 
             txtNumberOfGuests.IsEnabled = true;
+            txtNumberOfDays.IsEnabled = true;
 
             for (int i = 0; i < hotels.Count; i++)
             {
                 if (HotelNameCB.SelectedItem != null && HotelNameCB.SelectedItem.ToString() == hotels[i].Name)
                 {
                     txtNumberOfGuests.Text = hotels[i].MaxNumberOfGuests.ToString();
+                    txtNumberOfDays.Text = hotels[i].MinNumberOfDays.ToString();
                 }
             }
         }
@@ -165,6 +151,7 @@ namespace TravelAgency.View
         {
             if (HotelNameCB.SelectedItem != null
                 && !string.IsNullOrEmpty(txtNumberOfGuests.Text)
+                && !string.IsNullOrEmpty(txtNumberOfDays.Text)
                 && Date1.SelectedDate != null
                 && Date2.SelectedDate != null)
             return true;
@@ -193,6 +180,16 @@ namespace TravelAgency.View
         }
 
         private void txtNumberOfGuests_LostFocus(object sender, RoutedEventArgs e)
+        {
+            btnReserve.IsEnabled = AllFieldsValid();
+        }
+
+        private void txtNumberOfDays_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            btnReserve.IsEnabled = AllFieldsValid();
+        }
+
+        private void txtNumberOfDays_LostFocus(object sender, RoutedEventArgs e)
         {
             btnReserve.IsEnabled = AllFieldsValid();
         }

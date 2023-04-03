@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Model;
+using TravelAgency.Repository;
 
 namespace TravelAgency.View.Owner
 {
@@ -21,10 +22,13 @@ namespace TravelAgency.View.Owner
     public partial class OwnerProfil : Window
     {
         private User LogedOwner { get; set; }
+
+        private OwnerRepository ownerRepository;
         public OwnerProfil(User user)
         {
             InitializeComponent();
             LogedOwner = user;
+            ownerRepository = new OwnerRepository();
         }
 
         private void LogOut(object sender, RoutedEventArgs e)
@@ -38,6 +42,7 @@ namespace TravelAgency.View.Owner
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             UsernameTXT.Text = LogedOwner.Username;
+                
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -47,7 +52,7 @@ namespace TravelAgency.View.Owner
 
         private void SuperOwnerLabel_Loaded(object sender, RoutedEventArgs e)
         {
-            SuperOwnerLabel.Content = "Owner";
+            SuperOwnerLabel.Content = ownerRepository.SuperOwner(LogedOwner.Username);
         }
     }
 }
