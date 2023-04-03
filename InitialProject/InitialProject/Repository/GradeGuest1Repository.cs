@@ -72,5 +72,19 @@ namespace TravelAgency.Repository
             }
             else return null;
         }
+
+        public string FindGradedGuest(int i)
+        {
+            List<Reservation> reservations = new List<Reservation>();
+            reservations = reservationRepository.ReadFromReservationsCsv();
+            if (reservations[i].GradeStatus == "Graded")
+            {
+                string username = reservations[i].GuestUserName;
+                return username;
+            }
+            else return null;
+        }
+
+
     }
 }
