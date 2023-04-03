@@ -46,15 +46,18 @@ namespace TravelAgency.Repository
             }
         }
 
-        public void ShowMessageForGrade(int i)
+        public string ShowMessageForGrade(int i)
         {
             List<Reservation> reservations = new List<Reservation>();
             reservations = reservationRepository.ReadFromReservationsCsv();
             DateTime dateTimeNow = DateTime.Now;
+            string message = null;
             if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow && reservations[i].GradeStatus == "NotGraded")
             {
-                MessageBox.Show("You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName);
+                
+                message = "You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName;
             }
+            return message;
         }
 
         public string FindGuestsForGrade(int i)
@@ -69,5 +72,19 @@ namespace TravelAgency.Repository
             }
             else return null;
         }
+
+        public string FindGradedGuest(int i)
+        {
+            List<Reservation> reservations = new List<Reservation>();
+            reservations = reservationRepository.ReadFromReservationsCsv();
+            if (reservations[i].GradeStatus == "Graded")
+            {
+                string username = reservations[i].GuestUserName;
+                return username;
+            }
+            else return null;
+        }
+
+
     }
 }
