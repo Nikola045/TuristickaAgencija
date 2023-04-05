@@ -23,29 +23,43 @@ namespace TravelAgency.View.Owner
     /// </summary>
     public partial class ReviewForm : Window
     {
-        GradeGuest1Repository gradeGuest1Repository;
-        OwnerRepository ownerRepository;
+        OwnerGradeRepository ownerGradeRepository;
+        ReservationRepository reservationRepository;
+        
         private User LogedOwner { get; set; }
         public ReviewForm(User user)
         {
             InitializeComponent();
-            gradeGuest1Repository = new GradeGuest1Repository();
-            ownerRepository = new OwnerRepository();
+            reservationRepository = new ReservationRepository();
+            ownerGradeRepository = new OwnerGradeRepository();
             LogedOwner = user;
         }
 
-        public void ShowReviews()
+        public List<OwnerGrade> ShowReviews()
         {
-            //logika izlistaj ocene od onih koje si ti ocenio
-            
-
-            //ako su ocenjeni znaci da je u rezervacijama graded status (fun za uzimanje svih gostova1 iz rezervacije i distinctujem)
-            //izlistava iz OwnerRating.csv (fun koja poredi usernamove od fun iznad sa usernamovima u OwnerOwerRating i izlistava ih u Grid)
+            List<Reservation> allReservation = reservationRepository.ReadFromReservationsCsv();
+            List<OwnerGrade> ownerGrades = new List<OwnerGrade>();
+            foreach(Reservation reservation in allReservation)
+            {
+                if(reservation.GradeStatus == "Graded")
+                {
+                    if (ownerGradeRepository.IsGradeExists(reservation.Id))
+                    {
+                        ownerGrades.Add(ownerGradeRepository.FindByReservationId(reservation.Id));
+                    }
+                }
+            }
+            return ownerGrades;
         }
 
         private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void ShowData(object sender, RoutedEventArgs e)
+        {
+            ReviewData.ItemsSource = ShowReviews();
         }
     }
 }

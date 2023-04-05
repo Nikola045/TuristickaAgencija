@@ -13,20 +13,22 @@ namespace TravelAgency.Model
         public int Cleanliness { get; set; }
         public int Respecting { get; set; }
         public string CommentText { get; set; }
+        public int ReservationId { get; set; }
 
         public GuestGrade() { }
 
-        public GuestGrade(string guestUserName, int cleanilness, int respecting, string commentText)
+        public GuestGrade(string guestUserName, int cleanilness, int respecting, string commentText, int reservationId)
         {
             GuestUserName = guestUserName;
             Cleanliness = cleanilness;  
             Respecting = respecting;
             CommentText = commentText;
+            ReservationId = reservationId;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { GuestUserName, Cleanliness.ToString(), Respecting.ToString(), CommentText};
+            string[] csvValues = { GuestUserName, Cleanliness.ToString(), Respecting.ToString(), CommentText, ReservationId.ToString()};
             return csvValues;
         }
 
@@ -36,6 +38,7 @@ namespace TravelAgency.Model
             Cleanliness = Convert.ToInt32(values[1]);
             Respecting = Convert.ToInt32(values[2]);
             CommentText = values[3];
+            ReservationId = Convert.ToInt32(values[4]);
         }
     }
 }

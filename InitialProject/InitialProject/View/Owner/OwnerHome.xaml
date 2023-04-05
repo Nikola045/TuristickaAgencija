@@ -45,6 +45,7 @@
         <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="101" Background="#FFEC1515">
 
         </Button>
+        <Button Content="Gallery" HorizontalAlignment="Left" Margin="880,573,0,0" VerticalAlignment="Top" Height="58" Width="119" Click="OpenGallery"/>
 
 
     </Grid>

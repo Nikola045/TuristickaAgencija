@@ -52,10 +52,17 @@ namespace TravelAgency.Repository
             reservations = reservationRepository.ReadFromReservationsCsv();
             DateTime dateTimeNow = DateTime.Now;
             string message = null;
+
             if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow && reservations[i].GradeStatus == "NotGraded")
             {
-                
-                message = "You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName;
+                if(dateTimeNow < reservations[i].EndDate)
+                {
+                    message = "You have " + (5 - DateTime.DaysInMonth(dateTimeNow.Year,dateTimeNow.Month) - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName;
+                }
+                else
+                {
+                    message = "You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName;
+                }
             }
             return message;
         }

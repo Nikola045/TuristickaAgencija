@@ -74,6 +74,25 @@ namespace TravelAgency.Repository
             return null;
         }
 
-
+        public List<HotelImage> FindAllById(int id)
+        {
+            List<HotelImage> hotelImages = new List<HotelImage>();
+            using (StreamReader sr = new StreamReader(FilePathForImages))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    HotelImage hotelImage = new HotelImage();
+                    string[] fields = line.Split('|');
+                    hotelImage.HotelId = Convert.ToInt32(fields[0]);
+                    hotelImage.Url = fields[1];
+                    if (hotelImage.HotelId == id)
+                    {
+                        hotelImages.Add(hotelImage);
+                    }
+                }
+            }
+            return hotelImages;
+        }
     }
 }

@@ -69,14 +69,6 @@ namespace TravelAgency.View
 
         private void SaveGrade_Click(object sender, RoutedEventArgs e)
         {
-            GuestGrade newGrade = new GuestGrade(
-                GuestsCB.Text,
-                Convert.ToInt32(CB1.Text),
-                Convert.ToInt32(CB2.Text),
-                CommentText.Text);
-            gradeGuest1Repository.Save(newGrade);
-
-            CommentText.Clear();
             object selectedItem = GuestsCB.SelectedItem;
             Reservation oldReservation = new Reservation();
             int id;
@@ -84,6 +76,15 @@ namespace TravelAgency.View
             string[] fields = line.Split(' ');
             id = Convert.ToInt32(fields[0]);
 
+            GuestGrade newGrade = new GuestGrade(
+                GuestsCB.Text,
+                Convert.ToInt32(CB1.Text),
+                Convert.ToInt32(CB2.Text),
+                CommentText.Text,
+                id);
+            gradeGuest1Repository.Save(newGrade);
+
+            CommentText.Clear();
             oldReservation = reservationRepository.FindReservationByID(id);
             GuestsCB.Items.Remove(selectedItem);
             reservationRepository.LogicalDelete(oldReservation);
