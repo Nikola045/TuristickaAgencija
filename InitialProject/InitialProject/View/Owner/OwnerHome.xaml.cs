@@ -119,5 +119,11 @@ namespace TravelAgency.View.Owner
             OwnerProfil profil = new OwnerProfil(LoggedInUser);
             profil.ShowDialog();
         }
+
+        private void OpenGallery(object sender, RoutedEventArgs e)
+        {
+            
+            HotelGalery openHotelGalery = new HotelGalery();
+        }
     }
 }

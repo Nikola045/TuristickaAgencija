@@ -59,12 +59,6 @@ namespace TravelAgency.Forms
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            string typeOfHotel = null;
-            if (RadioHouse.IsChecked == true) typeOfHotel = "House";
-            else if (RadioHotel.IsChecked == true) typeOfHotel = "Hotel";
-            else if (RadioHut.IsChecked == true) typeOfHotel = "Hut";
-            else if (RadioApartment.IsChecked == true) typeOfHotel = "Apartment";
-
             if (ButtonActivator())
             {
                Hotel newHotel = new Hotel(
@@ -72,7 +66,7 @@ namespace TravelAgency.Forms
                     txtName.Text,
                     txtCity.Text,
                     txtCountry.Text,
-                    typeOfHotel,
+                    Type.Text,
                     Convert.ToInt32(brMax.Text),
                     Convert.ToInt32(brMin.Text),
                     Convert.ToInt32(brDaysLeft.Text));
@@ -209,25 +203,6 @@ namespace TravelAgency.Forms
             }
         }
 
-        private void HouseCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void HutCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void HotelCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void ApartmentCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
 
         private void UrlValidation(object sender, TextChangedEventArgs e)
         {
@@ -242,6 +217,19 @@ namespace TravelAgency.Forms
                 LabelUrlValidator.Content = "Please input valid ulr address";
                 AddImgButton.IsEnabled = false;
             }
+        }
+
+        private void DataFill(object sender, RoutedEventArgs e)
+        {
+            Type.Items.Add("Hotel");
+            Type.Items.Add("Hut");
+            Type.Items.Add("House");
+            Type.Items.Add("Apartment");
+        }
+
+        private void ValidationType(object sender, SelectionChangedEventArgs e)
+        {
+            LabelTypeValidator.Content = "";
         }
     }
 }
