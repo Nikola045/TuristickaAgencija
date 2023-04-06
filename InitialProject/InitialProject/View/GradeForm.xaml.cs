@@ -26,9 +26,9 @@ namespace TravelAgency.View
     public partial class GradeForm : Window
     {
         private readonly GradeGuest1Repository gradeGuest1Repository; 
-
         private readonly ReservationRepository reservationRepository;
         private readonly GradeService gradeService;
+        private readonly ReservationService reservationService;
 
         public GradeForm()
         {
@@ -38,13 +38,14 @@ namespace TravelAgency.View
             gradeGuest1Repository = new GradeGuest1Repository();
             reservationRepository = new ReservationRepository();
             gradeService = new GradeService();
+            reservationService = new ReservationService();
         }
 
         private void GusetLoaded(object sender, RoutedEventArgs e)
         {
             List<Reservation> reservations = new List<Reservation>();
             
-            reservations = reservationRepository.ReadFromReservationsCsv();
+            reservations = reservationRepository.GetAll();
 
             for (int i = 0; i < reservations.Count; i++)
             {
@@ -89,15 +90,15 @@ namespace TravelAgency.View
             gradeGuest1Repository.Save(newGrade);
 
             CommentText.Clear();
-            oldReservation = reservationRepository.FindReservationByID(id);
+            oldReservation = reservationService.FindReservationByID(id);
             GuestsCB.Items.Remove(selectedItem);
-            reservationRepository.LogicalDelete(oldReservation);
+            reservationService.LogicalDelete(oldReservation);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             List<Reservation> reservations = new List<Reservation>();
-            reservations = reservationRepository.ReadFromReservationsCsv();
+            reservations = reservationRepository.GetAll();
 
             for (int i = 0; i < reservations.Count; i++)
             {
