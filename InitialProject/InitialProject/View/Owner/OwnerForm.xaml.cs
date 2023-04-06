@@ -1,6 +1,4 @@
-﻿using TravelAgency.Model;
-using TravelAgency.Repository;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -21,6 +19,9 @@ using static Azure.Core.HttpHeader;
 using System.Text.RegularExpressions;
 using Microsoft.Windows.Themes;
 using static System.Net.WebRequestMethods;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Services;
 
 namespace TravelAgency.Forms
 {
@@ -28,8 +29,7 @@ namespace TravelAgency.Forms
     {
         private readonly HotelRepository hotelRepository;
         private readonly HotelImageRepository hotelImageRepository;
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        private readonly HotelService hotelService;
         public OwnerForm()
         {
             InitializeComponent();
@@ -37,6 +37,7 @@ namespace TravelAgency.Forms
             DataContext = this;
             hotelRepository = new HotelRepository();
             hotelImageRepository = new HotelImageRepository();
+            hotelService = new HotelService();
         }
 
         public bool ButtonActivator()
@@ -105,7 +106,7 @@ namespace TravelAgency.Forms
         private void DeleteImage(object sender, RoutedEventArgs e)
         {
             object selectedItem = ImageList.SelectedItem;
-            HotelImage hotelImage = hotelImageRepository.FindByUrl(selectedItem.ToString());
+            HotelImage hotelImage = hotelService.FindByUrl(selectedItem.ToString());
 
             ImageList.Items.Remove(selectedItem);
             hotelImageRepository.Delete(hotelImage);
@@ -119,7 +120,7 @@ namespace TravelAgency.Forms
         {
             foreach(object item in ImageList.Items)
             {
-                HotelImage hotelImage = hotelImageRepository.FindByUrl(item.ToString());
+                HotelImage hotelImage = hotelService.FindByUrl(item.ToString());
                 hotelImageRepository.Delete(hotelImage);
             }
             this.Close();

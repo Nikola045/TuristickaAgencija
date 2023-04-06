@@ -16,8 +16,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
+using TravelAgency.Repository.HotelRepo;
 
 namespace TravelAgency.View
 {
@@ -28,7 +29,7 @@ namespace TravelAgency.View
     {
         Reservation NewReservation = new Reservation();
 
-        Model.User LogedUser = new Model.User();
+        Domain.Model.User LogedUser = new Domain.Model. User();
 
         private readonly ReservationRepository _repository;
 
@@ -37,7 +38,7 @@ namespace TravelAgency.View
         private readonly HotelRepository hotelRepository;
 
         
-        public ReservationForm(Model.User user)
+        public ReservationForm(Domain.Model.User user)
         {
             InitializeComponent();
             Title = "Create new reservation";
@@ -56,7 +57,7 @@ namespace TravelAgency.View
         private void Reserve(object sender, RoutedEventArgs e)
         {            
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv();
+            hotels = hotelRepository.GetAll();
 
             bool requirementsMet = true;
 
@@ -116,7 +117,7 @@ namespace TravelAgency.View
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv();
+            hotels = hotelRepository.GetAll();
 
             for(int i = 0; i < hotels.Count; i++)
             {
@@ -127,7 +128,7 @@ namespace TravelAgency.View
         private void DefaultValuesForTXT(object sender, SelectionChangedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv();
+            hotels = hotelRepository.GetAll();
 
             txtNumberOfGuests.IsEnabled = true;
             txtNumberOfDays.IsEnabled = true;

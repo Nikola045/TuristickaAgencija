@@ -11,8 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TravelAgency.Model;
-using TravelAgency.Repository;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Services;
 
 namespace TravelAgency.View
 {
@@ -21,7 +22,8 @@ namespace TravelAgency.View
     /// </summary>
     public partial class Guest1Form : Window
     {
-        private readonly HotelRepository _repository;
+        private readonly HotelRepository hotelRepository;
+        private readonly HotelService hotelService;
 
         const string FilePath = "../../../Resources/Data/hotels.csv";
         public Guest1Form()
@@ -29,13 +31,14 @@ namespace TravelAgency.View
             InitializeComponent();
             Title = "Search hotel";
             DataContext = this;
-            _repository = new HotelRepository();
+            hotelRepository = new HotelRepository();
+            hotelService = new HotelService();
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = _repository.ReadFromHotelsCsv();
+            hotels = hotelRepository.GetAll();
             DataPanel.ItemsSource = hotels;
         }
 
@@ -47,7 +50,7 @@ namespace TravelAgency.View
             else if (RadioHotel.IsChecked == true) { RadioChoice = "Hotel"; }
             else if (RadioHut.IsChecked == true) { RadioChoice = "Hut"; }
             else if (RadioApartment.IsChecked == true) { RadioChoice = "Apartment"; }
-            hotels = _repository.FindHotel(FilePath, txtName.Text, txtCity.Text, txtCountry.Text, RadioChoice, txtNoGuests.Text, txtNoDays.Text);
+            hotels = hotelService.FindHotel(txtName.Text, txtCity.Text, txtCountry.Text, RadioChoice, txtNoGuests.Text, txtNoDays.Text);
             DataPanel.ItemsSource = hotels;
         }
         private void DataPanel_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

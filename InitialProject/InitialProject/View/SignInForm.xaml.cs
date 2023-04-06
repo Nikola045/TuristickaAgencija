@@ -1,12 +1,12 @@
 ﻿using TravelAgency.Forms;
-using TravelAgency.Model;
-using TravelAgency.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using TravelAgency.View;
 using TravelAgency.View.Guest2;
 using TravelAgency.View.Owner;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.UserRepo;
 
 namespace TravelAgency
 {

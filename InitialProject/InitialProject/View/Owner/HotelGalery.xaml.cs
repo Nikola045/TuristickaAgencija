@@ -12,8 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TravelAgency.Model;
-using TravelAgency.Repository;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.View.Owner
@@ -25,19 +25,18 @@ namespace TravelAgency.View.Owner
     {
         private HotelImageRepository hotelImageRepository;
         private readonly Serializer<HotelImage> _serializer;
+        public Hotel CurrentHutel { get; set; }
 
-        List<HotelImage> hotelImages;
-        int i = 1;
-        public HotelGalery()
+        public HotelGalery(Hotel hotel)
         {
             hotelImageRepository = new HotelImageRepository();
             _serializer = new Serializer<HotelImage>();
+            CurrentHutel = hotel;
             InitializeComponent();
         }
 
         private void NextImage(object sender, RoutedEventArgs e)
         {
-            
 
         }
 
