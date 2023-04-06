@@ -23,7 +23,7 @@
     <Compile Update="View\Owner\HotelGalery.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Owner\MoveReservation.xaml.cs">
+    <Compile Update="View\Owner\MoveReservationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Owner\OwnerHome.xaml.cs">
@@ -61,7 +61,7 @@
     <Page Update="View\Owner\HotelGalery.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Owner\MoveReservation.xaml">
+    <Page Update="View\Owner\MoveReservationView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\OwnerHome.xaml">

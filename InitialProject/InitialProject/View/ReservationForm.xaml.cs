@@ -19,6 +19,7 @@ using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Services;
 
 namespace TravelAgency.View
 {
@@ -36,6 +37,7 @@ namespace TravelAgency.View
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly HotelRepository hotelRepository;
+        private readonly ReservationService reservationService;
 
         
         public ReservationForm(Domain.Model.User user)
@@ -46,6 +48,7 @@ namespace TravelAgency.View
             LogedUser = user;
             _repository = new ReservationRepository();
             hotelRepository = new HotelRepository();
+            reservationService = new ReservationService();
         }
         
 
@@ -81,7 +84,7 @@ namespace TravelAgency.View
                         requirementsMet = false;
                         break;
                     }
-                    if (!_repository.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
+                    if (!reservationService.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
                         MessageBox.Show("No available rooms for selected period");
                         requirementsMet = false;

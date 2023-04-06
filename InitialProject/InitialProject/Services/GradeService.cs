@@ -10,10 +10,12 @@ namespace TravelAgency.Services
     {
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
+        private readonly ReservationService reservationService;
         public GradeService() 
         {
             ownerGradeRepository = new OwnerGradeRepository();
             reservationRepository = new ReservationRepository();
+            reservationService = new ReservationService();
         }
 
         internal OwnerGrade FindOwnerGradeByReservationId(int id)
@@ -44,7 +46,7 @@ namespace TravelAgency.Services
 
         public List<OwnerGrade> ShowReviewsForOwner()
         {
-            List<Reservation> allReservation = reservationRepository.ReadFromReservationsCsv();
+            List<Reservation> allReservation = reservationRepository.GetAll();
             List<OwnerGrade> ownerGrades = new List<OwnerGrade>();
             foreach (Reservation reservation in allReservation)
             {
@@ -62,19 +64,19 @@ namespace TravelAgency.Services
         public void FindAndLogicalDeleteExpiredReservation(int i)
         {
             List<Reservation> reservations = new List<Reservation>();
-            reservations = reservationRepository.ReadFromReservationsCsv();
+            reservations = reservationRepository.GetAll();
             DateTime dateTimeNow = DateTime.Now;
 
             if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) < dateTimeNow)
             {
-                reservationRepository.LogicalDeleteExpire(reservations[i]);
+                reservationService.LogicalDeleteExpire(reservations[i]);
             }
         }
 
         public string ShowMessageForGrade(int i)
         {
             List<Reservation> reservations = new List<Reservation>();
-            reservations = reservationRepository.ReadFromReservationsCsv();
+            reservations = reservationRepository.GetAll();
             DateTime dateTimeNow = DateTime.Now;
             string message = null;
 
@@ -94,7 +96,7 @@ namespace TravelAgency.Services
 
         public string FindGuestsForGrade(int i)
         {
-            List<Reservation> reservations = reservationRepository.ReadFromReservationsCsv();
+            List<Reservation> reservations = reservationRepository.GetAll();
             DateTime dateTimeNow = DateTime.Now;
             if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow && reservations[i].GradeStatus == "NotGraded")
             {
@@ -106,7 +108,7 @@ namespace TravelAgency.Services
 
         public string FindGradedGuest(int i)
         {
-            List<Reservation> reservations = reservationRepository.ReadFromReservationsCsv();
+            List<Reservation> reservations = reservationRepository.GetAll();
             if (reservations[i].GradeStatus == "Graded")
             {
                 string username = reservations[i].GuestUserName;

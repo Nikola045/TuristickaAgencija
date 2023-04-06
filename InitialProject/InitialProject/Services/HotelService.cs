@@ -58,6 +58,17 @@ namespace TravelAgency.Services
             return findedHotels.Distinct().ToList();
         }
 
+        public Hotel GetHotelByName(string name)
+        {
+            List<Hotel> hotelList = hotelRepository.GetAll();
+            foreach(Hotel hotel in hotelList)
+            {
+                if(hotel.Name == name)
+                    return hotel;
+            }
+            return null;
+        }
+
         public HotelImage FindByUrl(string url)
         {
             List<HotelImage> hotelImages = hotelImageRepository.GetAll();
