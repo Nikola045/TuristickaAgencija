@@ -20,6 +20,7 @@ namespace TravelAgency.Repository
             _serializer = new Serializer<MoveReservation>();
             _reservations = _serializer.FromCSV(FilePath);
         }
+
         public List<MoveReservation> GetAll()
         {
             List<MoveReservation> reservations = new List<MoveReservation>();
