@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository

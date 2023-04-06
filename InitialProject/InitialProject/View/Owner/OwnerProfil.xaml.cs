@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using TravelAgency.Model;
-using TravelAgency.Repository;
+﻿using System.Windows;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.UserRepo;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Owner
 {
@@ -22,13 +11,12 @@ namespace TravelAgency.View.Owner
     public partial class OwnerProfil : Window
     {
         private User LogedOwner { get; set; }
-
-        private OwnerRepository ownerRepository;
+        private readonly OwnerService ownerService;
         public OwnerProfil(User user)
         {
             InitializeComponent();
             LogedOwner = user;
-            ownerRepository = new OwnerRepository();
+            ownerService = new OwnerService();
         }
 
         private void LogOut(object sender, RoutedEventArgs e)
@@ -52,7 +40,7 @@ namespace TravelAgency.View.Owner
 
         private void SuperOwnerLabel_Loaded(object sender, RoutedEventArgs e)
         {
-            SuperOwnerLabel.Content = ownerRepository.SuperOwner(LogedOwner.Username);
+            SuperOwnerLabel.Content = ownerService.SuperOwner(LogedOwner.Username);
         }
     }
 }

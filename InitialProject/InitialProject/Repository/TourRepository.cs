@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Xml.Linq;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository

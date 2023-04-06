@@ -9,7 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Xml.Linq;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Serializer;
 using TravelAgency.View;
 
@@ -168,7 +169,7 @@ namespace TravelAgency.Repository
         public bool IsAvailable(string hotelName, DateTime startDate, DateTime endDate)
         {
             List<Reservation> reservations = ReadFromReservationsCsv();
-            Hotel hotel = hotelRepository.ReadFromHotelsCsv().FirstOrDefault(h => h.Name == hotelName);
+            Hotel hotel = hotelRepository.GetAll().FirstOrDefault(h => h.Name == hotelName);
 
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {

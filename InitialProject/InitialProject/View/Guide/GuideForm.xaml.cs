@@ -16,7 +16,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using static Azure.Core.HttpHeader;
 

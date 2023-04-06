@@ -15,9 +15,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
-using TravelAgency.Model;
 using TravelAgency.Repository;
+using TravelAgency.Repository.GradeRepo;
+using TravelAgency.Services;
 
 namespace TravelAgency.View
 {
@@ -26,6 +28,7 @@ namespace TravelAgency.View
         private readonly GradeGuest1Repository gradeGuest1Repository; 
 
         private readonly ReservationRepository reservationRepository;
+        private readonly GradeService gradeService;
 
         public GradeForm()
         {
@@ -34,6 +37,7 @@ namespace TravelAgency.View
             DataContext = this;
             gradeGuest1Repository = new GradeGuest1Repository();
             reservationRepository = new ReservationRepository();
+            gradeService = new GradeService();
         }
 
         private void GusetLoaded(object sender, RoutedEventArgs e)
@@ -44,8 +48,8 @@ namespace TravelAgency.View
 
             for (int i = 0; i < reservations.Count; i++)
             {
-                if(gradeGuest1Repository.FindGuestsForGrade(i) != null)
-                GuestsCB.Items.Add(gradeGuest1Repository.FindGuestsForGrade(i));
+                if(gradeService.FindGuestsForGrade(i) != null)
+                GuestsCB.Items.Add(gradeService.FindGuestsForGrade(i));
             }
         }
 
@@ -69,14 +73,6 @@ namespace TravelAgency.View
 
         private void SaveGrade_Click(object sender, RoutedEventArgs e)
         {
-            GuestGrade newGrade = new GuestGrade(
-                GuestsCB.Text,
-                Convert.ToInt32(CB1.Text),
-                Convert.ToInt32(CB2.Text),
-                CommentText.Text);
-            gradeGuest1Repository.Save(newGrade);
-
-            CommentText.Clear();
             object selectedItem = GuestsCB.SelectedItem;
             Reservation oldReservation = new Reservation();
             int id;
@@ -84,6 +80,15 @@ namespace TravelAgency.View
             string[] fields = line.Split(' ');
             id = Convert.ToInt32(fields[0]);
 
+            GuestGrade newGrade = new GuestGrade(
+                GuestsCB.Text,
+                Convert.ToInt32(CB1.Text),
+                Convert.ToInt32(CB2.Text),
+                CommentText.Text,
+                id);
+            gradeGuest1Repository.Save(newGrade);
+
+            CommentText.Clear();
             oldReservation = reservationRepository.FindReservationByID(id);
             GuestsCB.Items.Remove(selectedItem);
             reservationRepository.LogicalDelete(oldReservation);
@@ -96,11 +101,11 @@ namespace TravelAgency.View
 
             for (int i = 0; i < reservations.Count; i++)
             {
-                if(gradeGuest1Repository.ShowMessageForGrade(i) != null)
+                if(gradeService.ShowMessageForGrade(i) != null)
                 {
-                    MessageBox.Show(gradeGuest1Repository.ShowMessageForGrade(i));
+                    MessageBox.Show(gradeService.ShowMessageForGrade(i));
                 }
-                gradeGuest1Repository.FindAndLogicalDeleteExpiredReservation(i);
+                gradeService.FindAndLogicalDeleteExpiredReservation(i);
             }
         }
 
