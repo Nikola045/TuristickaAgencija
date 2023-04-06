@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.Forms"
-        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Model" x:Class="TravelAgency.Forms.OwnerForm"
+        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Domain.Model" x:Class="TravelAgency.Forms.OwnerForm"
         mc:Ignorable="d"
         Title="Create new accommodation" Height="392" Width="749" WindowStartupLocation="CenterScreen" FontSize="17">
     <Canvas Margin="0,0,0,-6">
