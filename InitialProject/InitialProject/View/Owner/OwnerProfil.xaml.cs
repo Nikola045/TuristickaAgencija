@@ -12,13 +12,11 @@ namespace TravelAgency.View.Owner
     {
         private User LogedOwner { get; set; }
 
-        private OwnerRepository ownerRepository;
         private readonly OwnerService ownerService;
         public OwnerProfil(User user)
         {
             InitializeComponent();
             LogedOwner = user;
-            ownerRepository = new OwnerRepository();
             ownerService = new OwnerService();
         }
 

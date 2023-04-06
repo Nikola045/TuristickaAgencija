@@ -53,7 +53,7 @@ namespace TravelAgency.View.Owner
 
         private void OpenMoveReservation(object sender, RoutedEventArgs e)
         {
-            MoveReservation createMoveReservation = new MoveReservation();
+            MoveReservationView createMoveReservation = new MoveReservationView();
             createMoveReservation.Show();
         }
 
