@@ -11,7 +11,6 @@ namespace TravelAgency.View.Owner
     public partial class OwnerProfil : Window
     {
         private User LogedOwner { get; set; }
-
         private readonly OwnerService ownerService;
         public OwnerProfil(User user)
         {
