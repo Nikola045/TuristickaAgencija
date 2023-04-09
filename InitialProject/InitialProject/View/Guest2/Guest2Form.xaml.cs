@@ -15,8 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
-using TravelAgency.Model;
 using TravelAgency.Repository;
 
 namespace TravelAgency.View.Guest2
@@ -34,7 +34,7 @@ namespace TravelAgency.View.Guest2
 
         public Tour selectedTour;
 
-        Model.User LogedUser = new Model.User();
+        User LogedUser = new Domain.Model.User();
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

@@ -9,7 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Xml.Linq;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Serializer;
 using TravelAgency.View;
 
@@ -23,13 +24,10 @@ namespace TravelAgency.Repository
 
         private List<Reservation> _reservations;
 
-        private HotelRepository hotelRepository;
-
         public ReservationRepository()
         {
             _serializer = new Serializer<Reservation>();
             _reservations = _serializer.FromCSV(FilePath);
-            hotelRepository = new HotelRepository();
         }
 
         public Reservation Save(Reservation reservation)
@@ -50,7 +48,7 @@ namespace TravelAgency.Repository
             return _reservations.Max(r => r.Id) + 1;
         }
 
-        public List<Reservation> ReadFromReservationsCsv()
+        public List<Reservation> GetAll()
         {
             List<Reservation> reservations = new List<Reservation>();
 
@@ -91,96 +89,9 @@ namespace TravelAgency.Repository
             Reservation current = _reservations.Find(c => c.Id == reservation.Id);
             int index = _reservations.IndexOf(current);
             _reservations.Remove(current);
-            _reservations.Insert(index, reservation);       // keep ascending order of ids in file 
+            _reservations.Insert(index, reservation);
             _serializer.ToCSV(FilePath, _reservations);
             return reservation;
-        }
-
-        public void LogicalDelete(Reservation reservation)
-        {
-            reservation.GradeStatus = "Graded";
-            Update(reservation);
-        }
-
-        public void LogicalDeleteExpire(Reservation reservation)
-        {
-            if (reservation.GradeStatus != "Graded" && reservation.GradeStatus != "Expired")
-            {
-                reservation.GradeStatus = "Expire";
-                Update(reservation);
-            }
-        }
-
-
-        public Reservation FindReservationByID(int id)
-        {
-            List<Reservation> reservations = new List<Reservation>();
-            using (StreamReader sr = new StreamReader(FilePath))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-
-                    string[] fields = line.Split('|');
-                    Reservation reservation = new Reservation();
-                    reservation.Id = Convert.ToInt32(fields[0]);
-                    reservation.GuestUserName = fields[1];
-                    reservation.HotelName = fields[2];
-                    reservation.StartDate = Convert.ToDateTime(fields[3]);
-                    reservation.EndDate = Convert.ToDateTime(fields[4]);
-                    reservation.NumberOfDays = Convert.ToInt32(fields[5]);
-                    reservation.NumberOfGuests = Convert.ToInt32(fields[6]);
-                    if (reservation.Id == id)
-                    {
-                        return reservation;
-                    }
-
-                }
-            }
-            return null;
-        }
-
-        public List<DateTime> GetReservedDates(string hotelName) 
-        {
-            List<DateTime> dates = new List<DateTime>();
-            using (StreamReader sr = new StreamReader(FilePath))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-
-                    string[] fields = line.Split('|');
-                    Reservation reservation = new Reservation();
-                    
-                    reservation.HotelName = fields[2];
-                    if (reservation.HotelName == hotelName) 
-                    {
-                        reservation.StartDate = Convert.ToDateTime(fields[3]);
-                        reservation.EndDate = Convert.ToDateTime(fields[4]);
-                        dates.Add(reservation.StartDate);
-                        dates.Add(reservation.EndDate);
-                    }
-                }
-            }
-            return dates;
-        }
-        
-        public bool IsAvailable(string hotelName, DateTime startDate, DateTime endDate)
-        {
-            List<Reservation> reservations = ReadFromReservationsCsv();
-            Hotel hotel = hotelRepository.ReadFromHotelsCsv().FirstOrDefault(h => h.Name == hotelName);
-
-            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
-            {
-                int reservationsForDate = reservations.Where(r => r.HotelName == hotelName && date >= r.StartDate && date <= r.EndDate).Sum(r => r.NumberOfGuests);
-
-                if (reservationsForDate >= hotel.MaxNumberOfGuests)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        }        
     }
 }

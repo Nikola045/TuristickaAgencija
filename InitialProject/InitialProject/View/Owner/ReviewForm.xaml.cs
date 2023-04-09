@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using TravelAgency.Repository;
+using TravelAgency.Repository.GradeRepo;
+using TravelAgency.Services;
+using User = TravelAgency.Domain.Model.User;
 
 namespace TravelAgency.View.Owner
 {
@@ -19,9 +11,23 @@ namespace TravelAgency.View.Owner
     /// </summary>
     public partial class ReviewForm : Window
     {
-        public ReviewForm()
+        private readonly OwnerGradeRepository ownerGradeRepository;
+        private readonly ReservationRepository reservationRepository;
+        private readonly GradeService gradeService;
+        
+        private User LogedOwner { get; set; }
+        public ReviewForm(User user)
         {
             InitializeComponent();
+            reservationRepository = new ReservationRepository();
+            ownerGradeRepository = new OwnerGradeRepository();
+            gradeService = new GradeService();
+            LogedOwner = user;
+        }
+
+        private void ShowData(object sender, RoutedEventArgs e)
+        {
+            ReviewData.ItemsSource = gradeService.ShowReviewsForOwner();
         }
 
         private void Close(object sender, RoutedEventArgs e)

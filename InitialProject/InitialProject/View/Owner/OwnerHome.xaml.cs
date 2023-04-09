@@ -12,10 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
-using TravelAgency.Model;
-using TravelAgency.Repository;
-using User = TravelAgency.Model.User;
+using TravelAgency.Repository.HotelRepo;
+using User = TravelAgency.Domain.Model.User;
 
 namespace TravelAgency.View.Owner
 {
@@ -25,6 +25,7 @@ namespace TravelAgency.View.Owner
     public partial class OwnerHome : Window
     {
         public User LoggedInUser { get; set; }
+        public Hotel SelectedHotel { get; set; }
         private readonly HotelRepository hotelRepository;
         static int ClickAccommodationCount = 1;
         static int ClickMediaCount = 1;
@@ -52,20 +53,20 @@ namespace TravelAgency.View.Owner
 
         private void OpenMoveReservation(object sender, RoutedEventArgs e)
         {
-            MoveReservation createMoveReservation = new MoveReservation();
+            MoveReservationView createMoveReservation = new MoveReservationView();
             createMoveReservation.Show();
         }
 
         private void OpenReviewForm(object sender, RoutedEventArgs e)
         {
-            ReviewForm createReviewForm = new ReviewForm();
+            ReviewForm createReviewForm = new ReviewForm(LoggedInUser);
             createReviewForm.Show();
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv();
+            hotels = hotelRepository.GetAll();
             DataPanel.ItemsSource = hotels;
         }
 
@@ -118,6 +119,13 @@ namespace TravelAgency.View.Owner
         {
             OwnerProfil profil = new OwnerProfil(LoggedInUser);
             profil.ShowDialog();
+        }
+
+        private void OpenGallery(object sender, RoutedEventArgs e)
+        {
+            SelectedHotel = (Hotel)DataPanel.SelectedItem;
+            HotelGalery openHotelGalery = new HotelGalery(SelectedHotel);
+            openHotelGalery.Show();
         }
     }
 }

@@ -16,8 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
+using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Services;
 
 namespace TravelAgency.View
 {
@@ -28,16 +30,17 @@ namespace TravelAgency.View
     {
         Reservation NewReservation = new Reservation();
 
-        Model.User LogedUser = new Model.User();
+        Domain.Model.User LogedUser = new Domain.Model. User();
 
         private readonly ReservationRepository _repository;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly HotelRepository hotelRepository;
+        private readonly ReservationService reservationService;
 
         
-        public ReservationForm(Model.User user)
+        public ReservationForm(Domain.Model.User user)
         {
             InitializeComponent();
             Title = "Create new reservation";
@@ -45,6 +48,7 @@ namespace TravelAgency.View
             LogedUser = user;
             _repository = new ReservationRepository();
             hotelRepository = new HotelRepository();
+            reservationService = new ReservationService();
         }
         
 
@@ -56,7 +60,7 @@ namespace TravelAgency.View
         private void Reserve(object sender, RoutedEventArgs e)
         {            
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv();
+            hotels = hotelRepository.GetAll();
 
             bool requirementsMet = true;
 
@@ -80,7 +84,7 @@ namespace TravelAgency.View
                         requirementsMet = false;
                         break;
                     }
-                    if (!_repository.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
+                    if (!reservationService.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
                         MessageBox.Show("No available rooms for selected period");
                         requirementsMet = false;
@@ -116,7 +120,7 @@ namespace TravelAgency.View
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv();
+            hotels = hotelRepository.GetAll();
 
             for(int i = 0; i < hotels.Count; i++)
             {
@@ -127,7 +131,7 @@ namespace TravelAgency.View
         private void DefaultValuesForTXT(object sender, SelectionChangedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv();
+            hotels = hotelRepository.GetAll();
 
             txtNumberOfGuests.IsEnabled = true;
             txtNumberOfDays.IsEnabled = true;
