@@ -16,8 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
+using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Services;
 
 namespace TravelAgency.View
 {
@@ -28,16 +30,17 @@ namespace TravelAgency.View
     {
         Reservation NewReservation = new Reservation();
 
-        Model.User LogedUser = new Model.User();
+        Domain.Model.User LogedUser = new Domain.Model. User();
 
         private readonly ReservationRepository _repository;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly HotelRepository hotelRepository;
+        private readonly ReservationService reservationService;
 
         
-        public ReservationForm(Model.User user)
+        public ReservationForm(Domain.Model.User user)
         {
             InitializeComponent();
             Title = "Create new reservation";
@@ -45,6 +48,7 @@ namespace TravelAgency.View
             LogedUser = user;
             _repository = new ReservationRepository();
             hotelRepository = new HotelRepository();
+            reservationService = new ReservationService();
         }
         
 
@@ -54,10 +58,9 @@ namespace TravelAgency.View
         }
 
         private void Reserve(object sender, RoutedEventArgs e)
-        {            
+        {
             List<Hotel> hotels = new List<Hotel>();
-            string FilePath = "../../../Resources/Data/hotels.csv";
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
+            hotels = hotelRepository.GetAll();
 
             bool requirementsMet = true;
 
@@ -75,38 +78,41 @@ namespace TravelAgency.View
                         MessageBox.Show("Return date must be greater than departure date");
                         requirementsMet = false;
                     }
-                    DateTime startDate = (DateTime)Date1.SelectedDate;
-                    DateTime endDate = (DateTime)Date2.SelectedDate;
-
-                    int numberOfDays = (int)(endDate - startDate).TotalDays;
-
-                    if (numberOfDays < hotels[i].MinNumberOfDays)
+                    if (Convert.ToInt32(txtNumberOfDays.Text) < hotels[i].MinNumberOfDays)
                     {
                         MessageBox.Show("Minimum number of days for " + hotels[i].Name + " must be greater than " + hotels[i].MinNumberOfDays);
                         requirementsMet = false;
                         break;
                     }
-
-                    List<DateTime> reservedDates = _repository.GetReservedDates(hotels[i].Name);
-                    bool isReserved = false;
-
-                    foreach (DateTime reservedDate in reservedDates)
+                    if (!reservationService.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
-                        if (startDate <= reservedDate && reservedDate <= endDate)
+                        List<DateTime> alternativeDates = reservationService.FindAlternativeDates(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value, Convert.ToInt32(txtNumberOfDays.Text));
+
+                        if (alternativeDates.Count > 0)
                         {
-                            isReserved = true;
+                            StringBuilder message = new StringBuilder();
+                            message.AppendLine("The selected hotel is already booked for the selected dates.");
+                            message.AppendLine("Please choose one of the following alternative dates:");
+                            int maxAlternativeDates = Math.Min(alternativeDates.Count, 5);
+                            for (int j = 0; j < maxAlternativeDates; j++)
+                            {
+                                message.AppendLine("- " + alternativeDates[j].ToShortDateString() + " to " + alternativeDates[j].AddDays(Convert.ToInt32(txtNumberOfDays.Text)).ToShortDateString());
+                            }
+
+                            MessageBox.Show(message.ToString());
+                            requirementsMet = false;
+                            break;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No alternative dates available for the selected period.");
+                            requirementsMet = false;
                             break;
                         }
                     }
-
-                    if (isReserved)
-                    {
-                        MessageBox.Show("Already reserved in that period.");
-                        requirementsMet = false;
-                    }
                 }
             }
-             
+
             if (requirementsMet)
             {
 
@@ -116,25 +122,25 @@ namespace TravelAgency.View
                     HotelNameCB.Text,
                     Convert.ToDateTime(Date1.Text),
                     Convert.ToDateTime(Date2.Text),
-                    Convert.ToDateTime(Date2.Text).Day - Convert.ToDateTime(Date1.Text).Day,
-                    Convert.ToInt32(txtNumberOfGuests.Text)); ;
+                    Convert.ToInt32(txtNumberOfDays.Text),
+                    Convert.ToInt32(txtNumberOfGuests.Text));
                 _repository.Save(newReservation);
                 MessageBox.Show("Reservation made succesfully!");
 
                 HotelNameCB.SelectedItem = null;
                 txtNumberOfGuests.Clear();
+                txtNumberOfDays.Clear();
                 Date1.SelectedDate = null;
                 Date2.SelectedDate = null;
                 btnReserve.IsEnabled = false;
             }
-
         }
+
 
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            string FilePath = "../../../Resources/Data/hotels.csv";
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
+            hotels = hotelRepository.GetAll();
 
             for(int i = 0; i < hotels.Count; i++)
             {
@@ -145,16 +151,17 @@ namespace TravelAgency.View
         private void DefaultValuesForTXT(object sender, SelectionChangedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            string FilePath = "../../../Resources/Data/hotels.csv";
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
+            hotels = hotelRepository.GetAll();
 
             txtNumberOfGuests.IsEnabled = true;
+            txtNumberOfDays.IsEnabled = true;
 
             for (int i = 0; i < hotels.Count; i++)
             {
                 if (HotelNameCB.SelectedItem != null && HotelNameCB.SelectedItem.ToString() == hotels[i].Name)
                 {
                     txtNumberOfGuests.Text = hotels[i].MaxNumberOfGuests.ToString();
+                    txtNumberOfDays.Text = hotels[i].MinNumberOfDays.ToString();
                 }
             }
         }
@@ -168,6 +175,7 @@ namespace TravelAgency.View
         {
             if (HotelNameCB.SelectedItem != null
                 && !string.IsNullOrEmpty(txtNumberOfGuests.Text)
+                && !string.IsNullOrEmpty(txtNumberOfDays.Text)
                 && Date1.SelectedDate != null
                 && Date2.SelectedDate != null)
             return true;
@@ -196,6 +204,16 @@ namespace TravelAgency.View
         }
 
         private void txtNumberOfGuests_LostFocus(object sender, RoutedEventArgs e)
+        {
+            btnReserve.IsEnabled = AllFieldsValid();
+        }
+
+        private void txtNumberOfDays_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            btnReserve.IsEnabled = AllFieldsValid();
+        }
+
+        private void txtNumberOfDays_LostFocus(object sender, RoutedEventArgs e)
         {
             btnReserve.IsEnabled = AllFieldsValid();
         }

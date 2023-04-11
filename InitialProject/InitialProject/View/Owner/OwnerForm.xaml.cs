@@ -1,6 +1,4 @@
-﻿using TravelAgency.Model;
-using TravelAgency.Repository;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -21,16 +19,17 @@ using static Azure.Core.HttpHeader;
 using System.Text.RegularExpressions;
 using Microsoft.Windows.Themes;
 using static System.Net.WebRequestMethods;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Services;
 
 namespace TravelAgency.Forms
 {
     public partial class OwnerForm : Window
     {
-        private const string FilePath = "../../../Resources/Data/hotels.csv";
         private readonly HotelRepository hotelRepository;
         private readonly HotelImageRepository hotelImageRepository;
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        private readonly HotelService hotelService;
         public OwnerForm()
         {
             InitializeComponent();
@@ -38,6 +37,7 @@ namespace TravelAgency.Forms
             DataContext = this;
             hotelRepository = new HotelRepository();
             hotelImageRepository = new HotelImageRepository();
+            hotelService = new HotelService();
         }
 
         public bool ButtonActivator()
@@ -60,12 +60,6 @@ namespace TravelAgency.Forms
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            string typeOfHotel = null;
-            if (RadioHouse.IsChecked == true) typeOfHotel = "House";
-            else if (RadioHotel.IsChecked == true) typeOfHotel = "Hotel";
-            else if (RadioHut.IsChecked == true) typeOfHotel = "Hut";
-            else if (RadioApartment.IsChecked == true) typeOfHotel = "Apartment";
-
             if (ButtonActivator())
             {
                Hotel newHotel = new Hotel(
@@ -73,7 +67,7 @@ namespace TravelAgency.Forms
                     txtName.Text,
                     txtCity.Text,
                     txtCountry.Text,
-                    typeOfHotel,
+                    Type.Text,
                     Convert.ToInt32(brMax.Text),
                     Convert.ToInt32(brMin.Text),
                     Convert.ToInt32(brDaysLeft.Text));
@@ -94,12 +88,7 @@ namespace TravelAgency.Forms
             }
         }
 
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {         
-            List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
-            DataPanel.ItemsSource = hotels;
-        }
+
 
         private void AddImage(object sender, RoutedEventArgs e)
         {
@@ -117,7 +106,7 @@ namespace TravelAgency.Forms
         private void DeleteImage(object sender, RoutedEventArgs e)
         {
             object selectedItem = ImageList.SelectedItem;
-            HotelImage hotelImage = hotelImageRepository.FindByUrl(selectedItem.ToString());
+            HotelImage hotelImage = hotelService.FindByUrl(selectedItem.ToString());
 
             ImageList.Items.Remove(selectedItem);
             hotelImageRepository.Delete(hotelImage);
@@ -131,7 +120,7 @@ namespace TravelAgency.Forms
         {
             foreach(object item in ImageList.Items)
             {
-                HotelImage hotelImage = hotelImageRepository.FindByUrl(item.ToString());
+                HotelImage hotelImage = hotelService.FindByUrl(item.ToString());
                 hotelImageRepository.Delete(hotelImage);
             }
             this.Close();
@@ -141,7 +130,7 @@ namespace TravelAgency.Forms
         private void NameValidation(object sender, TextChangedEventArgs e)
         {
             string name = txtName.Text;
-            if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(name, @"^[a-zA-Z\s]+$"))
             {
                 LabelNameValidator.Content = "";
             }
@@ -154,7 +143,7 @@ namespace TravelAgency.Forms
         private void CityValidation(object sender, TextChangedEventArgs e)
         {
             string city = txtCity.Text;
-            if (Regex.IsMatch(city, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(city, @"^[a-zA-Z\s]+$"))
             {
                 LabelCityValidator.Content = "";
             }
@@ -167,7 +156,7 @@ namespace TravelAgency.Forms
         private void CountryValidation(object sender, TextChangedEventArgs e)
         {
             string country = txtCountry.Text;
-            if (Regex.IsMatch(country, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(country, @"^[a-zA-Z\s]+$"))
             {
                 LabelCountryValidator.Content = "";
             }
@@ -215,25 +204,6 @@ namespace TravelAgency.Forms
             }
         }
 
-        private void HouseCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void HutCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void HotelCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void ApartmentCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
 
         private void UrlValidation(object sender, TextChangedEventArgs e)
         {
@@ -248,6 +218,19 @@ namespace TravelAgency.Forms
                 LabelUrlValidator.Content = "Please input valid ulr address";
                 AddImgButton.IsEnabled = false;
             }
+        }
+
+        private void DataFill(object sender, RoutedEventArgs e)
+        {
+            Type.Items.Add("Hotel");
+            Type.Items.Add("Hut");
+            Type.Items.Add("House");
+            Type.Items.Add("Apartment");
+        }
+
+        private void ValidationType(object sender, SelectionChangedEventArgs e)
+        {
+            LabelTypeValidator.Content = "";
         }
     }
 }

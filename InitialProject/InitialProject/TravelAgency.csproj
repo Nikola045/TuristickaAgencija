@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Images\" />
+    <Folder Include="Domain\RepositoryInterfaces\" />
   </ItemGroup>
 
 </Project>

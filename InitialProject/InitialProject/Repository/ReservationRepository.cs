@@ -5,8 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Xml.Linq;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Serializer;
 using TravelAgency.View;
 
@@ -44,11 +48,11 @@ namespace TravelAgency.Repository
             return _reservations.Max(r => r.Id) + 1;
         }
 
-        public List<Reservation> ReadFromReservationsCsv(string FileName)
+        public List<Reservation> GetAll()
         {
             List<Reservation> reservations = new List<Reservation>();
 
-            using (StreamReader sr = new StreamReader(FileName))
+            using (StreamReader sr = new StreamReader(FilePath))
             {
                 while (!sr.EndOfStream)
                 {
@@ -63,6 +67,7 @@ namespace TravelAgency.Repository
                     reservation.EndDate = Convert.ToDateTime(fields[4]);
                     reservation.NumberOfDays = Convert.ToInt32(fields[5]);
                     reservation.NumberOfGuests = Convert.ToInt32(fields[6]);
+                    reservation.GradeStatus = fields[7];
                     reservations.Add(reservation);
 
                 }
@@ -78,51 +83,15 @@ namespace TravelAgency.Repository
             _serializer.ToCSV(FilePath, _reservations);
         }
 
-        public Reservation FindReservationByID(int id)
+        public Reservation Update(Reservation reservation)
         {
-            List<Reservation> reservations = new List<Reservation>();
-            using (StreamReader sr = new StreamReader(FilePath))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-
-                    string[] fields = line.Split('|');
-                    Reservation reservation = new Reservation();
-                    reservation.Id = Convert.ToInt32(fields[0]);
-                    if (reservation.Id == id)
-                    {
-                        return reservation;
-                    }
-
-                }
-            }
-            return null;
-        }
-
-        public List<DateTime> GetReservedDates(string hotelName) 
-        {
-            List<DateTime> dates = new List<DateTime>();
-            using (StreamReader sr = new StreamReader(FilePath))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-
-                    string[] fields = line.Split('|');
-                    Reservation reservation = new Reservation();
-                    
-                    reservation.HotelName = fields[2];
-                    if (reservation.HotelName == hotelName) 
-                    {
-                        reservation.StartDate = Convert.ToDateTime(fields[3]);
-                        reservation.EndDate = Convert.ToDateTime(fields[4]);
-                        dates.Add(reservation.StartDate);
-                        dates.Add(reservation.EndDate);
-                    }
-                }
-            }
-            return dates;
-        }
+            _reservations = _serializer.FromCSV(FilePath);
+            Reservation current = _reservations.Find(c => c.Id == reservation.Id);
+            int index = _reservations.IndexOf(current);
+            _reservations.Remove(current);
+            _reservations.Insert(index, reservation);
+            _serializer.ToCSV(FilePath, _reservations);
+            return reservation;
+        }        
     }
 }

@@ -13,8 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Graph.Models.Security;
+using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
-using TravelAgency.Model;
 using TravelAgency.Repository;
 
 namespace TravelAgency.View
