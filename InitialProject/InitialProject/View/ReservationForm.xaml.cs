@@ -91,7 +91,8 @@ namespace TravelAgency.View
                         if (alternativeDates.Count > 0)
                         {
                             StringBuilder message = new StringBuilder();
-                            MessageBox.Show("The selected hotel is already booked for the selected dates.\nPlease choose one of the following alternative dates:");
+                            message.AppendLine("The selected hotel is already booked for the selected dates.");
+                            message.AppendLine("Please choose one of the following alternative dates:");
                             int maxAlternativeDates = Math.Min(alternativeDates.Count, 5);
                             for (int j = 0; j < maxAlternativeDates; j++)
                             {
