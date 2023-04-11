@@ -70,6 +70,50 @@ namespace TravelAgency.Services
             }            
             return dates;
         }
+        public List<DateTime> GetAvailableDates(string hotelName, DateTime startDate, DateTime endDate, int numberOfDays)
+        {
+            List<DateTime> availableDates = new List<DateTime>();
+
+            if (!IsAvailable(hotelName, startDate, endDate))
+            {
+                DateTime currentDate = startDate.AddDays(1);
+                DateTime lastDate = endDate.AddDays(-numberOfDays);
+                while (currentDate <= lastDate)
+                {
+                    if (IsAvailable(hotelName, currentDate, currentDate.AddDays(numberOfDays)))
+                    {
+                        availableDates.Add(currentDate);
+                    }
+                    currentDate = currentDate.AddDays(1);
+                }
+            }
+            else
+            {
+                availableDates.Add(startDate);
+            }
+
+            return availableDates;
+        }
+        public List<DateTime> FindAlternativeDates(string hotelName, DateTime checkInDate, DateTime checkOutDate, int numberOfDays)
+        {
+            List<DateTime> alternativeDates = new List<DateTime>();
+            DateTime startDate = checkInDate.AddDays(1);
+            DateTime endDate = checkOutDate.AddDays(30);
+            while (startDate < endDate)
+            {
+                if (IsAvailable(hotelName, startDate, startDate.AddDays(numberOfDays)))
+                {
+                    alternativeDates.Add(startDate);
+                    if (alternativeDates.Count == 5)
+                    {
+                        break;
+                    }
+                }
+                startDate = startDate.AddDays(1);
+            }
+
+            return alternativeDates;
+        }
 
         public bool IsAvailable(string hotelName, DateTime startDate, DateTime endDate)
         {

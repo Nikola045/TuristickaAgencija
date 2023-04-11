@@ -58,7 +58,7 @@ namespace TravelAgency.View
         }
 
         private void Reserve(object sender, RoutedEventArgs e)
-        {            
+        {
             List<Hotel> hotels = new List<Hotel>();
             hotels = hotelRepository.GetAll();
 
@@ -86,13 +86,32 @@ namespace TravelAgency.View
                     }
                     if (!reservationService.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
-                        MessageBox.Show("No available rooms for selected period");
-                        requirementsMet = false;
-                        break;
+                        List<DateTime> alternativeDates = reservationService.FindAlternativeDates(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value, Convert.ToInt32(txtNumberOfDays.Text));
+
+                        if (alternativeDates.Count > 0)
+                        {
+                            StringBuilder message = new StringBuilder();
+                            MessageBox.Show("The selected hotel is already booked for the selected dates.\nPlease choose one of the following alternative dates:");
+                            int maxAlternativeDates = Math.Min(alternativeDates.Count, 5);
+                            for (int j = 0; j < maxAlternativeDates; j++)
+                            {
+                                message.AppendLine("- " + alternativeDates[j].ToShortDateString() + " to " + alternativeDates[j].AddDays(Convert.ToInt32(txtNumberOfDays.Text)).ToShortDateString());
+                            }
+
+                            MessageBox.Show(message.ToString());
+                            requirementsMet = false;
+                            break;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No alternative dates available for the selected period.");
+                            requirementsMet = false;
+                            break;
+                        }
                     }
                 }
             }
-             
+
             if (requirementsMet)
             {
 
@@ -103,7 +122,7 @@ namespace TravelAgency.View
                     Convert.ToDateTime(Date1.Text),
                     Convert.ToDateTime(Date2.Text),
                     Convert.ToInt32(txtNumberOfDays.Text),
-                    Convert.ToInt32(txtNumberOfGuests.Text)); 
+                    Convert.ToInt32(txtNumberOfGuests.Text));
                 _repository.Save(newReservation);
                 MessageBox.Show("Reservation made succesfully!");
 
@@ -114,8 +133,8 @@ namespace TravelAgency.View
                 Date2.SelectedDate = null;
                 btnReserve.IsEnabled = false;
             }
-
         }
+
 
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
