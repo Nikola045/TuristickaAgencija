@@ -7,47 +7,48 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.Domain.Model
 {
-    internal class GuestOnTour
+    internal class GuestOnTour : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
-        public string GuestUserName { get; set; }
+        public int GuestId { get; set; }
         public int TourId { get; set; }
-        public CheckPoint CurentCheckPoint { get; set; }
+        public string TourName { get; set; }
         public string StatusCP { get; set; }
+        public int NumOfGuests { get; set; }
+
+        public CheckPoint CurentCheckPoint { get; set; }
 
         public GuestOnTour() { }
 
-        public GuestOnTour(int id, string userName, int tourId, CheckPoint checkPoint, string Status)
+        public GuestOnTour(int id, int userId, int tourId, string tourName,  CheckPoint checkPoint, string Status, int numOfGuests)
         {
 
             Id = id;
-            GuestUserName = userName;
+            GuestId = userId;
             TourId = tourId;
+            TourName = tourName;
             CurentCheckPoint = checkPoint;
             StatusCP = Status;
-
+            NumOfGuests = numOfGuests;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), GuestUserName, TourId.ToString(), CurentCheckPoint.ToString(), StatusCP };
+            string[] csvValues = { Id.ToString(), GuestId.ToString(), TourId.ToString(), TourName, StatusCP, NumOfGuests.ToString(), CurentCheckPoint.ToString()};
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            GuestUserName = values[1];
+            GuestId = Convert.ToInt32(values[1]);
             TourId = Convert.ToInt32(values[2]);
-            CurentCheckPoint.Id = Convert.ToInt32(values[3]);
-            CurentCheckPoint.Name = values[4];
-            CurentCheckPoint.Status = values[5];
-            StatusCP = values[6];
+            TourName= values[3];
+            StatusCP = values[4];
+            NumOfGuests = Convert.ToInt32(values[5]);
+            CurentCheckPoint.Id = Convert.ToInt32(values[6]);
+            CurentCheckPoint.Name = values[7];
+            CurentCheckPoint.Status = values[8];
         }
-
-
-
-
     }
-
 }
