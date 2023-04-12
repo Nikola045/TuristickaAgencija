@@ -17,14 +17,20 @@ namespace TravelAgency.Repository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
+        private const string FilePath1 = "../../../Resources/Data/guestOnTour.csv";
+
         private readonly Serializer<Tour> _serializer;
+        private readonly Serializer<GuestOnTour> _serializerG;
 
         private List<Tour> _tours;
+        private List<GuestOnTour> _guestsOnTours;
 
         public TourRepository()
         {
             _serializer = new Serializer<Tour>();
             _tours = _serializer.FromCSV(FilePath);
+            _serializerG = new Serializer<GuestOnTour>();
+            _guestsOnTours = _serializerG.FromCSV(FilePath1);
         }
 
         public Tour Save(Tour tour)
@@ -46,7 +52,15 @@ namespace TravelAgency.Repository
             return _tours.Max(t => t.Id) + 1;
         }
 
-
+        public int NextIdG()
+        {
+            _guestsOnTours = _serializerG.FromCSV(FilePath1);
+            if (_guestsOnTours.Count < 1)
+            {
+                return 1;
+            }
+            return _guestsOnTours.Max(t => t.Id) + 1;
+        }
 
 
         public List<Tour> ReadFromToursCsv(string FileName)
@@ -96,7 +110,7 @@ namespace TravelAgency.Repository
             return tours;
         }
 
-        public List<Tour> FindTour(string FileName, string city, string country, string leng, string duration, string num)
+        public List<Tour> FilterTours(string FileName, string city, string country, string leng, string duration, string num)
         {
             List<Tour> allTours = ReadFromToursCsv(FileName);
 
@@ -137,6 +151,23 @@ namespace TravelAgency.Repository
             return tours;
         }
 
+        public Tour FindById(int id)
+        {
+            Tour tour = new Tour();
+            List<Tour> allTours = ReadFromToursCsv(FilePath);
+
+            for (int i = 0; i<allTours.Count; i++)
+            {
+                if (allTours[i].Id == id)
+                {
+                    tour = allTours[i];
+                }
+            }
+            return tour;
+        }
+
+
+
         public List<Tour> GetTodaysTours(string FileName)
         {
             List<Tour> allTours = ReadFromToursCsv(FileName);
@@ -154,23 +185,26 @@ namespace TravelAgency.Repository
         }
 
 
-        public bool ReserveTour(int tourId, string guestUsername, string fileName)
+        public bool ReserveTour(int tourId, int  guestId, string fileName, int num)
         {
+            GuestOnTour guestOnTour = new GuestOnTour();
+            Tour tour = FindById(tourId);
+            guestOnTour.Id = NextIdG();
+            guestOnTour.GuestId = guestId;
+            guestOnTour.TourId = tour.Id;
+            guestOnTour.TourName = tour.Name;
+            guestOnTour.NumOfGuests = num;
+            guestOnTour.CurentCheckPoint = tour.CheckPoints[0];
+            guestOnTour.StatusCP = "Neaktivna";
 
             ///////// upisi u guestOnTour.csv
+            _guestsOnTours = _serializerG.FromCSV(fileName);
+            _guestsOnTours.Add(guestOnTour);
+            _serializerG.ToCSV(fileName, _guestsOnTours);
 
             return true;
         }
 
-
-
-        public bool UpdateSelectedTour(int tourId, string num)
-        {
-
-            ////////// dodaj broj gostiju u zadatu turu
-
-            return true;
-        }
 
 
         public Tour Update(Tour tour)
