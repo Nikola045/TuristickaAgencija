@@ -116,5 +116,16 @@ namespace TravelAgency.Services
             }
             else return null;
         }
+
+        public bool IsOwnerAlreadyRatedByGuest(int reservationId, string guestUsername)
+        {
+            OwnerGrade ownerGrade = ownerGradeRepository.GetByReservationId(reservationId);
+            if (ownerGrade != null && ownerGrade.Guest1Username == guestUsername)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
