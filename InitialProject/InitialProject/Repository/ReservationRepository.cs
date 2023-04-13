@@ -1,18 +1,9 @@
-﻿using Microsoft.Graph.Drives.Item.List.Items.Item.Fields;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Markup;
-using System.Xml.Linq;
 using TravelAgency.Domain.Model;
-using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Serializer;
-using TravelAgency.View;
 
 namespace TravelAgency.Repository
 {

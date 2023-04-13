@@ -75,7 +75,7 @@ namespace TravelAgency.Repository
             CheckPoint current = _checkPoints.Find(c => c.Id == checkPoint.Id);
             int index = _checkPoints.IndexOf(current);
             _checkPoints.Remove(current);
-            _checkPoints.Insert(index, checkPoint);       // keep ascending order of ids in file 
+            _checkPoints.Insert(index, checkPoint);
             _serializer.ToCSV(FilePath, _checkPoints);
             return checkPoint;
         }

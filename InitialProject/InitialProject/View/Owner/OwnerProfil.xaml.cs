@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using TravelAgency.Domain.Model;
-using TravelAgency.Repository.UserRepo;
 using TravelAgency.Services;
 
 namespace TravelAgency.View.Owner

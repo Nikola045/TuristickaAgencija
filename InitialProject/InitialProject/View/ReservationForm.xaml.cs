@@ -1,21 +1,9 @@
-﻿using Microsoft.Graph.Models;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
@@ -28,19 +16,12 @@ namespace TravelAgency.View
     /// </summary>
     public partial class ReservationForm : Window
     {
-        Reservation NewReservation = new Reservation();
-
-        Domain.Model.User LogedUser = new Domain.Model. User();
+        User LogedUser = new User();
 
         private readonly ReservationRepository _repository;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private readonly HotelRepository hotelRepository;
         private readonly ReservationService reservationService;
-
-        
-        public ReservationForm(Domain.Model.User user)
+        public ReservationForm(User user)
         {
             InitializeComponent();
             Title = "Create new reservation";
@@ -60,6 +41,7 @@ namespace TravelAgency.View
         private void Reserve(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
+            List<Reservation> reservations = _repository.GetAll();
             hotels = hotelRepository.GetAll();
 
             bool requirementsMet = true;
@@ -84,7 +66,7 @@ namespace TravelAgency.View
                         requirementsMet = false;
                         break;
                     }
-                    if (!reservationService.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
+                    if (!reservationService.IsAvailable(reservations, HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
                         List<DateTime> alternativeDates = reservationService.FindAlternativeDates(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value, Convert.ToInt32(txtNumberOfDays.Text));
 
