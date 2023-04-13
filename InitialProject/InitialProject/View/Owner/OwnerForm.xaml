@@ -15,7 +15,7 @@
         <Label Content="Min Days:" Canvas.Left="22" Canvas.Top="210" HorizontalAlignment="Left" VerticalAlignment="Center" Height="33"/>
         <Label Content="Cancellnacion:" Canvas.Left="22" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30"/>
         <TextBox x:Name="txtName" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="10" Width="120"
-                 Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="28" TextChanged="NameValidation"/>
+                 DataContext="{Binding HotelService}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="28" TextChanged="NameValidation"/>
         <TextBox x:Name="txtCity" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="52" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" 
                  Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Height="30" TextChanged="CityValidation"/>
         <TextBox x:Name="brMax" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="166" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"

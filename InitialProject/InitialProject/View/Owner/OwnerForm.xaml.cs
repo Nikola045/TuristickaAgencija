@@ -1,39 +1,61 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
-using TravelAgency.Domain.Model;
-using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
 
 namespace TravelAgency.Forms
 {
     public partial class OwnerForm : Window
     {
-        private readonly HotelRepository hotelRepository;
-        private readonly HotelImageRepository hotelImageRepository;
         private readonly HotelService hotelService;
+        public static OwnerForm ownerForm;
         public OwnerForm()
         {
             InitializeComponent();
-            Title = "Create new hotel";
-            DataContext = this;
-            hotelRepository = new HotelRepository();
-            hotelImageRepository = new HotelImageRepository();
             hotelService = new HotelService();
+            ownerForm = this;
         }
 
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            hotelService.SaveHotel(ButtonActivator());
+        }
+
+        private void AddImage(object sender, RoutedEventArgs e)
+        {
+            hotelService.AddHotelImage();
+        }
+
+        private void DeleteImage(object sender, RoutedEventArgs e)
+        {
+            hotelService.DeleteHotelImage();
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            hotelService.ClearListOfImage();
+            this.Close();
+        }
+
+        //Validation 
         public bool ButtonActivator()
         {
-            if(
+            if (
                 LabelNameValidator.Content == "" &&
                 LabelCityValidator.Content == "" &&
-                LabelCountryValidator.Content == ""&&
-                LabelMaxGuestValidator.Content == ""&&
-                LabelMinDaysValidator.Content == ""&&
-                LabelCancelDaysValidator.Content == ""&&
-                LabelTypeValidator.Content == ""&&
-                LabelImgValidator.Content == "")
+                LabelCountryValidator.Content == "" &&
+                LabelMaxGuestValidator.Content == "" &&
+                LabelMinDaysValidator.Content == "" &&
+                LabelCancelDaysValidator.Content == "" &&
+                LabelTypeValidator.Content == "" &&
+                LabelImgValidator.Content == "" &&
+                txtName.Text != "" &&
+                txtCity.Text != "" &&
+                txtCountry.Text != "" &&
+                brMax.Text != "" &&
+                brMin.Text != "" &&
+                brDaysLeft.Text != "" &&
+                Type.Text != "")
             {
                 return true;
             }
@@ -41,75 +63,6 @@ namespace TravelAgency.Forms
             { return false; }
         }
 
-        private void Save(object sender, RoutedEventArgs e)
-        {
-            if (ButtonActivator())
-            {
-               Hotel newHotel = new Hotel(
-                    hotelRepository.NextId(),
-                    txtName.Text,
-                    txtCity.Text,
-                    txtCountry.Text,
-                    Type.Text,
-                    Convert.ToInt32(brMax.Text),
-                    Convert.ToInt32(brMin.Text),
-                    Convert.ToInt32(brDaysLeft.Text));
-               Hotel savedHotel = hotelRepository.Save(newHotel);
-
-                MessageBox.Show("Accommodation successfully created");
-
-                txtName.Clear();
-                txtCity.Clear();
-                txtCountry.Clear();
-                brMax.Clear();
-                brMin.Clear();
-                brDaysLeft.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Please check your input datas");
-            }
-        }
-
-
-
-        private void AddImage(object sender, RoutedEventArgs e)
-        {
-            HotelImage newImage = new HotelImage(
-               hotelImageRepository.NextId(),
-               txtImg.Text);
-
-            HotelImage savedImage = hotelImageRepository.Save(newImage);
-            ImageList.Items.Add(txtImg.Text);
-            MessageBox.Show("You have successfully added an image");
-            LabelImgValidator.Content = "";
-            txtImg.Clear();
-        }
-
-        private void DeleteImage(object sender, RoutedEventArgs e)
-        {
-            object selectedItem = ImageList.SelectedItem;
-            HotelImage hotelImage = hotelService.FindByUrl(selectedItem.ToString());
-
-            ImageList.Items.Remove(selectedItem);
-            hotelImageRepository.Delete(hotelImage);
-            if(ImageList.Items.IsEmpty == true)
-            {
-                LabelImgValidator.Content = "Please add at least one image";
-            }
-        }
-
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            foreach(object item in ImageList.Items)
-            {
-                HotelImage hotelImage = hotelService.FindByUrl(item.ToString());
-                hotelImageRepository.Delete(hotelImage);
-            }
-            this.Close();
-        }
-
-        //Validation 
         private void NameValidation(object sender, TextChangedEventArgs e)
         {
             string name = txtName.Text;
@@ -186,7 +139,6 @@ namespace TravelAgency.Forms
                 LabelCancelDaysValidator.Content = "Please enter valid value";
             }
         }
-
 
         private void UrlValidation(object sender, TextChangedEventArgs e)
         {
