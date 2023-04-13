@@ -43,6 +43,7 @@
             </Button>
             <Separator/>
         </ToolBar>
+        <Button Grid.Column="1" Content="Move Reservation" HorizontalAlignment="Left" Margin="70,178,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click"/>
 
     </Grid>
 </Window>

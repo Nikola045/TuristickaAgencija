@@ -34,8 +34,8 @@ namespace TravelAgency.Repository
                     string[] fields = line.Split('|');
                     MoveReservation reservation = new MoveReservation();
                     reservation.ReservationId = Convert.ToInt32(fields[0]);
-                    reservation.GuestUsername = fields[1];
-                    reservation.HotelName = fields[2];
+                    reservation.HotelName = fields[1];
+                    reservation.GuestUsername = fields[2];
                     reservation.OldStartDate = Convert.ToDateTime(fields[3]);
                     reservation.OldEndDate = Convert.ToDateTime(fields[4]);
                     reservation.NewStartDate = Convert.ToDateTime(fields[5]);
@@ -63,6 +63,14 @@ namespace TravelAgency.Repository
             MoveReservation founded = _reservations.Find(c => c.ReservationId == reservation.ReservationId);
             _reservations.Remove(founded);
             _serializer.ToCSV(FilePath, _reservations);
+        }
+
+        public MoveReservation Save(MoveReservation moveReservation)
+        {
+            _reservations = _serializer.FromCSV(FilePath);
+            _reservations.Add(moveReservation);
+            _serializer.ToCSV(FilePath, _reservations);
+            return moveReservation;
         }
     }
 }

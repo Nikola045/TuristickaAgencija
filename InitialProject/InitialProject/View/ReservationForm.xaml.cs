@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
@@ -40,6 +41,7 @@ namespace TravelAgency.View
         private void Reserve(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
+            List<Reservation> reservations = _repository.GetAll();
             hotels = hotelRepository.GetAll();
 
             bool requirementsMet = true;
@@ -64,7 +66,7 @@ namespace TravelAgency.View
                         requirementsMet = false;
                         break;
                     }
-                    if (!reservationService.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
+                    if (!reservationService.IsAvailable(reservations, HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
                         List<DateTime> alternativeDates = reservationService.FindAlternativeDates(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value, Convert.ToInt32(txtNumberOfDays.Text));
 
