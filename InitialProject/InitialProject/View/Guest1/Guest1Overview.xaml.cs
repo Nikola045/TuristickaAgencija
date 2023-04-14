@@ -47,6 +47,12 @@ namespace TravelAgency.View
             Guest1AccountForm createAccountForm = new Guest1AccountForm();
             createAccountForm.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MoveReservationForm moveReservationForm = new MoveReservationForm(LoggedInUser);
+            moveReservationForm.Show();
+        }
     }
 }
 

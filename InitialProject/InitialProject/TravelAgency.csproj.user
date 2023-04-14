@@ -5,10 +5,16 @@
     <Compile Update="View\GradeForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest1\GradeOwnerForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest1\Guest1AccountForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\Guest1ShowReview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\MoveReservationForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\RecommendationForRenovation.xaml.cs">
@@ -52,10 +58,16 @@
     <Page Update="View\GradeForm.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Guest1\GradeOwnerForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\Guest1AccountForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\Guest1ShowReview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\MoveReservationForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\RecommendationForRenovation.xaml">

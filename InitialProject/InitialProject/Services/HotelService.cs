@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Xml.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Forms;
 using TravelAgency.Repository.HotelRepo;
 
 namespace TravelAgency.Services
@@ -93,6 +97,73 @@ namespace TravelAgency.Services
                 }
             }
             return hotelImages;
+        }
+
+        public void SaveHotel(bool validator)
+        {
+            if (validator) 
+            {
+                Hotel newHotel = new Hotel(
+                    
+                     hotelRepository.NextId(),
+                     OwnerForm.ownerForm.txtName.Text,
+                     OwnerForm.ownerForm.txtCity.Text,
+                     OwnerForm.ownerForm.txtCountry.Text,
+                     OwnerForm.ownerForm.Type.Text,
+                     Convert.ToInt32(OwnerForm.ownerForm.brMax.Text),
+                     Convert.ToInt32(OwnerForm.ownerForm.brMin.Text),
+                     Convert.ToInt32(OwnerForm.ownerForm.brDaysLeft.Text));
+                Hotel savedHotel = hotelRepository.Save(newHotel);
+
+                MessageBox.Show("Accommodation successfully created");
+
+                OwnerForm.ownerForm.txtName.Clear();
+                OwnerForm.ownerForm.txtCity.Clear();
+                OwnerForm.ownerForm.txtCountry.Clear();
+                OwnerForm.ownerForm.brMax.Clear();
+                OwnerForm.ownerForm.brMin.Clear();
+                OwnerForm.ownerForm.brDaysLeft.Clear();
+                OwnerForm.ownerForm.ImageList.Items.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please check your input datas");
+            }
+        }
+
+        public void AddHotelImage()
+        {
+            HotelImage newImage = new HotelImage(
+               hotelImageRepository.NextId(),
+               OwnerForm.ownerForm.txtImg.Text);
+
+            HotelImage savedImage = hotelImageRepository.Save(newImage);
+            OwnerForm.ownerForm.ImageList.Items.Add(OwnerForm.ownerForm.txtImg.Text);
+            MessageBox.Show("You have successfully added an image");
+            OwnerForm.ownerForm.LabelImgValidator.Content = "";
+            OwnerForm.ownerForm.txtImg.Clear();
+        }
+
+        public void DeleteHotelImage()
+        {
+            object selectedItem = OwnerForm.ownerForm.ImageList.SelectedItem;
+            HotelImage hotelImage = FindByUrl(selectedItem.ToString());
+
+            OwnerForm.ownerForm.ImageList.Items.Remove(selectedItem);
+            hotelImageRepository.Delete(hotelImage);
+            if (OwnerForm.ownerForm.ImageList.Items.IsEmpty == true)
+            {
+                OwnerForm.ownerForm.LabelImgValidator.Content = "Please add at least one image";
+            }
+        }
+
+        public void ClearListOfImage()
+        {
+            foreach (object item in OwnerForm.ownerForm.ImageList.Items)
+            {
+                HotelImage hotelImage = FindByUrl(item.ToString());
+                hotelImageRepository.Delete(hotelImage);
+            }
         }
     }
 }
