@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using TravelAgency.Services;
 using Microsoft.Win32;
+using TravelAgency.Domain.Model;
 
 namespace TravelAgency.Forms
 {
@@ -10,16 +11,18 @@ namespace TravelAgency.Forms
     {
         private readonly HotelService hotelService;
         public static OwnerForm ownerForm;
-        public OwnerForm()
+        private User LogedUser;
+        public OwnerForm(User user)
         {
             InitializeComponent();
             hotelService = new HotelService();
+            LogedUser = user;
             ownerForm = this;
         }
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            hotelService.SaveHotel(ButtonActivator());
+            hotelService.SaveHotel(ButtonActivator(), LogedUser.Username);
         }
 
         private void AddImage(object sender, RoutedEventArgs e)
