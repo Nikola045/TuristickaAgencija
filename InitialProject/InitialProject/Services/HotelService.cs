@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
 using TravelAgency.Repository.HotelRepo;
+using DialogResult = Prism.Services.Dialogs.DialogResult;
 
 namespace TravelAgency.Services
 {
@@ -73,6 +74,17 @@ namespace TravelAgency.Services
             return null;
         }
 
+        public Hotel GetHotelById(int id)
+        {
+            List<Hotel> hotelList = hotelRepository.GetAll();
+            foreach (Hotel hotel in hotelList)
+            {
+                if (hotel.Id == id)
+                    return hotel;
+            }
+            return null;
+        }
+
         public HotelImage FindByUrl(string url)
         {
             List<HotelImage> hotelImages = hotelImageRepository.GetAll();
@@ -89,14 +101,15 @@ namespace TravelAgency.Services
         public List<HotelImage> FindAllById(int id)
         {
             List<HotelImage> hotelImages = hotelImageRepository.GetAll();
-            foreach (HotelImage hotelImage in hotelImages)
+            List<HotelImage> findedImages = new List<HotelImage>();
+            foreach (HotelImage hotelImage  in hotelImages)
             {
                 if (hotelImage.HotelId == id)
                 {
-                    hotelImages.Add(hotelImage);
+                    findedImages.Add(hotelImage);
                 }
             }
-            return hotelImages;
+            return findedImages;
         }
 
         public void SaveHotel(bool validator)
@@ -164,6 +177,7 @@ namespace TravelAgency.Services
                 HotelImage hotelImage = FindByUrl(item.ToString());
                 hotelImageRepository.Delete(hotelImage);
             }
+
         }
     }
 }

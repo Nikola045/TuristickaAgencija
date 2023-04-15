@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using TravelAgency.Services;
+using Microsoft.Win32;
 
 namespace TravelAgency.Forms
 {
@@ -166,6 +167,13 @@ namespace TravelAgency.Forms
         private void ValidationType(object sender, SelectionChangedEventArgs e)
         {
             LabelTypeValidator.Content = "";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.ShowDialog();
+            txtImg.Text = file.FileName;
         }
     }
 }
