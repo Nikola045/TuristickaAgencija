@@ -16,6 +16,7 @@ using Microsoft.Graph.Models.Security;
 using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
 using TravelAgency.Repository;
+using TravelAgency.View.Guest1;
 
 namespace TravelAgency.View
 {
@@ -39,6 +40,18 @@ namespace TravelAgency.View
         {
             ReservationForm createReservationForm = new ReservationForm(LoggedInUser);
             createReservationForm.Show();
+        }
+
+        private void OpenAccount(object sender, RoutedEventArgs e)
+        {
+            Guest1AccountForm createAccountForm = new Guest1AccountForm();
+            createAccountForm.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MoveReservationForm moveReservationForm = new MoveReservationForm(LoggedInUser);
+            moveReservationForm.Show();
         }
     }
 }

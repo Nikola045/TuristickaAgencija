@@ -11,18 +11,11 @@ namespace TravelAgency.View.Owner
     /// </summary>
     public partial class ReviewForm : Window
     {
-        private readonly OwnerGradeRepository ownerGradeRepository;
-        private readonly ReservationRepository reservationRepository;
         private readonly GradeService gradeService;
-        
-        private User LogedOwner { get; set; }
         public ReviewForm(User user)
         {
             InitializeComponent();
-            reservationRepository = new ReservationRepository();
-            ownerGradeRepository = new OwnerGradeRepository();
             gradeService = new GradeService();
-            LogedOwner = user;
         }
 
         private void ShowData(object sender, RoutedEventArgs e)

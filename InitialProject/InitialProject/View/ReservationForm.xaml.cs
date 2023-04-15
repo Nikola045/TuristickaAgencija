@@ -1,21 +1,9 @@
-﻿using Microsoft.Graph.Models;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
@@ -28,19 +16,12 @@ namespace TravelAgency.View
     /// </summary>
     public partial class ReservationForm : Window
     {
-        Reservation NewReservation = new Reservation();
-
-        Domain.Model.User LogedUser = new Domain.Model. User();
+        User LogedUser = new User();
 
         private readonly ReservationRepository _repository;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private readonly HotelRepository hotelRepository;
         private readonly ReservationService reservationService;
-
-        
-        public ReservationForm(Domain.Model.User user)
+        public ReservationForm(User user)
         {
             InitializeComponent();
             Title = "Create new reservation";
@@ -58,8 +39,9 @@ namespace TravelAgency.View
         }
 
         private void Reserve(object sender, RoutedEventArgs e)
-        {            
+        {
             List<Hotel> hotels = new List<Hotel>();
+            List<Reservation> reservations = _repository.GetAll();
             hotels = hotelRepository.GetAll();
 
             bool requirementsMet = true;
@@ -84,15 +66,35 @@ namespace TravelAgency.View
                         requirementsMet = false;
                         break;
                     }
-                    if (!reservationService.IsAvailable(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
+                    if (!reservationService.IsAvailable(reservations, HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
-                        MessageBox.Show("No available rooms for selected period");
-                        requirementsMet = false;
-                        break;
+                        List<DateTime> alternativeDates = reservationService.FindAlternativeDates(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value, Convert.ToInt32(txtNumberOfDays.Text));
+
+                        if (alternativeDates.Count > 0)
+                        {
+                            StringBuilder message = new StringBuilder();
+                            message.AppendLine("The selected hotel is already booked for the selected dates.");
+                            message.AppendLine("Please choose one of the following alternative dates:");
+                            int maxAlternativeDates = Math.Min(alternativeDates.Count, 5);
+                            for (int j = 0; j < maxAlternativeDates; j++)
+                            {
+                                message.AppendLine("- " + alternativeDates[j].ToShortDateString() + " to " + alternativeDates[j].AddDays(Convert.ToInt32(txtNumberOfDays.Text)).ToShortDateString());
+                            }
+
+                            MessageBox.Show(message.ToString());
+                            requirementsMet = false;
+                            break;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No alternative dates available for the selected period.");
+                            requirementsMet = false;
+                            break;
+                        }
                     }
                 }
             }
-             
+
             if (requirementsMet)
             {
 
@@ -103,7 +105,7 @@ namespace TravelAgency.View
                     Convert.ToDateTime(Date1.Text),
                     Convert.ToDateTime(Date2.Text),
                     Convert.ToInt32(txtNumberOfDays.Text),
-                    Convert.ToInt32(txtNumberOfGuests.Text)); 
+                    Convert.ToInt32(txtNumberOfGuests.Text));
                 _repository.Save(newReservation);
                 MessageBox.Show("Reservation made succesfully!");
 
@@ -114,8 +116,8 @@ namespace TravelAgency.View
                 Date2.SelectedDate = null;
                 btnReserve.IsEnabled = false;
             }
-
         }
+
 
         private void LoadHotels(object sender, RoutedEventArgs e)
         {

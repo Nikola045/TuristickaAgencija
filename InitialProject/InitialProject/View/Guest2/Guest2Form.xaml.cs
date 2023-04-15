@@ -66,7 +66,7 @@ namespace TravelAgency.View.Guest2
         {
             List<Tour> tours = new List<Tour>();
             
-            tours = _repository.FindTour(FilePath, txtCity.Text, txtCountry.Text, txtLeng.Text, txtDuration.Text, txtNum.Text);
+            tours = _repository.FilterTours(FilePath, txtCity.Text, txtCountry.Text, txtLeng.Text, txtDuration.Text, txtNum.Text);
             DataPanel.ItemsSource = tours;
         }
 
@@ -80,18 +80,39 @@ namespace TravelAgency.View.Guest2
 
         private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
         {
-
             selectedTour = (Tour)DataPanel.SelectedItem;
-            const string FilePath = "../../../Resources/Data/guestOnTour.csv";
+            const string FilePath1 = "../../../Resources/Data/guestOnTour.csv";
+            int numGuests = Convert.ToInt32(txtNumOfGuests.Text);
+
             if (DataPanel.SelectedItem != null)
             {
-                if (_repository.UpdateSelectedTour(selectedTour.Id, txtNumOfGuests.Text) && _repository.ReserveTour(selectedTour.Id, LogedUser.Username, FilePath))
+                if (numGuests <= 0)
                 {
-                    MessageBox.Show("Reserved.");
+                    MessageBox.Show("Please select how many guests want to go on the tour.");
                 }
                 else
                 {
-                    MessageBox.Show("Not reserved.");
+                    if (selectedTour.MaxNumberOfGuests < selectedTour.CurentNumberOfGuests + numGuests)
+                    {
+                        MessageBox.Show("Selected tour doesn't have that many free places." +
+                            "Here are some similar tours for that many people.");
+                    }
+                    else
+                    {
+
+                        if (_repository.ReserveTour(selectedTour.Id, LogedUser.Id, FilePath1, numGuests))
+                        {
+                            selectedTour.CurentNumberOfGuests = selectedTour.CurentNumberOfGuests + numGuests;
+                            _repository.Update(selectedTour);
+
+                            MessageBox.Show("Reserved.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Not reserved.");
+                        }
+                        
+                    }
                 }
             }
             else
