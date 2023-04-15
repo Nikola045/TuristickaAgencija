@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.GradeRepo;
+using TravelAgency.Repository.UserRepo;
 
 namespace TravelAgency.Services
 {
     internal class OwnerService
     {
         private readonly OwnerGradeRepository ownerGradeRepository;
+        private readonly UserRepository userRepository;
         public OwnerService()
         {
             ownerGradeRepository = new OwnerGradeRepository();
+            userRepository = new UserRepository();
         }
 
         public int CountGradesFromOwnerRating(string OwnerUserName)
@@ -52,6 +56,32 @@ namespace TravelAgency.Services
             {
                 return "Owner";
             }
+
+        }
+
+        public List<User> GetAllOwners()
+        {
+            List<User> users = userRepository.GetAll();
+            List<User> owners = new List<User>();
+            foreach (User user in users)
+            {
+                if(user.LoginRole == "Owner")
+                    owners.Add(user);
+            }
+            return owners;
+
+        }
+
+        public List<User> GetAllSuperOwners()
+        {
+            List<User> owners = GetAllOwners();
+            List<User> superOwners = new List<User>();
+            foreach (User owner in owners)
+            {
+                if (SuperOwner(owner.Username) == "Super-Owner")
+                    superOwners.Add(owner);
+            }
+            return superOwners.Distinct().ToList();
 
         }
     }

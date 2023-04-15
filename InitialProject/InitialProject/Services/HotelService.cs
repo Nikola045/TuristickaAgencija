@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
 using TravelAgency.Repository.HotelRepo;
-using DialogResult = Prism.Services.Dialogs.DialogResult;
 
 namespace TravelAgency.Services
 {
@@ -60,7 +60,7 @@ namespace TravelAgency.Services
                 }
             }
                     
-            return findedHotels.Distinct().ToList();
+            return SortBySuperOwner(findedHotels.Distinct().ToList());
         }
 
         public Hotel GetHotelByName(string name)
@@ -83,6 +83,18 @@ namespace TravelAgency.Services
                     return hotel;
             }
             return null;
+        }
+
+        public List<Hotel> GetHotelByOwner(string username)
+        {
+            List<Hotel> hotelList = hotelRepository.GetAll();
+            List<Hotel> findedHotels = new List<Hotel>();
+            foreach (Hotel hotel in hotelList)
+            {
+                if (hotel.OwnerUsername == username)
+                    findedHotels.Add(hotel);        
+            }
+            return findedHotels;
         }
 
         public HotelImage FindByUrl(string url)
@@ -112,7 +124,7 @@ namespace TravelAgency.Services
             return findedImages;
         }
 
-        public void SaveHotel(bool validator)
+        public void SaveHotel(bool validator, string username)
         {
             if (validator) 
             {
@@ -126,6 +138,7 @@ namespace TravelAgency.Services
                      Convert.ToInt32(OwnerForm.ownerForm.brMax.Text),
                      Convert.ToInt32(OwnerForm.ownerForm.brMin.Text),
                      Convert.ToInt32(OwnerForm.ownerForm.brDaysLeft.Text));
+                newHotel.OwnerUsername = username;
                 Hotel savedHotel = hotelRepository.Save(newHotel);
 
                 MessageBox.Show("Accommodation successfully created");
@@ -142,6 +155,24 @@ namespace TravelAgency.Services
             {
                 MessageBox.Show("Please check your input datas");
             }
+        }
+
+        public List<Hotel> SortBySuperOwner(List<Hotel> hotels)
+        {
+            List<Hotel> sortedHotels = new List<Hotel>();
+            hotels.Reverse();
+            foreach (Hotel hotel in hotels)
+            {
+                if(Regex.IsMatch(hotel.OwnerUsername, @"^[a-zA-Z0-9\s]+\sSuper-Owner$"))
+                    sortedHotels.Insert(0, hotel);
+            }
+            foreach (Hotel hotel in hotels)
+            {
+                if (!Regex.IsMatch(hotel.OwnerUsername, @"^[a-zA-Z0-9\s]+\sSuper-Owner$"))
+                    sortedHotels.Add(hotel);
+            }
+
+            return sortedHotels;
         }
 
         public void AddHotelImage()
