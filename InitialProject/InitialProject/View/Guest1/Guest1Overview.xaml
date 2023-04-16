@@ -35,7 +35,15 @@
                 </StackPanel>
             </Button>
             <Separator/>
+            <Button Click="OpenAccount">
+                <StackPanel Orientation="Horizontal" Width="87">
+                    <Image Source="../Resources/Images/add.png" Width="20" Height="25"/>
+                    <TextBlock Text="Account" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="57" />
+                </StackPanel>
+            </Button>
+            <Separator/>
         </ToolBar>
+        <Button Grid.Column="1" Content="Move Reservation" HorizontalAlignment="Left" Margin="70,178,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click"/>
 
     </Grid>
 </Window>

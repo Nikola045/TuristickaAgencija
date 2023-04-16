@@ -8,8 +8,12 @@ namespace TravelAgency.Repository.GradeRepo
     internal class OwnerGradeRepository
     {
         private const string FilePath = "../../../Resources/Data/OwnerRating.csv";
+        private List<OwnerGrade> ownerGrades;
 
-        public OwnerGradeRepository() { }
+        public OwnerGradeRepository()
+        {
+            ownerGrades = GetAll();
+        }
 
         public List<OwnerGrade> GetAll()
         {
@@ -33,5 +37,18 @@ namespace TravelAgency.Repository.GradeRepo
             }
             return grades;
         }
+
+        public OwnerGrade GetByReservationId(int id)
+        {
+            foreach (OwnerGrade grade in ownerGrades)
+            {
+                if (grade.ReservationId == id)
+                {
+                    return grade;
+                }
+            }
+            return null;
+        }
     }
+
 }

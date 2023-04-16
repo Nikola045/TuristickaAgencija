@@ -1,17 +1,5 @@
-﻿using Microsoft.Graph.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
 using TravelAgency.Repository.HotelRepo;
@@ -41,8 +29,8 @@ namespace TravelAgency.View.Owner
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)
         {
-            OwnerForm createOwnerForm = new OwnerForm();
-            createOwnerForm.ShowDialog();
+            OwnerForm createOwnerForm = new OwnerForm(LoggedInUser);
+            createOwnerForm.Show();
         }
 
         private void OpenGradeForm(object sender, RoutedEventArgs e)
