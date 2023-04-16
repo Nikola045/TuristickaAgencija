@@ -1,56 +1,65 @@
-﻿using TravelAgency.Model;
-using TravelAgency.Repository;
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Xml.Linq;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.IO;
-using System.Globalization;
-using CsvHelper;
-using System.Linq;
-using TravelAgency.Serializer;
-using System.Data;
-using Cake.Core.IO;
-using Microsoft.Graph.Models;
-using System.Windows.Data;
-using static Azure.Core.HttpHeader;
 using System.Text.RegularExpressions;
-using Microsoft.Windows.Themes;
-using static System.Net.WebRequestMethods;
+using TravelAgency.Services;
+using Microsoft.Win32;
+using TravelAgency.Domain.Model;
 
 namespace TravelAgency.Forms
 {
     public partial class OwnerForm : Window
     {
-        private const string FilePath = "../../../Resources/Data/hotels.csv";
-        private readonly HotelRepository hotelRepository;
-        private readonly HotelImageRepository hotelImageRepository;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public OwnerForm()
+        private readonly HotelService hotelService;
+        public static OwnerForm ownerForm;
+        private User LogedUser;
+        public OwnerForm(User user)
         {
             InitializeComponent();
-            Title = "Create new hotel";
-            DataContext = this;
-            hotelRepository = new HotelRepository();
-            hotelImageRepository = new HotelImageRepository();
+            hotelService = new HotelService();
+            LogedUser = user;
+            ownerForm = this;
         }
 
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            hotelService.SaveHotel(ButtonActivator(), LogedUser.Username);
+        }
+
+        private void AddImage(object sender, RoutedEventArgs e)
+        {
+            hotelService.AddHotelImage();
+        }
+
+        private void DeleteImage(object sender, RoutedEventArgs e)
+        {
+            hotelService.DeleteHotelImage();
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            hotelService.ClearListOfImage();
+            this.Close();
+        }
+
+        //Validation 
         public bool ButtonActivator()
         {
-            if(
+            if (
                 LabelNameValidator.Content == "" &&
                 LabelCityValidator.Content == "" &&
-                LabelCountryValidator.Content == ""&&
-                LabelMaxGuestValidator.Content == ""&&
-                LabelMinDaysValidator.Content == ""&&
-                LabelCancelDaysValidator.Content == ""&&
-                LabelTypeValidator.Content == ""&&
-                LabelImgValidator.Content == "")
+                LabelCountryValidator.Content == "" &&
+                LabelMaxGuestValidator.Content == "" &&
+                LabelMinDaysValidator.Content == "" &&
+                LabelCancelDaysValidator.Content == "" &&
+                LabelTypeValidator.Content == "" &&
+                LabelImgValidator.Content == "" &&
+                txtName.Text != "" &&
+                txtCity.Text != "" &&
+                txtCountry.Text != "" &&
+                brMax.Text != "" &&
+                brMin.Text != "" &&
+                brDaysLeft.Text != "" &&
+                Type.Text != "")
             {
                 return true;
             }
@@ -58,90 +67,10 @@ namespace TravelAgency.Forms
             { return false; }
         }
 
-        private void Save(object sender, RoutedEventArgs e)
-        {
-            string typeOfHotel = null;
-            if (RadioHouse.IsChecked == true) typeOfHotel = "House";
-            else if (RadioHotel.IsChecked == true) typeOfHotel = "Hotel";
-            else if (RadioHut.IsChecked == true) typeOfHotel = "Hut";
-            else if (RadioApartment.IsChecked == true) typeOfHotel = "Apartment";
-
-            if (ButtonActivator())
-            {
-               Hotel newHotel = new Hotel(
-                    hotelRepository.NextId(),
-                    txtName.Text,
-                    txtCity.Text,
-                    txtCountry.Text,
-                    typeOfHotel,
-                    Convert.ToInt32(brMax.Text),
-                    Convert.ToInt32(brMin.Text),
-                    Convert.ToInt32(brDaysLeft.Text));
-               Hotel savedHotel = hotelRepository.Save(newHotel);
-
-                MessageBox.Show("Accommodation successfully created");
-
-                txtName.Clear();
-                txtCity.Clear();
-                txtCountry.Clear();
-                brMax.Clear();
-                brMin.Clear();
-                brDaysLeft.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Please check your input datas");
-            }
-        }
-
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {         
-            List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.ReadFromHotelsCsv(FilePath);
-            DataPanel.ItemsSource = hotels;
-        }
-
-        private void AddImage(object sender, RoutedEventArgs e)
-        {
-            HotelImage newImage = new HotelImage(
-               hotelImageRepository.NextId(),
-               txtImg.Text);
-
-            HotelImage savedImage = hotelImageRepository.Save(newImage);
-            ImageList.Items.Add(txtImg.Text);
-            MessageBox.Show("You have successfully added an image");
-            LabelImgValidator.Content = "";
-            txtImg.Clear();
-        }
-
-        private void DeleteImage(object sender, RoutedEventArgs e)
-        {
-            object selectedItem = ImageList.SelectedItem;
-            HotelImage hotelImage = hotelImageRepository.FindByUrl(selectedItem.ToString());
-
-            ImageList.Items.Remove(selectedItem);
-            hotelImageRepository.Delete(hotelImage);
-            if(ImageList.Items.IsEmpty == true)
-            {
-                LabelImgValidator.Content = "Please add at least one image";
-            }
-        }
-
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            foreach(object item in ImageList.Items)
-            {
-                HotelImage hotelImage = hotelImageRepository.FindByUrl(item.ToString());
-                hotelImageRepository.Delete(hotelImage);
-            }
-            this.Close();
-        }
-
-        //Validation 
         private void NameValidation(object sender, TextChangedEventArgs e)
         {
             string name = txtName.Text;
-            if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(name, @"^[a-zA-Z\s]+$"))
             {
                 LabelNameValidator.Content = "";
             }
@@ -154,7 +83,7 @@ namespace TravelAgency.Forms
         private void CityValidation(object sender, TextChangedEventArgs e)
         {
             string city = txtCity.Text;
-            if (Regex.IsMatch(city, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(city, @"^[a-zA-Z\s]+$"))
             {
                 LabelCityValidator.Content = "";
             }
@@ -167,7 +96,7 @@ namespace TravelAgency.Forms
         private void CountryValidation(object sender, TextChangedEventArgs e)
         {
             string country = txtCountry.Text;
-            if (Regex.IsMatch(country, @"^[a-zA-Z]+$"))
+            if (Regex.IsMatch(country, @"^[a-zA-Z\s]+$"))
             {
                 LabelCountryValidator.Content = "";
             }
@@ -215,26 +144,6 @@ namespace TravelAgency.Forms
             }
         }
 
-        private void HouseCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void HutCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void HotelCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
-        private void ApartmentCheckValidation(object sender, RoutedEventArgs e)
-        {
-            LabelTypeValidator.Content = "";
-        }
-
         private void UrlValidation(object sender, TextChangedEventArgs e)
         {
             string url = txtImg.Text;
@@ -248,6 +157,26 @@ namespace TravelAgency.Forms
                 LabelUrlValidator.Content = "Please input valid ulr address";
                 AddImgButton.IsEnabled = false;
             }
+        }
+
+        private void DataFill(object sender, RoutedEventArgs e)
+        {
+            Type.Items.Add("Hotel");
+            Type.Items.Add("Hut");
+            Type.Items.Add("House");
+            Type.Items.Add("Apartment");
+        }
+
+        private void ValidationType(object sender, SelectionChangedEventArgs e)
+        {
+            LabelTypeValidator.Content = "";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.ShowDialog();
+            txtImg.Text = file.FileName;
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TravelAgency.Model;
+using TravelAgency.Domain.Model;
 
 namespace TravelAgency.View.Guest2
 {
@@ -34,7 +34,7 @@ namespace TravelAgency.View.Guest2
 
         private void OpenGuest2Form(object sender, RoutedEventArgs e)
         {
-            Guest2Form createGuest2Form = new Guest2Form();
+            Guest2Form createGuest2Form = new Guest2Form(LoggedInUser);
             createGuest2Form.Show();
         }
 
