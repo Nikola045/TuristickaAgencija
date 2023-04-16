@@ -194,7 +194,7 @@ namespace TravelAgency.Repository
             guestOnTour.TourId = tour.Id;
             guestOnTour.TourName = tour.Name;
             guestOnTour.NumOfGuests = num;
-            guestOnTour.CurentCheckPoint = tour.CheckPoints[0];
+            guestOnTour.CurentCheckPoints = tour.CheckPoints;
             guestOnTour.StatusCP = "Neaktivna";
 
             ///////// upisi u guestOnTour.csv
