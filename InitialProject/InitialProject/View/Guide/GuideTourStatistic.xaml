@@ -18,9 +18,10 @@
         <TextBox x:Name="txt2" HorizontalAlignment="Left" Margin="95,343,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txt3" HorizontalAlignment="Left" Margin="95,383,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txt4" HorizontalAlignment="Left" Margin="606,343,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="23,300,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="23,339,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="23,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.127,0.167"/>
+        <Label Content="18-" HorizontalAlignment="Left" Margin="23,300,0,0" VerticalAlignment="Top"/>
+        <Label Content="18-50" HorizontalAlignment="Left" Margin="23,339,0,0" VerticalAlignment="Top"/>
+        <Label Content="50+" HorizontalAlignment="Left" Margin="23,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.127,0.167"/>
+        <Label Content="People with vouchers" HorizontalAlignment="Left" Margin="465,335,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
