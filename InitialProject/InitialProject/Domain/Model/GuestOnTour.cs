@@ -16,7 +16,6 @@ namespace TravelAgency.Domain.Model
         public string StartingPoint { get; set; }
         public int NumOfGuests { get; set; }
         public int GuestAge { get; set; }
-
         public string WithVoucher { get; set; }
         public List<CheckPoint> CurentCheckPoints { get; set; }
 

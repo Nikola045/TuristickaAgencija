@@ -24,6 +24,7 @@ namespace TravelAgency.View.Guest2
         private readonly TourRepository _repository;
         private const string FilePath = "../../../Resources/Data/tours.csv";
         User LogedUser = new Domain.Model.User();
+        private Tour selectedTour;
 
         public PastTours(User logedUser)
         {
@@ -47,7 +48,16 @@ namespace TravelAgency.View.Guest2
 
         private void MakeReview(object sender, RoutedEventArgs e)
         {
-
+            if (DataPanel.SelectedItem != null)
+            {
+                selectedTour = (Tour)DataPanel.SelectedItem;
+                TourReview createTourReview = new TourReview(LogedUser, selectedTour);
+                createTourReview.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a tour you want to review.");
+            }
         }
     }
 }

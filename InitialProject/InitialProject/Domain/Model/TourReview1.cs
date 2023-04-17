@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.Domain.Model
 {
-    internal class TourReview
+    internal class TourReview1 : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
         public int TourId { get; set; }
@@ -15,7 +15,9 @@ namespace TravelAgency.Domain.Model
         public int Overall { get; set; }
         public string Comment { get; set; }
 
-        public TourReview(int id, int tourId, int guidesKnowlege, int guidesLenguage, int overall, string comment)
+        public TourReview1() { }
+
+        public TourReview1(int id, int tourId, int guidesKnowlege, int guidesLenguage, int overall, string comment)
         {
             Id = id;
             TourId = tourId;
