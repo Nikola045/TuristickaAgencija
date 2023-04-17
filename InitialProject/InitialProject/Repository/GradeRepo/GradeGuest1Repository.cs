@@ -27,25 +27,7 @@ namespace TravelAgency.Repository.GradeRepo
             return grade;
         }
         public List<GuestGrade> GetAll()
-        {
-            List<GuestGrade> grades = new List<GuestGrade>();
-            using (StreamReader sr = new StreamReader(FilePathGuestRatingde))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-
-                    string[] fields = line.Split('|');
-                    GuestGrade grade = new GuestGrade();
-                    grade.GuestUserName = fields[0];
-                    grade.Cleanliness = Convert.ToInt32(fields[1]);
-                    grade.Respecting = Convert.ToInt32(fields[2]);
-                    grade.CommentText = fields[3];
-                    grade.ReservationId = Convert.ToInt32(fields[4]);
-                    grades.Add(grade);
-
-    }
-            }
+        {    
             return grades;
         }
     }

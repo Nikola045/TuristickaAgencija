@@ -1,4 +1,5 @@
 ﻿using Cake.Core.IO;
+using Microsoft.Graph.Models.Security;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,7 @@ namespace TravelAgency.View.Guest2
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public Guest2Form(User logedUser)
         {
             InitializeComponent();
@@ -78,46 +80,19 @@ namespace TravelAgency.View.Guest2
             DataPanel.ItemsSource = tours;
         }
 
-        private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
-        {
-            selectedTour = (Tour)DataPanel.SelectedItem;
-            const string FilePath1 = "../../../Resources/Data/guestOnTour.csv";
-            int numGuests = Convert.ToInt32(txtNumOfGuests.Text);
 
+
+        private void ShowSelectedTour(object sender, RoutedEventArgs e)
+        {
             if (DataPanel.SelectedItem != null)
             {
-                if (numGuests <= 0)
-                {
-                    MessageBox.Show("Please select how many guests want to go on the tour.");
-                }
-                else
-                {
-                    if (selectedTour.MaxNumberOfGuests < selectedTour.CurentNumberOfGuests + numGuests)
-                    {
-                        MessageBox.Show("Selected tour doesn't have that many free places." +
-                            "Here are some similar tours for that many people.");
-                    }
-                    else
-                    {
-
-                        if (_repository.ReserveTour(selectedTour.Id, LogedUser.Id, FilePath1, numGuests))
-                        {
-                            selectedTour.CurentNumberOfGuests = selectedTour.CurentNumberOfGuests + numGuests;
-                            _repository.Update(selectedTour);
-
-                            MessageBox.Show("Reserved.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Not reserved.");
-                        }
-                        
-                    }
-                }
+                selectedTour = (Tour)DataPanel.SelectedItem;
+                OneTour createOneTour = new OneTour(LogedUser, selectedTour);
+                createOneTour.Show();
             }
             else
             {
-                MessageBox.Show("Please select a tour you want to go on.");
+                MessageBox.Show("Please select a tour you want to see.");
             }
         }
     }

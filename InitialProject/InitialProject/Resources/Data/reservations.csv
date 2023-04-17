@@ -1,4 +1,4 @@
-1|rista|Alpina|09-Sep-23 12:00:00 AM|10-Sep-23 12:00:00 AM|1|10|NotGraded
+1|rista|Alpina|09-Sep-23 12:00:00 AM|10-Sep-23 12:00:00 AM|1|10|Canceled
 4|rista|Malina|28-Mar-23 12:00:00 AM|29-Mar-23 12:00:00 AM|4|1|Graded
 8|rista|Jabuka|24-Mar-23 12:00:00 AM|26-Mar-23 12:00:00 AM|4|2|Expire
 9|rista|Jabuka|24-Mar-23 12:00:00 AM|22-Mar-23 12:00:00 AM|5|1|Graded
@@ -17,19 +17,16 @@
 25|rista|Alpina|09-Mar-23 12:00:00 AM|11-Mar-23 12:00:00 AM|2|10|Graded
 26|rista|Alpina|06-Mar-23 12:00:00 AM|09-Mar-23 12:00:00 AM|3|10|Graded
 27|rista|Alpina|01-Mar-23 12:00:00 AM|03-Mar-23 12:00:00 AM|2|10|Graded
-28|rista|Alpina|20-May-23 12:00:00 AM|24-May-23 12:00:00 AM|4|10|NotGraded
-29|rista|Apolon|01-Apr-23 12:00:00 AM|07-Apr-23 12:00:00 AM|6|2|Expire
-30|rista|Jabuka|01-Mar-23 12:00:00 AM|16-Mar-23 12:00:00 AM|5|2|Expire
-31|rista|Hotel Park|01-Apr-23 12:00:00 AM|03-Apr-23 12:00:00 AM|1|20|Graded
-32|rista|Alpina|01-Apr-23 12:00:00 AM|03-Apr-23 12:00:00 AM|1|10|Expire
-33|rista|Alpina|01-Apr-23 12:00:00 AM|04-Apr-23 12:00:00 AM|1|10|Expire
-34|rista|Alpina|01-Apr-23 12:00:00 AM|04-Apr-23 12:00:00 AM|1|10|Expire
-35|rista|Alpina|01-Apr-23 12:00:00 AM|04-Apr-23 12:00:00 AM|1|10|Expire
-36|rista|Alpina|01-Apr-23 12:00:00 AM|04-Apr-23 12:00:00 AM|1|10|Expire
-37|rista|Alpina|20-Apr-23 12:00:00 AM|23-Apr-23 12:00:00 AM|1|10|NotGraded
-38|rista|Alpina|01-Apr-23 12:00:00 AM|03-Apr-23 12:00:00 AM|1|10|Expire
-39|rista|Alpina|05-Apr-23 12:00:00 AM|06-Apr-23 12:00:00 AM|2|10|Expire
-40|rista|Alpina|07-Apr-23 12:00:00 AM|13-Apr-23 12:00:00 AM|2|10|NotGraded
-41|rista|Alpina|17-Apr-23 12:00:00 AM|19-Apr-23 12:00:00 AM|2|10|NotGraded
-42|rista|Alpina|14-Apr-23 12:00:00 AM|15-Apr-23 12:00:00 AM|1|10|NotGraded
-43|rista|Hotel Park|08-Apr-23 12:00:00 AM|10-Apr-23 12:00:00 AM|1|20|Graded
+28|rista|Alpina|12-Apr-23 12:00:00 AM|19-Apr-23 12:00:00 AM|1|10|Canceled
+29|rista|Apolon|09-Apr-23 12:00:00 AM|12-Apr-23 12:00:00 AM|1|2|Expire
+30|rista|Apolon|01-May-23 12:00:00 AM|08-May-23 12:00:00 AM|1|2|NotGraded
+31|rista|Alpina|02-May-23 12:00:00 AM|12-May-23 12:00:00 AM|1|10|Canceled
+32|rista|Hotel Park|06-May-23 12:00:00 AM|12-May-23 12:00:00 AM|1|20|Canceled
+33|rista|Apolon|13-May-23 12:00:00 AM|18-May-23 12:00:00 AM|1|2|Canceled
+34|rista|Apolon|19-May-23 12:00:00 AM|21-May-23 12:00:00 AM|1|2|Canceled
+35|rista|Jabuka|18-Apr-23 12:00:00 AM|24-Apr-23 12:00:00 AM|4|2|NotGraded
+36|rista|Apolon|09-May-23 12:00:00 AM|13-May-23 12:00:00 AM|1|2|Canceled
+37|rista|Apolon|08-May-23 12:00:00 AM|13-May-23 12:00:00 AM|1|2|Canceled
+38|rista|Apolon|07-May-23 12:00:00 AM|13-May-23 12:00:00 AM|1|2|NotGraded
+39|rista|Apolon|13-May-23 12:00:00 AM|16-May-23 12:00:00 AM|1|2|NotGraded
+39|rista|Apolon|13-Apr-23 12:00:00 AM|16-Apr-23 12:00:00 AM|1|2|NotGraded

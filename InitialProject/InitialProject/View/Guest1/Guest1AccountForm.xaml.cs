@@ -36,10 +36,10 @@ namespace TravelAgency.View.Guest1
             createShowReview.Show();
         }
 
-        private void ShowRecommendationForRenovation(object sender, RoutedEventArgs e)
+        private void GradeOwner(object sender, RoutedEventArgs e)
         {
-            RecommendationForRenovation createRecommendation = new RecommendationForRenovation();
-            createRecommendation.Show();
+            GradeOwnerForm gradeOwner = new GradeOwnerForm();
+            gradeOwner.Show();
         }
     }
 }
