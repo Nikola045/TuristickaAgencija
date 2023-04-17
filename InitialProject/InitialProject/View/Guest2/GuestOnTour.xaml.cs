@@ -36,7 +36,7 @@ namespace TravelAgency.View.Guest2
         private void LoadData(object sender, RoutedEventArgs e)
         { 
             List<Tour> tours = new List<Tour>();
-            tours = _repository.ReadFromToursCsv(FilePath);
+            tours = _repository.GetMyTours(FilePath, LogedUser.Id);
             DataPanel.ItemsSource = tours;
         }
 

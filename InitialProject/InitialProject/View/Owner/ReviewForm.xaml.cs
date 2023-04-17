@@ -12,13 +12,10 @@ namespace TravelAgency.View.Owner
     public partial class ReviewForm : Window
     {
         private readonly GradeService gradeService;
-        
-        private User LogedOwner { get; set; }
         public ReviewForm(User user)
         {
             InitializeComponent();
             gradeService = new GradeService();
-            LogedOwner = user;
         }
 
         private void ShowData(object sender, RoutedEventArgs e)

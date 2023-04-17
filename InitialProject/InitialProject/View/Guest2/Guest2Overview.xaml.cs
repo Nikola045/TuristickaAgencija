@@ -20,9 +20,7 @@ namespace TravelAgency.View.Guest2
     /// </summary>
     public partial class Guest2Overview : Window
     {
-        public Guest2Overview()
-        {
-        }
+        public Guest2Overview() {}
         public User LoggedInUser { get; set; }
 
         public Guest2Overview(User user)
@@ -42,6 +40,18 @@ namespace TravelAgency.View.Guest2
         {
             GuestOnTour createGuestOnTour = new GuestOnTour(LoggedInUser);
             createGuestOnTour.Show();
+        }
+
+        private void OpenVouchers(object sender, RoutedEventArgs e)
+        {
+            VouchersView createVouchers = new VouchersView();
+            createVouchers.Show();
+        }
+
+        private void OpenTourReviews(object sender, RoutedEventArgs e)
+        {
+            PastTours createTourReview = new PastTours(LoggedInUser);
+            createTourReview.Show();
         }
     }
 }

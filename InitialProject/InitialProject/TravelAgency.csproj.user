@@ -26,6 +26,15 @@
     <Compile Update="View\Guest2\GuestOnTour.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest2\PastTours.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest2\TourReview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest2\VouchersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guide\GuideLiveTour.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -77,6 +86,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\GuestOnTour.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\PastTours.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\TourReview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\VouchersView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guide\GuideLiveTour.xaml">

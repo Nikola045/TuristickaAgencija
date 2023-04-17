@@ -24,6 +24,7 @@ namespace TravelAgency.View
     {
         private readonly HotelRepository hotelRepository;
         private readonly HotelService hotelService;
+        private readonly OwnerService ownerService;
 
         const string FilePath = "../../../Resources/Data/hotels.csv";
         public Guest1Form()
@@ -33,13 +34,25 @@ namespace TravelAgency.View
             DataContext = this;
             hotelRepository = new HotelRepository();
             hotelService = new HotelService();
+            ownerService = new OwnerService();
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
             hotels = hotelRepository.GetAll();
-            DataPanel.ItemsSource = hotels;
+            List<User> superOwners = ownerService.GetAllSuperOwners();
+            foreach (Hotel hotel in hotels)
+            {
+                foreach(User superOwner in superOwners)
+                {
+                    if (hotel.OwnerUsername == superOwner.Username)
+                        hotel.OwnerUsername = hotel.OwnerUsername + " Super-Owner";
+                }
+                
+            }
+            
+            DataPanel.ItemsSource = hotelService.SortBySuperOwner(hotels);
         }
 
         private void Search(object sender, RoutedEventArgs e)

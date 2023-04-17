@@ -29,7 +29,7 @@ namespace TravelAgency.View.Owner
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)
         {
-            OwnerForm createOwnerForm = new OwnerForm();
+            OwnerForm createOwnerForm = new OwnerForm(LoggedInUser);
             createOwnerForm.Show();
         }
 

@@ -59,6 +59,7 @@ namespace TravelAgency.Repository.HotelRepo
                     hotel.MaxNumberOfGuests = Convert.ToInt32(fields[5]);
                     hotel.MinNumberOfDays = Convert.ToInt32(fields[6]);
                     hotel.NumberOfDaysToCancel = Convert.ToInt32(fields[7]);
+                    hotel.OwnerUsername = fields[8];
                     hotels.Add(hotel);
                 }
             }

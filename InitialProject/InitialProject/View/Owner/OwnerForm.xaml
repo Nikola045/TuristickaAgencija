@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.Forms"
-        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Domain.Model" x:Class="TravelAgency.Forms.OwnerForm"
+        xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Domain.Model" xmlns:win32="clr-namespace:Microsoft.Win32;assembly=PresentationFramework" x:Class="TravelAgency.Forms.OwnerForm"
         mc:Ignorable="d"
         Title="Create new accommodation" Height="392" Width="749" WindowStartupLocation="CenterScreen" FontSize="17">
     <Canvas Margin="0,0,0,-6">
@@ -31,10 +31,10 @@
         <TextBox x:Name="txtCountry" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="93" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Height="28" TextChanged="CountryValidation" FontSize="10"></TextBox>
         <Label Content="Image URL:" Canvas.Left="397" Canvas.Top="243" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top"/>
         <TextBox x:Name="txtImg" Canvas.Left="492" TextWrapping="Wrap" Text="" Canvas.Top="248" Width="132" HorizontalAlignment="Center" VerticalAlignment="Top" Height="26" TextChanged="UrlValidation"/>
-        <Button x:Name="AddImgButton" Content="Add" IsEnabled ="False" Canvas.Left="629" Canvas.Top="250" Click="AddImage" HorizontalAlignment="Center" Height="24" VerticalAlignment="Top"/>
+        <Button x:Name="AddImgButton" Content="Add" IsEnabled ="False" Canvas.Left="648" Canvas.Top="248" Click="AddImage" HorizontalAlignment="Center" Height="26" VerticalAlignment="Top"/>
         <Button Content="Start Demo" Height="39" Width="165" HorizontalAlignment="Center" Canvas.Top="330" VerticalAlignment="Top" Canvas.Left="44"></Button>
         <ListBox Height="170" Width="333" x:Name="ImageList" Canvas.Left="402" Canvas.Top="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button Content="Delete" Canvas.Left="664" Canvas.Top="250" Click="DeleteImage" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Delete" Canvas.Left="683" Canvas.Top="248" Click="DeleteImage" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label x:Name="LabelNameValidator" Content="" Canvas.Left="267" Canvas.Top="10" Height="32" Width="140" HorizontalAlignment="Left" Foreground="Red" VerticalAlignment="Center" FontSize="10"/>
         <Label x:Name="LabelCityValidator" Content="" Canvas.Left="266" Canvas.Top="54" HorizontalAlignment="Left" VerticalAlignment="Center" Width="103" Height="26" Foreground="Red" FontSize="10"/>
         <Label x:Name="LabelCountryValidator" Content="" Canvas.Left="265" Canvas.Top="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Foreground="Red" RenderTransformOrigin="0.5,0.5" Height="28" FontSize="10">
@@ -55,5 +55,6 @@
         <Label x:Name="LabelUrlValidator" Content="" Canvas.Left="492" Canvas.Top="279" HorizontalAlignment="Left" VerticalAlignment="Top" Width="167" Foreground="Red" FontSize="10"/>
         <ComboBox x:Name="Type" Canvas.Left="134" Canvas.Top="127" Width="120" Loaded="DataFill" SelectionChanged="ValidationType" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button Content="Stop Demo" Height="39" Width="165" Canvas.Top="330" Canvas.Left="307" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="+" Canvas.Left="624" Canvas.Top="248" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Width="24" Height="26"/>
     </Canvas>
 </Window>

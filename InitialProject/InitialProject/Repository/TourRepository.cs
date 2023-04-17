@@ -110,6 +110,64 @@ namespace TravelAgency.Repository
             return tours;
         }
 
+        public List<Tour> ReadMyPastToursCsv(string Filename, int id)
+        {
+            List<Tour> allMyTours = GetMyTours(Filename, id);
+            List<Tour> tours = new List<Tour>();
+            for (int i = 0; i < allMyTours.Count; i++)
+            {
+                if (allMyTours[i].TourStatus == "Finished")
+                {
+                    Tour tour = allMyTours[i];
+                    tours.Add(tour);
+                }
+            }
+            return tours;
+        }
+
+        public List<GuestOnTour> ReadFromGuestOnTour(string FileName)
+        {
+            List<GuestOnTour> guestsOnTour = new List<GuestOnTour>();
+
+            using (StreamReader sr = new StreamReader(FileName))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    string[] fields = line.Split('|');
+                    GuestOnTour guest = new GuestOnTour();
+
+
+                    guest.Id = Convert.ToInt32(fields[0]);
+                    guest.GuestId = Convert.ToInt32(fields[1]);
+                    guest.TourId = Convert.ToInt32(fields[2]);
+                    guest.TourName = fields[3];
+                    guest.StartingPoint = fields[4];
+                    guest.NumOfGuests = Convert.ToInt32(fields[5]);
+                    guest.GuestAge = Convert.ToInt32(fields[6]);
+                    int i = 7;
+                    int j = 8;
+                    int k = 9;
+                    List<CheckPoint> checkPoints = new List<CheckPoint>();
+                    while (k <= fields.Count())
+                    {
+                        CheckPoint checkPoint = new CheckPoint();
+                        checkPoint.Id = Convert.ToInt32(fields[i]);
+                        checkPoint.Name = fields[j];
+                        checkPoint.Status = fields[k];
+                        checkPoints.Add(checkPoint);
+                        i = i + 3;
+                        j = j + 3;
+                        k = k + 3;
+                    }
+                    guest.CurentCheckPoints = checkPoints;
+                    guestsOnTour.Add(guest);
+                }
+            }
+            return guestsOnTour;
+        }
+
         public List<Tour> FilterTours(string FileName, string city, string country, string leng, string duration, string num)
         {
             List<Tour> allTours = ReadFromToursCsv(FileName);
@@ -184,18 +242,40 @@ namespace TravelAgency.Repository
             return tours;
         }
 
+        public List<Tour> GetMyTours(string FileName, int id)
+        {
+            List<Tour> allTours = ReadFromToursCsv(FileName);
+            List<GuestOnTour> guestOnTours = ReadFromGuestOnTour(FilePath1);
+            List<Tour> tours = new List<Tour>();
 
-        public bool ReserveTour(int tourId, int  guestId, string fileName, int num)
+            for (int i = 0; i < allTours.Count; i++)
+            {
+                for (int j = 0; j < guestOnTours.Count; j++)
+                {
+                    if (allTours[i].Id == guestOnTours[j].TourId && guestOnTours[j].GuestId == id)
+                    {
+                        Tour tour = allTours[i];
+                        tours.Add(tour);
+                    }
+                }
+            }
+            return tours;
+        }
+
+
+
+        public bool ReserveTour(int tourId, User user, string fileName, int num)
         {
             GuestOnTour guestOnTour = new GuestOnTour();
             Tour tour = FindById(tourId);
             guestOnTour.Id = NextIdG();
-            guestOnTour.GuestId = guestId;
+            guestOnTour.GuestId = user.Id;
             guestOnTour.TourId = tour.Id;
             guestOnTour.TourName = tour.Name;
             guestOnTour.NumOfGuests = num;
-            guestOnTour.CurentCheckPoint = tour.CheckPoints[0];
-            guestOnTour.StatusCP = "Neaktivna";
+            guestOnTour.CurentCheckPoints = tour.CheckPoints;
+            guestOnTour.StartingPoint = "NijePrisutan";
+            guestOnTour.GuestAge = user.Age;
 
             ///////// upisi u guestOnTour.csv
             _guestsOnTours = _serializerG.FromCSV(fileName);

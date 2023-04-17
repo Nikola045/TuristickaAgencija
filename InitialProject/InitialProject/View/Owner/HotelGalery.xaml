@@ -9,7 +9,7 @@
     <Grid>
         <Button Content="Next" HorizontalAlignment="Left" Margin="523,322,0,0" VerticalAlignment="Top" Height="31" Width="92" Click="NextImage"/>
         <Button Content="Preview" HorizontalAlignment="Left" Margin="132,322,0,0" VerticalAlignment="Top" Height="31" Width="87" Click="PreviewImage"/>
-        <Image x:Name ="CurrentImage" HorizontalAlignment="Left" Height="282" Margin="61,18,0,0" VerticalAlignment="Top" Width="623" Source="/Resources/Images/back.png" Stretch="Fill"/>
+        <Image x:Name="Image" HorizontalAlignment="Left" Height="256" Margin="132,35,0,0" VerticalAlignment="Top" Width="475"/>
 
     </Grid>
 </Window>
