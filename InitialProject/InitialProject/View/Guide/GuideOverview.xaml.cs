@@ -44,6 +44,12 @@ namespace TravelAgency.View
             GuideLiveTour createLiveTourForm = new GuideLiveTour();
             createLiveTourForm.Show();
         }
+
+        private void OpenTourStatisticForm(object sender, RoutedEventArgs e)
+        {
+            TourStatistic createTourStatistic = new TourStatistic();
+            createTourStatistic.Show();
+        }
     }
 }
 
