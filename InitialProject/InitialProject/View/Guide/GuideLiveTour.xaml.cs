@@ -87,7 +87,7 @@ namespace TravelAgency.View.Guide
                         if(NumOfPoint == 0)
                         {
                             point.Status = "Active";
-                            checkPointRepository.Update(point);
+                            //checkPointRepository.Update(point);
                         }
                         ListCheckPoints.Items.Add(point);
                         NumOfPoint++;
@@ -108,7 +108,7 @@ namespace TravelAgency.View.Guide
             {
                 selectedCheckPoint = ListCheckPoints.SelectedItem as CheckPoint;
                 selectedCheckPoint.Status = "Active";
-                selectedCheckPoint = checkPointRepository.Update(selectedCheckPoint);
+                //selectedCheckPoint = checkPointRepository.Update(selectedCheckPoint);
                 MessageBox.Show("Done");
             }
             int NumOfActivatePoints = 0;
@@ -152,6 +152,32 @@ namespace TravelAgency.View.Guide
             }
             MessageBox.Show("Tour finished");
             ListCheckPoints.Items.Clear();
+        }
+
+        private void CancelTour(object sender, RoutedEventArgs e)
+        {
+            Tour selectedTour = new Tour();
+            selectedTour = DataPanel.SelectedItem as Tour;
+            CurrentSelectedTour = selectedTour;
+            DateTime currentDate = DateTime.Now;
+
+            if ((selectedTour.StartTime - currentDate).TotalHours < 48)
+            {
+                MessageBox.Show("You cannot cancel this tour");
+            }
+            else
+            {
+                if (CurrentSelectedTour.TourStatus == "Cancelled")
+                {
+                    MessageBox.Show("This tour is already cancelled");
+                }
+                else
+                {
+                    CurrentSelectedTour.TourStatus = "Cancelled";
+                    CurrentSelectedTour = tourRepository.Update(CurrentSelectedTour);
+                    MessageBox.Show("Tour cancelled");
+                }
+            }
         }
 
         /*private void LoadCheckPoints(object sender, RoutedEventArgs e)
