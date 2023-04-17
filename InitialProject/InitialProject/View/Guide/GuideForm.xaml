@@ -30,6 +30,12 @@
         <Label Content="Country" HorizontalAlignment="Left" Margin="46,88,0,0" VerticalAlignment="Top"/>
         <Label Content="Start Date" HorizontalAlignment="Left" Margin="39,201,0,0" VerticalAlignment="Top"/>
         <Label Content="Choose Check Points&#xD;&#xA; " HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="DateList" Margin="424,47,20,208"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="229,204,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <ListBox x:Name="ImageList"  Margin="424,161,20,82"/>
+        <Label Content="Add Image" HorizontalAlignment="Left" Margin="20,256,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ImageTxt" HorizontalAlignment="Left" Margin="97,260,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="229,259,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

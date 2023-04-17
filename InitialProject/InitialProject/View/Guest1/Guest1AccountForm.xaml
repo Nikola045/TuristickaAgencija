@@ -16,10 +16,10 @@
                 </StackPanel>
             </Button>
             <Separator/>
-            <Button Click="ShowRecommendationForRenovation">
-                <StackPanel Orientation="Horizontal" Width="230">
+            <Button Click="GradeOwner">
+                <StackPanel Orientation="Horizontal" Width="110">
                     <Image Source="../Resources/Images/add.png" Width="20" Height="25" RenderTransformOrigin="0.5,0.6"/>
-                    <TextBlock Text="Recommendation for renovation" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                    <TextBlock Text="Grade owner" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
                 </StackPanel>
             </Button>
             <Separator/>
