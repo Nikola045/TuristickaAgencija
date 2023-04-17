@@ -13,6 +13,14 @@
         <Label Content="Select Year" HorizontalAlignment="Left" Margin="229,61,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="DataPanel" Margin="5,103,5,217"/>
         <Button x:Name="SelectButton" Content="Select" HorizontalAlignment="Left" Margin="465,63,0,0" VerticalAlignment="Top" Click="SelectButton_Click"/>
+        <Button x:Name="ShowStatisticButton" Content="Show Statistic" HorizontalAlignment="Center" Margin="0,234,0,0" VerticalAlignment="Top" Width="84" Height="34" RenderTransformOrigin="0.166,0.996" Click="ShowStatisticButton_Click"/>
+        <TextBox x:Name="txt1" HorizontalAlignment="Left" Margin="95,304,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt2" HorizontalAlignment="Left" Margin="95,343,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt3" HorizontalAlignment="Left" Margin="95,383,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt4" HorizontalAlignment="Left" Margin="606,343,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="23,300,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="23,339,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="23,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.127,0.167"/>
 
     </Grid>
 </Window>

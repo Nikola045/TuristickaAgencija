@@ -26,6 +26,8 @@ namespace TravelAgency.View.Guide
         private const string FilePathTour = "../../../Resources/Data/tours.csv";
 
         private const string FilePathGuestOnTour = "../../../Resources/Data/guestOnTour.csv";
+        
+        public Tour selectedTour;
 
 
         public TourStatistic()
@@ -68,6 +70,13 @@ namespace TravelAgency.View.Guide
             tours.Add(tour);
             DataPanel.ItemsSource = tours;
             
+        }
+
+        private void ShowStatisticButton_Click(object sender, RoutedEventArgs e)
+        {
+            selectedTour = (Tour) DataPanel.SelectedItem;
+            int[] Info = new int[4];
+            //Info = tourRepository.ShowStatistic(selectedTour.Id);
         }
     }
 }
