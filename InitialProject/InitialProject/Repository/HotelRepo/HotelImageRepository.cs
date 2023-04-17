@@ -55,19 +55,6 @@ namespace TravelAgency.Repository.HotelRepo
 
         public List<HotelImage> GetAll()
         {
-            List<HotelImage> hotelImages = new List<HotelImage>();
-            using (StreamReader sr = new StreamReader(FilePathForImages))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-                    HotelImage hotelImage = new HotelImage();
-                    string[] fields = line.Split('|');
-                    hotelImage.HotelId = Convert.ToInt32(fields[0]);
-                    hotelImage.Url = fields[1];
-                    hotelImages.Add(hotelImage);
-                }
-            }
             return hotelImages;
         }
     }
