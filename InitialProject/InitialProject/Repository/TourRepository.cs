@@ -401,6 +401,37 @@ namespace TravelAgency.Repository
             return tour;
         }
 
+        public int[] ShowStatistic(int id)
+        {
+            int[] statistic = new int[4];
+
+            List<GuestOnTour> guestOnTour = ReadFromGuestOnTour(FilePath1);
+
+            for(int i  = 0; i <guestOnTour.Count(); i++)
+            {
+                if (guestOnTour[i].TourId == id)
+                {
+                    if (guestOnTour[i].GuestAge<18)
+                    {
+                        statistic[0] += guestOnTour[i].NumOfGuests;
+                    }
+                    else if (guestOnTour[i].GuestAge<50)
+                    {
+                        statistic[1] += guestOnTour[i].NumOfGuests;
+                    }
+                    else
+                    {
+                        statistic[2] += guestOnTour[i].NumOfGuests;
+                    }
+
+                    if (guestOnTour[i].WithVoucher == "Ima")
+                    {
+                        statistic[3] += guestOnTour[i].NumOfGuests;
+                    }
+                }
+            }
+            return statistic;        
+        }
 
     }
 
