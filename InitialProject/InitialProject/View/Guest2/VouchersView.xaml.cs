@@ -24,7 +24,7 @@ namespace TravelAgency.View.Guest2
     {
 
         private readonly VoucherRepository _repository;
-        private const string FilePath = "../../../Resources/Data/tours.csv";
+        private const string FilePath = "../../../Resources/Data/vouchers.csv";
         User LogedUser = new Domain.Model.User();
 
         public VouchersView()

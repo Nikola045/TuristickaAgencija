@@ -27,7 +27,7 @@ namespace TravelAgency.Repository.GradeRepo
             return grade;
         }
         public List<GuestGrade> GetAll()
-        {
+        {    
             return grades;
         }
     }
