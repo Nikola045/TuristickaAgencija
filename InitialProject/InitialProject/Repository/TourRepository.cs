@@ -146,9 +146,10 @@ namespace TravelAgency.Repository
                     guest.StartingPoint = fields[4];
                     guest.NumOfGuests = Convert.ToInt32(fields[5]);
                     guest.GuestAge = Convert.ToInt32(fields[6]);
-                    int i = 7;
-                    int j = 8;
-                    int k = 9;
+                    guest.WithVoucher = fields[7];
+                    int i = 8;
+                    int j = 9;
+                    int k = 10;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
                     while (k <= fields.Count())
                     {
@@ -276,6 +277,7 @@ namespace TravelAgency.Repository
             guestOnTour.CurentCheckPoints = tour.CheckPoints;
             guestOnTour.StartingPoint = "NijePrisutan";
             guestOnTour.GuestAge = user.Age;
+            guestOnTour.WithVoucher = "Nema";
 
             ///////// upisi u guestOnTour.csv
             _guestsOnTours = _serializerG.FromCSV(fileName);
@@ -365,7 +367,39 @@ namespace TravelAgency.Repository
             }
             
         }
+        public Tour FindMostAttendedTour(string filename)
+        {
+            Tour tour = new Tour();
+            List<Tour> allTours = ReadFromToursCsv(filename);
+            int maxNumOfGuest = 0;
 
+            for (int i = 0; i < allTours.Count; i++)
+            {
+                if (allTours[i].CurentNumberOfGuests > maxNumOfGuest)
+                {
+                    maxNumOfGuest = allTours[i].CurentNumberOfGuests;
+                    tour = allTours[i];
+                }
+            }
+            return tour;
+        }
+        public Tour FindMostAttendedTourThisYear(string filename,string year)
+        {
+            Tour tour = new Tour();
+            int year1 = Convert.ToInt32(year);
+            List<Tour> allTours = ReadFromToursCsv(filename);
+            int maxNumOfGuest = 0;
+
+            for (int i = 0; i < allTours.Count; i++)
+            {
+                if (allTours[i].CurentNumberOfGuests > maxNumOfGuest && allTours[i].StartTime.Year == year1)
+                {
+                    maxNumOfGuest = allTours[i].CurentNumberOfGuests;
+                    tour = allTours[i];
+                }
+            }
+            return tour;
+        }
 
 
     }

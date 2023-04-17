@@ -44,6 +44,9 @@
     <Compile Update="View\Guide\GuideOverview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guide\GuideTourStatistic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Owner\HotelGalery.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -104,6 +107,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guide\GuideOverview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guide\GuideTourStatistic.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\HotelGalery.xaml">
