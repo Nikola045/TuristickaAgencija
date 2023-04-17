@@ -16,8 +16,8 @@ namespace TravelAgency.View.Owner
         public User LoggedInUser { get; set; }
         public Hotel SelectedHotel { get; set; }
         private readonly HotelService hotelService;
-        static int ClickAccommodationCount = 1;
-        static int ClickMediaCount = 1;
+            static int ClickAccommodationCount = 1;
+            static int ClickMediaCount = 1;
         public OwnerHome(User user)
         {
             InitializeComponent();
