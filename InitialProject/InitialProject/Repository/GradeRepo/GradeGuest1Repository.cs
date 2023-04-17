@@ -44,7 +44,7 @@ namespace TravelAgency.Repository.GradeRepo
                     grade.ReservationId = Convert.ToInt32(fields[4]);
                     grades.Add(grade);
 
-    }
+                }
             }
             return grades;
         }
