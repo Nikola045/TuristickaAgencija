@@ -195,7 +195,7 @@ namespace TravelAgency.Repository
             guestOnTour.TourName = tour.Name;
             guestOnTour.NumOfGuests = num;
             guestOnTour.CurentCheckPoints = tour.CheckPoints;
-            guestOnTour.StatusCP = "Neaktivna";
+            guestOnTour.StartingPoint = "NijePrisutan";
 
             ///////// upisi u guestOnTour.csv
             _guestsOnTours = _serializerG.FromCSV(fileName);
