@@ -17,32 +17,37 @@ using TravelAgency.Repository;
 namespace TravelAgency.View.Guest2
 {
     /// <summary>
-    /// Interaction logic for GuestOnTour.xaml
+    /// Interaction logic for PastTours.xaml
     /// </summary>
-    public partial class GuestOnTour : Window
+    public partial class PastTours : Window
     {
+        private readonly TourRepository _repository;
+        private const string FilePath = "../../../Resources/Data/tours.csv";
         User LogedUser = new Domain.Model.User();
 
-        const string FilePath = "../../../Resources/Data/tours.csv";
-
-        private readonly TourRepository _repository;
-        public GuestOnTour(User logedUser)
+        public PastTours(User logedUser)
         {
             InitializeComponent();
             LogedUser = logedUser;
             _repository = new TourRepository();
         }
 
+
         private void LoadData(object sender, RoutedEventArgs e)
-        { 
-            List<Tour> tours = new List<Tour>();
-            tours = _repository.GetMyTours(FilePath, LogedUser.Id);
-            DataPanel.ItemsSource = tours;
+        {
+            List<Tour> tour = new List<Tour>();
+            tour = _repository.ReadMyPastToursCsv(FilePath, LogedUser.Id);
+            DataPanel.ItemsSource = tour;
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void MakeReview(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
