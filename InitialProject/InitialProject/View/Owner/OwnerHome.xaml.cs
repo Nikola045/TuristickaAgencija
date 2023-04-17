@@ -3,6 +3,7 @@ using System.Windows;
 using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
 using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Services;
 using User = TravelAgency.Domain.Model.User;
 
 namespace TravelAgency.View.Owner
@@ -14,15 +15,15 @@ namespace TravelAgency.View.Owner
     {
         public User LoggedInUser { get; set; }
         public Hotel SelectedHotel { get; set; }
-        private readonly HotelRepository hotelRepository;
+        private readonly HotelService hotelService;
         static int ClickAccommodationCount = 1;
         static int ClickMediaCount = 1;
         public OwnerHome(User user)
         {
             InitializeComponent();
             DataContext = this;
-            LoggedInUser = user;
-            hotelRepository = new HotelRepository();
+            LoggedInUser = user;    
+            hotelService = new HotelService();
         }
 
         public OwnerHome() { }
@@ -54,7 +55,7 @@ namespace TravelAgency.View.Owner
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelRepository.GetAll();
+            hotels = hotelService.GetHotelByOwner(LoggedInUser.Username);
             DataPanel.ItemsSource = hotels;
         }
 
