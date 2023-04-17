@@ -30,7 +30,6 @@ namespace TravelAgency.View.Guest1
         private readonly GradeService gradeService;
 
 
-        const string FilePath = "../../../Resources/Data/OwnerRating.csv";
         public Guest1ShowReview()
         {
             InitializeComponent();

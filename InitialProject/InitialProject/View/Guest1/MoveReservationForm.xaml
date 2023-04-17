@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="MoveReservationForm" Height="450" Width="800">
     <Grid>
-        <Button Content="Request" HorizontalAlignment="Left" Margin="27,292,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button x:Name="btnRequest" Content="Request" HorizontalAlignment="Left" Margin="27,292,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="450,332,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <DataGrid x:Name="DataPanel"  Margin="10,10,311,171" Loaded="OnLoad"/>
-        <DatePicker x:Name="NewStartDate" HorizontalAlignment="Left" Margin="562,96,0,0" VerticalAlignment="Top" Height="41" Width="180"/>
-        <DatePicker x:Name="NewEndDate" HorizontalAlignment="Left" Margin="562,159,0,0" VerticalAlignment="Top" Height="45" Width="180"/>
+        <DataGrid x:Name="DataPanel"  Margin="10,10,311,171" Loaded="OnLoad" SelectionChanged="DataPanel_SelectionChanged"/>
+        <DatePicker x:Name="NewStartDate" HorizontalAlignment="Left" Margin="562,96,0,0" VerticalAlignment="Top" Height="41" Width="180" SelectedDateChanged="NewStartDate_SelectedDateChanged"/>
+        <DatePicker x:Name="NewEndDate" HorizontalAlignment="Left" Margin="562,159,0,0" VerticalAlignment="Top" Height="45" Width="180" SelectedDateChanged="NewEndDate_SelectedDateChanged"/>
         <Button Content="Cancel Reservation" HorizontalAlignment="Left" Margin="27,327,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
 
     </Grid>
