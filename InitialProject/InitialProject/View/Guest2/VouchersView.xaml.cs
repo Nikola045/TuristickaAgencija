@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cake.Core.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,32 +18,32 @@ using TravelAgency.Repository;
 namespace TravelAgency.View.Guest2
 {
     /// <summary>
-    /// Interaction logic for GuestOnTour.xaml
+    /// Interaction logic for VouchersView.xaml
     /// </summary>
-    public partial class GuestOnTour : Window
+    public partial class VouchersView : Window
     {
+
+        private readonly VoucherRepository _repository;
+        private const string FilePath = "../../../Resources/Data/tours.csv";
         User LogedUser = new Domain.Model.User();
 
-        const string FilePath = "../../../Resources/Data/tours.csv";
-
-        private readonly TourRepository _repository;
-        public GuestOnTour(User logedUser)
+        public VouchersView()
         {
             InitializeComponent();
-            LogedUser = logedUser;
-            _repository = new TourRepository();
+            _repository = new VoucherRepository();
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
-        { 
-            List<Tour> tours = new List<Tour>();
-            tours = _repository.GetMyTours(FilePath, LogedUser.Id);
-            DataPanel.ItemsSource = tours;
+        {
+            List<Voucher> vouchers = new List<Voucher>();
+            vouchers = _repository.ReadFromVouchersCsv(FilePath);
+            DataPanel.ItemsSource = vouchers;
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+    
     }
 }

@@ -40,6 +40,7 @@ namespace TravelAgency.View.Guest2
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public Guest2Form(User logedUser)
         {
             InitializeComponent();
@@ -100,7 +101,7 @@ namespace TravelAgency.View.Guest2
                     else
                     {
 
-                        if (_repository.ReserveTour(selectedTour.Id, LogedUser.Id, FilePath1, numGuests))
+                        if (_repository.ReserveTour(selectedTour.Id, LogedUser, FilePath1, numGuests))
                         {
                             selectedTour.CurentNumberOfGuests = selectedTour.CurentNumberOfGuests + numGuests;
                             _repository.Update(selectedTour);

@@ -23,20 +23,33 @@
 
         <ToolBar Grid.Row="0" Grid.ColumnSpan="4" Margin="4,0,-4,0">
             <Button Click="OpenGuest2Form">
-                <StackPanel Orientation="Horizontal" Width="67">
+                <StackPanel Orientation="Horizontal" Width="53">
 
-                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="50" />
                 </StackPanel>
             </Button>
             <Separator/>
             <Button Click="OpenGuestOnTour"  Width="69">
                 <StackPanel Orientation="Horizontal">
 
-                    <TextBlock Text="My tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="62" />
+                    <TextBlock Text="My tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="59" />
                 </StackPanel>
             </Button>
             <Separator/>
-        </ToolBar>
+            <Button Click="OpenVouchers">
+                <StackPanel Orientation="Horizontal" Width="67">
 
+                    <TextBlock Text="Vouchers" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="60" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourReviews" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Past Tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+      
     </Grid>
 </Window>

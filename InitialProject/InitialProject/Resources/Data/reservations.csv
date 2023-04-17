@@ -1,35 +1,35 @@
-1|rista|Alpina|09-Sep-23 12:00:00 AM|10-Sep-23 12:00:00 AM|1|10|NotGraded
-4|rista|Malina|28-Mar-23 12:00:00 AM|29-Mar-23 12:00:00 AM|4|1|Graded
-8|rista|Jabuka|24-Mar-23 12:00:00 AM|26-Mar-23 12:00:00 AM|4|2|Expire
-9|rista|Jabuka|24-Mar-23 12:00:00 AM|22-Mar-23 12:00:00 AM|5|1|Graded
-13|rista|Hotel Park|10-Mar-23 12:00:00 AM|23-Mar-23 12:00:00 AM|1|20|Graded
-14|rista|Apolon|05-Mar-23 12:00:00 AM|09-Mar-23 12:00:00 AM|1|2|Graded
-15|rista|Apolon|12-Mar-23 12:00:00 AM|14-Mar-23 12:00:00 AM|1|2|Graded
-16|rista|Apolon|05-Mar-23 12:00:00 AM|08-Mar-23 12:00:00 AM|1|2|Graded
-17|rista|Apolon|02-Mar-23 12:00:00 AM|04-Mar-23 12:00:00 AM|1|2|Graded
-18|rista|Hotel Park|11-Mar-23 12:00:00 AM|15-Mar-23 12:00:00 AM|1|20|Graded
-19|rista|Apolon|05-Mar-23 12:00:00 AM|26-Mar-23 12:00:00 AM|1|2|Expire
-20|rista|Apolon|18-Mar-23 12:00:00 AM|24-Mar-23 12:00:00 AM|1|2|Expire
-21|rista|Malina|04-Mar-23 12:00:00 AM|03-Mar-23 12:00:00 AM|3|2|Graded
-22|rista|Apolon|11-Mar-23 12:00:00 AM|14-Mar-23 12:00:00 AM|1|2|Graded
-23|rista|Hotel Park|01-Mar-23 12:00:00 AM|02-Mar-23 12:00:00 AM|1|1|Graded
-24|rista|Malina|09-Mar-23 12:00:00 AM|12-Mar-23 12:00:00 AM|3|2|Graded
-25|rista|Alpina|09-Mar-23 12:00:00 AM|11-Mar-23 12:00:00 AM|2|10|Graded
-26|rista|Alpina|06-Mar-23 12:00:00 AM|09-Mar-23 12:00:00 AM|3|10|Graded
-27|rista|Alpina|01-Mar-23 12:00:00 AM|03-Mar-23 12:00:00 AM|2|10|Graded
-28|rista|Alpina|20-May-23 12:00:00 AM|24-May-23 12:00:00 AM|4|10|NotGraded
-29|rista|Apolon|01-Apr-23 12:00:00 AM|07-Apr-23 12:00:00 AM|6|2|Expire
-30|rista|Jabuka|01-Mar-23 12:00:00 AM|16-Mar-23 12:00:00 AM|5|2|Expire
-31|rista|Hotel Park|01-Apr-23 12:00:00 AM|03-Apr-23 12:00:00 AM|1|20|Graded
-32|rista|Alpina|01-Apr-23 12:00:00 AM|03-Apr-23 12:00:00 AM|1|10|Expire
-33|rista|Alpina|01-Apr-23 12:00:00 AM|04-Apr-23 12:00:00 AM|1|10|Expire
-34|rista|Alpina|01-Apr-23 12:00:00 AM|04-Apr-23 12:00:00 AM|1|10|Expire
-35|rista|Alpina|01-Apr-23 12:00:00 AM|04-Apr-23 12:00:00 AM|1|10|Expire
-36|rista|Alpina|01-Apr-23 12:00:00 AM|04-Apr-23 12:00:00 AM|1|10|Expire
-37|rista|Alpina|20-Apr-23 12:00:00 AM|23-Apr-23 12:00:00 AM|1|10|NotGraded
-38|rista|Alpina|01-Apr-23 12:00:00 AM|03-Apr-23 12:00:00 AM|1|10|Expire
-39|rista|Alpina|05-Apr-23 12:00:00 AM|06-Apr-23 12:00:00 AM|2|10|Expire
-40|rista|Alpina|07-Apr-23 12:00:00 AM|13-Apr-23 12:00:00 AM|2|10|NotGraded
-41|rista|Alpina|17-Apr-23 12:00:00 AM|19-Apr-23 12:00:00 AM|2|10|NotGraded
-42|rista|Alpina|14-Apr-23 12:00:00 AM|15-Apr-23 12:00:00 AM|1|10|NotGraded
-43|rista|Hotel Park|08-Apr-23 12:00:00 AM|10-Apr-23 12:00:00 AM|1|20|Graded
+1|rista|Alpina|9/9/2023 12:00:00 AM|9/10/2023 12:00:00 AM|1|10|NotGraded
+4|rista|Malina|3/28/2023 12:00:00 AM|3/29/2023 12:00:00 AM|4|1|Graded
+8|rista|Jabuka|3/24/2023 12:00:00 AM|3/26/2023 12:00:00 AM|4|2|Expire
+9|rista|Jabuka|3/24/2023 12:00:00 AM|3/22/2023 12:00:00 AM|5|1|Graded
+13|rista|Hotel Park|3/10/2023 12:00:00 AM|3/23/2023 12:00:00 AM|1|20|Graded
+14|rista|Apolon|3/5/2023 12:00:00 AM|3/9/2023 12:00:00 AM|1|2|Graded
+15|rista|Apolon|3/12/2023 12:00:00 AM|3/14/2023 12:00:00 AM|1|2|Graded
+16|rista|Apolon|3/5/2023 12:00:00 AM|3/8/2023 12:00:00 AM|1|2|Graded
+17|rista|Apolon|3/2/2023 12:00:00 AM|3/4/2023 12:00:00 AM|1|2|Graded
+18|rista|Hotel Park|3/11/2023 12:00:00 AM|3/15/2023 12:00:00 AM|1|20|Graded
+19|rista|Apolon|3/5/2023 12:00:00 AM|3/26/2023 12:00:00 AM|1|2|Expire
+20|rista|Apolon|3/18/2023 12:00:00 AM|3/24/2023 12:00:00 AM|1|2|Expire
+21|rista|Malina|3/4/2023 12:00:00 AM|3/3/2023 12:00:00 AM|3|2|Graded
+22|rista|Apolon|3/11/2023 12:00:00 AM|3/14/2023 12:00:00 AM|1|2|Graded
+23|rista|Hotel Park|3/1/2023 12:00:00 AM|3/2/2023 12:00:00 AM|1|1|Graded
+24|rista|Malina|3/9/2023 12:00:00 AM|3/12/2023 12:00:00 AM|3|2|Graded
+25|rista|Alpina|3/9/2023 12:00:00 AM|3/11/2023 12:00:00 AM|2|10|Graded
+26|rista|Alpina|3/6/2023 12:00:00 AM|3/9/2023 12:00:00 AM|3|10|Graded
+27|rista|Alpina|3/1/2023 12:00:00 AM|3/3/2023 12:00:00 AM|2|10|Graded
+28|rista|Alpina|5/20/2023 12:00:00 AM|5/24/2023 12:00:00 AM|4|10|NotGraded
+29|rista|Apolon|4/1/2023 12:00:00 AM|4/7/2023 12:00:00 AM|6|2|Expire
+30|rista|Jabuka|3/1/2023 12:00:00 AM|3/16/2023 12:00:00 AM|5|2|Expire
+31|rista|Hotel Park|4/1/2023 12:00:00 AM|4/3/2023 12:00:00 AM|1|20|Graded
+32|rista|Alpina|4/1/2023 12:00:00 AM|4/3/2023 12:00:00 AM|1|10|Expire
+33|rista|Alpina|4/1/2023 12:00:00 AM|4/4/2023 12:00:00 AM|1|10|Expire
+34|rista|Alpina|4/1/2023 12:00:00 AM|4/4/2023 12:00:00 AM|1|10|Expire
+35|rista|Alpina|4/1/2023 12:00:00 AM|4/4/2023 12:00:00 AM|1|10|Expire
+36|rista|Alpina|4/1/2023 12:00:00 AM|4/4/2023 12:00:00 AM|1|10|Expire
+37|rista|Alpina|4/20/2023 12:00:00 AM|4/23/2023 12:00:00 AM|1|10|NotGraded
+38|rista|Alpina|4/1/2023 12:00:00 AM|4/3/2023 12:00:00 AM|1|10|Expire
+39|rista|Alpina|4/5/2023 12:00:00 AM|4/6/2023 12:00:00 AM|2|10|Expire
+40|rista|Alpina|4/7/2023 12:00:00 AM|4/13/2023 12:00:00 AM|2|10|NotGraded
+41|rista|Alpina|4/17/2023 12:00:00 AM|4/19/2023 12:00:00 AM|2|10|NotGraded
+42|rista|Alpina|4/14/2023 12:00:00 AM|4/15/2023 12:00:00 AM|1|10|NotGraded
+43|rista|Hotel Park|4/8/2023 12:00:00 AM|4/10/2023 12:00:00 AM|1|20|Graded
