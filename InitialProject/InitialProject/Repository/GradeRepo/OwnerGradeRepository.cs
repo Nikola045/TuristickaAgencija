@@ -2,40 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using TravelAgency.Domain.Model;
+using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository.GradeRepo
 {
     internal class OwnerGradeRepository
     {
         private const string FilePath = "../../../Resources/Data/OwnerRating.csv";
+        private Serializer<OwnerGrade> _serializer;
         private List<OwnerGrade> ownerGrades;
 
         public OwnerGradeRepository()
         {
-            ownerGrades = GetAll();
+            _serializer = new Serializer<OwnerGrade>();
+            ownerGrades = _serializer.FromCSV(FilePath);
+
         }
 
         public List<OwnerGrade> GetAll()
         {
-            List<OwnerGrade> grades = new List<OwnerGrade>();
-            using (StreamReader sr = new StreamReader(FilePath))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
 
-                    string[] fields = line.Split('|');
-                    OwnerGrade grade = new OwnerGrade();
-                    grade.Guest1Username = fields[0];
-                    grade.OwnerUsername = fields[1];
-                    grade.ReservationId = Convert.ToInt32(fields[2]);
-                    grade.HotelRating = Convert.ToInt32(fields[3]);
-                    grade.OwnerRating = Convert.ToInt32(fields[4]);
-                    grade.Comment = fields[5];
-                    grades.Add(grade);
-                }
-            }
-            return grades;
+            return ownerGrades;
         }
 
         public OwnerGrade GetByReservationId(int id)
