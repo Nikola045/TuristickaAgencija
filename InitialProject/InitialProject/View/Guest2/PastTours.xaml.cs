@@ -38,6 +38,7 @@ namespace TravelAgency.View.Guest2
         {
             List<Tour> tour = new List<Tour>();
             tour = _repository.ReadMyPastToursCsv(FilePath, LogedUser.Id);
+
             DataPanel.ItemsSource = tour;
         }
 
