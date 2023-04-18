@@ -36,6 +36,14 @@ namespace TravelAgency.Repository.GradeRepo
             }
             return null;
         }
+
+        public OwnerGrade Save(OwnerGrade grade)
+        {
+            ownerGrades = _serializer.FromCSV(FilePath);
+            ownerGrades.Add(grade);
+            _serializer.ToCSV(FilePath, ownerGrades);
+            return grade;
+        }
     }
 
 }
