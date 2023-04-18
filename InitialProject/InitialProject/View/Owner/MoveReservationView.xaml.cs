@@ -44,30 +44,30 @@ namespace TravelAgency.View.Owner
 
         private void AcceptMoveReservation(object sender, RoutedEventArgs e)
         {
-            if (this.SelectedReservation != null) 
+            if (this.SelectedReservation != null)
             {
                 SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
                 reservationService.MoveReservation(SelectedReservation.ReservationId, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
                 DataPanel.ItemsSource = moveReservationRepository.GetAll();
             }
-            else { }       
+            else { }
         }
 
         private void DeclineMoveReservation(object sender, RoutedEventArgs e)
         {
-            if(SelectedReservation != null) 
+            if (SelectedReservation != null)
             {
                 SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
                 moveReservationRepository.Delete(SelectedReservation);
                 DataPanel.ItemsSource = moveReservationRepository.GetAll();
             }
-            else { }   
+            else { }
         }
 
-        private void ReservationInfo(object sender, SelectionChangedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-            ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.ReservationId, SelectedReservation.HotelName,SelectedReservation.NewStartDate,SelectedReservation.NewEndDate);
+            ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.ReservationId, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
         }
-    }
+    }       
 }

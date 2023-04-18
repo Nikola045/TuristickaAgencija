@@ -152,26 +152,26 @@ namespace TravelAgency.Services
 
         public string TextForReservationInfo(int reservationId, string hotelName, DateTime newStartDate, DateTime newEndDate)
         {
-            string InfoText;
-            string Available;
-            List<Reservation> reservations = reservationRepository.GetAll();
-            List<Reservation> reservationData = new List<Reservation>();
-            foreach(Reservation reservation in reservations)
-            {
-                if(reservation.Id != reservationId)
-                    reservationData.Add(reservation);
+                string InfoText;
+                string Available;
+                List<Reservation> reservations = reservationRepository.GetAll();
+                List<Reservation> reservationData = new List<Reservation>();
+                foreach (Reservation reservation in reservations)
+                {
+                    if (reservation.Id != reservationId)
+                        reservationData.Add(reservation);
 
-            }
-            if(IsAvailable(reservationData, hotelName, newStartDate, newEndDate))
-            {
-                Available = "is available";
-            }
-            else
-            {
-                Available = "not available";
-            }
-            InfoText = hotelName + " " + Available + " for requested period";
-            return InfoText;
+                }
+                if (IsAvailable(reservationData, hotelName, newStartDate, newEndDate))
+                {
+                    Available = "is available";
+                }
+                else
+                {
+                    Available = "not available";
+                }
+                InfoText = hotelName + " " + Available + " for requested period";
+                return InfoText;
         }
 
         public List<Reservation> FindReservationByGuestUsername(string username)
