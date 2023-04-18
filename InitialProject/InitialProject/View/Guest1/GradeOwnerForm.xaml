@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GradeOwnerForm" Height="597" Width="547">
     <Grid>
-        <StackPanel Orientation ="Horizontal" Margin="36,158,347,397">
+        <StackPanel Orientation ="Horizontal" Margin="36,146,347,409">
             <RadioButton x:Name="rbHotelOption1" Content="1" />
             <RadioButton x:Name="rbHotelOption2" Content="2" Margin="5,0,0,0" />
             <RadioButton x:Name="rbHotelOption3" Content="3" Margin="5,0,0,0" />
@@ -32,7 +32,7 @@
         <Button x:Name="btnDeleteImage" Content="Delete" HorizontalAlignment="Left" Margin="445,358,0,0" VerticalAlignment="Top" Click="btnDeleteImage_Click"/>
         <ListBox x:Name="ListViewImg" Margin="22,384,169,86"/>
         <Button Content="Grade" HorizontalAlignment="Left" Margin="412,420,0,0" VerticalAlignment="Top" Click="Grade"/>
-        <Label Content="Cleanliness:" HorizontalAlignment="Left" Margin="33,132,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cleanliness:" HorizontalAlignment="Left" Margin="33,120,0,0" VerticalAlignment="Top"/>
         <Label Content="Owner politeness:" HorizontalAlignment="Left" Margin="34,171,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
