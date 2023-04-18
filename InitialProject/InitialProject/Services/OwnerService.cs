@@ -41,9 +41,9 @@ namespace TravelAgency.Services
 
         public string SuperOwner(string username)
         {
-            if (CountGradesFromOwnerRating(username) >= 50)
+            if (CountGradesFromOwnerRating(username) >= 1)
             {
-                if (GetAverageOwnerRating(username) < 9.5)
+                if (GetAverageOwnerRating(username) < 1)
                 {
                     return "Owner";
                 }
