@@ -19,8 +19,8 @@ namespace TravelAgency.Repository
 
         public GuideReviewRepository()
         {
-            //_serializer = new Serializer<TourReview>();
-            //_tourreviews = _serializer.FromCSV(FilePath);
+            _serializer = new Serializer<TourReview1>();
+            _tourreviews = _serializer.FromCSV(FilePath);
         }
 
         public TourReview1 Save(TourReview1 review)

@@ -21,14 +21,17 @@ namespace TravelAgency.View.Guest2
     /// </summary>
     public partial class TourReview : Window
     {
-        private readonly TourRepository _repository = new TourRepository();
+        private readonly GuideReviewRepository _repository = new GuideReviewRepository();
+
         User LogedUser = new Domain.Model.User();
+        public Tour selectedTour;
         public TourReview(User logedUser, Tour tour)
         {
             InitializeComponent();
             LogedUser = logedUser;
             DataContext = this;
-            _repository = new TourRepository();
+            selectedTour = tour;
+            _repository = new GuideReviewRepository();
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -66,7 +69,14 @@ namespace TravelAgency.View.Guest2
         private void MakeReview(object sender, RoutedEventArgs e)
         {
             TourReview1 tourReview = new TourReview1();
-            
+            tourReview.Id = _repository.NextId();
+            tourReview.TourId = selectedTour.Id;
+            tourReview.GuidesKnowlege = Convert.ToInt32(CB1.SelectedItem);
+            tourReview.GuidesLenguage = Convert.ToInt32(CB2.SelectedItem);
+            tourReview.Overall = Convert.ToInt32(CB3.SelectedItem);
+            tourReview.Comment = txtComment.Text.ToString();
+            _repository.Save(tourReview);
+            MessageBox.Show("You have succesfully review this tour.");
         }
     }
 }
