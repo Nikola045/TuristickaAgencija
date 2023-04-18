@@ -12,18 +12,20 @@ namespace TravelAgency.Domain.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public int GuestId { get; set; }
 
         public Voucher() { }
-        public Voucher(int id, string name, DateTime expirationDate)
+        public Voucher(int id, string name, DateTime expirationDate, int guestId)
         {
             Id = id;
             Name = name;
             ExpirationDate = expirationDate;
+            GuestId = guestId;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, ExpirationDate.ToString() };
+            string[] csvValues = { Id.ToString(), Name, ExpirationDate.ToString() , GuestId.ToString()};
             return csvValues;
         }
 
@@ -32,6 +34,7 @@ namespace TravelAgency.Domain.Model
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
             ExpirationDate = Convert.ToDateTime(values[2]);
+            GuestId = Convert.ToInt32(values[3]);
         }
 
 

@@ -80,6 +80,7 @@ namespace TravelAgency.View.Guest1
             string line = selectedItem.ToString();
             string[] fields = line.Split(' ');
             id = Convert.ToInt32(fields[0]);
+            string hotelName = fields[1];
 
             int hotelRating = 0;
             if (rbHotelOption1.IsChecked == true)
@@ -134,7 +135,7 @@ namespace TravelAgency.View.Guest1
                 }
             }
 
-            Hotel selectedOwnerUsername = hotelService.GetHotelByName(cbHotelName.Text);
+            Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
 
             OwnerGrade newGrade = new OwnerGrade(
                 LogedUser.Username,
@@ -172,7 +173,7 @@ namespace TravelAgency.View.Guest1
                 {
                     if (!hotelNames.Contains(reservation.HotelName))
                     {
-                        hotelNames.Add(reservation.HotelName);
+                        hotelNames.Add(reservation.Id.ToString() + " " + reservation.HotelName);
                     }
                 }
             }

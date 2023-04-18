@@ -14,8 +14,12 @@ namespace TravelAgency.Repository
     {
 
         private const string FilePath = "../../../Resources/Data/vouchers.csv";
+        private const string FilePathGuest = "../../../Resources/Data/guestOnTour.csv";
+
 
         private readonly Serializer<Voucher> _serializer;
+
+        private readonly TourRepository _tourRepository;    
 
         private List<Voucher> _vouchers;
 
@@ -42,6 +46,23 @@ namespace TravelAgency.Repository
                 return 1;
             }
             return _vouchers.Max(t => t.Id) + 1;
+        }
+
+        public void CreateVouchersForCancelling(Tour tour, int guestId)
+        {
+            List<GuestOnTour> guestOnTours = _tourRepository.ReadFromGuestOnTour(FilePathGuest);
+            for(int i = 0; i< guestOnTours.Count; i++)
+            {
+                if (guestOnTours[i].TourId == tour.Id) 
+                { 
+                    Voucher voucher = new Voucher();
+                    voucher.Id = NextId();
+                    voucher.ExpirationDate = DateTime.Now;
+                    voucher.Name = "Voucher for canceling";
+                    voucher.GuestId = guestId;
+                    Save(voucher);
+                }
+            }
         }
 
         public List<Voucher> ReadFromVouchersCsv(string FileName)

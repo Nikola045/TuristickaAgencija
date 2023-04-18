@@ -286,7 +286,7 @@ namespace TravelAgency.Repository
 
 
 
-        public bool ReserveTour(int tourId, User user, string fileName, int num)
+        public bool ReserveTour(int tourId, User user, string fileName, int num, bool hasVoucher)
         {
             GuestOnTour guestOnTour = new GuestOnTour();
             Tour tour = FindById(tourId);
@@ -298,7 +298,14 @@ namespace TravelAgency.Repository
             guestOnTour.CurentCheckPoints = tour.CheckPoints;
             guestOnTour.StartingPoint = "NijePrisutan";
             guestOnTour.GuestAge = user.Age;
-            guestOnTour.WithVoucher = "Nema";
+            if (hasVoucher)
+            {
+                guestOnTour.WithVoucher = "Ima";
+            }
+            else
+            {
+                guestOnTour.WithVoucher = "Nema";
+            }
 
             ///////// upisi u guestOnTour.csv
             _guestsOnTours = _serializerG.FromCSV(fileName);
