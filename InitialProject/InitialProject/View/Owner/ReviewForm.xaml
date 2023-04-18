@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="RevievForm" Height="768" Width="1024" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
     <Grid>
-        <DataGrid x:Name="ReviewData" Margin="43,55,43,144" Loaded="ShowData"/>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,647,0,0" VerticalAlignment="Top" Height="54" Width="228" Click="Close"/>
+        <DataGrid x:Name="ReviewData" Margin="43,100,43,64" Loaded="ShowData"/>
+        <Button Content="back" HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" Height="64" Width="81" Click="Close"/>
 
     </Grid>
 </Window>

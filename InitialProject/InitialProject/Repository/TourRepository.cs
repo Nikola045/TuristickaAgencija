@@ -114,14 +114,21 @@ namespace TravelAgency.Repository
         {
             List<Tour> allMyTours = GetMyTours(Filename, id);
             List<Tour> tours = new List<Tour>();
-            for (int i = 0; i < allMyTours.Count; i++)
+            List<GuestOnTour> guestOnTours = ReadFromGuestOnTour(FilePath1);
+            for (int j = 0; j < guestOnTours.Count; j++)
             {
-                if (allMyTours[i].TourStatus == "Finished")
+                for (int i = 0; i < allMyTours.Count; i++)
                 {
-                    Tour tour = allMyTours[i];
-                    tours.Add(tour);
+                    if (allMyTours[i].TourStatus == "Finished" && guestOnTours[j].GuestId == id && guestOnTours[j].TourId == allMyTours[i].Id)
+                    {
+                        Tour tour = allMyTours[i];
+                        tours.Add(tour);
+                    }
                 }
             }
+           
+         
+
             return tours;
         }
 
@@ -146,9 +153,10 @@ namespace TravelAgency.Repository
                     guest.StartingPoint = fields[4];
                     guest.NumOfGuests = Convert.ToInt32(fields[5]);
                     guest.GuestAge = Convert.ToInt32(fields[6]);
-                    int i = 7;
-                    int j = 8;
-                    int k = 9;
+                    guest.WithVoucher = fields[7];
+                    int i = 8;
+                    int j = 9;
+                    int k = 10;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
                     while (k <= fields.Count())
                     {
@@ -223,6 +231,20 @@ namespace TravelAgency.Repository
             }
             return tour;
         }
+        public GuestOnTour FindGuestByTourIdAndGuestId(int idT, int idG)
+        {
+            GuestOnTour guest = new GuestOnTour();
+            List<GuestOnTour> allguests = ReadFromGuestOnTour(FilePath1);
+
+            for (int i = 0; i < allguests.Count; i++)
+            {
+                if (allguests[i].TourId == idT && allguests[i].GuestId == idG)
+                {
+                    guest = allguests[i];
+                }
+            }
+            return guest;
+        }
 
 
 
@@ -276,6 +298,7 @@ namespace TravelAgency.Repository
             guestOnTour.CurentCheckPoints = tour.CheckPoints;
             guestOnTour.StartingPoint = "NijePrisutan";
             guestOnTour.GuestAge = user.Age;
+            guestOnTour.WithVoucher = "Nema";
 
             ///////// upisi u guestOnTour.csv
             _guestsOnTours = _serializerG.FromCSV(fileName);
@@ -296,6 +319,17 @@ namespace TravelAgency.Repository
             _tours.Insert(index, tour); 
             _serializer.ToCSV(FilePath, _tours);
             return tour;
+        }
+
+        public GuestOnTour UpdateGuestOnTour(GuestOnTour guestOnTour)
+        {
+            _guestsOnTours = _serializerG.FromCSV(FilePath1);
+            GuestOnTour current = _guestsOnTours.Find(c => c.Id == guestOnTour.Id);
+            int index = _guestsOnTours.IndexOf(current);
+            _guestsOnTours.Remove(current);
+            _guestsOnTours.Insert(index, guestOnTour);
+            _serializerG.ToCSV(FilePath1, _guestsOnTours);
+            return guestOnTour;
         }
 
         public List<CheckPoint> FindAllCheckPoints()
@@ -365,8 +399,71 @@ namespace TravelAgency.Repository
             }
             
         }
+        public Tour FindMostAttendedTour(string filename)
+        {
+            Tour tour = new Tour();
+            List<Tour> allTours = ReadFromToursCsv(filename);
+            int maxNumOfGuest = 0;
 
+            for (int i = 0; i < allTours.Count; i++)
+            {
+                if (allTours[i].CurentNumberOfGuests > maxNumOfGuest)
+                {
+                    maxNumOfGuest = allTours[i].CurentNumberOfGuests;
+                    tour = allTours[i];
+                }
+            }
+            return tour;
+        }
+        public Tour FindMostAttendedTourThisYear(string filename,string year)
+        {
+            Tour tour = new Tour();
+            int year1 = Convert.ToInt32(year);
+            List<Tour> allTours = ReadFromToursCsv(filename); 
+            int maxNumOfGuest = 0;
 
+            for (int i = 0; i < allTours.Count; i++)
+            {
+                if (allTours[i].CurentNumberOfGuests > maxNumOfGuest && allTours[i].StartTime.Year == year1)
+                {
+                    maxNumOfGuest = allTours[i].CurentNumberOfGuests;
+                    tour = allTours[i];
+                }
+            }
+            return tour;
+        }
+
+        public int[] ShowStatistic(int id)
+        {
+            int[] statistic = new int[4];
+
+            List<GuestOnTour> guestOnTour = ReadFromGuestOnTour(FilePath1);
+
+            for(int i  = 0; i <guestOnTour.Count(); i++)
+            {
+                if (guestOnTour[i].TourId == id)
+                {
+                    if (guestOnTour[i].GuestAge<18)
+                    {
+                        statistic[0] += guestOnTour[i].NumOfGuests;
+                    }
+                    else if (guestOnTour[i].GuestAge<50)
+                    {
+                        statistic[1] += guestOnTour[i].NumOfGuests;
+                    }
+                    else
+                    {
+                        statistic[2] += guestOnTour[i].NumOfGuests;
+                    }
+
+                    if (guestOnTour[i].WithVoucher == "Ima")
+                    {
+                        statistic[3] += guestOnTour[i].NumOfGuests;
+                    }
+                }
+            }
+            return statistic;        
+        }
 
     }
 

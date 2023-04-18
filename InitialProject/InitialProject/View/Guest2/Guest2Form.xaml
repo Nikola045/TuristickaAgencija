@@ -33,9 +33,7 @@
         <Label Content="Lenguage" HorizontalAlignment="Left" Margin="80,158,0,0" VerticalAlignment="Top"/>
         <Label Content="Free number of places" HorizontalAlignment="Left" Margin="14,203,0,0" VerticalAlignment="Top"/>
         <Label Content="Search all off our tours." HorizontalAlignment="Left" Margin="54,79,0,0" VerticalAlignment="Top" Width="196" Height="28"/>
-        <Label Content="How many people are going on selected tour?" HorizontalAlignment="Left" Margin="34,338,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtNumOfGuests" HorizontalAlignment="Left" Margin="92,379,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Add people" HorizontalAlignment="Left" Margin="315,374,0,0" VerticalAlignment="Top" Click="AddPeopleOnSelectedTour" Width="85" Height="27"/>
+        <Button Content="Show selected tour" HorizontalAlignment="Left" Margin="580,345,0,0" VerticalAlignment="Top" Click="ShowSelectedTour" Width="142" Height="27"/>
         <Button Content="Exit" HorizontalAlignment="Left" Margin="1083,371,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
 
     </Grid>
