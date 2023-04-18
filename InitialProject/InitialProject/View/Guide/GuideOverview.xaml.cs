@@ -41,7 +41,7 @@ namespace TravelAgency.View
 
         private void OpenLiveTourForm(object sender, RoutedEventArgs e)
         {
-            GuideLiveTour createLiveTourForm = new GuideLiveTour();
+            GuideLiveTour createLiveTourForm = new GuideLiveTour(LoggedInUser);
             createLiveTourForm.Show();
         }
 

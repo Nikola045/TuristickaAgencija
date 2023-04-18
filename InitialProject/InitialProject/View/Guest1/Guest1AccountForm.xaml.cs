@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Graph.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelAgency.Domain.Model;
+using User = TravelAgency.Domain.Model.User;
 
 namespace TravelAgency.View.Guest1
 {
@@ -19,14 +22,16 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class Guest1AccountForm : Window
     {
-        public Guest1AccountForm()
+        private User LogedUser { get; set; }
+        public Guest1AccountForm(User user)
         {
+            LogedUser = user;
             InitializeComponent();
         }
 
         private void OpenAccount(object sender, RoutedEventArgs e)
         {
-            Guest1AccountForm createAccountForm = new Guest1AccountForm();
+            Guest1AccountForm createAccountForm = new Guest1AccountForm(LogedUser);
             createAccountForm.Show();
         }
 
@@ -38,7 +43,7 @@ namespace TravelAgency.View.Guest1
 
         private void GradeOwner(object sender, RoutedEventArgs e)
         {
-            GradeOwnerForm gradeOwner = new GradeOwnerForm();
+            GradeOwnerForm gradeOwner = new GradeOwnerForm(LogedUser);
             gradeOwner.Show();
         }
     }
