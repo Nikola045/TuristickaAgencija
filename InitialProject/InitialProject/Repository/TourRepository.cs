@@ -114,14 +114,21 @@ namespace TravelAgency.Repository
         {
             List<Tour> allMyTours = GetMyTours(Filename, id);
             List<Tour> tours = new List<Tour>();
-            for (int i = 0; i < allMyTours.Count; i++)
+            List<GuestOnTour> guestOnTours = ReadFromGuestOnTour(FilePath1);
+            for (int j = 0; j < guestOnTours.Count; j++)
             {
-                if (allMyTours[i].TourStatus == "Finished")
+                for (int i = 0; i < allMyTours.Count; i++)
                 {
-                    Tour tour = allMyTours[i];
-                    tours.Add(tour);
+                    if (allMyTours[i].TourStatus == "Finished" && guestOnTours[j].GuestId == id && guestOnTours[j].TourId == allMyTours[i].Id)
+                    {
+                        Tour tour = allMyTours[i];
+                        tours.Add(tour);
+                    }
                 }
             }
+           
+         
+
             return tours;
         }
 
@@ -224,6 +231,20 @@ namespace TravelAgency.Repository
             }
             return tour;
         }
+        public GuestOnTour FindGuestByTourIdAndGuestId(int idT, int idG)
+        {
+            GuestOnTour guest = new GuestOnTour();
+            List<GuestOnTour> allguests = ReadFromGuestOnTour(FilePath1);
+
+            for (int i = 0; i < allguests.Count; i++)
+            {
+                if (allguests[i].TourId == idT && allguests[i].GuestId == idG)
+                {
+                    guest = allguests[i];
+                }
+            }
+            return guest;
+        }
 
 
 
@@ -298,6 +319,17 @@ namespace TravelAgency.Repository
             _tours.Insert(index, tour); 
             _serializer.ToCSV(FilePath, _tours);
             return tour;
+        }
+
+        public GuestOnTour UpdateGuestOnTour(GuestOnTour guestOnTour)
+        {
+            _guestsOnTours = _serializerG.FromCSV(FilePath1);
+            GuestOnTour current = _guestsOnTours.Find(c => c.Id == guestOnTour.Id);
+            int index = _guestsOnTours.IndexOf(current);
+            _guestsOnTours.Remove(current);
+            _guestsOnTours.Insert(index, guestOnTour);
+            _serializerG.ToCSV(FilePath1, _guestsOnTours);
+            return guestOnTour;
         }
 
         public List<CheckPoint> FindAllCheckPoints()
@@ -387,7 +419,7 @@ namespace TravelAgency.Repository
         {
             Tour tour = new Tour();
             int year1 = Convert.ToInt32(year);
-            List<Tour> allTours = ReadFromToursCsv(filename);
+            List<Tour> allTours = ReadFromToursCsv(filename); 
             int maxNumOfGuest = 0;
 
             for (int i = 0; i < allTours.Count; i++)

@@ -26,11 +26,17 @@ namespace TravelAgency.View.Guest2
         const string FilePath = "../../../Resources/Data/tours.csv";
 
         private readonly TourRepository _repository;
+        private readonly CheckPointRepository _CPrepository;
+
+        public Tour selectedTour;
+        public CheckPoint selectedCheckPoint;
+
         public GuestOnTour(User logedUser)
         {
             InitializeComponent();
             LogedUser = logedUser;
             _repository = new TourRepository();
+            _CPrepository = new CheckPointRepository();
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
@@ -43,6 +49,29 @@ namespace TravelAgency.View.Guest2
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+
+
+        private void ConfirmArrival(object sender, RoutedEventArgs e)
+        {
+            selectedTour = (Tour)DataPanel.SelectedItem;
+            selectedCheckPoint = (CheckPoint)KeyPoints.SelectedItem;
+
+            if (selectedTour != null)
+            {
+                if(selectedCheckPoint != null)
+                {
+                    //GuestOnTour guestOnTour = _repository.FindGuestByTourIdAndGuestId(selectedTour.Id, LogedUser.Id);
+                }
+            }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            selectedTour = (Tour)DataPanel.SelectedItem;
+            KeyPoints.ItemsSource = selectedTour.CheckPoints;
         }
     }
 }
