@@ -31,7 +31,6 @@
         <Button x:Name="btnAddImage" Content="Add" HorizontalAlignment="Left" Margin="413,358,0,0" VerticalAlignment="Top" Click="btnAddImage_Click"/>
         <Button x:Name="btnDeleteImage" Content="Delete" HorizontalAlignment="Left" Margin="445,358,0,0" VerticalAlignment="Top" Click="btnDeleteImage_Click"/>
         <ListBox x:Name="ListViewImg" Margin="22,384,169,86"/>
-        <Button Content="Grade" HorizontalAlignment="Left" Margin="412,420,0,0" VerticalAlignment="Top" Click="Grade"/>
         <Label Content="Cleanliness:" HorizontalAlignment="Left" Margin="33,132,0,0" VerticalAlignment="Top"/>
         <Label Content="Owner politeness:" HorizontalAlignment="Left" Margin="34,171,0,0" VerticalAlignment="Top"/>
     </Grid>
