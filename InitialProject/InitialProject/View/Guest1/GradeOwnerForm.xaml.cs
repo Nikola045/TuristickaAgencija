@@ -40,10 +40,7 @@ namespace TravelAgency.View.Guest1
             gradeService = new GradeService();
         }
 
-        private string imagePath;
-
-        private string imageUrl;
-
+        
         private void btnPlus_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog file = new OpenFileDialog();
@@ -68,10 +65,94 @@ namespace TravelAgency.View.Guest1
             }
         }
 
-        private void Grade(object sender, RoutedEventArgs e)
+        /*private void Grade(object sender, RoutedEventArgs e)
         {
+            object selectedItem = cbHotelName.SelectedItem;
+            Reservation reservation = new Reservation();
+            int id;
+            string line = selectedItem.ToString();
+            string[] fields = line.Split(' ');
+            id = Convert.ToInt32(fields[0]);
 
-        }
+            int hotelRating = 0;
+            if (rbHotelOption1.IsChecked == true)
+            {
+                hotelRating = 1;
+            }
+            else if (rbHotelOption2.IsChecked == true)
+            {
+                hotelRating = 2;
+            }
+            else if (rbHotelOption3.IsChecked == true)
+            {
+                hotelRating = 3;
+            }
+            else if (rbHotelOption4.IsChecked == true)
+            {
+                hotelRating = 4;
+            }
+            else if (rbHotelOption5.IsChecked == true)
+            {
+                hotelRating = 5;
+            }
+
+            int ownerRating = 0;
+            if (rbOwnerOption1.IsChecked == true)
+            {
+                ownerRating = 1;
+            }
+            else if (rbOwnerOption2.IsChecked == true)
+            {
+                ownerRating = 2;
+            }
+            else if (rbOwnerOption3.IsChecked == true)
+            {
+                ownerRating = 3;
+            }
+            else if (rbOwnerOption4.IsChecked == true)
+            {
+                ownerRating = 4;
+            }
+            else if (rbOwnerOption5.IsChecked == true)
+            {
+                ownerRating = 5;
+            }
+
+            List<string> images = new List<string>();
+            foreach (object item in ListViewImg.Items)
+            {
+                if (item is string)
+                {
+                    images.Add(item as string);
+                }
+            }
+
+            OwnerGrade newGrade = new OwnerGrade(
+                LogedUser.Username,
+                selectedOwnerUsername,
+                id,
+                hotelRating,
+                ownerRating,
+                txtComment.Text,
+                images.ToArray()
+            );
+            ownerGradeRepository.Save(newGrade);
+
+            txtComment.Clear();
+            rbHotelOption1.IsChecked = false;
+            rbHotelOption2.IsChecked = false;
+            rbHotelOption3.IsChecked = false;
+            rbHotelOption4.IsChecked = false;
+            rbHotelOption5.IsChecked = false;
+            rbOwnerOption1.IsChecked = false;
+            rbOwnerOption2.IsChecked = false;
+            rbOwnerOption3.IsChecked = false;
+            rbOwnerOption4.IsChecked = false;
+            rbOwnerOption5.IsChecked = false;
+            ListViewImg.Items.Clear();
+        }*/
+
+
 
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
