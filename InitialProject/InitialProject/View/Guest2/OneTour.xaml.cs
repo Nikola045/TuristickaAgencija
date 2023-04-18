@@ -71,8 +71,15 @@ namespace TravelAgency.View.Guest2
                     {
                         selectedTour.CurentNumberOfGuests = selectedTour.CurentNumberOfGuests + numGuests;
                         _repository.Update(selectedTour);
+                        if (Vouchers.SelectedItem != null)
+                        {
+                            MessageBox.Show("Reserved with voucher.");
 
-                        MessageBox.Show("Reserved.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Reserved.");
+                        }
                     }
                     else
                     {
