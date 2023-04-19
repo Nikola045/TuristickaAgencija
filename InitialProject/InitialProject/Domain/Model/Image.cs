@@ -7,28 +7,28 @@ using TravelAgency.Serializer;
 
 namespace TravelAgency.Domain.Model
 {
-    internal class HotelImage : ISerializable
+    internal class Image : ISerializable
     {
-        public int HotelId { get; set; }
+        public int Id { get; set; }
         public string Url { get; set; }
 
-        public HotelImage() { }
+        public Image() { }
 
-        public HotelImage(int hotelId, string url)
+        public Image(int id, string url)
         {
-            HotelId = hotelId;
+            Id = id;
             Url = url;
         }
 
         public void FromCSV(string[] values)
         {
-            HotelId = Convert.ToInt32(values[0]);
+            Id = Convert.ToInt32(values[0]);
             Url = values[1];
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { HotelId.ToString(), Url };
+            string[] csvValues = { Id.ToString(), Url };
             return csvValues;
         }
 
