@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using TravelAgency.Domain.Model;
-
+using TravelAgency.Services;
+using DevExpress.Utils.Filtering.Internal;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.Repository.HotelRepo
 {

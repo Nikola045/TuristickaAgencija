@@ -1,21 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using TravelAgency.Domain.Model;
-using TravelAgency.Repository;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using TravelAgency.Repository.GradeRepo;
+using TravelAgency.Repository;
 using TravelAgency.Services;
+using TravelAgency.Domain.Model;
 
-namespace TravelAgency.View
+namespace TravelAgency.View.Owner
 {
-    public partial class GradeForm : Window
+    /// <summary>
+    /// Interaction logic for GradePage.xaml
+    /// </summary>
+    public partial class GradePage : Page
     {
-        private readonly GradeGuest1Repository gradeGuest1Repository; 
+        private readonly GradeGuest1Repository gradeGuest1Repository;
         private readonly ReservationRepository reservationRepository;
         private readonly GradeService gradeService;
         private readonly ReservationService reservationService;
-
-        public GradeForm()
+        public GradePage()
         {
             InitializeComponent();
             Title = "Create new comment";
@@ -29,13 +42,13 @@ namespace TravelAgency.View
         private void GusetLoaded(object sender, RoutedEventArgs e)
         {
             List<Reservation> reservations = new List<Reservation>();
-            
+
             reservations = reservationRepository.GetAll();
 
             for (int i = 0; i < reservations.Count; i++)
             {
-                if(gradeService.FindGuestsForGrade(i) != null)
-                GuestsCB.Items.Add(gradeService.FindGuestsForGrade(i));
+                if (gradeService.FindGuestsForGrade(i) != null)
+                    GuestsCB.Items.Add(gradeService.FindGuestsForGrade(i));
             }
         }
 
@@ -87,7 +100,7 @@ namespace TravelAgency.View
 
             for (int i = 0; i < reservations.Count; i++)
             {
-                if(gradeService.ShowMessageForGrade(i) != null)
+                if (gradeService.ShowMessageForGrade(i) != null)
                 {
                     MessageBox.Show(gradeService.ShowMessageForGrade(i));
                 }
@@ -97,7 +110,8 @@ namespace TravelAgency.View
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            
         }
     }
 }
+

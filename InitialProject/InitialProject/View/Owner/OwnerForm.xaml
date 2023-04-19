@@ -6,38 +6,38 @@
         xmlns:local="clr-namespace:TravelAgency.Forms"
         xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic" xmlns:Model="clr-namespace:TravelAgency.Domain.Model" xmlns:win32="clr-namespace:Microsoft.Win32;assembly=PresentationFramework" x:Class="TravelAgency.Forms.OwnerForm"
         mc:Ignorable="d"
-        Title="Create new accommodation" Height="392" Width="749" WindowStartupLocation="CenterScreen" FontSize="17">
+        Title="Create new accommodation" Height="450" Width="800" WindowStartupLocation="CenterScreen" FontSize="17">
     <Canvas Margin="0,0,0,-6">
-        <Label Content="Name:" Canvas.Left="51" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center" Height="28" Width="66" FontSize="17"/>
-        <Label Content="List of imags:" Canvas.Left="512" Canvas.Top="14" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33" Width="112"/>
-        <Label Content="Type:" Canvas.Left="22" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="49"/>
-        <Label Content="Max Guests:" Canvas.Left="22" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"/>
-        <Label Content="Min Days:" Canvas.Left="22" Canvas.Top="210" HorizontalAlignment="Left" VerticalAlignment="Center" Height="33"/>
-        <Label Content="Cancellnacion:" Canvas.Left="22" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30"/>
-        <TextBox x:Name="txtName" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="10" Width="120"
-                 DataContext="{Binding HotelService}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="28" TextChanged="NameValidation"/>
-        <TextBox x:Name="txtCity" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="52" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" 
+        <Label Content="Name:" Canvas.Left="74" Canvas.Top="35" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="66" FontSize="17"/>
+        <Label Content="List of imags:" Canvas.Left="535" Canvas.Top="39" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33" Width="112"/>
+        <Label Content="Type:" Canvas.Left="45" Canvas.Top="149" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="49"/>
+        <Label Content="Max Guests:" Canvas.Left="45" Canvas.Top="189" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"/>
+        <Label Content="Min Days:" Canvas.Left="45" Canvas.Top="235" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33"/>
+        <Label Content="Cancellnacion:" Canvas.Left="45" Canvas.Top="275" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30"/>
+        <TextBox x:Name="txtName" Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="35" Width="120"
+                 DataContext="{Binding HotelService}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextChanged="NameValidation"/>
+        <TextBox x:Name="txtCity" Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="77" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" 
                  Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Height="30" TextChanged="CityValidation"/>
-        <TextBox x:Name="brMax" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="166" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"
+        <TextBox x:Name="brMax" Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="191" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"
                  Text="{Binding Path=Max, UpdateSourceTrigger=PropertyChanged}" Height="30" TextChanged="MaxGuestValidation"/>
-        <TextBox x:Name="brMin" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="210" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="MinDaysValidation"
+        <TextBox x:Name="brMin" Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="235" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="MinDaysValidation"
                  Text="{Binding Path=Min, UpdateSourceTrigger=PropertyChanged}" Height="28"/>
-        <TextBox x:Name="brDaysLeft" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="251" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="CancelDaysValidation"
+        <TextBox x:Name="brDaysLeft" Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="276" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="CancelDaysValidation"
                  Text="{Binding Path=DaysLeft, UpdateSourceTrigger=PropertyChanged}" Height="31"/>
-        <Button x:Name="saveBTN" Click="Save" Content="Save" Canvas.Left="570" Canvas.Top="329" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="165" />
-        <Button Content="Cancel" Click="Cancel" Height="28" Width="44" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="City:" Canvas.Left="22" Canvas.Top="50" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="44"/>
-        <Label Content="Country:" Canvas.Left="22" Canvas.Top="90" HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="80"/>
-        <TextBox x:Name="txtCountry" Canvas.Left="134" TextWrapping="Wrap" Canvas.Top="93" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Height="28" TextChanged="CountryValidation" FontSize="10"></TextBox>
-        <Label Content="Image URL:" Canvas.Left="397" Canvas.Top="243" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtImg" Canvas.Left="492" TextWrapping="Wrap" Text="" Canvas.Top="248" Width="132" HorizontalAlignment="Center" VerticalAlignment="Top" Height="26" TextChanged="UrlValidation"/>
-        <Button x:Name="AddImgButton" Content="Add" IsEnabled ="False" Canvas.Left="648" Canvas.Top="248" Click="AddImage" HorizontalAlignment="Center" Height="26" VerticalAlignment="Top"/>
-        <Button Content="Start Demo" Height="39" Width="165" HorizontalAlignment="Center" Canvas.Top="330" VerticalAlignment="Top" Canvas.Left="44"></Button>
-        <ListBox Height="170" Width="333" x:Name="ImageList" Canvas.Left="402" Canvas.Top="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button Content="Delete" Canvas.Left="683" Canvas.Top="248" Click="DeleteImage" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label x:Name="LabelNameValidator" Content="" Canvas.Left="267" Canvas.Top="10" Height="32" Width="140" HorizontalAlignment="Left" Foreground="Red" VerticalAlignment="Center" FontSize="10"/>
-        <Label x:Name="LabelCityValidator" Content="" Canvas.Left="266" Canvas.Top="54" HorizontalAlignment="Left" VerticalAlignment="Center" Width="103" Height="26" Foreground="Red" FontSize="10"/>
-        <Label x:Name="LabelCountryValidator" Content="" Canvas.Left="265" Canvas.Top="93" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Foreground="Red" RenderTransformOrigin="0.5,0.5" Height="28" FontSize="10">
+        <Button x:Name="saveBTN" Click="Save" Content="Save" Canvas.Left="593" Canvas.Top="357" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="165" RenderTransformOrigin="0.568,1.059" />
+        <Button Content="Cancel" Click="Cancel" Height="40" Width="136" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="445" Canvas.Top="357"/>
+        <Label Content="City:" Canvas.Left="45" Canvas.Top="75" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="44"/>
+        <Label Content="Country:" Canvas.Left="45" Canvas.Top="115" HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="80"/>
+        <TextBox x:Name="txtCountry" Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="118" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextChanged="CountryValidation" FontSize="10"></TextBox>
+        <Label Content="Image URL:" Canvas.Left="420" Canvas.Top="268" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtImg" Canvas.Left="515" TextWrapping="Wrap" Text="" Canvas.Top="273" Width="132" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" TextChanged="UrlValidation"/>
+        <Button x:Name="AddImgButton" Content="Add" IsEnabled ="False" Canvas.Left="671" Canvas.Top="273" Click="AddImage" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top"/>
+        <Button Content="Start Demo" Height="39" Width="165" HorizontalAlignment="Left" Canvas.Top="358" VerticalAlignment="Top" Canvas.Left="33"></Button>
+        <ListBox Height="170" Width="333" x:Name="ImageList" Canvas.Left="425" Canvas.Top="75" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Delete" Canvas.Left="706" Canvas.Top="273" Click="DeleteImage" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="LabelNameValidator" Content="" Canvas.Left="290" Canvas.Top="35" Height="32" Width="140" HorizontalAlignment="Left" Foreground="Red" VerticalAlignment="Top" FontSize="10"/>
+        <Label x:Name="LabelCityValidator" Content="" Canvas.Left="289" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="26" Foreground="Red" FontSize="10"/>
+        <Label x:Name="LabelCountryValidator" Content="" Canvas.Left="288" Canvas.Top="118" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Foreground="Red" RenderTransformOrigin="0.5,0.5" Height="28" FontSize="10">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -47,14 +47,14 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label x:Name="LabelMaxGuestValidator" Content="" Canvas.Left="261" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Foreground="Red" FontSize="10"/>
-        <Label x:Name="LabelMinDaysValidator" Content="" Canvas.Left="259" Canvas.Top="211" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Foreground="Red" Height="28" FontSize="10"/>
-        <Label x:Name="LabelCancelDaysValidator" Content="" Canvas.Left="266" Canvas.Top="257" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" Foreground="Red" FontSize="10"/>
-        <Label x:Name="LabelImgValidator" Content="Please add at least one image" Canvas.Left="406" Canvas.Top="220" HorizontalAlignment="Center" VerticalAlignment="Top" Width="173" Foreground="Red" FontSize="10"/>
-        <Label x:Name="LabelTypeValidator" Content="Please select one option" Canvas.Left="258" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center" Width="132" Foreground="Red" FontSize="10"/>
-        <Label x:Name="LabelUrlValidator" Content="" Canvas.Left="492" Canvas.Top="279" HorizontalAlignment="Left" VerticalAlignment="Top" Width="167" Foreground="Red" FontSize="10"/>
-        <ComboBox x:Name="Type" Canvas.Left="134" Canvas.Top="127" Width="120" Loaded="DataFill" SelectionChanged="ValidationType" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button Content="Stop Demo" Height="39" Width="165" Canvas.Top="330" Canvas.Left="307" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="+" Canvas.Left="624" Canvas.Top="248" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Width="24" Height="26"/>
+        <Label x:Name="LabelMaxGuestValidator" Content="" Canvas.Left="284" Canvas.Top="194" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Foreground="Red" FontSize="10"/>
+        <Label x:Name="LabelMinDaysValidator" Content="" Canvas.Left="282" Canvas.Top="236" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Foreground="Red" Height="28" FontSize="10"/>
+        <Label x:Name="LabelCancelDaysValidator" Content="" Canvas.Left="289" Canvas.Top="282" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" Foreground="Red" FontSize="10"/>
+        <Label x:Name="LabelImgValidator" Content="Please add at least one image" Canvas.Left="429" Canvas.Top="245" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Foreground="Red" FontSize="10"/>
+        <Label x:Name="LabelTypeValidator" Content="Please select one option" Canvas.Left="281" Canvas.Top="155" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Foreground="Red" FontSize="10"/>
+        <Label x:Name="LabelUrlValidator" Content="" Canvas.Left="515" Canvas.Top="304" HorizontalAlignment="Left" VerticalAlignment="Top" Width="167" Foreground="Red" FontSize="10"/>
+        <ComboBox x:Name="Type" Canvas.Left="157" Canvas.Top="152" Width="120" Loaded="DataFill" SelectionChanged="ValidationType" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Stop Demo" Height="39" Width="165" Canvas.Top="358" Canvas.Left="217" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="+" Canvas.Left="647" Canvas.Top="273" Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Height="26"/>
     </Canvas>
 </Window>

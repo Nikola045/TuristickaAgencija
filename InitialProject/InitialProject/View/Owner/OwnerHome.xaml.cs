@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
 using TravelAgency.Repository.HotelRepo;
@@ -36,20 +37,20 @@ namespace TravelAgency.View.Owner
 
         private void OpenGradeForm(object sender, RoutedEventArgs e)
         {
-            GradeForm createGradeForm = new GradeForm();
-            createGradeForm.Show();
+            GradePage page = new GradePage();
+            ShowSmallPage.Content = page;
         }
 
         private void OpenMoveReservation(object sender, RoutedEventArgs e)
         {
-            MoveReservationView createMoveReservation = new MoveReservationView();
-            createMoveReservation.Show();
+            MoveReservationPage page = new MoveReservationPage();
+            ShowBigPage.Content = page;
         }
 
         private void OpenReviewForm(object sender, RoutedEventArgs e)
         {
-            ReviewForm createReviewForm = new ReviewForm(LoggedInUser);
-            createReviewForm.Show();
+            ReviewPage page = new ReviewPage(LoggedInUser);
+            ShowSmallPage.Content = page;
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
@@ -115,6 +116,30 @@ namespace TravelAgency.View.Owner
             SelectedHotel = (Hotel)DataPanel.SelectedItem;
             HotelGalery openHotelGalery = new HotelGalery(SelectedHotel);
             openHotelGalery.Show();
+        }
+
+        private void HomeButton(object sender, RoutedEventArgs e)
+        {
+            ShowBigPage.Content = null;
+            ShowSmallPage.Content = null;
+        }
+
+        private void OpenStatistic(object sender, RoutedEventArgs e)
+        {
+            StatisticPage page = new StatisticPage();
+            ShowSmallPage.Content = page;
+        }
+
+        private void OpenRenovation(object sender, RoutedEventArgs e)
+        {
+            RenovationPage page = new RenovationPage();
+            ShowSmallPage.Content = page;
+        }
+
+        private void OpenRenovationReview(object sender, RoutedEventArgs e)
+        {
+            RenovationReview page = new RenovationReview();
+            ShowSmallPage.Content = page;
         }
     }
 }

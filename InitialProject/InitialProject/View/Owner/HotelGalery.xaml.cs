@@ -5,6 +5,7 @@ using System.Windows.Media;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
+using Image = TravelAgency.Domain.Model.Image;
 
 namespace TravelAgency.View.Owner
 {
@@ -26,7 +27,7 @@ namespace TravelAgency.View.Owner
 
         private void NextImage(object sender, RoutedEventArgs e)
         {
-           List<HotelImage> allHotelImages = hotelService.FindAllById(CurrentHotel.Id);
+           List<Image> allHotelImages = hotelService.FindAllById(CurrentHotel.Id);
             indexer++;
             if (indexer > allHotelImages.Count-1)
                 indexer = 0;
@@ -35,7 +36,7 @@ namespace TravelAgency.View.Owner
 
         private void PreviewImage(object sender, RoutedEventArgs e)
         {
-            List<HotelImage> allHotelImages = hotelService.FindAllById(CurrentHotel.Id);
+            List<Image> allHotelImages = hotelService.FindAllById(CurrentHotel.Id);
             indexer--;
             if (indexer < 0)
                 indexer = allHotelImages.Count-1;

@@ -18,7 +18,9 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
+using TravelAgency.Repository.HotelRepo;
 using static Azure.Core.HttpHeader;
+using Image = TravelAgency.Domain.Model.Image;
 
 namespace TravelAgency.View
 {
@@ -35,7 +37,7 @@ namespace TravelAgency.View
 
         private readonly CheckPointRepository checkPointRepository;
 
-        private readonly TourImageRepository tourImageRepository;
+        private readonly ImageRepository tourImageRepository;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -48,7 +50,7 @@ namespace TravelAgency.View
             DataContext = this;
             tourRepository = new TourRepository();
             checkPointRepository = new CheckPointRepository();
-            tourImageRepository = new TourImageRepository();
+            tourImageRepository = new ImageRepository();
         }
 
         private void SaveTour(object sender, RoutedEventArgs e)
@@ -86,7 +88,7 @@ namespace TravelAgency.View
 
             foreach(string image  in ImageList.Items)
             {
-                HotelImage img = new HotelImage();
+                Image img = new Image();
                 img.Url = image;
                 tourImageRepository.Save(img);
             }
