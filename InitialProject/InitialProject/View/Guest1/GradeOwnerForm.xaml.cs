@@ -17,6 +17,7 @@ using TravelAgency.Repository;
 using TravelAgency.Services;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.HotelRepo;
+using DevExpress.XtraEditors.Filtering;
 
 namespace TravelAgency.View.Guest1
 {
@@ -161,8 +162,6 @@ namespace TravelAgency.View.Guest1
             ListViewImg.Items.Clear();
         }
 
-
-
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
             List<string> hotelNames = new List<string>();
@@ -188,5 +187,47 @@ namespace TravelAgency.View.Guest1
                 ListViewImg.Items.Remove(ListViewImg.SelectedItem);
             }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            btnGrade.IsEnabled = false;
+        }
+        private void EnableGradeButton()
+        {
+            bool isHotelOptionSelected = rbHotelOption1.IsChecked == true || rbHotelOption2.IsChecked == true || rbHotelOption3.IsChecked == true || rbHotelOption4.IsChecked == true || rbHotelOption5.IsChecked == true;
+            bool isOwnerOptionSelected = rbOwnerOption1.IsChecked == true || rbOwnerOption2.IsChecked == true || rbOwnerOption3.IsChecked == true || rbOwnerOption4.IsChecked == true || rbOwnerOption5.IsChecked == true;
+            bool isHotelNameSelected = cbHotelName.SelectedItem != null;
+            bool isCommentEntered = !string.IsNullOrWhiteSpace(txtComment.Text);
+ 
+            if (isHotelOptionSelected && isOwnerOptionSelected && isHotelNameSelected && isCommentEntered)
+            {
+                btnGrade.IsEnabled = true;
+            }
+            else
+            {
+                btnGrade.IsEnabled = false;
+            }
+        }
+
+        private void rbHotelOption_Checked(object sender, RoutedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void rbOwnerOption_Checked(object sender, RoutedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void cbHotelName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void txtComment_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
     }
 }

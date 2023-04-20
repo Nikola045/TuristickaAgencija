@@ -107,11 +107,29 @@ namespace TravelAgency.View.Guest1
         }
         private void NewStartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            DateTime today = DateTime.Now.Date;
+            if (NewStartDate.SelectedDate.HasValue && NewStartDate.SelectedDate.Value.Date < today)
+            {
+                if (NewStartDate.SelectedDate.Value.Date != today)
+                {
+                    MessageBox.Show("It is not possible to select a date before today.");
+                }
+                NewStartDate.SelectedDate = today;
+            }
             btnRequest.IsEnabled = AllFieldsValid();
         }
 
         private void NewEndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            DateTime today = DateTime.Now.Date;
+            if (NewEndDate.SelectedDate.HasValue && NewEndDate.SelectedDate.Value.Date < today)
+            {
+                if (NewEndDate.SelectedDate.Value.Date != today)
+                {
+                    MessageBox.Show("It is not possible to select a date before today.");
+                }
+                NewEndDate.SelectedDate = today;
+            }
             btnRequest.IsEnabled = AllFieldsValid();
         }
 
