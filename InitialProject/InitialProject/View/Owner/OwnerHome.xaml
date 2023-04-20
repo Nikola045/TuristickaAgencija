@@ -8,7 +8,7 @@
         Title="OwnerHome" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid x:Name="DataPanel" Height="677" Width="1024" HorizontalAlignment="Center" Canvas.Top="75" VerticalAlignment="Top" Margin="0,74,0,0" Loaded="OnLoad" FontSize="20"/>
-        <Button Content="Home" Height="75" Width="201" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,0,0,0"/>
+        <Button Content="Home" Height="75" Width="201" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,0,0,0" Click="HomeButton"/>
         <Button x:Name="AccommodationDropBTN" Content="Accommodation" Canvas.Left="242" Height="75" Width="183" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="17" Margin="300,0,0,0" Click="AccommodationDrop"/>
         <Button x:Name="MediaDropBTN" Content="Media" Canvas.Left="455" Height="75" Width="256" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="17" Canvas.Top="1" Margin="482,0,0,0" Click="MediaDrop"/>
         <Button Content="Reservation" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="288" Click="OpenMoveReservation" Canvas.Left="736" FontSize="17" Margin="736,0,0,0" />
@@ -35,17 +35,19 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="StatisticOfAccommodationsBTN" Visibility="Hidden" Content="Statistic of Accommodations" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="382" Canvas.Left="1081" Canvas.Top="83" FontSize="17" Margin="0,74,0,0" />
-        <Button x:Name="MakeRenovationRequestBTN" Visibility="Hidden" Content="Make a renovation request" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="332" Canvas.Left="1081" Canvas.Top="83" FontSize="17" Margin="382,74,0,0" />
-        <Button x:Name="ShowFutureRenovationBTN" Visibility="Hidden" Content="Show future renovation" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="310" Canvas.Left="1081" Canvas.Top="83" FontSize="17" Margin="714,74,0,0" />
-
-        <Button x:Name="GradeGuestBTN" Visibility="Hidden" Content="Grade Guest" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="299" Click="OpenGradeForm" Canvas.Left="1081" Canvas.Top="123" FontSize="17" Margin="0,75,0,0" />
-        <Button x:Name="ReviewFormBTN" Visibility="Hidden"  Content="Review Form" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="361" Click="OpenReviewForm" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="299,74,0,0" />
-        <Button x:Name="ForumsBTN" Visibility="Hidden"  Content="Forums" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="364" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="660,74,0,0" />
-        <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="101" Background="#FFEC1515">
-
-        </Button>
         <Button Content="Gallery" HorizontalAlignment="Left" Margin="880,573,0,0" VerticalAlignment="Top" Height="58" Width="119" Click="OpenGallery"/>
+        <Frame  NavigationUIVisibility="Hidden" x:Name="ShowBigPage" Margin="0,74,0,0" Height="680"/>
+        <Frame  NavigationUIVisibility="Hidden" x:Name="ShowSmallPage" Margin="0,131,0,0" Height="620"/>
+
+        <Button x:Name="StatisticOfAccommodationsBTN" Visibility="Hidden" Content="Statistic of Accommodations" Click="OpenStatistic" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="382" Canvas.Left="1081" Canvas.Top="83" FontSize="17" Margin="0,74,0,0" />
+        <Button x:Name="MakeRenovationRequestBTN" Visibility="Hidden" Content="Make a renovation request" Click="OpenRenovation" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="332" Canvas.Left="1081" Canvas.Top="83" FontSize="17" Margin="382,74,0,0" />
+        <Button x:Name="ShowFutureRenovationBTN" Visibility="Hidden" Content="Show future renovation" Click="OpenRenovationReview" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="310" Canvas.Left="1081" Canvas.Top="83" FontSize="17" Margin="714,74,0,0" />
+
+        <Button x:Name="GradeGuestBTN" Visibility="Hidden"  Content="Grade Guest" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="299" Click="OpenGradeForm" Canvas.Left="1081" Canvas.Top="123" FontSize="17" Margin="0,75,0,0" />
+        <Button x:Name="ReviewFormBTN"  Visibility="Hidden" Content="Review Form" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="361" Click="OpenReviewForm" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="299,74,0,0" />
+        <Button x:Name="ForumsBTN" Visibility="Hidden"  Content="Forums" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="364" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="660,74,0,0" />
+
+        <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="101" Background="#FFEC1515"/>
 
 
     </Grid>

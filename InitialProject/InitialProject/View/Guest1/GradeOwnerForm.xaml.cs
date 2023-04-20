@@ -29,7 +29,10 @@ namespace TravelAgency.View.Guest1
         private readonly ReservationRepository reservationRepository;
         private readonly HotelRepository hotelRepository;
         private readonly GradeService gradeService;
-        public GradeOwnerForm()
+        private readonly HotelService hotelService;
+        private readonly ReservationService reservationService;
+        private User LogedUser { get; set; }
+        public GradeOwnerForm(User user)
         {
             InitializeComponent();
             Title = "Grade owner";
@@ -38,6 +41,9 @@ namespace TravelAgency.View.Guest1
             reservationRepository = new ReservationRepository();
             hotelRepository = new HotelRepository();
             gradeService = new GradeService();
+            hotelService = new HotelService();
+            reservationService = new ReservationService();
+            LogedUser = user;
         }
 
         
@@ -65,14 +71,16 @@ namespace TravelAgency.View.Guest1
             }
         }
 
-        /*private void Grade(object sender, RoutedEventArgs e)
+        private void Grade(object sender, RoutedEventArgs e)
         {
             object selectedItem = cbHotelName.SelectedItem;
             Reservation reservation = new Reservation();
+            
             int id;
             string line = selectedItem.ToString();
             string[] fields = line.Split(' ');
             id = Convert.ToInt32(fields[0]);
+            string hotelName = fields[1];
 
             int hotelRating = 0;
             if (rbHotelOption1.IsChecked == true)
@@ -127,14 +135,15 @@ namespace TravelAgency.View.Guest1
                 }
             }
 
+            Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
+
             OwnerGrade newGrade = new OwnerGrade(
                 LogedUser.Username,
-                selectedOwnerUsername,
+                selectedOwnerUsername.OwnerUsername,
                 id,
                 hotelRating,
                 ownerRating,
-                txtComment.Text,
-                images.ToArray()
+                txtComment.Text
             );
             ownerGradeRepository.Save(newGrade);
 
@@ -150,7 +159,7 @@ namespace TravelAgency.View.Guest1
             rbOwnerOption4.IsChecked = false;
             rbOwnerOption5.IsChecked = false;
             ListViewImg.Items.Clear();
-        }*/
+        }
 
 
 
@@ -164,7 +173,7 @@ namespace TravelAgency.View.Guest1
                 {
                     if (!hotelNames.Contains(reservation.HotelName))
                     {
-                        hotelNames.Add(reservation.HotelName);
+                        hotelNames.Add(reservation.Id.ToString() + " " + reservation.HotelName);
                     }
                 }
             }
@@ -179,6 +188,5 @@ namespace TravelAgency.View.Guest1
                 ListViewImg.Items.Remove(ListViewImg.SelectedItem);
             }
         }
-
     }
 }

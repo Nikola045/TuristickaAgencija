@@ -2,9 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="View\GradeForm.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Guest1\GradeOwnerForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -50,7 +47,13 @@
     <Compile Update="View\Guide\GuideTourStatistic.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Owner\GradePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Owner\HotelGalery.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\MoveReservationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Owner\MoveReservationView.xaml.cs">
@@ -62,7 +65,16 @@
     <Compile Update="View\Owner\OwnerProfil.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Owner\ReviewForm.xaml.cs">
+    <Compile Update="View\Owner\RenovationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\RenovationReview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\ReviewPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\StatisticPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ReservationForm.xaml.cs">
@@ -70,9 +82,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="View\GradeForm.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\Guest1\GradeOwnerForm.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -118,7 +127,13 @@
     <Page Update="View\Guide\GuideTourStatistic.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Owner\GradePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Owner\HotelGalery.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\MoveReservationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\MoveReservationView.xaml">
@@ -130,7 +145,16 @@
     <Page Update="View\Owner\OwnerProfil.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Owner\ReviewForm.xaml">
+    <Page Update="View\Owner\RenovationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\RenovationReview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\ReviewPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\StatisticPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ReservationForm.xaml">

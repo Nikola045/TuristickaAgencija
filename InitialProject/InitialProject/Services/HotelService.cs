@@ -12,12 +12,12 @@ namespace TravelAgency.Services
 {
     internal class HotelService
     {
-        private readonly HotelImageRepository hotelImageRepository;
+        private readonly ImageRepository hotelImageRepository;
         private readonly HotelRepository hotelRepository;
 
         public HotelService() 
         {
-            hotelImageRepository = new HotelImageRepository();
+            hotelImageRepository = new ImageRepository();
             hotelRepository = new HotelRepository();
         }
 
@@ -97,10 +97,10 @@ namespace TravelAgency.Services
             return findedHotels;
         }
 
-        public HotelImage FindByUrl(string url)
+        public Image FindByUrl(string url)
         {
-            List<HotelImage> hotelImages = hotelImageRepository.GetAll();
-            foreach (HotelImage hotelImage in hotelImages)
+            List<Image> hotelImages = hotelImageRepository.GetAll();
+            foreach (Image hotelImage in hotelImages)
             {
                 if (hotelImage.Url == url)
                 {
@@ -110,13 +110,13 @@ namespace TravelAgency.Services
             return null;
         }
 
-        public List<HotelImage> FindAllById(int id)
+        public List<Image> FindAllById(int id)
         {
-            List<HotelImage> hotelImages = hotelImageRepository.GetAll();
-            List<HotelImage> findedImages = new List<HotelImage>();
-            foreach (HotelImage hotelImage  in hotelImages)
+            List<Image> hotelImages = hotelImageRepository.GetAll();
+            List<Image> findedImages = new List<Image>();
+            foreach (Image hotelImage  in hotelImages)
             {
-                if (hotelImage.HotelId == id)
+                if (hotelImage.Id == id)
                 {
                     findedImages.Add(hotelImage);
                 }
@@ -177,11 +177,11 @@ namespace TravelAgency.Services
 
         public void AddHotelImage()
         {
-            HotelImage newImage = new HotelImage(
+            Image newImage = new Image(
                hotelImageRepository.NextId(),
                OwnerForm.ownerForm.txtImg.Text);
 
-            HotelImage savedImage = hotelImageRepository.Save(newImage);
+            Image savedImage = hotelImageRepository.Save(newImage);
             OwnerForm.ownerForm.ImageList.Items.Add(OwnerForm.ownerForm.txtImg.Text);
             MessageBox.Show("You have successfully added an image");
             OwnerForm.ownerForm.LabelImgValidator.Content = "";
@@ -191,7 +191,7 @@ namespace TravelAgency.Services
         public void DeleteHotelImage()
         {
             object selectedItem = OwnerForm.ownerForm.ImageList.SelectedItem;
-            HotelImage hotelImage = FindByUrl(selectedItem.ToString());
+            Image hotelImage = FindByUrl(selectedItem.ToString());
 
             OwnerForm.ownerForm.ImageList.Items.Remove(selectedItem);
             hotelImageRepository.Delete(hotelImage);
@@ -205,7 +205,7 @@ namespace TravelAgency.Services
         {
             foreach (object item in OwnerForm.ownerForm.ImageList.Items)
             {
-                HotelImage hotelImage = FindByUrl(item.ToString());
+                Image hotelImage = FindByUrl(item.ToString());
                 hotelImageRepository.Delete(hotelImage);
             }
 
