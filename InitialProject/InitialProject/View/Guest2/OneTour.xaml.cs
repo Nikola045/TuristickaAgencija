@@ -52,6 +52,11 @@ namespace TravelAgency.View.Guest2
 
             const string FilePath1 = "../../../Resources/Data/guestOnTour.csv";
             int numGuests = Convert.ToInt32(txtNumOfGuests.Text);
+            bool hasVoucher = false;
+            if(Vouchers.SelectedItem != null)
+            {
+                hasVoucher = true;
+            }
 
             if (numGuests <= 0)
             {
@@ -67,7 +72,7 @@ namespace TravelAgency.View.Guest2
                 else
                 {
 
-                    if (_repository.ReserveTour(selectedTour.Id, LogedUser, FilePath1, numGuests))
+                    if (_repository.ReserveTour(selectedTour.Id, LogedUser, FilePath1, numGuests, hasVoucher))
                     {
                         selectedTour.CurentNumberOfGuests = selectedTour.CurentNumberOfGuests + numGuests;
                         _repository.Update(selectedTour);

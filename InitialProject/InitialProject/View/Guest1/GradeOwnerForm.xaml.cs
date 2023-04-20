@@ -17,6 +17,7 @@ using TravelAgency.Repository;
 using TravelAgency.Services;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.HotelRepo;
+using DevExpress.XtraEditors.Filtering;
 
 namespace TravelAgency.View.Guest1
 {
@@ -29,7 +30,10 @@ namespace TravelAgency.View.Guest1
         private readonly ReservationRepository reservationRepository;
         private readonly HotelRepository hotelRepository;
         private readonly GradeService gradeService;
-        public GradeOwnerForm()
+        private readonly HotelService hotelService;
+        private readonly ReservationService reservationService;
+        private User LogedUser { get; set; }
+        public GradeOwnerForm(User user)
         {
             InitializeComponent();
             Title = "Grade owner";
@@ -38,12 +42,12 @@ namespace TravelAgency.View.Guest1
             reservationRepository = new ReservationRepository();
             hotelRepository = new HotelRepository();
             gradeService = new GradeService();
+            hotelService = new HotelService();
+            reservationService = new ReservationService();
+            LogedUser = user;
         }
 
-        private string imagePath;
-
-        private string imageUrl;
-
+        
         private void btnPlus_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog file = new OpenFileDialog();
@@ -70,7 +74,92 @@ namespace TravelAgency.View.Guest1
 
         private void Grade(object sender, RoutedEventArgs e)
         {
+            object selectedItem = cbHotelName.SelectedItem;
+            Reservation reservation = new Reservation();
+            
+            int id;
+            string line = selectedItem.ToString();
+            string[] fields = line.Split(' ');
+            id = Convert.ToInt32(fields[0]);
+            string hotelName = fields[1];
 
+            int hotelRating = 0;
+            if (rbHotelOption1.IsChecked == true)
+            {
+                hotelRating = 1;
+            }
+            else if (rbHotelOption2.IsChecked == true)
+            {
+                hotelRating = 2;
+            }
+            else if (rbHotelOption3.IsChecked == true)
+            {
+                hotelRating = 3;
+            }
+            else if (rbHotelOption4.IsChecked == true)
+            {
+                hotelRating = 4;
+            }
+            else if (rbHotelOption5.IsChecked == true)
+            {
+                hotelRating = 5;
+            }
+
+            int ownerRating = 0;
+            if (rbOwnerOption1.IsChecked == true)
+            {
+                ownerRating = 1;
+            }
+            else if (rbOwnerOption2.IsChecked == true)
+            {
+                ownerRating = 2;
+            }
+            else if (rbOwnerOption3.IsChecked == true)
+            {
+                ownerRating = 3;
+            }
+            else if (rbOwnerOption4.IsChecked == true)
+            {
+                ownerRating = 4;
+            }
+            else if (rbOwnerOption5.IsChecked == true)
+            {
+                ownerRating = 5;
+            }
+
+            List<string> images = new List<string>();
+            foreach (object item in ListViewImg.Items)
+            {
+                if (item is string)
+                {
+                    images.Add(item as string);
+                }
+            }
+
+            Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
+
+            OwnerGrade newGrade = new OwnerGrade(
+                LogedUser.Username,
+                selectedOwnerUsername.OwnerUsername,
+                id,
+                hotelRating,
+                ownerRating,
+                txtComment.Text
+            );
+            ownerGradeRepository.Save(newGrade);
+
+            txtComment.Clear();
+            rbHotelOption1.IsChecked = false;
+            rbHotelOption2.IsChecked = false;
+            rbHotelOption3.IsChecked = false;
+            rbHotelOption4.IsChecked = false;
+            rbHotelOption5.IsChecked = false;
+            rbOwnerOption1.IsChecked = false;
+            rbOwnerOption2.IsChecked = false;
+            rbOwnerOption3.IsChecked = false;
+            rbOwnerOption4.IsChecked = false;
+            rbOwnerOption5.IsChecked = false;
+            ListViewImg.Items.Clear();
         }
 
         private void LoadHotels(object sender, RoutedEventArgs e)
@@ -83,7 +172,7 @@ namespace TravelAgency.View.Guest1
                 {
                     if (!hotelNames.Contains(reservation.HotelName))
                     {
-                        hotelNames.Add(reservation.HotelName);
+                        hotelNames.Add(reservation.Id.ToString() + " " + reservation.HotelName);
                     }
                 }
             }
@@ -97,6 +186,47 @@ namespace TravelAgency.View.Guest1
             {
                 ListViewImg.Items.Remove(ListViewImg.SelectedItem);
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            btnGrade.IsEnabled = false;
+        }
+        private void EnableGradeButton()
+        {
+            bool isHotelOptionSelected = rbHotelOption1.IsChecked == true || rbHotelOption2.IsChecked == true || rbHotelOption3.IsChecked == true || rbHotelOption4.IsChecked == true || rbHotelOption5.IsChecked == true;
+            bool isOwnerOptionSelected = rbOwnerOption1.IsChecked == true || rbOwnerOption2.IsChecked == true || rbOwnerOption3.IsChecked == true || rbOwnerOption4.IsChecked == true || rbOwnerOption5.IsChecked == true;
+            bool isHotelNameSelected = cbHotelName.SelectedItem != null;
+            bool isCommentEntered = !string.IsNullOrWhiteSpace(txtComment.Text);
+ 
+            if (isHotelOptionSelected && isOwnerOptionSelected && isHotelNameSelected && isCommentEntered)
+            {
+                btnGrade.IsEnabled = true;
+            }
+            else
+            {
+                btnGrade.IsEnabled = false;
+            }
+        }
+
+        private void rbHotelOption_Checked(object sender, RoutedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void rbOwnerOption_Checked(object sender, RoutedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void cbHotelName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void txtComment_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableGradeButton();
         }
 
     }

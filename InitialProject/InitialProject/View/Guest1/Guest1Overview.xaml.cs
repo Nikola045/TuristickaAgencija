@@ -44,7 +44,7 @@ namespace TravelAgency.View
 
         private void OpenAccount(object sender, RoutedEventArgs e)
         {
-            Guest1AccountForm createAccountForm = new Guest1AccountForm();
+            Guest1AccountForm createAccountForm = new Guest1AccountForm(LoggedInUser);
             createAccountForm.Show();
         }
 
