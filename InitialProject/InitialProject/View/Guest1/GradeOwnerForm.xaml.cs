@@ -26,9 +26,10 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class GradeOwnerForm : Window
     {
+        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
-        private readonly HotelRepository hotelRepository;
+        public HotelRepository hotelRepository { get; }
         private readonly GradeService gradeService;
         private readonly HotelService hotelService;
         private readonly ReservationService reservationService;
@@ -38,9 +39,9 @@ namespace TravelAgency.View.Guest1
             InitializeComponent();
             Title = "Grade owner";
             DataContext = this;
-            ownerGradeRepository = new OwnerGradeRepository();
-            reservationRepository = new ReservationRepository();
-            hotelRepository = new HotelRepository();
+            ownerGradeRepository = app.OwnerGradeRepository;
+            reservationRepository = app.ReservationRepository;
+            hotelRepository = app.HotelRepository;
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();

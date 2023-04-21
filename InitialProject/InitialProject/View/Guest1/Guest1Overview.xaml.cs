@@ -53,6 +53,13 @@ namespace TravelAgency.View
             MoveReservationForm moveReservationForm = new MoveReservationForm(LoggedInUser);
             moveReservationForm.Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
+        }
     }
 }
 

@@ -5,37 +5,35 @@ using System.Linq;
 using System.IO;
 using TravelAgency.Domain.Model;
 using TravelAgency.Services;
-using DevExpress.Utils.Filtering.Internal;
 using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.Repository.HotelRepo
 {
     public class HotelRepository
     {
-        private const string FilePath = "../../../Resources/Data/hotels.csv";
+        private readonly List<Hotel> hotels;
+        private readonly IStorage<Hotel> _storage;
 
-        private readonly Serializer<Hotel> _serializer;
-
-        private List<Hotel> hotels;
-
-        public HotelRepository()
+        public HotelRepository(IStorage<Hotel> storage)
         {
-            _serializer = new Serializer<Hotel>();
-            hotels = _serializer.FromCSV(FilePath);
+            _storage = storage;
+            hotels = _storage.Load();
         }
 
-        public Hotel Save(Hotel hotel)
+        public void Delete(Hotel entity)
         {
-            hotel.Id = NextId();
-            hotels = _serializer.FromCSV(FilePath);
-            hotels.Add(hotel);
-            _serializer.ToCSV(FilePath, hotels);
-            return hotel;
+            Hotel founded = hotels.Find(c => c.Id == entity.Id);
+            hotels.Remove(founded);
+            _storage.Save(hotels);
+        }
+
+        public List<Hotel> GetAll()
+        {
+            return hotels;
         }
 
         public int NextId()
         {
-            hotels = _serializer.FromCSV(FilePath);
             if (hotels.Count < 1)
             {
                 return 1;
@@ -43,9 +41,21 @@ namespace TravelAgency.Repository.HotelRepo
             return hotels.Max(h => h.Id) + 1;
         }
 
-        public List<Hotel> GetAll()
+        public Hotel Save(Hotel entity)
         {
-            return hotels;
+            hotels.Add(entity);
+            _storage.Save(hotels);
+            return entity;
+        }
+
+        public Hotel Update(Hotel entity)
+        {
+            Hotel current = hotels.Find(c => c.Id == entity.Id);
+            int index = hotels.IndexOf(current);
+            hotels.Remove(current);
+            hotels.Insert(index, entity);
+            _storage.Save(hotels);
+            return entity;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class MoveReservationForm : Window
     {
+        private readonly App app = (App)App.Current;
         ReservationService reservationService;
         MoveReservationRepository moveReservationRepository;
         ReservationRepository reservationRepository;
@@ -36,8 +37,8 @@ namespace TravelAgency.View.Guest1
         {
             InitializeComponent();
             reservationService = new ReservationService();
-            moveReservationRepository = new MoveReservationRepository();
-            reservationRepository = new ReservationRepository();
+            moveReservationRepository = app.MoveReservationRepository;
+            reservationRepository = app.ReservationRepository;
             hotelService = new HotelService();
             LogedUser = user;
         }

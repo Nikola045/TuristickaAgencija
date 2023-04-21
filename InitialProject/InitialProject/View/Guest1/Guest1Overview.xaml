@@ -44,6 +44,7 @@
             <Separator/>
         </ToolBar>
         <Button Grid.Column="1" Content="Move Reservation" HorizontalAlignment="Left" Margin="70,178,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Grid.Column="1" Content="LogOut" HorizontalAlignment="Left" Margin="396,211,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click_1"/>
 
     </Grid>
 </Window>
