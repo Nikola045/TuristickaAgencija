@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Xml.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository
 {
-    internal class TourRepository
+    public class TourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.Domain.Model
 {
-    internal class ToursStatistic
+    public class ToursStatistic
     {
 
     }

@@ -56,9 +56,6 @@
     <Compile Update="View\Owner\MoveReservationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Owner\MoveReservationView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Owner\OwnerHome.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -134,9 +131,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\MoveReservationPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Owner\MoveReservationView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\OwnerHome.xaml">

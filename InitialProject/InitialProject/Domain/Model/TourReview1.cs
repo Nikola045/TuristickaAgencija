@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.Domain.Model
 {
-    internal class TourReview1 : TravelAgency.Serializer.ISerializable
+    public class TourReview1 : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
         public int TourId { get; set; }

@@ -15,7 +15,7 @@ namespace TravelAgency
     /// </summary>
     public partial class SignInForm : Window
     {
-
+        private readonly App app = (App)App.Current;
         private readonly UserRepository _repository;
 
         private string _username;
@@ -43,7 +43,7 @@ namespace TravelAgency
         {
             InitializeComponent();
             DataContext = this;
-            _repository = new UserRepository();
+            _repository = app.UserRepository;
         }
 
         private void SignIn(object sender, RoutedEventArgs e)

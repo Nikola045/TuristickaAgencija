@@ -24,6 +24,7 @@ namespace TravelAgency.View.Owner
     /// </summary>
     public partial class GradePage : Page
     {
+        private readonly App app = (App)App.Current;
         private readonly GradeGuest1Repository gradeGuest1Repository;
         private readonly ReservationRepository reservationRepository;
         private readonly GradeService gradeService;
@@ -33,8 +34,8 @@ namespace TravelAgency.View.Owner
             InitializeComponent();
             Title = "Create new comment";
             DataContext = this;
-            gradeGuest1Repository = new GradeGuest1Repository();
-            reservationRepository = new ReservationRepository();
+            gradeGuest1Repository = app.GradeGuest1Repository;
+            reservationRepository = app.ReservationRepository;
             gradeService = new GradeService();
             reservationService = new ReservationService();
         }

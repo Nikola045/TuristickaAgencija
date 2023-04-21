@@ -15,15 +15,16 @@ namespace TravelAgency.Services
 {
     internal class ReservationService
     {
-        private readonly ReservationRepository reservationRepository;
-        private readonly HotelRepository hotelRepository;
+        private readonly App app = (App)App.Current;
+        public HotelRepository HotelRepository { get; }
+        private ReservationRepository reservationRepository;
         private readonly MoveReservationRepository moveReservationRepository;
         private readonly HotelService hotelService;
         public ReservationService() 
         {
-            reservationRepository = new ReservationRepository();
-            hotelRepository = new HotelRepository();
-            moveReservationRepository = new MoveReservationRepository();
+            reservationRepository = app.ReservationRepository;
+            HotelRepository = app.HotelRepository;
+            moveReservationRepository = app.MoveReservationRepository;
             hotelService = new HotelService();
         }
 
@@ -146,6 +147,7 @@ namespace TravelAgency.Services
                     reservationRepository.Update(reservation);
                     moveReservationRepository.Delete(moveReservationRepository.GetById(id));
                     MessageBox.Show("Reservation seccesfuly changed.");
+                    break;
                 }
             }
         }
