@@ -22,7 +22,8 @@ namespace TravelAgency.View
     /// </summary>
     public partial class Guest1Form : Window
     {
-        private readonly HotelRepository hotelRepository;
+        private readonly App app = (App)App.Current;
+        public HotelRepository hotelRepository { get; }
         private readonly HotelService hotelService;
         private readonly OwnerService ownerService;
 
@@ -32,7 +33,7 @@ namespace TravelAgency.View
             InitializeComponent();
             Title = "Search hotel";
             DataContext = this;
-            hotelRepository = new HotelRepository();
+            hotelRepository = app.HotelRepository;
             hotelService = new HotelService();
             ownerService = new OwnerService();
         }

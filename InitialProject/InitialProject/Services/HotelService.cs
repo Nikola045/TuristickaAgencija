@@ -12,13 +12,14 @@ namespace TravelAgency.Services
 {
     internal class HotelService
     {
-        private readonly ImageRepository hotelImageRepository;
+        private readonly App app = (App)App.Current;
+        private ImageRepository imageRepository { get; }
         private readonly HotelRepository hotelRepository;
 
         public HotelService() 
         {
-            hotelImageRepository = new ImageRepository();
-            hotelRepository = new HotelRepository();
+            imageRepository = app.ImageRepository;
+            hotelRepository = app.HotelRepository;
         }
 
         public List<Hotel> FindHotel(string name, string city, string country, string type, string max, string days)
@@ -99,7 +100,7 @@ namespace TravelAgency.Services
 
         public Image FindByUrl(string url)
         {
-            List<Image> hotelImages = hotelImageRepository.GetAll();
+            List<Image> hotelImages = imageRepository.GetAll();
             foreach (Image hotelImage in hotelImages)
             {
                 if (hotelImage.Url == url)
@@ -112,7 +113,7 @@ namespace TravelAgency.Services
 
         public List<Image> FindAllById(int id)
         {
-            List<Image> hotelImages = hotelImageRepository.GetAll();
+            List<Image> hotelImages = imageRepository.GetAll();
             List<Image> findedImages = new List<Image>();
             foreach (Image hotelImage  in hotelImages)
             {
@@ -178,10 +179,10 @@ namespace TravelAgency.Services
         public void AddHotelImage()
         {
             Image newImage = new Image(
-               hotelImageRepository.NextId(),
+               imageRepository.NextId(),
                OwnerForm.ownerForm.txtImg.Text);
 
-            Image savedImage = hotelImageRepository.Save(newImage);
+            Image savedImage = imageRepository.Save(newImage);
             OwnerForm.ownerForm.ImageList.Items.Add(OwnerForm.ownerForm.txtImg.Text);
             MessageBox.Show("You have successfully added an image");
             OwnerForm.ownerForm.LabelImgValidator.Content = "";
@@ -194,7 +195,7 @@ namespace TravelAgency.Services
             Image hotelImage = FindByUrl(selectedItem.ToString());
 
             OwnerForm.ownerForm.ImageList.Items.Remove(selectedItem);
-            hotelImageRepository.Delete(hotelImage);
+            imageRepository.Delete(hotelImage);
             if (OwnerForm.ownerForm.ImageList.Items.IsEmpty == true)
             {
                 OwnerForm.ownerForm.LabelImgValidator.Content = "Please add at least one image";
@@ -206,7 +207,7 @@ namespace TravelAgency.Services
             foreach (object item in OwnerForm.ownerForm.ImageList.Items)
             {
                 Image hotelImage = FindByUrl(item.ToString());
-                hotelImageRepository.Delete(hotelImage);
+                imageRepository.Delete(hotelImage);
             }
 
         }

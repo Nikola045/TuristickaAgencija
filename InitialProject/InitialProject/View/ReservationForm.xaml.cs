@@ -18,6 +18,7 @@ namespace TravelAgency.View
     {
         User LogedUser = new User();
 
+        private readonly App app = (App)App.Current;
         private readonly ReservationRepository _repository;
         private readonly HotelRepository hotelRepository;
         private readonly ReservationService reservationService;
@@ -27,8 +28,8 @@ namespace TravelAgency.View
             Title = "Create new reservation";
             DataContext = this;
             LogedUser = user;
-            _repository = new ReservationRepository();
-            hotelRepository = new HotelRepository();
+            _repository = app.ReservationRepository;
+            hotelRepository = app.HotelRepository;
             reservationService = new ReservationService();
         }
         

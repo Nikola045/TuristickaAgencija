@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository.GradeRepo
 {
-    internal class OwnerGradeRepository
+    public class OwnerGradeRepository
     {
-        private const string FilePath = "../../../Resources/Data/OwnerRating.csv";
-        private Serializer<OwnerGrade> _serializer;
         private List<OwnerGrade> ownerGrades;
+        private IStorage<OwnerGrade> _storage;
 
-        public OwnerGradeRepository()
+        public OwnerGradeRepository(IStorage<OwnerGrade> storage)
         {
-            _serializer = new Serializer<OwnerGrade>();
-            ownerGrades = _serializer.FromCSV(FilePath);
+            _storage = storage;
+            ownerGrades = _storage.Load();
 
         }
 
@@ -39,9 +39,8 @@ namespace TravelAgency.Repository.GradeRepo
 
         public OwnerGrade Save(OwnerGrade grade)
         {
-            ownerGrades = _serializer.FromCSV(FilePath);
             ownerGrades.Add(grade);
-            _serializer.ToCSV(FilePath, ownerGrades);
+            _storage.Save(ownerGrades);
             return grade;
         }
     }

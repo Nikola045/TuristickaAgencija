@@ -9,7 +9,7 @@ using Microsoft.Kiota.Abstractions;
 
 namespace TravelAgency.Domain.Model
 {
-    internal class Reservation : Serializer.ISerializable
+    public class Reservation : Serializer.ISerializable
     {
         public int Id { get; set; }
         public string GuestUserName { get; set; }

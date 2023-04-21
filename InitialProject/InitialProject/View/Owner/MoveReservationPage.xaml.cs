@@ -23,12 +23,13 @@ namespace TravelAgency.View.Owner
     /// </summary>
     public partial class MoveReservationPage : Page
     {
+        private readonly App app = (App)App.Current;
         private readonly MoveReservationRepository moveReservationRepository;
         private readonly ReservationService reservationService;
         public MoveReservation SelectedReservation { get; set; }
         public MoveReservationPage()
         {
-            moveReservationRepository = new MoveReservationRepository();
+            moveReservationRepository = app.MoveReservationRepository;
             reservationService = new ReservationService();
             InitializeComponent();
         }
@@ -40,24 +41,16 @@ namespace TravelAgency.View.Owner
 
         private void AcceptMoveReservation(object sender, RoutedEventArgs e)
         {
-            if (this.SelectedReservation != null)
-            {
                 SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
                 reservationService.MoveReservation(SelectedReservation.ReservationId, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
-                DataPanel.ItemsSource = moveReservationRepository.GetAll();
-            }
-            else { }
+                DataPanel.ItemsSource = moveReservationRepository.GetAll();    
         }
 
         private void DeclineMoveReservation(object sender, RoutedEventArgs e)
         {
-            if (SelectedReservation != null)
-            {
                 SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
                 moveReservationRepository.Delete(SelectedReservation);
                 DataPanel.ItemsSource = moveReservationRepository.GetAll();
-            }
-            else { }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

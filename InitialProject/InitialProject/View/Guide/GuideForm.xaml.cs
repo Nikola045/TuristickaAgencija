@@ -30,7 +30,7 @@ namespace TravelAgency.View
     public partial class GuideForm : Window
     {
 
-
+        private readonly App app = (App)App.Current;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly TourRepository tourRepository;
@@ -50,7 +50,7 @@ namespace TravelAgency.View
             DataContext = this;
             tourRepository = new TourRepository();
             checkPointRepository = new CheckPointRepository();
-            tourImageRepository = new ImageRepository();
+            tourImageRepository = app.ImageRepository;
         }
 
         private void SaveTour(object sender, RoutedEventArgs e)

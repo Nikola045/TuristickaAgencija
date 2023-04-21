@@ -5,47 +5,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository.HotelRepo
 {
-    internal class ImageRepository
+    public class ImageRepository
     {
         private const string FilePath = "../../../Resources/Data/hotels.csv";
-        private const string FilePathForImages = "../../../Resources/Data/hotelsImg.csv";
 
         private readonly Serializer<Image> _serializer;
 
         private List<Image> images;
         private List<Image> hotels;
+        private IStorage<Image> _storage;
 
-        public ImageRepository()
+        public ImageRepository(IStorage<Image> storage)
         {
+            _storage = storage;
             _serializer = new Serializer<Image>();
-            images = _serializer.FromCSV(FilePathForImages);
+            images = _storage.Load();
             hotels = _serializer.FromCSV(FilePath);
         }
 
         public Image Save(Image image)
         {
             image.Id = NextId();
-            images = _serializer.FromCSV(FilePathForImages);
             images.Add(image);
-            _serializer.ToCSV(FilePathForImages, images);
+            _storage.Save(images);
             return image;
         }
 
         public void Delete(Image image)
         {
-            images = _serializer.FromCSV(FilePathForImages);
             Image founded = images.Find(hi => hi.Url == image.Url);
             images.Remove(founded);
-            _serializer.ToCSV(FilePathForImages, images);
+            _storage.Save(images);
         }
 
         public int NextId()
         {
-            hotels = _serializer.FromCSV(FilePath);
             if (hotels.Count < 1)
             {
                 return 1;

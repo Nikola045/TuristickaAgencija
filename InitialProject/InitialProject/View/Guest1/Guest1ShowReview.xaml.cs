@@ -25,8 +25,9 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class Guest1ShowReview : Window
     {
-        private readonly GradeGuest1Repository gradeGuest1Repository;
-        private readonly ReservationRepository reservationRepository;
+        private readonly App app = (App)App.Current;
+        private GradeGuest1Repository gradeGuest1Repository;
+        private ReservationRepository reservationRepository;
         private readonly GradeService gradeService;
 
 
@@ -35,8 +36,8 @@ namespace TravelAgency.View.Guest1
             InitializeComponent();
             Title = "Guest1 review";
             DataContext = this;
-            gradeGuest1Repository = new GradeGuest1Repository();
-            reservationRepository = new ReservationRepository();
+            gradeGuest1Repository = app.GradeGuest1Repository;
+            reservationRepository = app.ReservationRepository;
             gradeService = new GradeService();
         }
         private void OnLoad(object sender, RoutedEventArgs e)
