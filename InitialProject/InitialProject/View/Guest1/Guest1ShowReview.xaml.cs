@@ -42,23 +42,31 @@ namespace TravelAgency.View.Guest1
         }
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            var reservations = reservationRepository.GetAll();
-            var grades = gradeGuest1Repository.GetAll();
+            List<GuestGrade> guestGrades = gradeGuest1Repository.GetAll();
+            List<object> filteredGrades = new List<object>();
 
-            var query = from grade in grades
-                        join reservation in reservations on grade.ReservationId equals reservation.Id
-                        where !gradeService.IsOwnerGradeExists(reservation.Id)
-                        select new
-                        {
-                            GuestUserName = grade.GuestUserName,
-                            AccommodationName = reservation.HotelName,
-                            Cleanliness = grade.Cleanliness,
-                            Respecting = grade.Respecting,
-                            CommentText = grade.CommentText
-                        };
+            foreach (GuestGrade grade in guestGrades)
+            {
+                Reservation reservation = reservationRepository.Get(grade.ReservationId);
 
-            DataPanel.ItemsSource = query.ToList();
+                if (reservation != null && gradeService.IsOwnerGradeExists(reservation.Id))
+                {
+                    var obj = new
+                    {
+                        OwnerOf = reservation.HotelName,
+                        Cleanliness = grade.Cleanliness,
+                        Politeness = grade.Respecting,
+                        Comment = grade.CommentText,
+                        ReservationId = grade.ReservationId                        
+                    };
+                    filteredGrades.Add(obj);
+                }
+            }
+
+            DataPanel.ItemsSource = filteredGrades;
         }
+
+
 
     }
 }
