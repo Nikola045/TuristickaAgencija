@@ -55,6 +55,11 @@ namespace TravelAgency.Repository
             reservations.Insert(index, reservation);
             _storage.Save(reservations);
             return reservation;
-        }        
+        }
+        public Reservation Get(int id)
+        {
+            return reservations.FirstOrDefault(r => r.Id == id);
+        }
+
     }
 }
