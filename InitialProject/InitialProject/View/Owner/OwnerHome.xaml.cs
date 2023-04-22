@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Graph.Models;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
@@ -17,6 +18,7 @@ namespace TravelAgency.View.Owner
         public User LoggedInUser { get; set; }
         public Hotel SelectedHotel { get; set; }
         private readonly HotelService hotelService;
+        private ReservationService reservationService;
         static int ClickAccommodationCount = 1;
         static int ClickMediaCount = 1;
         public OwnerHome(User user)
@@ -25,6 +27,7 @@ namespace TravelAgency.View.Owner
             DataContext = this;
             LoggedInUser = user;    
             hotelService = new HotelService();
+            reservationService = new ReservationService();
         }
 
         public OwnerHome() { }
@@ -55,6 +58,7 @@ namespace TravelAgency.View.Owner
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
+            reservationService.IsHotelRenovated();
             List<Hotel> hotels = new List<Hotel>();
             hotels = hotelService.GetHotelByOwner(LoggedInUser.Username);
             DataPanel.ItemsSource = hotels;
@@ -132,7 +136,7 @@ namespace TravelAgency.View.Owner
 
         private void OpenRenovation(object sender, RoutedEventArgs e)
         {
-            RenovationPage page = new RenovationPage();
+            RenovationPage page = new RenovationPage(LoggedInUser);
             ShowSmallPage.Content = page;
         }
 

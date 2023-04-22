@@ -27,6 +27,7 @@ namespace TravelAgency
         public OwnerGradeRepository OwnerGradeRepository { get; }
         public ReservationRepository ReservationRepository { get; }
         public UserRepository UserRepository { get; }
+        public RenovationRequestRepository RenovationRequestRepository { get; }
 
         public App()
         {
@@ -37,6 +38,7 @@ namespace TravelAgency
             OwnerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
             ReservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             UserRepository = new(InjectorService.CreateInstance<IStorage<User>>());
+            RenovationRequestRepository = new(InjectorService.CreateInstance<IStorage<RenovationRequest>>());
         }
     }
 }
