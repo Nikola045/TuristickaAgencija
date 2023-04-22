@@ -10,7 +10,7 @@
         <Button x:Name="btnReserve" Content="Reserve" HorizontalAlignment="Left" Margin="144,233,0,0" VerticalAlignment="Top" Height="23" Width="56" Click="Reserve"/>
         <Button x:Name="btnClose" Content="Cancel" HorizontalAlignment="Left" Margin="219,233,0,0" VerticalAlignment="Top" Height="23" Width="49" Click="Close"/>
         <DatePicker x:Name="Date1" HorizontalAlignment="Left" Margin="144,74,0,0" VerticalAlignment="Top" Height="28" Width="127" SelectedDateChanged="Date1_SelectedDateChanged"/>
-        <DatePicker x:Name="Date2" HorizontalAlignment="Left" Margin="144,105,0,0" VerticalAlignment="Top" Height="29" Width="127" SelectedDateChanged="Date2_SelectedDateChanged_1"/>
+        <DatePicker x:Name="Date2" HorizontalAlignment="Left" Margin="144,105,0,0" VerticalAlignment="Top" Height="29" Width="127" SelectedDateChanged="Date2_SelectedDateChanged"/>
         <TextBox x:Name="txtNumberOfGuests" IsEnabled="false" HorizontalAlignment="Left" Margin="144,167,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="127" Height="21" LostFocus="txtNumberOfGuests_LostFocus"/>
         <Label Content="Number of guests:" HorizontalAlignment="Left" Margin="28,163,0,0" VerticalAlignment="Top" Height="34" Width="116"/>
         <Label Content="Start date:" HorizontalAlignment="Left" Margin="57,71,0,0" VerticalAlignment="Top" Height="31" Width="80"/>

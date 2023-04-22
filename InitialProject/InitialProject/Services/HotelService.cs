@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
 using TravelAgency.Repository.HotelRepo;
+using Image = TravelAgency.Domain.Model.Image;
 
 namespace TravelAgency.Services
 {
@@ -14,7 +16,7 @@ namespace TravelAgency.Services
     {
         private readonly App app = (App)App.Current;
         private ImageRepository imageRepository { get; }
-        private readonly HotelRepository hotelRepository;
+        private HotelRepository hotelRepository { get; }
 
         public HotelService() 
         {
@@ -210,6 +212,20 @@ namespace TravelAgency.Services
                 imageRepository.Delete(hotelImage);
             }
 
+        }
+
+        public List<ComboBoxItem> FillForComboBoxHotels(User user)
+        {
+            List<ComboBoxItem> hotelsCB = new List<ComboBoxItem>();
+            List<Hotel> hotels = GetHotelByOwner(user.Username);
+            foreach (Hotel hotel in hotels)
+            {
+                ComboBoxItem cbItem = new ComboBoxItem();
+                cbItem.Tag = hotel.Id.ToString();
+                cbItem.Content = hotel.Name;
+                hotelsCB.Add(cbItem);
+            }
+            return hotelsCB;
         }
     }
 }

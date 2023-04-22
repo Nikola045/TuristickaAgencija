@@ -9,8 +9,17 @@
       Title="RenovationPage">
 
     <Grid Background="White">
-        <Label Content="Renovation
-" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100"/>
-
+        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="378,126,0,0" VerticalAlignment="Top" Height="54" Width="314" FontSize="20"/>
+        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="378,193,0,0" VerticalAlignment="Top" Height="57" Width="314" FontSize="20"/>
+        <ComboBox x:Name="HotelCB" HorizontalAlignment="Left" Margin="378,65,0,0" VerticalAlignment="Top" Width="314" Height="48" Loaded="OnLoad"/>
+        <TextBox x:Name="NumberOfDays" HorizontalAlignment="Left" Margin="378,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="314" Height="53"/>
+        <Button Content="Show Date" HorizontalAlignment="Left" Margin="471,323,0,0" VerticalAlignment="Top" Height="50" Width="128" Click="ShowDates"/>
+        <Button Content="Reserve" HorizontalAlignment="Left" Margin="581,545,0,0" VerticalAlignment="Top" Height="47" Width="251" Click="Reserve"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="308,76,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="308,140,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="308,209,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="308,279,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="ListDates" Margin="70,378,50,80"/>
+        <Button Content="Accept Alternative" HorizontalAlignment="Left" Margin="259,545,0,0" VerticalAlignment="Top" Height="47" Width="198" Click="AcceptAlternative"/>
     </Grid>
 </Page>

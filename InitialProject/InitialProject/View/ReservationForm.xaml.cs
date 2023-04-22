@@ -178,13 +178,33 @@ namespace TravelAgency.View
 
         private void Date1_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            DateTime today = DateTime.Now.Date;
+            if (Date1.SelectedDate.HasValue && Date1.SelectedDate.Value.Date < today)
+            {
+                if (Date1.SelectedDate.Value.Date != today)
+                {
+                    MessageBox.Show("It is not possible to select a date before today.");
+                }
+                Date1.SelectedDate = today;
+            }
             btnReserve.IsEnabled = AllFieldsValid();
         }
 
-        private void Date2_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
+
+        private void Date2_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            DateTime today = DateTime.Now.Date;
+            if (Date2.SelectedDate.HasValue && Date2.SelectedDate.Value.Date < today)
+            {
+                if (Date2.SelectedDate.Value.Date != today)
+                {
+                    MessageBox.Show("It is not possible to select a date before today.");
+                }
+                Date2.SelectedDate = today;
+            }
             btnReserve.IsEnabled = AllFieldsValid();
         }
+
 
         private void txtNumberOfGuests_LostFocus(object sender, RoutedEventArgs e)
         {
