@@ -8,13 +8,14 @@ namespace TravelAgency.Services
 {
     internal class GradeService
     {
+        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
         private readonly ReservationService reservationService;
         public GradeService() 
         {
-            ownerGradeRepository = new OwnerGradeRepository();
-            reservationRepository = new ReservationRepository();
+            ownerGradeRepository = app.OwnerGradeRepository;
+            reservationRepository = app.ReservationRepository;
             reservationService = new ReservationService();
         }
 

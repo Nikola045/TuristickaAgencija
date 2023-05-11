@@ -20,6 +20,7 @@ namespace TravelAgency.Domain.Model
         public int MinNumberOfDays { get; set; }
         public int NumberOfDaysToCancel { get; set; }
         public string OwnerUsername { get; set; }
+        public string RenovationStatus { get; set; }
 
         public Hotel() { }
 
@@ -33,11 +34,12 @@ namespace TravelAgency.Domain.Model
             MaxNumberOfGuests = maxNumberOfGuests;
             MinNumberOfDays = minNumberOfDays;
             NumberOfDaysToCancel = numberOfDaysToCancel;
+            RenovationStatus = "Not Renovated";
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, City, Country, TypeOfHotel, MaxNumberOfGuests.ToString(), MinNumberOfDays.ToString(), NumberOfDaysToCancel.ToString(), OwnerUsername };
+            string[] csvValues = { Id.ToString(), Name, City, Country, TypeOfHotel, MaxNumberOfGuests.ToString(), MinNumberOfDays.ToString(), NumberOfDaysToCancel.ToString(), OwnerUsername, RenovationStatus };
             return csvValues;
         }
 
@@ -52,6 +54,7 @@ namespace TravelAgency.Domain.Model
             MinNumberOfDays = Convert.ToInt32(values[6]);
             NumberOfDaysToCancel = Convert.ToInt32(values[7]);
             OwnerUsername = values[8];
+            RenovationStatus = values[9];
         }
     }
 }

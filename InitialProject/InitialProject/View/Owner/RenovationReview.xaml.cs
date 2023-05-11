@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelAgency.Domain.Model;
+using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Owner
 {
@@ -20,9 +23,25 @@ namespace TravelAgency.View.Owner
     /// </summary>
     public partial class RenovationReview : Page
     {
+        ReservationService reservationService;
         public RenovationReview()
         {
+            reservationService = new ReservationService();
             InitializeComponent();
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            List<RenovationRequest> renovationRequests = new List<RenovationRequest>();
+            renovationRequests = reservationService.ShowAllRenovationForOwnerHotels();
+            DataPanel.ItemsSource = renovationRequests;
+        }
+
+        private void CancelRenovation(object sender, RoutedEventArgs e)
+        {
+            RenovationRequest renovationRequest = (RenovationRequest)DataPanel.SelectedItem;
+            reservationService.CancelRenovation(renovationRequest);
+            DataPanel.ItemsSource = reservationService.ShowAllRenovationForOwnerHotels();
         }
     }
 }

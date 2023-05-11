@@ -26,9 +26,10 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class GradeOwnerForm : Window
     {
+        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
-        private readonly HotelRepository hotelRepository;
+        public HotelRepository hotelRepository { get; }
         private readonly GradeService gradeService;
         private readonly HotelService hotelService;
         private readonly ReservationService reservationService;
@@ -38,9 +39,9 @@ namespace TravelAgency.View.Guest1
             InitializeComponent();
             Title = "Grade owner";
             DataContext = this;
-            ownerGradeRepository = new OwnerGradeRepository();
-            reservationRepository = new ReservationRepository();
-            hotelRepository = new HotelRepository();
+            ownerGradeRepository = app.OwnerGradeRepository;
+            reservationRepository = app.ReservationRepository;
+            hotelRepository = app.HotelRepository;
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();
@@ -148,18 +149,15 @@ namespace TravelAgency.View.Guest1
             );
             ownerGradeRepository.Save(newGrade);
 
-            txtComment.Clear();
-            rbHotelOption1.IsChecked = false;
-            rbHotelOption2.IsChecked = false;
-            rbHotelOption3.IsChecked = false;
-            rbHotelOption4.IsChecked = false;
-            rbHotelOption5.IsChecked = false;
-            rbOwnerOption1.IsChecked = false;
-            rbOwnerOption2.IsChecked = false;
-            rbOwnerOption3.IsChecked = false;
-            rbOwnerOption4.IsChecked = false;
-            rbOwnerOption5.IsChecked = false;
-            ListViewImg.Items.Clear();
+            
+            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation();
+
+            var selectedHotel = cbHotelName.SelectedItem;
+
+            recommendationForRenovation.HotelChoice(selectedHotel);
+
+            recommendationForRenovation.Show();
+            this.Close();
         }
 
         private void LoadHotels(object sender, RoutedEventArgs e)

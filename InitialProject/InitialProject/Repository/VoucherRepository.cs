@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository
 {
-    internal class VoucherRepository
+    public class VoucherRepository
     {
 
         private const string FilePath = "../../../Resources/Data/vouchers.csv";

@@ -4,30 +4,29 @@ using Cake.Core.IO;
 using System.IO;
 using TravelAgency.Domain.Model;
 using TravelAgency.Serializer;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.Repository.GradeRepo
 {
-    internal class GradeGuest1Repository
+    public class GradeGuest1Repository
     {
-        private const string FilePathGuestRatingde = "../../../Resources/Data/GuestRating.csv";
-        private readonly Serializer<GuestGrade> _serializer;
         private List<GuestGrade> grades;
+        private readonly IStorage<GuestGrade> _storage;
 
-        public GradeGuest1Repository()
+        public GradeGuest1Repository(IStorage<GuestGrade> storage)
         {
-            _serializer = new Serializer<GuestGrade>();
-            grades = _serializer.FromCSV(FilePathGuestRatingde);
+            _storage = storage;
+            grades = _storage.Load();
         }
 
         public GuestGrade Save(GuestGrade grade)
         {
-            grades = _serializer.FromCSV(FilePathGuestRatingde);
             grades.Add(grade);
-            _serializer.ToCSV(FilePathGuestRatingde, grades);
+            _storage.Save(grades);
             return grade;
         }
         public List<GuestGrade> GetAll()
-        {    
+        {       
             return grades;
         }
     }

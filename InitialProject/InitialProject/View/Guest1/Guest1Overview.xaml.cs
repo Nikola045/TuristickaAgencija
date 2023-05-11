@@ -11,12 +11,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Graph.Models.Security;
 using TravelAgency.Domain.Model;
 using TravelAgency.Forms;
 using TravelAgency.Repository;
 using TravelAgency.View.Guest1;
+using TravelAgency.View.Guest2;
 
 namespace TravelAgency.View
 {
@@ -32,14 +34,14 @@ namespace TravelAgency.View
 
         private void OpenGuest1Form(object sender, RoutedEventArgs e)
         {
-            Guest1Form createGuest1Form = new Guest1Form();
-            createGuest1Form.Show();
+            Guest1Form page = new Guest1Form();
+            ShowPage.Content = page;
         }
 
         private void OpenReserveForm(object sender, RoutedEventArgs e)
         {
-            ReservationForm createReservationForm = new ReservationForm(LoggedInUser);
-            createReservationForm.Show();
+            ReservationForm page = new ReservationForm(LoggedInUser);
+            ShowPage.Content = page;
         }
 
         private void OpenAccount(object sender, RoutedEventArgs e)
@@ -48,10 +50,14 @@ namespace TravelAgency.View
             createAccountForm.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
-            MoveReservationForm moveReservationForm = new MoveReservationForm(LoggedInUser);
-            moveReservationForm.Show();
+            string language1 = "English";
+            string language2 = "Serbian";
+            cbLanguage.Items.Add(language1);
+            cbLanguage.Items.Add(language2);
+            cbLanguage.Text = language1;
+
         }
     }
 }

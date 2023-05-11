@@ -20,9 +20,10 @@ namespace TravelAgency.View
     /// <summary>
     /// Interaction logic for Guest1Form.xaml
     /// </summary>
-    public partial class Guest1Form : Window
+    public partial class Guest1Form : Page
     {
-        private readonly HotelRepository hotelRepository;
+        private readonly App app = (App)App.Current;
+        public HotelRepository hotelRepository { get; }
         private readonly HotelService hotelService;
         private readonly OwnerService ownerService;
 
@@ -32,7 +33,7 @@ namespace TravelAgency.View
             InitializeComponent();
             Title = "Search hotel";
             DataContext = this;
-            hotelRepository = new HotelRepository();
+            hotelRepository = app.HotelRepository;
             hotelService = new HotelService();
             ownerService = new OwnerService();
         }
@@ -72,10 +73,6 @@ namespace TravelAgency.View
             {
                 e.Cancel = true;
             }
-        }
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

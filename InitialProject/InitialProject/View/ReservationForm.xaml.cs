@@ -4,20 +4,23 @@ using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Graph.Models.Security;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
+using TravelAgency.View.Guest1;
 
 namespace TravelAgency.View
 {
     /// <summary>
     /// Interaction logic for ReservationForm.xaml
     /// </summary>
-    public partial class ReservationForm : Window
+    public partial class ReservationForm : Page
     {
         User LogedUser = new User();
 
+        private readonly App app = (App)App.Current;
         private readonly ReservationRepository _repository;
         private readonly HotelRepository hotelRepository;
         private readonly ReservationService reservationService;
@@ -27,17 +30,11 @@ namespace TravelAgency.View
             Title = "Create new reservation";
             DataContext = this;
             LogedUser = user;
-            _repository = new ReservationRepository();
-            hotelRepository = new HotelRepository();
+            _repository = app.ReservationRepository;
+            hotelRepository = app.HotelRepository;
             reservationService = new ReservationService();
         }
         
-
-        private void Close(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void Reserve(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
@@ -52,20 +49,26 @@ namespace TravelAgency.View
                 {
                     if (Convert.ToInt32(txtNumberOfGuests.Text) <= 0 || Convert.ToInt32(txtNumberOfGuests.Text) > hotels[i].MaxNumberOfGuests)
                     {
-                        MessageBox.Show("Maximum guests for " + hotels[i].Name + " must be lower than " + Convert.ToInt32(hotels[i].MaxNumberOfGuests));
+                        guestsValidation.Content = ("*Maximum guests for " + hotels[i].Name + " must be lower than " + Convert.ToInt32(hotels[i].MaxNumberOfGuests));
+                        guestsValidation.Visibility = Visibility.Visible;
                         requirementsMet = false;
                     }
-                    if (Date2.SelectedDate <= Date1.SelectedDate)
+                    else
                     {
-                        MessageBox.Show("Return date must be greater than departure date");
-                        requirementsMet = false;
+                        guestsValidation.Visibility = Visibility.Collapsed;
                     }
+
                     if (Convert.ToInt32(txtNumberOfDays.Text) < hotels[i].MinNumberOfDays)
                     {
-                        MessageBox.Show("Minimum number of days for " + hotels[i].Name + " must be greater than " + hotels[i].MinNumberOfDays);
+                        daysValidation.Content = ("*Minimum number of days for " + hotels[i].Name + " must be greater than " + hotels[i].MinNumberOfDays);
+                        daysValidation.Visibility = Visibility.Visible;
                         requirementsMet = false;
-                        break;
                     }
+                    else
+                    {
+                        daysValidation.Visibility = Visibility.Collapsed;
+                    }
+
                     if (!reservationService.IsAvailable(reservations, HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value))
                     {
                         List<DateTime> alternativeDates = reservationService.FindAlternativeDates(HotelNameCB.SelectedItem.ToString(), Date1.SelectedDate.Value, Date2.SelectedDate.Value, Convert.ToInt32(txtNumberOfDays.Text));
@@ -73,25 +76,34 @@ namespace TravelAgency.View
                         if (alternativeDates.Count > 0)
                         {
                             StringBuilder message = new StringBuilder();
-                            message.AppendLine("The selected hotel is already booked for the selected dates.");
-                            message.AppendLine("Please choose one of the following alternative dates:");
-                            int maxAlternativeDates = Math.Min(alternativeDates.Count, 5);
+                            message.AppendLine($"*{HotelNameCB.SelectedItem} is already reserved in that period of time.");
+                            message.AppendLine();
+                            message.AppendLine($"  A few other suggestions for staying in {HotelNameCB.SelectedItem} for {txtNumberOfDays.Text} days:");
+                            message.AppendLine();
+                            int maxAlternativeDates = Math.Min(alternativeDates.Count, 3);
                             for (int j = 0; j < maxAlternativeDates; j++)
                             {
                                 message.AppendLine("- " + alternativeDates[j].ToShortDateString() + " to " + alternativeDates[j].AddDays(Convert.ToInt32(txtNumberOfDays.Text)).ToShortDateString());
                             }
 
-                            MessageBox.Show(message.ToString());
+                            suggestionLabel.Content = message.ToString();
+                            suggestionLabel.Visibility = Visibility.Visible;
                             requirementsMet = false;
                             break;
                         }
                         else
                         {
-                            MessageBox.Show("No alternative dates available for the selected period.");
+                            suggestionLabel.Content = $"*No alternative dates available for staying in {HotelNameCB.SelectedItem} for {txtNumberOfDays.Text} days.";
+                            suggestionLabel.Visibility = Visibility.Visible;
                             requirementsMet = false;
                             break;
                         }
                     }
+
+                    suggestionLabel.Visibility = Visibility.Collapsed;
+
+
+
                 }
             }
 
@@ -107,14 +119,8 @@ namespace TravelAgency.View
                     Convert.ToInt32(txtNumberOfDays.Text),
                     Convert.ToInt32(txtNumberOfGuests.Text));
                 _repository.Save(newReservation);
-                MessageBox.Show("Reservation made succesfully!");
-
-                HotelNameCB.SelectedItem = null;
-                txtNumberOfGuests.Clear();
-                txtNumberOfDays.Clear();
-                Date1.SelectedDate = null;
-                Date2.SelectedDate = null;
-                btnReserve.IsEnabled = false;
+                SucessfullReservation sucessfullReservationPage = new SucessfullReservation();
+                NavigationService.Navigate(sucessfullReservationPage);
             }
         }
 
@@ -151,6 +157,8 @@ namespace TravelAgency.View
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             btnReserve.IsEnabled = false;
+            
+
         }
 
         private bool AllFieldsValid()
@@ -164,60 +172,155 @@ namespace TravelAgency.View
            
             else return false;
         }
+        private void CheckAllFields()
+        {
+            if (!string.IsNullOrEmpty(txtNumberOfGuests.Text) &&
+                !string.IsNullOrEmpty(txtNumberOfDays.Text) &&
+                Date1.SelectedDate.HasValue &&
+                Date2.SelectedDate.HasValue &&
+                HotelNameCB.SelectedItem != null)
+            {
+                validationLabel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                validationLabel.Visibility = Visibility.Visible;
+            }
+        }
 
         private void HotelNameCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnReserve.IsEnabled = AllFieldsValid();
         }
 
-        private void txtNumberOfGuests_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            btnReserve.IsEnabled = AllFieldsValid();
-        }
 
         private void Date1_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DateTime today = DateTime.Now.Date;
-            if (Date1.SelectedDate.HasValue && Date1.SelectedDate.Value.Date < today)
-            {
-                if (Date1.SelectedDate.Value.Date != today)
-                {
-                    MessageBox.Show("It is not possible to select a date before today.");
-                }
-                Date1.SelectedDate = today;
-            }
-            btnReserve.IsEnabled = AllFieldsValid();
-        }
+            bool isDate1Valid = Date1.SelectedDate.HasValue && Date1.SelectedDate.Value.Date >= today;
+            bool isDate2Valid = Date2.SelectedDate.HasValue && Date2.SelectedDate.Value.Date >= today;
 
+            if (isDate1Valid && isDate2Valid)
+            {
+                dateValidationBefore.Visibility = Visibility.Collapsed;
+            }
+            else if (!isDate1Valid && !isDate2Valid)
+            {
+                dateValidationBefore.Visibility = Visibility.Visible;
+            }
+            else if (!isDate1Valid && isDate2Valid)
+            {
+                if (Date1.SelectedDate != null && Date1.SelectedDate.Value.Date < today)
+                {
+                    dateValidationBefore.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    dateValidationBefore.Visibility = Visibility.Collapsed;
+                }
+            }
+            else if (isDate1Valid && !isDate2Valid)
+            {
+                if (Date2.SelectedDate != null && Date2.SelectedDate.Value.Date < today)
+                {
+                    dateValidationBefore.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    dateValidationBefore.Visibility = Visibility.Collapsed;
+                }
+            }
+
+            btnReserve.IsEnabled = AllFieldsValid() && !dateValidationBefore.IsVisible;
+
+            if (Date1.SelectedDate > Date2.SelectedDate)
+            {
+                dateValidation.Visibility = Visibility.Visible;
+                btnReserve.IsEnabled = false;
+            }
+            else
+            {
+                dateValidation.Visibility = Visibility.Collapsed;
+            }
+
+            CheckAllFields();
+        }
 
         private void Date2_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DateTime today = DateTime.Now.Date;
-            if (Date2.SelectedDate.HasValue && Date2.SelectedDate.Value.Date < today)
+            bool isDate1Valid = Date1.SelectedDate.HasValue && Date1.SelectedDate.Value.Date >= today;
+            bool isDate2Valid = Date2.SelectedDate.HasValue && Date2.SelectedDate.Value.Date >= today;
+
+            if (isDate1Valid && isDate2Valid)
             {
-                if (Date2.SelectedDate.Value.Date != today)
-                {
-                    MessageBox.Show("It is not possible to select a date before today.");
-                }
-                Date2.SelectedDate = today;
+                dateValidationBefore.Visibility = Visibility.Collapsed;
             }
-            btnReserve.IsEnabled = AllFieldsValid();
+            else if (!isDate1Valid && !isDate2Valid)
+            {
+                dateValidationBefore.Visibility = Visibility.Visible;
+            }
+            else if (!isDate1Valid && isDate2Valid)
+            {
+                if (Date1.SelectedDate != null && Date1.SelectedDate.Value.Date < today)
+                {
+                    dateValidationBefore.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    dateValidationBefore.Visibility = Visibility.Collapsed;
+                }
+            }
+            else if (isDate1Valid && !isDate2Valid)
+            {
+                if (Date2.SelectedDate != null && Date2.SelectedDate.Value.Date < today)
+                {
+                    dateValidationBefore.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    dateValidationBefore.Visibility = Visibility.Collapsed;
+                }
+            }
+
+            btnReserve.IsEnabled = AllFieldsValid() && !dateValidationBefore.IsVisible;
+
+            if (Date1.SelectedDate > Date2.SelectedDate)
+            {
+                dateValidation.Visibility = Visibility.Visible;
+                btnReserve.IsEnabled = false;
+            }
+            else
+            {
+                dateValidation.Visibility = Visibility.Collapsed;
+            }
+
+            CheckAllFields();
         }
 
 
         private void txtNumberOfGuests_LostFocus(object sender, RoutedEventArgs e)
         {
             btnReserve.IsEnabled = AllFieldsValid();
+            CheckAllFields();
         }
 
         private void txtNumberOfDays_TextChanged(object sender, TextChangedEventArgs e)
         {
             btnReserve.IsEnabled = AllFieldsValid();
+            CheckAllFields();
         }
 
         private void txtNumberOfDays_LostFocus(object sender, RoutedEventArgs e)
         {
             btnReserve.IsEnabled = AllFieldsValid();
+            CheckAllFields();
+        }
+
+        private void txtNumberOfGuests_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            btnReserve.IsEnabled = AllFieldsValid();
+            CheckAllFields();
         }
     }
 }

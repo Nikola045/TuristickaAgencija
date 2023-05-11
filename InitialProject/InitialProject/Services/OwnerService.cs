@@ -8,12 +8,13 @@ namespace TravelAgency.Services
 {
     internal class OwnerService
     {
+        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly UserRepository userRepository;
         public OwnerService()
         {
-            ownerGradeRepository = new OwnerGradeRepository();
-            userRepository = new UserRepository();
+            ownerGradeRepository = app.OwnerGradeRepository;
+            userRepository = app.UserRepository;
         }
 
         public int CountGradesFromOwnerRating(string OwnerUserName)
