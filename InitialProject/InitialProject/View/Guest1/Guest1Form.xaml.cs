@@ -20,7 +20,7 @@ namespace TravelAgency.View
     /// <summary>
     /// Interaction logic for Guest1Form.xaml
     /// </summary>
-    public partial class Guest1Form : Window
+    public partial class Guest1Form : Page
     {
         private readonly App app = (App)App.Current;
         public HotelRepository hotelRepository { get; }
@@ -73,10 +73,6 @@ namespace TravelAgency.View
             {
                 e.Cancel = true;
             }
-        }
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }
