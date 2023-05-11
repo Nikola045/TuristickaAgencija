@@ -25,6 +25,7 @@
             <Separator/>
         </ToolBar>
         <Label Content="Super-guest status" HorizontalAlignment="Left" Margin="28,119,0,0" VerticalAlignment="Top"/>
+        <Button Content="Move Reservation" HorizontalAlignment="Left" Margin="170,0,0,0" VerticalAlignment="Center" Click="Button_Click"/>
 
     </Grid>
 </Window>

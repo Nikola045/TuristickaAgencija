@@ -5,46 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View"
         mc:Ignorable="d"
-        Title="Guest1Overview" Height="450" Width="800">
-    <Grid>
+        Title="https://travel-agency.com/home" Height="1080" Width="1920"
+        WindowState="Maximized">
+    <Grid Loaded="OnLoad">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="760"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="89*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-            <Button Click="OpenGuest1Form">
-                <StackPanel Orientation="Horizontal" Width="71">
-                    <Image Source="../Resources/Images/add.png" Width="20" Height="25" RenderTransformOrigin="0.5,0.6"/>
-                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
-                </StackPanel>
-            </Button>
-            <Separator/>
-            <Button Click="OpenReserveForm">
-                <StackPanel Orientation="Horizontal" Width="87">
-                    <Image Source="../Resources/Images/add.png" Width="20" Height="25"/>
-                    <TextBlock Text="Reserve" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="57" />
-                </StackPanel>
-            </Button>
-            <Separator/>
-            <Button Click="OpenAccount">
-                <StackPanel Orientation="Horizontal" Width="87">
-                    <Image Source="../Resources/Images/add.png" Width="20" Height="25"/>
-                    <TextBlock Text="Account" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="57" />
-                </StackPanel>
-            </Button>
-            <Separator/>
-        </ToolBar>
-        <Button Grid.Column="1" Content="Move Reservation" HorizontalAlignment="Left" Margin="70,178,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click"/>
-        <Button Grid.Column="1" Content="LogOut" HorizontalAlignment="Left" Margin="396,211,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Line X1="0" Y1="0" X2="1590" Y2="0" Stroke="Black" StrokeThickness="1" Margin="165,772,165,160" />
+        <Label Content="Get in touch with us" HorizontalAlignment="Center" Margin="0,790,0,0" VerticalAlignment="Top" FontSize="32"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="165,875,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="travelagency@gmail.com" HorizontalAlignment="Left" Margin="165,923,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Social media" HorizontalAlignment="Center" Margin="0,875,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="Adress" HorizontalAlignment="Left" Margin="1674,875,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="Petra Petrovica 14, Novi Sad" HorizontalAlignment="Left" Margin="1498,923,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image HorizontalAlignment="Left" Height="166" VerticalAlignment="Top" Width="698" Source="/Resources/Images/Ta.jpg" Stretch="None" Margin="16,16,0,0"/>
+        </Grid>
 
+        <Button Content="Search accommodations"  HorizontalAlignment="Left" Margin="722,78,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20" Click="OpenGuest1Form"/>
+        <Button Content="Make a reservation"  Click="OpenReserveForm" HorizontalAlignment="Left" Margin="974,78,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20"/>
+        <Button Content="Account" Click="OpenAccount" HorizontalAlignment="Left" Margin="1225,78,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20"/>
+        <Button Content="Forum" HorizontalAlignment="Left" Margin="1477,78,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20"/>
+        <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="1751,119,0,0" VerticalAlignment="Top" Width="147"/>
+        <Label Content="Dark theme" HorizontalAlignment="Left" Margin="1747,78,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+        <Frame NavigationUIVisibility="Hidden" x:Name="ShowPage" Canvas.Top="0" Margin="165,192,175,292"/>
+        <Image HorizontalAlignment="Left" Height="37" Margin="890,917,0,0" VerticalAlignment="Top" Width="37" Source="/Resources/Images/facebook-logo-493.png"/>
+        <Image HorizontalAlignment="Left" Height="55" Margin="983,909,0,0" VerticalAlignment="Top" Width="55" Source="/Resources/Images/logo-instagram-png-2430.png"/>
+        <Image HorizontalAlignment="Center" Height="56" Margin="0,908,0,0" VerticalAlignment="Top" Width="56" Source="/Resources/Images/logo-twitter-png-5859.png"/>
     </Grid>
 </Window>

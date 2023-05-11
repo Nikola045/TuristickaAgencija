@@ -17,6 +17,9 @@
     <Compile Update="View\Guest1\RecommendationForRenovation.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest1\SucessfullReservation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest2\Guest2Overview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +95,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\RecommendationForRenovation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\SucessfullReservation.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\Guest2Overview.xaml">

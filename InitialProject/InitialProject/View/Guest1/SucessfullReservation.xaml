@@ -1,0 +1,13 @@
+﻿<Page x:Class="TravelAgency.View.Guest1.SucessfullReservation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelAgency.View.Guest1"
+      mc:Ignorable="d" Height="575" Width="1590">
+    <Canvas Background="White" Margin="0,0,0,0">
+        <Label Content="Reservation made sucessfully" FontSize="28" Canvas.Left="611" Canvas.Top="363" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Thank you!" Canvas.Left="722" FontSize="28" Canvas.Top="413" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Image Height="415" Canvas.Left="588" Width="415" Source="/Resources/Images/confetti.jpg" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="3"/>
+    </Canvas>
+</Page>

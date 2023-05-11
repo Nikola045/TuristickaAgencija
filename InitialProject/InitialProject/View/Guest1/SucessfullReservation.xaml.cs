@@ -10,30 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
-    /// Interaction logic for RecommendationForRenovation.xaml
+    /// Interaction logic for SucessfullReservation.xaml
     /// </summary>
-    public partial class RecommendationForRenovation : Window
+    public partial class SucessfullReservation : Page
     {
-        public RecommendationForRenovation()
+        public SucessfullReservation()
         {
             InitializeComponent();
-        }
-
-        private object selectedHotel;
-
-        public void HotelChoice(object izbor)
-        {
-            selectedHotel = izbor;
-        }
-
-        private void Rate(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

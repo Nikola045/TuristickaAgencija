@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graph.Models;
+using Microsoft.Graph.Models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,12 @@ namespace TravelAgency.View.Guest1
         {
             GradeOwnerForm gradeOwner = new GradeOwnerForm(LogedUser);
             gradeOwner.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MoveReservationForm moveReservationForm = new MoveReservationForm(LogedUser);
+            moveReservationForm.Show();
         }
     }
 }
