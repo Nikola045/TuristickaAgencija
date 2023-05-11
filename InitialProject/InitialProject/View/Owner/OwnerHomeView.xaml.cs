@@ -58,9 +58,8 @@ namespace TravelAgency.View.Owner
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            reservationService.IsHotelRenovated();
-            List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelService.GetHotelByOwner(LoggedInUser.Username);
+            reservationService.ChangeAllRenovatedStatus();
+            List<Hotel> hotels = hotelService.GetHotelByOwner(LoggedInUser.Username);
             DataPanel.ItemsSource = hotels;
         }
 

@@ -28,5 +28,15 @@ namespace TravelAgency.Repository.UserRepo
         {
             return users;
         }
+
+        public User Update(User entity)
+        {
+            User current = users.Find(c => c.Id == entity.Id);
+            int index = users.IndexOf(current);
+            users.Remove(current);
+            users.Insert(index, entity);
+            _storage.Save(users);
+            return entity;
+        }
     }
 }
