@@ -2,10 +2,16 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="View\Guest1\AnywhereAnytime.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest1\GradeOwnerForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\Guest1AccountForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\Guest1HomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\Guest1ShowReview.xaml.cs">
@@ -82,10 +88,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\Guest1\AnywhereAnytime.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\GradeOwnerForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\Guest1AccountForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\Guest1HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\Guest1ShowReview.xaml">
