@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,11 +23,14 @@ namespace TravelAgency.View.Owner
     /// <summary>
     /// Interaction logic for MoveReservationPage.xaml
     /// </summary>
-    public partial class MoveReservationPage : Page
+    public partial class MoveReservationPage : Page, INotifyPropertyChanged
     {
         private readonly App app = (App)App.Current;
         private readonly MoveReservationRepository moveReservationRepository;
         private readonly ReservationService reservationService;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public MoveReservation SelectedReservation { get; set; }
         public MoveReservationPage()
         {
@@ -41,22 +46,40 @@ namespace TravelAgency.View.Owner
 
         private void AcceptMoveReservation(object sender, RoutedEventArgs e)
         {
-                SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-                reservationService.MoveReservation(SelectedReservation.ReservationId, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
-                DataPanel.ItemsSource = moveReservationRepository.GetAll();    
+            SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
+            reservationService.MoveReservation(SelectedReservation.ReservationId, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+            DataPanel.ItemsSource = moveReservationRepository.GetAll();
         }
 
         private void DeclineMoveReservation(object sender, RoutedEventArgs e)
         {
-                SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-                moveReservationRepository.Delete(SelectedReservation);
-                DataPanel.ItemsSource = moveReservationRepository.GetAll();
+            SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
+            moveReservationRepository.Delete(SelectedReservation);
+            DataPanel.ItemsSource = moveReservationRepository.GetAll();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
             ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.ReservationId, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+        }
+
+        /*public ImageSource ImageSource
+        {
+            get => _imageSource;
+            set
+            {
+                if (_imageSource != value)
+                {
+                    _imageSource = value;
+                    OnPropertyChanged();
+                }
+            }
+        }*/
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

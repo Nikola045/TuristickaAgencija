@@ -42,9 +42,9 @@ namespace TravelAgency.Services
 
         public string SuperOwner(string username)
         {
-            if (CountGradesFromOwnerRating(username) >= 1)
+            if (CountGradesFromOwnerRating(username) >= 50)
             {
-                if (GetAverageOwnerRating(username) < 1)
+                if (GetAverageOwnerRating(username) < 4.5)
                 {
                     return "Owner";
                 }
@@ -83,7 +83,11 @@ namespace TravelAgency.Services
                     superOwners.Add(owner);
             }
             return superOwners.Distinct().ToList();
+        }
 
+        public void UpadateUsername(User user)
+        {
+            userRepository.Update(user); 
         }
     }
 }
