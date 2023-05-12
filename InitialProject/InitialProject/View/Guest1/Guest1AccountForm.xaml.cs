@@ -21,19 +21,13 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for Guest1AccountForm.xaml
     /// </summary>
-    public partial class Guest1AccountForm : Window
+    public partial class Guest1AccountForm : Page
     {
-        private User LogedUser { get; set; }
+        private User LoggedInUser { get; set; }
         public Guest1AccountForm(User user)
         {
-            LogedUser = user;
+            LoggedInUser = user;
             InitializeComponent();
-        }
-
-        private void OpenAccount(object sender, RoutedEventArgs e)
-        {
-            Guest1AccountForm createAccountForm = new Guest1AccountForm(LogedUser);
-            createAccountForm.Show();
         }
 
         private void ShowReview(object sender, RoutedEventArgs e)
@@ -44,14 +38,27 @@ namespace TravelAgency.View.Guest1
 
         private void GradeOwner(object sender, RoutedEventArgs e)
         {
-            GradeOwnerForm gradeOwner = new GradeOwnerForm(LogedUser);
+            GradeOwnerForm gradeOwner = new GradeOwnerForm(LoggedInUser);
             gradeOwner.Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MoveReservationForm moveReservationForm = new MoveReservationForm(LogedUser);
+            MoveReservationForm moveReservationForm = new MoveReservationForm(LoggedInUser);
             moveReservationForm.Show();
+        }
+
+        private void LogoutClick(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            App.Current.Windows[0].Close();
+        }
+
+        private void AccountSettingsClick(object sender, RoutedEventArgs e)
+        {
+            Guest1AccountForm page = new Guest1AccountForm(LoggedInUser);
+            NavigationService.Navigate(page);
         }
     }
 }

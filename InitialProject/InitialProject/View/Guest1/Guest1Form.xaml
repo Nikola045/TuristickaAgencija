@@ -5,7 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" Height="575" Width="1590">
     <Canvas Background="White">
-        <Label Content="Name:" FontSize="20" Canvas.Left="3" Canvas.Top="58" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Name:" FontSize="20" Canvas.Left="3" Canvas.Top="58" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Content="Type:" FontSize="20" Canvas.Left="3" Canvas.Top="289" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Number of guests:" FontSize="20" Canvas.Left="1" Canvas.Top="325" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Number of days for reservation:" FontSize="20" Canvas.Left="3" Canvas.Top="393" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -35,7 +35,7 @@
         <Label Content="Country:" FontSize="20" Canvas.Top="211" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox x:Name="txtCountry"  FontSize="16" TextWrapping="Wrap" Canvas.Left="3" Canvas.Top="253" Width="454" Height="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <DataGrid x:Name="DataPanel" AutoGenerateColumns="True" AutoGeneratingColumn="DataPanel_AutoGeneratingColumn"   
-            ItemsSource="{Binding Hotels}" SelectedItem="{Binding SelectedHotel}" Loaded="OnLoad" Height="410" Canvas.Left="594" Canvas.Top="58" Width="986" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            ItemsSource="{Binding Hotels}" SelectedItem="{Binding SelectedHotel}" Loaded="OnLoad" Height="400" Canvas.Left="594" Canvas.Top="58" Width="986" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Searched accommodations:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Canvas.Left="594" Canvas.Top="16"/>
     </Canvas>
 </Page>
