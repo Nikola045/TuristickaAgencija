@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,11 +14,14 @@ namespace TravelAgency.View.Owner
     /// <summary>
     /// Interaction logic for HotelGalery.xaml
     /// </summary>
-    public partial class HotelGalery : Window
+    public partial class HotelGalery : Window, INotifyPropertyChanged
     {
         private HotelService hotelService;
         public Hotel CurrentHotel { get; set; }
         public int indexer = 0;
+        public ImageSource _imageSource;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public HotelGalery(Hotel hotel)
         {
@@ -41,6 +46,24 @@ namespace TravelAgency.View.Owner
             if (indexer < 0)
                 indexer = allHotelImages.Count-1;
             Image.Source = new ImageSourceConverter().ConvertFromString(allHotelImages[indexer].Url) as ImageSource;
+        }
+
+        public ImageSource ImageSource
+        {
+            get => _imageSource;
+            set
+            {
+                if (_imageSource != value)
+                {
+                    _imageSource = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

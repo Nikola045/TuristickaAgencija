@@ -213,32 +213,27 @@ namespace TravelAgency.Services
 
         public List<RenovationRequest> ShowAllRenovationForOwnerHotels()
         {
-            DateTime dateTime = DateTime.Now;
             List<RenovationRequest> renovations = renovationRequestRepository.GetAll();
-            List<RenovationRequest> futureRenovatin = new List<RenovationRequest>();
-            foreach(RenovationRequest renovation in renovations)
-            {
-                if(renovation.EndDate > dateTime)
-                {
-                    futureRenovatin.Add(renovation);
-                }
-            }
-            return futureRenovatin;
+            return renovations;
         }
 
         public void CancelRenovation(RenovationRequest renovation)
-        {
-            DateTime dateTime = DateTime.Now;
-            if(renovation.StartDate.Day - dateTime.Day > 5 )
+        {   
+            if(renovation != null)
             {
-                renovationRequestRepository.Delete(renovation);
+                DateTime dateTime = DateTime.Now;
+                if (renovation.StartDate.Day - dateTime.Day > 5)
+                {
+                    renovationRequestRepository.Delete(renovation);
+                }
             }
         }
 
-        public void IsHotelRenovated()
+        public List<Hotel> IsHotelRenovated()
         {
             DateTime dateTime = DateTime.Now;
             List<Hotel> hotels = hotelRepository.GetAll();
+            List<Hotel> changedHotels = new List<Hotel>();
             List<RenovationRequest> renovations = renovationRequestRepository.GetAll(); 
             if(renovations.Count != 0 && hotels.Count != 0)
             {
@@ -251,20 +246,32 @@ namespace TravelAgency.Services
                             if (renovation.StartDate <= dateTime && dateTime <= renovation.EndDate)
                             {
                                 hotel.RenovationStatus = "Is Renovationg";
+                                changedHotels.Add(hotel);   
                             }
                             else if (dateTime >= renovation.EndDate && dateTime.Year - renovation.EndDate.Year < 1)
                             {
                                 hotel.RenovationStatus = "Renovated";
+                                changedHotels.Add(hotel);
                             }
                             else
                             {
                                 hotel.RenovationStatus = "Not Renovated";
+                                changedHotels.Add(hotel);
                                 renovationRequestRepository.Delete(renovation);
                             }
                         }
                         if (renovations.Count == 0) break;
                     }
                 }
+            }
+            return changedHotels;
+        }
+        public void ChangeAllRenovatedStatus()
+        {
+            List<Hotel> hotels = IsHotelRenovated();
+            foreach(Hotel hotel in hotels)
+            {
+                hotelRepository.Update(hotel);
             }
         }
     }

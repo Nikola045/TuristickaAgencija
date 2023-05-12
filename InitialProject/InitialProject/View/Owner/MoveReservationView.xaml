@@ -9,10 +9,12 @@
       Title="MoveReservationPage">
 
     <Grid Background="White">
-        <DataGrid x:Name="DataPanel" Margin="69,44,69,289" Loaded="OnLoad"/>
+        <DataGrid x:Name="DataPanel" ItemsSource="{Binding Path=Data, UpdateSourceTrigger=PropertyChanged}" Margin="69,44,69,289" Loaded="OnLoad"/>
+        
+        <Label x:Name="ReservationInfoLabel" Content="" HorizontalAlignment="Left" Margin="634,479,0,0" VerticalAlignment="Top" Height="66" Width="321"/>
+
         <Button Content="Accept" HorizontalAlignment="Left" Margin="69,479,0,0" VerticalAlignment="Top" Height="66" Width="161" FontSize="20" Click="AcceptMoveReservation"/>
         <Button Content="Decline" HorizontalAlignment="Left" Margin="247,479,0,0" VerticalAlignment="Top" Height="66" Width="162" FontSize="20" Click="DeclineMoveReservation"/>
-        <Label x:Name="ReservationInfoLabel" Content="" HorizontalAlignment="Left" Margin="634,479,0,0" VerticalAlignment="Top" Height="66" Width="321"/>
         <Button Content="Show Info" HorizontalAlignment="Center" Margin="0,479,0,0" VerticalAlignment="Top" Height="66" Width="160" Click="Button_Click" FontSize="20"/>
     </Grid>
 </Page>

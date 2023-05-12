@@ -24,9 +24,8 @@ namespace TravelAgency.Domain.Model
 
         public Hotel() { }
 
-        public Hotel(int id, string name, string city, string country, string typeOfHotel, int maxNumberOfGuests, int minNumberOfDays, int numberOfDaysToCancel)
+        public Hotel(string name, string city, string country, string typeOfHotel, int maxNumberOfGuests, int minNumberOfDays, int numberOfDaysToCancel)
         {
-            Id = id;
             Name = name;
             City = city;
             Country = country;
