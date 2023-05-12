@@ -29,19 +29,28 @@ namespace TravelAgency.View.Owner
         private readonly MoveReservationRepository moveReservationRepository;
         private readonly ReservationService reservationService;
 
+        private string _hotelName;
+        private string _guestUsername;
+        private DateTime _oldStartDate;
+        private DateTime _newStartDate;
+        private DateTime _oldEndDate;
+        private DateTime _newEndDate;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public MoveReservation SelectedReservation { get; set; }
         public MoveReservationPage()
         {
+            InitializeComponent();
+            DataContext = this;
             moveReservationRepository = app.MoveReservationRepository;
             reservationService = new ReservationService();
-            InitializeComponent();
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            DataPanel.ItemsSource = moveReservationRepository.GetAll();
+            //DataPanel.ItemsSource = moveReservationRepository.GetAll();
+            HotelName = "hotel";
         }
 
         private void AcceptMoveReservation(object sender, RoutedEventArgs e)
@@ -64,18 +73,18 @@ namespace TravelAgency.View.Owner
             ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.ReservationId, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
         }
 
-        /*public ImageSource ImageSource
+        public string HotelName
         {
-            get => _imageSource;
+            get => _hotelName;
             set
             {
-                if (_imageSource != value)
+                if (_hotelName != value)
                 {
-                    _imageSource = value;
+                    _hotelName = value;
                     OnPropertyChanged();
                 }
             }
-        }*/
+        }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
