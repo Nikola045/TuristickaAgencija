@@ -1,6 +1,4 @@
-﻿using Microsoft.Graph.Models;
-using Microsoft.Graph.Models.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,31 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TravelAgency.Domain.Model;
 using User = TravelAgency.Domain.Model.User;
 
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
-    /// Interaction logic for Guest1AccountForm.xaml
+    /// Interaction logic for VisitedAccommodationsPage.xaml
     /// </summary>
-    public partial class Guest1AccountForm : Page
+    public partial class VisitedAccommodationsPage : Page
     {
         private User LoggedInUser { get; set; }
-        public Guest1AccountForm(User user)
+        public VisitedAccommodationsPage(User user)
         {
             LoggedInUser = user;
             InitializeComponent();
         }
-
-        private void LogoutClick(object sender, RoutedEventArgs e)
-        {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            App.Current.Windows[0].Close();
-        }
-
         private void AccountSettingsClick(object sender, RoutedEventArgs e)
         {
             Guest1AccountForm page = new Guest1AccountForm(LoggedInUser);
@@ -60,10 +50,17 @@ namespace TravelAgency.View.Guest1
             ActiveReservationsPage page = new ActiveReservationsPage(LoggedInUser);
             NavigationService.Navigate(page);
         }
-        private void DatePicker_Loaded(object sender, RoutedEventArgs e)
+
+        private void ShowReview(object sender, RoutedEventArgs e)
         {
-            Date1.SelectedDate = new DateTime(2000, 5, 15);
+            Guest1ShowReview createShowReview = new Guest1ShowReview();
+            createShowReview.Show();
         }
 
+        private void GradeOwner(object sender, RoutedEventArgs e)
+        {
+            GradeOwnerForm gradeOwner = new GradeOwnerForm(LoggedInUser);
+            gradeOwner.Show();
+        }
     }
 }

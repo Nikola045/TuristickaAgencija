@@ -168,7 +168,6 @@ namespace TravelAgency.View
             Mouse.OverrideCursor = null;
         }
 
-        
     }
 }
 
