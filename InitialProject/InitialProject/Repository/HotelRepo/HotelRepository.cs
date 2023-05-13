@@ -61,6 +61,10 @@ namespace TravelAgency.Repository.HotelRepo
         {
             return hotels.Find(h => h.Id == id);
         }
+        public Hotel GetByHotelName(string hotelName)
+        {
+            return hotels.FirstOrDefault(h => h.Name == hotelName);
+        }
 
     }
 }
