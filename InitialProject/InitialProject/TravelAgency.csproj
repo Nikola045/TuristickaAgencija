@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\apartment.jpg" />
+    <None Remove="Resources\Images\camera.png" />
     <None Remove="Resources\Images\confetti.jpeg" />
     <None Remove="Resources\Images\confetti.jpg" />
     <None Remove="Resources\Images\emptystar.png" />
@@ -26,6 +27,7 @@
     <None Remove="Resources\Images\hut.jpg" />
     <None Remove="Resources\Images\logo-instagram-png-2430.png" />
     <None Remove="Resources\Images\logo-twitter-png-5859.png" />
+    <None Remove="Resources\Images\profilepic.jpg" />
     <None Remove="Resources\Images\Ta.jpg" />
   </ItemGroup>
 
@@ -43,6 +45,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\Images\apartment.jpg" />
+    <Resource Include="Resources\Images\camera.png" />
     <Resource Include="Resources\Images\confetti.jpg" />
     <Resource Include="Resources\Images\emptystar.png" />
     <Resource Include="Resources\Images\facebook-logo-493.png" />
@@ -52,6 +55,7 @@
     <Resource Include="Resources\Images\hut.jpg" />
     <Resource Include="Resources\Images\logo-instagram-png-2430.png" />
     <Resource Include="Resources\Images\logo-twitter-png-5859.png" />
+    <Resource Include="Resources\Images\profilepic.jpg" />
     <Resource Include="Resources\Images\Ta.jpg" />
   </ItemGroup>
 
