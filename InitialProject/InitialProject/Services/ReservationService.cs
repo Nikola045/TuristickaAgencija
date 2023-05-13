@@ -1,11 +1,9 @@
-﻿using Cake.Core.IO;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
@@ -273,6 +271,49 @@ namespace TravelAgency.Services
             {
                 hotelRepository.Update(hotel);
             }
+        }
+
+        public ColumnSeries ShowHotelDataInChart(string hotelName)
+        {
+            DateTime dateTime = DateTime.Now;
+            List<int> yValues = new List<int>();
+            List<Reservation> reservations = reservationRepository.GetAll();
+            for (int i = 0; i < 5; i++)
+            {
+                int tempCount = 0;
+                foreach (Reservation reservation in reservations)
+                {
+                    if (reservation.HotelName == hotelName && reservation.StartDate.Year == dateTime.Year - 4 + i)
+                    {
+                        tempCount++;
+                    } 
+                }
+                yValues.Add(tempCount);
+            }
+            ColumnSeries columnSeries = new ColumnSeries();
+            columnSeries.Title = hotelName;
+            columnSeries.Values = new ChartValues<int>(yValues);
+
+            return columnSeries;
+        }
+
+        public List<int> ShowHotelDataPerMonth(string hotelName, int year)
+        {
+            List<int> yValues = new List<int>();
+            List<Reservation> reservations = reservationRepository.GetAll();
+            for (int i = 1; i <= 12; i++)
+            {
+                int tempCount = 0;
+                foreach (Reservation reservation in reservations)
+                {
+                    if (reservation.HotelName == hotelName && reservation.StartDate.Month == i && year == reservation.StartDate.Year)
+                    {
+                        tempCount++;
+                    }
+                }
+                yValues.Add(tempCount);
+            }
+            return yValues;
         }
     }
 }
