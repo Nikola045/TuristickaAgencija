@@ -2,7 +2,13 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="View\Guest1\ActiveReservationsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest1\AnywhereAnytime.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\ForumSettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\GradeOwnerForm.xaml.cs">
@@ -24,6 +30,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\SucessfullReservation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\VisitedAccommodationsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest2\Guest2Overview.xaml.cs">
@@ -86,12 +95,18 @@
     <Compile Update="View\Owner\StatisticPdfView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ReservationForm.xaml.cs">
+    <Compile Update="View\Guest1\ReservationForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\Guest1\ActiveReservationsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\AnywhereAnytime.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\ForumSettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\GradeOwnerForm.xaml">
@@ -113,6 +128,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\SucessfullReservation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\VisitedAccommodationsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\Guest2Overview.xaml">
@@ -175,7 +193,7 @@
     <Page Update="View\Owner\StatisticPdfView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\ReservationForm.xaml">
+    <Page Update="View\Guest1\ReservationForm.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
