@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="View\Guest1\AccountSettingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest1\ActiveReservationsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -18,9 +21,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\Guest1HomePage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Guest1\Guest1ShowReview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\MoveReservationForm.xaml.cs">
@@ -100,6 +100,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\Guest1\AccountSettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\ActiveReservationsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -116,9 +119,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\Guest1HomePage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Guest1\Guest1ShowReview.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\MoveReservationForm.xaml">

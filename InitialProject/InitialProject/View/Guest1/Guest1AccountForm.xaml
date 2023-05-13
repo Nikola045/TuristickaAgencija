@@ -6,46 +6,15 @@
         xmlns:local="clr-namespace:TravelAgency.View.Guest1"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="TravelAgency.View.Guest1.Guest1AccountForm"
         mc:Ignorable="d" Height="575" Width="1590">
-    <Canvas Background="White" Margin="0,0,0,0">
-
+    <Canvas Background="White" Margin="0,0,0,0" Loaded="OnLoad">
         <Image Height="232" Canvas.Left="14" Canvas.Top="14" Width="228" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Resources/Images/profilepic.jpg"/>
-        <Label Content="Change profile pic" FontSize="20" Canvas.Left="20" Canvas.Top="262" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Image Height="31" Canvas.Left="192" Source="/Resources/Images/camera.png" Stretch="Fill" Canvas.Top="265" Width="34" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="Label" Content="Change profile pic" FontSize="20" Canvas.Left="20" Canvas.Top="262" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Image x:Name="Image" Height="31" Canvas.Left="192" Source="/Resources/Images/camera.png" Stretch="Fill" Canvas.Top="265" Width="34" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button x:Name="AccountSettings" Content="Account settings" Height="53" Width="232" FontSize="20" HorizontalAlignment="Center" Canvas.Left="10" Canvas.Top="318" VerticalAlignment="Top" Click="AccountSettingsClick"/>
         <Button x:Name="ForumSettings" Content="Forum settings" Height="53" Width="232" FontSize="20" HorizontalAlignment="Center" Canvas.Left="10" Canvas.Top="371" VerticalAlignment="Top" Click="ForumSettingsClick"/>
         <Button x:Name="VisitedAccommodations" Content="Visited accommodations" Height="53" Width="232" FontSize="20" Canvas.Left="10" Canvas.Top="424" HorizontalAlignment="Center" VerticalAlignment="Top" Click="VisitedAccommodationsClick"/>
         <Button x:Name="ActiveReservations" Content="Active reservations" Height="53" Width="232" FontSize="20" Canvas.Left="10" Canvas.Top="477" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ActiveReservationsClick"/>
-        <Button x:Name="Logout" Content="Log out" Height="32" Width="139" FontSize="20" Canvas.Left="1441" Canvas.Top="498" HorizontalAlignment="Center" VerticalAlignment="Top" Click="LogoutClick"/>
-        <Label Content="Period of time you want check:" FontSize="20" Canvas.Left="1206" Canvas.Top="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="-" FontSize="20" Canvas.Left="1376" Canvas.Top="53" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <DatePicker Canvas.Left="1210" Canvas.Top="56" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160"/>
-        <DatePicker Canvas.Left="1401" Canvas.Top="56" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160"/>
-        <Button Content="Report of every made resevation" FontSize="20" Canvas.Left="1210" Canvas.Top="100" HorizontalAlignment="Left" VerticalAlignment="Top" Width="351"/>
-        <Button Content="Report of every cenceled resevation" FontSize="20" Canvas.Left="1209" Canvas.Top="140" HorizontalAlignment="Left" VerticalAlignment="Top" Width="352"/>
-        <Rectangle Height="176" Canvas.Left="1190" Stroke="Black" Canvas.Top="14" Width="390" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="First name:" FontSize="18" Canvas.Left="607" Canvas.Top="35"/>
-        <Label Content="Last name:" FontSize="18" Canvas.Left="609" Canvas.Top="70" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Username:" FontSize="18" Canvas.Left="609" Canvas.Top="105" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Password:" FontSize="18" Canvas.Left="615" Canvas.Top="140" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Phone number:" FontSize="18" Canvas.Left="572" Canvas.Top="175" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Home adress:" FontSize="18" Canvas.Left="585" Canvas.Top="210" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Email adress:" FontSize="18" Canvas.Left="591" Canvas.Top="246" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Sex:" FontSize="18" Canvas.Left="662" Canvas.Top="282" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Birth date:" FontSize="18" Canvas.Left="612" Canvas.Top="318" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Is super-guest:" FontSize="18" Canvas.Left="577" Canvas.Top="352" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Bonus points:" FontSize="18" Canvas.Left="586" Canvas.Top="386" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Content="Save changes" FontSize="18" Canvas.Left="708" Canvas.Top="426" HorizontalAlignment="Left" VerticalAlignment="Top" Width="214"/>
-        <Label Content="Yes" FontSize="18" Canvas.Left="708" Canvas.Top="352" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="15" FontSize="18" Canvas.Left="708" Canvas.Top="386" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="708" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="Marko" Canvas.Top="39" Width="214" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="708" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="Markovic" Canvas.Top="74" Width="214" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="708" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="rista" Canvas.Top="109" Width="214" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="708" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="" Canvas.Top="144" Width="214" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="708" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="0612345678" Canvas.Top="179" Width="214" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="708" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="Mise Misica 15, Novi Sad" Canvas.Top="214" Width="214" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="708" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="rista@gmail.com" Canvas.Top="250" Width="214" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <DatePicker x:Name="Date1" Canvas.Left="708" FontSize="18" Canvas.Top="320" HorizontalAlignment="Left" VerticalAlignment="Top" Width="214" Loaded="DatePicker_Loaded"/>
-        <RadioButton Content="Male" FontSize="18" IsChecked="True" VerticalContentAlignment="Center" Canvas.Left="708" Canvas.Top="288" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <RadioButton Content="Female" FontSize="18" VerticalContentAlignment="Center" Canvas.Left="795" Canvas.Top="288" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Frame NavigationUIVisibility="Hidden" x:Name="ShowSmallPage" Height="516" Width="1319" Canvas.Left="257" Canvas.Top="14" HorizontalAlignment="Left" VerticalAlignment="Center"></Frame>
+        <Label x:Name="UsernameLabel" Content="Username: rista" Canvas.Left="20" FontSize="20" Canvas.Top="262" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Canvas>
 </Page>
