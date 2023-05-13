@@ -49,7 +49,34 @@
                     <TextBlock Text="Past Tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
                 </StackPanel>
             </Button>
+            <Separator/>
+            <Button Click="OpenCreateTourRequest" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+
+            <Button Click="OpenTourRequestsStatistic" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Statistic" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+            <Separator/>
+
+
+            <Button Click="OpenAllTourRequests" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                </StackPanel>
+            </Button>
         </ToolBar>
+        
       
     </Grid>
 </Window>

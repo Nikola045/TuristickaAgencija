@@ -53,5 +53,24 @@ namespace TravelAgency.View.Guest2
             PastTours createTourReview = new PastTours(LoggedInUser);
             createTourReview.Show();
         }
+        private void OpenCreateTourRequest(object sender, RoutedEventArgs e)
+        {
+            CreatingTourRequest creatingTourRequest = new CreatingTourRequest(LoggedInUser);
+            creatingTourRequest.Show();
+        }
+
+        private void OpenTourRequestsStatistic(object sender, RoutedEventArgs e)
+        {
+            TourRequestsStatistic tourRequestsStatistic = new TourRequestsStatistic(LoggedInUser);
+            tourRequestsStatistic.Show();
+
+        }
+
+        private void OpenAllTourRequests(object sender, RoutedEventArgs e)
+        {
+            AllTourRequests tourRequestsStatistic = new AllTourRequests(LoggedInUser);
+            tourRequestsStatistic.Show();
+
+        }
     }
 }

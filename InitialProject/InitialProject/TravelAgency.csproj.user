@@ -100,6 +100,12 @@
     <Page Update="View\Guest1\SucessfullReservation.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Guest2\AllTourRequests.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\CreatingTourRequest.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest2\Guest2Overview.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -110,6 +116,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\PastTours.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\TourRequestsStatistic.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\TourReview.xaml">
