@@ -145,6 +145,9 @@
     <Page Update="View\Guest2\PastTours.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Guest2\TourRequestsStatistic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest2\TourReview.xaml">
       <SubType>Designer</SubType>
     </Page>

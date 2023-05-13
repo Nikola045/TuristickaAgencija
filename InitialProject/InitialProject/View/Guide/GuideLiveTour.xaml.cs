@@ -178,9 +178,9 @@ namespace TravelAgency.View.Guide
                 }
                 else
                 {
+                    //List<Voucher> vouchers = voucherRepository.CreateVouchersForCancelling(selectedTour,LogedUser.Id);
                     CurrentSelectedTour.TourStatus = "Cancelled";
                     CurrentSelectedTour = tourRepository.Update(CurrentSelectedTour);
-                    voucherRepository.CreateVouchersForCancelling(selectedTour,LogedUser.Id);
                     MessageBox.Show("Tour cancelled");
                 }
             }
