@@ -49,8 +49,7 @@ namespace TravelAgency.View.Owner
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            //DataPanel.ItemsSource = moveReservationRepository.GetAll();
-            HotelName = "hotel";
+            DataPanel.ItemsSource = moveReservationRepository.GetAll();
         }
 
         private void AcceptMoveReservation(object sender, RoutedEventArgs e)

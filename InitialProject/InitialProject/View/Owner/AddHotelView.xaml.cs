@@ -8,6 +8,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Image = TravelAgency.Domain.Model.Image;
 using System.Collections.Generic;
+using System.Windows.Input;
+using System.Threading.Tasks;
+using System.Threading;
+using System;
 
 namespace TravelAgency.Forms
 {
@@ -33,6 +37,7 @@ namespace TravelAgency.Forms
         private string _cancelV;
         private string _imgV;
         private string _urlV;
+        private CancellationTokenSource cts;
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public OwnerForm(User user)
@@ -469,6 +474,117 @@ namespace TravelAgency.Forms
                 }
 
             }
+        }
+
+        private async void StartDemo(object sender, RoutedEventArgs e)
+        {
+            cts = new CancellationTokenSource();
+            string name = "Letenka";
+            string city = "Novi Sad";
+            string country = "Srbija";
+            string type = "Hotel";
+            int max = 1;
+            int min = 1;
+            int cancel = 1;
+            string image = "a.jpg";
+
+            try
+            {
+                HotelName = "";
+                foreach (char c in name)
+                {
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    HotelName += c.ToString();
+                    await Task.Delay(100);
+                }
+                City = "";
+                foreach (char c in city)
+                {
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    City += c.ToString();
+                    await Task.Delay(100);
+                }
+                Country = "";
+                foreach (char c in country  )
+                {
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    Country += c.ToString();
+                    await Task.Delay(100);
+                }
+                if (cts.Token.IsCancellationRequested)
+                {
+
+                }
+                else
+                {
+                    HotelType = "Hotel";
+                }
+                
+                Max = 0;
+                foreach (char c in max.ToString())
+                {
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    Max += c;
+                    await Task.Delay(100);
+                }
+                Min = 0;
+                foreach (char c in min.ToString())
+                {
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    Min += c;
+                    await Task.Delay(100);
+                }
+                CancelDays = 0;
+                foreach (char c in cancel.ToString())
+                {
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    CancelDays += c;
+                    await Task.Delay(100);
+                }
+                Img = "";
+                foreach (char c in image)
+                {
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    Img += c.ToString();
+                    await Task.Delay(100);
+                }
+                if (cts.Token.IsCancellationRequested)
+                {
+                    
+                }
+                else
+                {
+                    AddImage(AddImgButton, e);
+                }
+                
+            }
+            catch (OperationCanceledException){}
+        }
+
+        private void StopDemo(object sender, RoutedEventArgs e)
+        {
+            cts?.Cancel();
         }
     }
 }
