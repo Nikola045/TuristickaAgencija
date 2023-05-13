@@ -26,6 +26,7 @@ namespace TravelAgency.View
         public HotelRepository hotelRepository { get; }
         private readonly HotelService hotelService;
         private readonly OwnerService ownerService;
+        private readonly ReservationService reservationService;
 
         const string FilePath = "../../../Resources/Data/hotels.csv";
         public Guest1Form()
@@ -36,10 +37,12 @@ namespace TravelAgency.View
             hotelRepository = app.HotelRepository;
             hotelService = new HotelService();
             ownerService = new OwnerService();
+            reservationService = new ReservationService();
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
+            reservationService.ChangeAllRenovatedStatus();
             List<Hotel> hotels = new List<Hotel>();
             hotels = hotelRepository.GetAll();
             List<User> superOwners = ownerService.GetAllSuperOwners();
@@ -52,10 +55,24 @@ namespace TravelAgency.View
                 }
                 
             }
-            
             DataPanel.ItemsSource = hotelService.SortBySuperOwner(hotels);
+            ExpandColumns(DataPanel);
         }
+        private void ExpandColumns(DataGrid dataGrid)
+        {
+            double totalWidth = dataGrid.ActualWidth;
+            int columnCount = dataGrid.Columns.Count;
 
+            if (columnCount > 0)
+            {
+                double columnWidth = totalWidth / columnCount;
+
+                foreach (DataGridColumn column in dataGrid.Columns)
+                {
+                    column.Width = new DataGridLength(columnWidth);
+                }
+            }
+        }
         private void Search(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();

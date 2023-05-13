@@ -12,16 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Graph.Models.Security;
+using User = TravelAgency.Domain.Model.User;
 
-namespace TravelAgency.View.Owner
+namespace TravelAgency.View.Guest1
 {
     /// <summary>
-    /// Interaction logic for StatisticPage.xaml
+    /// Interaction logic for ForumSettingsPage.xaml
     /// </summary>
-    public partial class StatisticPage : Page
+    public partial class ForumSettingsPage : Page
     {
-        public StatisticPage()
+        private User LoggedInUser { get; set; }
+        public ForumSettingsPage(User user)
         {
+            LoggedInUser = user;
             InitializeComponent();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graph.Models;
+using Microsoft.IdentityModel.Abstractions;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -58,9 +59,8 @@ namespace TravelAgency.View.Owner
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            reservationService.IsHotelRenovated();
-            List<Hotel> hotels = new List<Hotel>();
-            hotels = hotelService.GetHotelByOwner(LoggedInUser.Username);
+            reservationService.ChangeAllRenovatedStatus();
+            List<Hotel> hotels = hotelService.GetHotelByOwner(LoggedInUser.Username);
             DataPanel.ItemsSource = hotels;
         }
 
@@ -130,7 +130,7 @@ namespace TravelAgency.View.Owner
 
         private void OpenStatistic(object sender, RoutedEventArgs e)
         {
-            StatisticPage page = new StatisticPage();
+            StatisticPage page = new StatisticPage(LoggedInUser);
             ShowSmallPage.Content = page;
         }
 

@@ -14,7 +14,40 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        <ToggleButton Width="47" Height="22" Content="" HorizontalAlignment="Left" Canvas.Left="506" Canvas.Top="168" VerticalAlignment="Top" Margin="1845,82,0,0">
+            <ToggleButton.Template>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Border Background="#EEEEEE" CornerRadius="10" BorderThickness="1" BorderBrush="#DCDCDC">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Ellipse x:Name="Switch" Fill="White" Width="14" Height="14" HorizontalAlignment="Left" Margin="5,4,0,4">
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform X="0"/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Switch" Property="Fill" Value="#C5E1A5"/>
+                            <Setter TargetName="Switch" Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform X="22"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="Switch" Property="Fill" Value="white"/>
+                            <Setter TargetName="Switch" Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform X="0"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </ToggleButton.Template>
+        </ToggleButton>
         <Line X1="0" Y1="0" X2="1590" Y2="0" Stroke="Black" StrokeThickness="1" Margin="165,772,165,160" />
         <Label Content="Get in touch with us" HorizontalAlignment="Center" Margin="0,790,0,0" VerticalAlignment="Top" FontSize="32"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="165,875,0,0" VerticalAlignment="Top" FontSize="24"/>
@@ -23,7 +56,7 @@
         <Label Content="Adress" HorizontalAlignment="Left" Margin="1674,875,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Label Content="Petra Petrovica 14, Novi Sad" HorizontalAlignment="Left" Margin="1498,923,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Image HorizontalAlignment="Left" Height="166" VerticalAlignment="Top" Width="698" Source="/Resources/Images/Ta.jpg" Stretch="None" Margin="16,16,0,0"/>
+            <Image x:Name="Image" HorizontalAlignment="Left" Height="166" VerticalAlignment="Top" Width="698" Source="/Resources/Images/Ta.jpg" Stretch="None" Margin="16,16,0,0" MouseLeftButtonUp="Image_MouseLeftButtonUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"/>
         </Grid>
 
         <Button Content="Search accommodations"  HorizontalAlignment="Left" Margin="722,78,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20" Click="OpenGuest1Form"/>
@@ -33,9 +66,9 @@
         <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="1751,119,0,0" VerticalAlignment="Top" Width="147"/>
         <Label Content="Dark theme" HorizontalAlignment="Left" Margin="1747,78,0,0" VerticalAlignment="Top" FontSize="16"/>
 
-        <Frame NavigationUIVisibility="Hidden" x:Name="ShowPage" Canvas.Top="0" Margin="165,192,175,292"/>
-        <Image HorizontalAlignment="Left" Height="37" Margin="890,917,0,0" VerticalAlignment="Top" Width="37" Source="/Resources/Images/facebook-logo-493.png"/>
-        <Image HorizontalAlignment="Left" Height="55" Margin="983,909,0,0" VerticalAlignment="Top" Width="55" Source="/Resources/Images/logo-instagram-png-2430.png"/>
-        <Image HorizontalAlignment="Center" Height="56" Margin="0,908,0,0" VerticalAlignment="Top" Width="56" Source="/Resources/Images/logo-twitter-png-5859.png"/>
+        <Frame NavigationUIVisibility="Hidden" x:Name="ShowPage" Canvas.Top="0" Margin="165,192,165,292"/>
+        <Image x:Name="Facebook" MouseEnter="Facebook_MouseEnter" MouseLeave="Facebook_MouseLeave" HorizontalAlignment="Left" Height="37" Margin="890,917,0,0" VerticalAlignment="Top" Width="37" Source="/Resources/Images/facebook-logo-493.png" MouseLeftButtonUp="Facebook_MouseLeftButtonUp"/>
+        <Image x:Name="Instagram" HorizontalAlignment="Left" Height="55" Margin="983,909,0,0" VerticalAlignment="Top" Width="55" Source="/Resources/Images/logo-instagram-png-2430.png" MouseLeftButtonUp="Instagram_MouseLeftButtonUp" MouseEnter="Instagram_MouseEnter" MouseLeave="Instagram_MouseLeave"/>
+        <Image x:Name="Twitter" HorizontalAlignment="Center" Height="56" Margin="0,908,0,0" VerticalAlignment="Top" Width="56" Source="/Resources/Images/logo-twitter-png-5859.png" MouseLeftButtonUp="Twitter_MouseLeftButtonUp" MouseEnter="Twitter_MouseEnter" MouseLeave="Twitter_MouseLeave"/>
     </Grid>
 </Window>

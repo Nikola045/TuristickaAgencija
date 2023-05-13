@@ -94,7 +94,7 @@ namespace TravelAgency.Services
             List<Hotel> findedHotels = new List<Hotel>();
             foreach (Hotel hotel in hotelList)
             {
-                if (hotel.OwnerUsername == username)
+                if (hotel.OwnerUsername == username || hotel.OwnerUsername == username + " Super-Owner")
                     findedHotels.Add(hotel);        
             }
             return findedHotels;
@@ -127,32 +127,17 @@ namespace TravelAgency.Services
             return findedImages;
         }
 
-        public void SaveHotel(bool validator, string username)
+        public void SaveHotel(bool validator, string username, Hotel newHotel)
         {
+            
+
             if (validator) 
             {
-                Hotel newHotel = new Hotel(
-                    
-                     hotelRepository.NextId(),
-                     OwnerForm.ownerForm.txtName.Text,
-                     OwnerForm.ownerForm.txtCity.Text,
-                     OwnerForm.ownerForm.txtCountry.Text,
-                     OwnerForm.ownerForm.Type.Text,
-                     Convert.ToInt32(OwnerForm.ownerForm.brMax.Text),
-                     Convert.ToInt32(OwnerForm.ownerForm.brMin.Text),
-                     Convert.ToInt32(OwnerForm.ownerForm.brDaysLeft.Text));
+                newHotel.Id = hotelRepository.NextId();
                 newHotel.OwnerUsername = username;
                 Hotel savedHotel = hotelRepository.Save(newHotel);
 
                 MessageBox.Show("Accommodation successfully created");
-
-                OwnerForm.ownerForm.txtName.Clear();
-                OwnerForm.ownerForm.txtCity.Clear();
-                OwnerForm.ownerForm.txtCountry.Clear();
-                OwnerForm.ownerForm.brMax.Clear();
-                OwnerForm.ownerForm.brMin.Clear();
-                OwnerForm.ownerForm.brDaysLeft.Clear();
-                OwnerForm.ownerForm.ImageList.Items.Clear();
             }
             else
             {
@@ -178,35 +163,22 @@ namespace TravelAgency.Services
             return sortedHotels;
         }
 
-        public void AddHotelImage()
+        public void AddHotelImage(Image newImage)
         {
-            Image newImage = new Image(
-               imageRepository.NextId(),
-               OwnerForm.ownerForm.txtImg.Text);
-
-            Image savedImage = imageRepository.Save(newImage);
-            OwnerForm.ownerForm.ImageList.Items.Add(OwnerForm.ownerForm.txtImg.Text);
+            newImage.Id = imageRepository.NextId();
+            imageRepository.Save(newImage);
             MessageBox.Show("You have successfully added an image");
-            OwnerForm.ownerForm.LabelImgValidator.Content = "";
-            OwnerForm.ownerForm.txtImg.Clear();
         }
 
-        public void DeleteHotelImage()
-        {
-            object selectedItem = OwnerForm.ownerForm.ImageList.SelectedItem;
-            Image hotelImage = FindByUrl(selectedItem.ToString());
-
-            OwnerForm.ownerForm.ImageList.Items.Remove(selectedItem);
+        public void DeleteHotelImage(string url)
+        {    
+            Image hotelImage = FindByUrl(url);
             imageRepository.Delete(hotelImage);
-            if (OwnerForm.ownerForm.ImageList.Items.IsEmpty == true)
-            {
-                OwnerForm.ownerForm.LabelImgValidator.Content = "Please add at least one image";
-            }
         }
 
-        public void ClearListOfImage()
+        public void ClearListOfImage(List<string> urls)
         {
-            foreach (object item in OwnerForm.ownerForm.ImageList.Items)
+            foreach (object item in urls)
             {
                 Image hotelImage = FindByUrl(item.ToString());
                 imageRepository.Delete(hotelImage);
@@ -226,6 +198,14 @@ namespace TravelAgency.Services
                 hotelsCB.Add(cbItem);
             }
             return hotelsCB;
+        }
+
+        public void UpdateAll(List<Hotel> hotels)
+        {
+            foreach (Hotel hotel in hotels)
+            {
+                hotelRepository.Update(hotel);
+            }
         }
     }
 }

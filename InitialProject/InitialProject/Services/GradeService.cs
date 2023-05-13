@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Repository.GradeRepo;
@@ -74,7 +76,7 @@ namespace TravelAgency.Services
             }
         }
 
-        public string ShowMessageForGrade(int i)
+        public void ShowMessageForGrade(int i)
         {
             List<Reservation> reservations = new List<Reservation>();
             reservations = reservationRepository.GetAll();
@@ -92,19 +94,30 @@ namespace TravelAgency.Services
                     message = "You have " + (5 - (dateTimeNow.Day - reservations[i].EndDate.Day)).ToString() + " days left to grade " + reservations[i].GuestUserName;
                 }
             }
-            return message;
+            if(message != null)
+            {
+                
+                MessageBox.Show(message);
+            }   
         }
 
-        public string FindGuestsForGrade(int i)
+        public ComboBox FindGuestsForGrade(ComboBox comboBox)
         {
             List<Reservation> reservations = reservationRepository.GetAll();
+            ComboBoxItem item = new ComboBoxItem();
             DateTime dateTimeNow = DateTime.Now;
-            if (reservations[i].EndDate < dateTimeNow && reservations[i].EndDate.AddDays(5) > dateTimeNow && reservations[i].GradeStatus == "NotGraded")
+            foreach(Reservation reservation in reservations)
             {
-                string reservationForm = reservations[i].Id.ToString() + " " + reservations[i].GuestUserName;
-                return reservationForm;
+                if (reservation.EndDate < dateTimeNow && reservation.EndDate.AddDays(5) > dateTimeNow && reservation.GradeStatus == "NotGraded")
+                {
+                    item.Tag = reservation.Id;
+                    item.Content = reservation.GuestUserName;
+                    comboBox.Items.Add(item);
+                }
+                else;
             }
-            else return null;
+
+            return comboBox;
         }
 
         public string FindGradedGuest(int i)

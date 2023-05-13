@@ -21,37 +21,57 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for Guest1AccountForm.xaml
     /// </summary>
-    public partial class Guest1AccountForm : Window
+    public partial class Guest1AccountForm : Page
     {
-        private User LogedUser { get; set; }
+        private User LoggedInUser { get; set; }
         public Guest1AccountForm(User user)
         {
-            LogedUser = user;
+            LoggedInUser = user;
             InitializeComponent();
         }
-
-        private void OpenAccount(object sender, RoutedEventArgs e)
+        private void AccountSettingsClick(object sender, RoutedEventArgs e)
         {
-            Guest1AccountForm createAccountForm = new Guest1AccountForm(LogedUser);
-            createAccountForm.Show();
+            AccountSettingsPage page = new AccountSettingsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Visible;
+            Label.Visibility = Visibility.Visible;
+            UsernameLabel.Visibility = Visibility.Collapsed;
         }
 
-        private void ShowReview(object sender, RoutedEventArgs e)
+        private void ForumSettingsClick(object sender, RoutedEventArgs e)
         {
-            Guest1ShowReview createShowReview = new Guest1ShowReview();
-            createShowReview.Show();
+            ForumSettingsPage page = new ForumSettingsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
         }
 
-        private void GradeOwner(object sender, RoutedEventArgs e)
+        private void VisitedAccommodationsClick(object sender, RoutedEventArgs e)
         {
-            GradeOwnerForm gradeOwner = new GradeOwnerForm(LogedUser);
-            gradeOwner.Show();
+            VisitedAccommodationsPage page = new VisitedAccommodationsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ActiveReservationsClick(object sender, RoutedEventArgs e)
         {
-            MoveReservationForm moveReservationForm = new MoveReservationForm(LogedUser);
-            moveReservationForm.Show();
+            ActiveReservationsPage page = new ActiveReservationsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            AccountSettingsPage page = new AccountSettingsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Visible;
+            Label.Visibility = Visibility.Visible;
+            UsernameLabel.Visibility = Visibility.Collapsed;
         }
     }
 }

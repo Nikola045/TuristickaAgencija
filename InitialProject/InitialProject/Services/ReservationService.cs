@@ -1,11 +1,9 @@
-﻿using Cake.Core.IO;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
@@ -213,32 +211,27 @@ namespace TravelAgency.Services
 
         public List<RenovationRequest> ShowAllRenovationForOwnerHotels()
         {
-            DateTime dateTime = DateTime.Now;
             List<RenovationRequest> renovations = renovationRequestRepository.GetAll();
-            List<RenovationRequest> futureRenovatin = new List<RenovationRequest>();
-            foreach(RenovationRequest renovation in renovations)
-            {
-                if(renovation.EndDate > dateTime)
-                {
-                    futureRenovatin.Add(renovation);
-                }
-            }
-            return futureRenovatin;
+            return renovations;
         }
 
         public void CancelRenovation(RenovationRequest renovation)
-        {
-            DateTime dateTime = DateTime.Now;
-            if(renovation.StartDate.Day - dateTime.Day > 5 )
+        {   
+            if(renovation != null)
             {
-                renovationRequestRepository.Delete(renovation);
+                DateTime dateTime = DateTime.Now;
+                if (renovation.StartDate.Day - dateTime.Day > 5)
+                {
+                    renovationRequestRepository.Delete(renovation);
+                }
             }
         }
 
-        public void IsHotelRenovated()
+        public List<Hotel> IsHotelRenovated()
         {
             DateTime dateTime = DateTime.Now;
             List<Hotel> hotels = hotelRepository.GetAll();
+            List<Hotel> changedHotels = new List<Hotel>();
             List<RenovationRequest> renovations = renovationRequestRepository.GetAll(); 
             if(renovations.Count != 0 && hotels.Count != 0)
             {
@@ -251,14 +244,17 @@ namespace TravelAgency.Services
                             if (renovation.StartDate <= dateTime && dateTime <= renovation.EndDate)
                             {
                                 hotel.RenovationStatus = "Is Renovationg";
+                                changedHotels.Add(hotel);   
                             }
                             else if (dateTime >= renovation.EndDate && dateTime.Year - renovation.EndDate.Year < 1)
                             {
                                 hotel.RenovationStatus = "Renovated";
+                                changedHotels.Add(hotel);
                             }
                             else
                             {
                                 hotel.RenovationStatus = "Not Renovated";
+                                changedHotels.Add(hotel);
                                 renovationRequestRepository.Delete(renovation);
                             }
                         }
@@ -266,6 +262,58 @@ namespace TravelAgency.Services
                     }
                 }
             }
+            return changedHotels;
+        }
+        public void ChangeAllRenovatedStatus()
+        {
+            List<Hotel> hotels = IsHotelRenovated();
+            foreach(Hotel hotel in hotels)
+            {
+                hotelRepository.Update(hotel);
+            }
+        }
+
+        public ColumnSeries ShowHotelDataInChart(string hotelName)
+        {
+            DateTime dateTime = DateTime.Now;
+            List<int> yValues = new List<int>();
+            List<Reservation> reservations = reservationRepository.GetAll();
+            for (int i = 0; i < 5; i++)
+            {
+                int tempCount = 0;
+                foreach (Reservation reservation in reservations)
+                {
+                    if (reservation.HotelName == hotelName && reservation.StartDate.Year == dateTime.Year - 4 + i)
+                    {
+                        tempCount++;
+                    } 
+                }
+                yValues.Add(tempCount);
+            }
+            ColumnSeries columnSeries = new ColumnSeries();
+            columnSeries.Title = hotelName;
+            columnSeries.Values = new ChartValues<int>(yValues);
+
+            return columnSeries;
+        }
+
+        public List<int> ShowHotelDataPerMonth(string hotelName, int year)
+        {
+            List<int> yValues = new List<int>();
+            List<Reservation> reservations = reservationRepository.GetAll();
+            for (int i = 1; i <= 12; i++)
+            {
+                int tempCount = 0;
+                foreach (Reservation reservation in reservations)
+                {
+                    if (reservation.HotelName == hotelName && reservation.StartDate.Month == i && year == reservation.StartDate.Year)
+                    {
+                        tempCount++;
+                    }
+                }
+                yValues.Add(tempCount);
+            }
+            return yValues;
         }
     }
 }

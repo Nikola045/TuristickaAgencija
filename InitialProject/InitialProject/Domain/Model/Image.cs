@@ -14,9 +14,8 @@ namespace TravelAgency.Domain.Model
 
         public Image() { }
 
-        public Image(int id, string url)
+        public Image(string url)
         {
-            Id = id;
             Url = url;
         }
 
