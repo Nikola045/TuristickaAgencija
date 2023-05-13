@@ -37,7 +37,7 @@
         <TextBox Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="77" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" 
                  Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Height="30" TextChanged="CityValidation"/>
         <TextBox  Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="118" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                 Text ="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Height="28" TextChanged="CountryValidation" FontSize="10"/>
+                 Text ="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged }" Height="28" TextChanged="CountryValidation" FontSize="17"/>
         <TextBox Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="191" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"
                  Text="{Binding Path=Max, Converter={StaticResource intCon}, UpdateSourceTrigger=PropertyChanged}" Height="30" TextChanged="MaxGuestValidation"/>
         <TextBox Canvas.Left="157" TextWrapping="Wrap" Canvas.Top="235" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="MinDaysValidation"
@@ -53,9 +53,9 @@
         <Button x:Name="saveBTN" Click="Save" Content="Save" Canvas.Left="593" Canvas.Top="357" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="165" RenderTransformOrigin="0.568,1.059" />
         <Button Content="Cancel" Click="Cancel" Height="40" Width="136" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="445" Canvas.Top="357"/>
         <Button x:Name="AddImgButton" Content="Add" IsEnabled ="False" Canvas.Left="671" Canvas.Top="273" Click="AddImage" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top"/>
-        <Button Content="Start Demo" Height="39" Width="165" HorizontalAlignment="Left" Canvas.Top="358" VerticalAlignment="Top" Canvas.Left="33"></Button>
+        <Button Content="Start Demo" Height="39" Width="165" HorizontalAlignment="Left" Canvas.Top="358" VerticalAlignment="Top" Canvas.Left="33" Click="StartDemo"></Button>
         <Button Content="Delete" Canvas.Left="706" Canvas.Top="273" Click="DeleteImage" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Content="Stop Demo" Height="39" Width="165" Canvas.Top="358" Canvas.Left="217" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Stop Demo" Height="39" Width="165" Canvas.Top="358" Canvas.Left="217" HorizontalAlignment="Left" VerticalAlignment="Top" Click="StopDemo"/>
         <Button Content="+" Canvas.Left="647" Canvas.Top="273" Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Height="26"/>
 
     </Canvas>

@@ -8,6 +8,7 @@ using TravelAgency.Services;
 using TravelAgency.Domain.Model;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls.Primitives;
 
 namespace TravelAgency.View.Owner
 {
@@ -25,6 +26,7 @@ namespace TravelAgency.View.Owner
         private int _cb1Text;
         private int _cb2Text;
         private string _comment;
+        private ButtonBase _button;
         public event PropertyChangedEventHandler? PropertyChanged;
 
 
@@ -106,6 +108,19 @@ namespace TravelAgency.View.Owner
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public ButtonBase Back
+        {
+            get => _button;
+            set
+            {
+                if (_button != value)
+                {
+                    _button = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public string GuestCB

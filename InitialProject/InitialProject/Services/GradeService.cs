@@ -96,6 +96,7 @@ namespace TravelAgency.Services
             }
             if(message != null)
             {
+                
                 MessageBox.Show(message);
             }   
         }
