@@ -18,7 +18,9 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
+using TravelAgency.Repository.HotelRepo;
 using static Azure.Core.HttpHeader;
+using Image = TravelAgency.Domain.Model.Image;
 
 namespace TravelAgency.View
 {
@@ -28,12 +30,14 @@ namespace TravelAgency.View
     public partial class GuideForm : Window
     {
 
-
+        private readonly App app = (App)App.Current;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly TourRepository tourRepository;
 
         private readonly CheckPointRepository checkPointRepository;
+
+        private readonly ImageRepository tourImageRepository;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -46,11 +50,12 @@ namespace TravelAgency.View
             DataContext = this;
             tourRepository = new TourRepository();
             checkPointRepository = new CheckPointRepository();
+            tourImageRepository = app.ImageRepository;
         }
 
         private void SaveTour(object sender, RoutedEventArgs e)
         {
-            string FilePath = "../../../Resources/Data/checkPoints.csv";
+            string FilePath = "../../../Resources/Data/checkPoints.csv";           
 
             List<CheckPoint> checkPoints = new List<CheckPoint>();
             foreach (string item in ListCheckPoints.Items)
@@ -63,9 +68,10 @@ namespace TravelAgency.View
             }
             if (ListCheckPoints.Items.Count < 2)
                 MessageBox.Show("Morate uneti bar dve Kljucne tacke Pocetnu i krajnju");
-            
 
-            Tour newTour = new Tour(
+            for (int i = 0; i < DateList.Items.Count; i++)
+            {
+                Tour newTour = new Tour(
                     tourRepository.NextId(),
                     txtName.Text,
                     txtCity.Text,
@@ -73,11 +79,20 @@ namespace TravelAgency.View
                     txtDescription.Text,
                     txtLangueg.Text,
                     Convert.ToInt32(txtMaxNumberOfGuests.Text),
-                    Convert.ToDateTime(StartDateBox.Text),
+                    Convert.ToDateTime(DateList.Items[i]),
                     Convert.ToInt32(txtTourDuration.Text),
-                    checkPoints
-                    );
-            Tour savedTour= tourRepository.Save(newTour);
+                    checkPoints);
+                Tour savedTour = tourRepository.Save(newTour);
+                
+            }
+
+            foreach(string image  in ImageList.Items)
+            {
+                Image img = new Image();
+                img.Url = image;
+                tourImageRepository.Save(img);
+            }
+
 
             MessageBox.Show("Uspesno uneta tura");
         }
@@ -104,6 +119,16 @@ namespace TravelAgency.View
                 CheckPointsCB.Items.Add(checkPoints[i].Name);
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DateList.Items.Add(StartDateBox.Text);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ImageList.Items.Add(ImageTxt.Text);
         }
     }
 }

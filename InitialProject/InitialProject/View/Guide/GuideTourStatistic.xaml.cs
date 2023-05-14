@@ -76,7 +76,11 @@ namespace TravelAgency.View.Guide
         {
             selectedTour = (Tour) DataPanel.SelectedItem;
             int[] Info = new int[4];
-            //Info = tourRepository.ShowStatistic(selectedTour.Id);
+            Info = tourRepository.ShowStatistic(selectedTour.Id);
+            txt1.Text = Info[0].ToString();
+            txt2.Text = Info[1].ToString();
+            txt3.Text = Info[2].ToString();
+            txt4.Text = Info[3].ToString();
         }
     }
 }

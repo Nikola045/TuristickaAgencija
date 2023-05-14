@@ -6,15 +6,18 @@
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
         Title="TourReview" Height="450" Width="800">
-    <Grid>
+    <Grid RenderTransformOrigin="0.494,0.603">
 
-        <Label Content="Comment:" HorizontalAlignment="Left" Margin="40,249,0,0" VerticalAlignment="Top" Height="47" Width="160" FontSize="20"/>
-        <ComboBox x:Name="TourCB" HorizontalAlignment="Left" Margin="229,38,0,0" VerticalAlignment="Top" Width="297"  Height="40" FontSize="20"/>
-        <TextBox x:Name="CommentText" HorizontalAlignment="Left" Margin="50,287,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="624" Height="89"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="432,392,0,0" VerticalAlignment="Top" Height="32" Width="83"  FontSize="20"/>
-        <Button x:Name="SaveGrade" Content="Grade Guest" HorizontalAlignment="Left" Margin="194,392,0,0" VerticalAlignment="Top" Height="32" Width="140"  FontSize="20"/>
-        <ComboBox x:Name="CB1" HorizontalAlignment="Left" Margin="378,119,0,0" VerticalAlignment="Top" Width="296"  Height="40" FontSize="20"/>
-        <ComboBox x:Name="CB2" HorizontalAlignment="Left" Margin="331,190,0,0" VerticalAlignment="Top" Width="296"  Height="40" FontSize="20"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="727,360,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <Label Content="Comment" HorizontalAlignment="Left" Margin="40,249,0,0" VerticalAlignment="Top" Height="47" Width="160" FontSize="20"/>
+        <ComboBox x:Name="CB1" HorizontalAlignment="Center" Margin="0,37,0,0" VerticalAlignment="Top" Width="296" Loaded="Fill1" Height="40" FontSize="20"/>
+        <TextBox x:Name="txtComment" HorizontalAlignment="Left" Margin="41,284,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="736" Height="92"/>
+        <Button x:Name="SaveReview" Content="Grade Guest" HorizontalAlignment="Center" Margin="0,387,0,0" VerticalAlignment="Top" Height="32" Width="140" Click="MakeReview" FontSize="20"/>
+        <ComboBox x:Name="CB2" HorizontalAlignment="Center" Margin="0,115,0,0" VerticalAlignment="Top" Width="296"  Height="40" Loaded="Fill2" FontSize="20"/>
+        <ComboBox x:Name="CB3" HorizontalAlignment="Center" Margin="0,192,0,0" VerticalAlignment="Top" Width="296"  Height="40" Loaded="Fill3" FontSize="20"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="729,387,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <Label Content="Guide's Knowledge" FontSize="18" HorizontalAlignment="Left" Margin="40,37,0,0" VerticalAlignment="Top" Height="38" Width="178" RenderTransformOrigin="3.773,5.139"/>
+        <Label Content="Guide's Lenguage" FontSize="18" HorizontalAlignment="Left" Margin="40,117,0,0" VerticalAlignment="Top" Height="38" Width="178" RenderTransformOrigin="3.773,5.139"/>
+        <Label Content="Tour Overall" FontSize="18" HorizontalAlignment="Left" Margin="40,192,0,0" VerticalAlignment="Top" Height="38" Width="178" RenderTransformOrigin="3.773,5.139"/>
+
     </Grid>
 </Window>

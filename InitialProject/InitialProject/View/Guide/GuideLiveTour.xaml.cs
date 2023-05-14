@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Printing;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,17 +26,21 @@ namespace TravelAgency.View.Guide
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        User LogedUser = new Domain.Model.User();
+
         Tour CurrentSelectedTour = new Tour();
 
         private readonly TourRepository tourRepository;
+        private readonly VoucherRepository voucherRepository;
 
         private readonly CheckPointRepository checkPointRepository;
 
-        public GuideLiveTour()
+        public GuideLiveTour(User user)
         {
             InitializeComponent();
             Title = "Create new tour";
             DataContext = this;
+            LogedUser = user;
             tourRepository = new TourRepository();
             checkPointRepository = new CheckPointRepository();
         }
@@ -173,6 +178,7 @@ namespace TravelAgency.View.Guide
                 }
                 else
                 {
+                    //List<Voucher> vouchers = voucherRepository.CreateVouchersForCancelling(selectedTour,LogedUser.Id);
                     CurrentSelectedTour.TourStatus = "Cancelled";
                     CurrentSelectedTour = tourRepository.Update(CurrentSelectedTour);
                     MessageBox.Show("Tour cancelled");

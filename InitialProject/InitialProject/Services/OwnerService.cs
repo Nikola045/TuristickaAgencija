@@ -8,12 +8,13 @@ namespace TravelAgency.Services
 {
     internal class OwnerService
     {
+        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly UserRepository userRepository;
         public OwnerService()
         {
-            ownerGradeRepository = new OwnerGradeRepository();
-            userRepository = new UserRepository();
+            ownerGradeRepository = app.OwnerGradeRepository;
+            userRepository = app.UserRepository;
         }
 
         public int CountGradesFromOwnerRating(string OwnerUserName)
@@ -43,7 +44,7 @@ namespace TravelAgency.Services
         {
             if (CountGradesFromOwnerRating(username) >= 50)
             {
-                if (GetAverageOwnerRating(username) < 9.5)
+                if (GetAverageOwnerRating(username) < 4.5)
                 {
                     return "Owner";
                 }
@@ -82,7 +83,11 @@ namespace TravelAgency.Services
                     superOwners.Add(owner);
             }
             return superOwners.Distinct().ToList();
+        }
 
+        public void UpadateUsername(User user)
+        {
+            userRepository.Update(user); 
         }
     }
 }

@@ -5,50 +5,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository
 {
-    internal class MoveReservationRepository
+    public class MoveReservationRepository
     {
-        private const string FilePath = "../../../Resources/Data/moveReservationRequest.csv";
-        private readonly Serializer<MoveReservation> _serializer;
-        private List<MoveReservation> _reservations;
+        private List<MoveReservation> reservations;
+        private IStorage<MoveReservation> _storage;
 
-        public MoveReservationRepository() 
+        public MoveReservationRepository(IStorage<MoveReservation> storage)
         {
-            _serializer = new Serializer<MoveReservation>();
-            _reservations = _serializer.FromCSV(FilePath);
+            _storage = storage;
+            reservations = _storage.Load();
         }
 
         public List<MoveReservation> GetAll()
         {
-            List<MoveReservation> reservations = new List<MoveReservation>();
-
-            using (StreamReader sr = new StreamReader(FilePath))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-
-                    string[] fields = line.Split('|');
-                    MoveReservation reservation = new MoveReservation();
-                    reservation.ReservationId = Convert.ToInt32(fields[0]);
-                    reservation.HotelName = fields[1];
-                    reservation.GuestUsername = fields[2];
-                    reservation.OldStartDate = Convert.ToDateTime(fields[3]);
-                    reservation.OldEndDate = Convert.ToDateTime(fields[4]);
-                    reservation.NewStartDate = Convert.ToDateTime(fields[5]);
-                    reservation.NewEndDate = Convert.ToDateTime(fields[6]);
-                    reservations.Add(reservation);
-                }
-            }
+            reservations = _storage.Load();
             return reservations;
         }
 
         public MoveReservation GetById(int id)
         {
-            List<MoveReservation> reservations = GetAll();
             foreach(MoveReservation reservation in reservations)
             {
                 if (reservation.ReservationId == id)
@@ -59,17 +39,15 @@ namespace TravelAgency.Repository
 
         public void Delete(MoveReservation reservation)
         {
-            _reservations = _serializer.FromCSV(FilePath);
-            MoveReservation founded = _reservations.Find(c => c.ReservationId == reservation.ReservationId);
-            _reservations.Remove(founded);
-            _serializer.ToCSV(FilePath, _reservations);
+            MoveReservation founded = reservations.Find(c => c.ReservationId == reservation.ReservationId);
+            reservations.Remove(founded);
+            _storage.Save(reservations);
         }
 
         public MoveReservation Save(MoveReservation moveReservation)
         {
-            _reservations = _serializer.FromCSV(FilePath);
-            _reservations.Add(moveReservation);
-            _serializer.ToCSV(FilePath, _reservations);
+            reservations.Add(moveReservation);
+            _storage.Save(reservations);
             return moveReservation;
         }
     }

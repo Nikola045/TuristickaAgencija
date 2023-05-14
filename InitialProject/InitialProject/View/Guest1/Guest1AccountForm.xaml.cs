@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Graph.Models;
+using Microsoft.Graph.Models.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,35 +13,65 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelAgency.Domain.Model;
+using User = TravelAgency.Domain.Model.User;
 
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
     /// Interaction logic for Guest1AccountForm.xaml
     /// </summary>
-    public partial class Guest1AccountForm : Window
+    public partial class Guest1AccountForm : Page
     {
-        public Guest1AccountForm()
+        private User LoggedInUser { get; set; }
+        public Guest1AccountForm(User user)
         {
+            LoggedInUser = user;
             InitializeComponent();
         }
-
-        private void OpenAccount(object sender, RoutedEventArgs e)
+        private void AccountSettingsClick(object sender, RoutedEventArgs e)
         {
-            Guest1AccountForm createAccountForm = new Guest1AccountForm();
-            createAccountForm.Show();
+            AccountSettingsPage page = new AccountSettingsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Visible;
+            Label.Visibility = Visibility.Visible;
+            UsernameLabel.Visibility = Visibility.Collapsed;
         }
 
-        private void ShowReview(object sender, RoutedEventArgs e)
+        private void ForumSettingsClick(object sender, RoutedEventArgs e)
         {
-            Guest1ShowReview createShowReview = new Guest1ShowReview();
-            createShowReview.Show();
+            ForumSettingsPage page = new ForumSettingsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
         }
 
-        private void ShowRecommendationForRenovation(object sender, RoutedEventArgs e)
+        private void VisitedAccommodationsClick(object sender, RoutedEventArgs e)
         {
-            RecommendationForRenovation createRecommendation = new RecommendationForRenovation();
-            createRecommendation.Show();
+            VisitedAccommodationsPage page = new VisitedAccommodationsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
+        }
+
+        private void ActiveReservationsClick(object sender, RoutedEventArgs e)
+        {
+            ActiveReservationsPage page = new ActiveReservationsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            AccountSettingsPage page = new AccountSettingsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Visible;
+            Label.Visibility = Visibility.Visible;
+            UsernameLabel.Visibility = Visibility.Collapsed;
         }
     }
 }

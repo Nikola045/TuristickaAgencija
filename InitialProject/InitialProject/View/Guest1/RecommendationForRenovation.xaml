@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="RecommendationForRenovation" Height="450" Width="800">
     <Grid>
-        
+        <RadioButton x:Name="RadioButton1" Content="Level 1 - Perfect/it would be nice to renovate some small things,but everything works fine even without it" HorizontalAlignment="Left" Margin="88,81,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioButton2" Content="Level 2 - There are some minor complaints about the accommodation that if addressed,would make it perfect" HorizontalAlignment="Left" Margin="88,101,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioButton3" Content="Level 3 - Several things that are reallz bothering need do be renovated" HorizontalAlignment="Left" Margin="88,121,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioButton4" Content="Level 4 - There are a lot of bad things and renovation is really necessary" HorizontalAlignment="Left" Margin="88,141,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioButton5" Content="Level 5 - The accommodation is in very poor condition and it's not worth renting unless it's renovated" HorizontalAlignment="Left" Margin="88,161,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="RateButton" Content="Rate" HorizontalAlignment="Left" Margin="88,288,0,0" VerticalAlignment="Top" Height="25" Width="61" Click="Rate" />
+        <TextBox x:Name="tb1" HorizontalAlignment="Left" Margin="88,231,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>

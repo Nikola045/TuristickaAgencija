@@ -6,16 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
+using TravelAgency.View.Guest2;
 
 namespace TravelAgency.Repository
 {
-    internal class VoucherRepository
+    public class VoucherRepository
     {
 
         private const string FilePath = "../../../Resources/Data/vouchers.csv";
+        private const string FilePathGuest = "../../../Resources/Data/guestOnTour.csv";
+
 
         private readonly Serializer<Voucher> _serializer;
+
+        private readonly TourRepository _tourRepository;    
 
         private List<Voucher> _vouchers;
 
@@ -43,6 +49,25 @@ namespace TravelAgency.Repository
             }
             return _vouchers.Max(t => t.Id) + 1;
         }
+
+        /*public List<Voucher> CreateVouchersForCancelling(Tour tour, int guestId)
+        {
+            List<GuestOnTour> guestOnTours = _tourRepository.ReadFromGuestOnTour(FilePathGuest);
+            List<Voucher> vouchers = new List<Voucher>();
+            for(int i = 0; i< guestOnTours.Count; i++)
+            {
+                if (guestOnTours[i].TourId == tour.Id) 
+                { 
+                    Voucher voucher = new Voucher();
+                    voucher.Id = NextId();
+                    voucher.ExpirationDate = DateTime.Now;
+                    voucher.Name = "Voucher for canceling";
+                    voucher.GuestId = guestId;
+                    Save(voucher);
+                }
+            }
+            return vouchers;
+        }*/
 
         public List<Voucher> ReadFromVouchersCsv(string FileName)
         {

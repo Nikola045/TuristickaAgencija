@@ -15,15 +15,56 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="3.0.0" />
-    <PackageReference Include="CsvHelper" Version="30.0.1" />
-    <PackageReference Include="DevExpress.Data" Version="22.2.5" />
-    <PackageReference Include="Microsoft.Graph" Version="5.1.0" />
-    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <None Remove="Resources\Images\apartment.jpg" />
+    <None Remove="Resources\Images\camera.png" />
+    <None Remove="Resources\Images\confetti.jpeg" />
+    <None Remove="Resources\Images\confetti.jpg" />
+    <None Remove="Resources\Images\emptystar.png" />
+    <None Remove="Resources\Images\facebook-logo-493.png" />
+    <None Remove="Resources\Images\fullstar.png" />
+    <None Remove="Resources\Images\halfstar.png" />
+    <None Remove="Resources\Images\hotel.jpg" />
+    <None Remove="Resources\Images\hut.jpg" />
+    <None Remove="Resources\Images\logo-instagram-png-2430.png" />
+    <None Remove="Resources\Images\logo-twitter-png-5859.png" />
+    <None Remove="Resources\Images\profilepic.jpg" />
+    <None Remove="Resources\Images\Ta.jpg" />
+    <None Remove="View\Owner\536-5367699_add-plus-new-user-green-page-file-up.png" />
+    <None Remove="View\Owner\back.png" />
+    <None Remove="View\Owner\Gallery-PNG-File.png" />
+    <None Remove="View\Owner\profilepic.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\RepositoryInterfaces\" />
+    <PackageReference Include="Cake.Core" Version="3.0.0" />
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="DevExpress.Data" Version="22.2.5" />
+    <PackageReference Include="LiveCharts" Version="0.9.7" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Microsoft.Graph" Version="5.1.0" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.1.2" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="SkiaSharp" Version="2.88.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\apartment.jpg" />
+    <Resource Include="Resources\Images\camera.png" />
+    <Resource Include="Resources\Images\confetti.jpg" />
+    <Resource Include="Resources\Images\emptystar.png" />
+    <Resource Include="Resources\Images\facebook-logo-493.png" />
+    <Resource Include="Resources\Images\fullstar.png" />
+    <Resource Include="Resources\Images\halfstar.png" />
+    <Resource Include="Resources\Images\hotel.jpg" />
+    <Resource Include="Resources\Images\hut.jpg" />
+    <Resource Include="Resources\Images\logo-instagram-png-2430.png" />
+    <Resource Include="Resources\Images\logo-twitter-png-5859.png" />
+    <Resource Include="Resources\Images\profilepic.jpg" />
+    <Resource Include="Resources\Images\Ta.jpg" />
+    <Resource Include="View\Owner\536-5367699_add-plus-new-user-green-page-file-up.png" />
+    <Resource Include="View\Owner\back.png" />
+    <Resource Include="View\Owner\Gallery-PNG-File.png" />
+    <Resource Include="View\Owner\profilepic.jpg" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,17 @@
+﻿<Window x:Class="TravelAgency.View.Owner.HotelGalery"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelAgency.View.Owner"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="HotelGalery" Height="400" Width="800
+        ">
+    <Grid>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="603,322,0,0" VerticalAlignment="Top" Height="31" Width="92" Click="NextImage"/>
+        <Button Content="Preview" HorizontalAlignment="Left" Margin="132,322,0,0" VerticalAlignment="Top" Height="31" Width="87" Click="PreviewImage"/>
+
+        <Image x:Name="Image" Source="{Binding Path=Image, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="256" Margin="132,35,0,0" VerticalAlignment="Top" Width="562"/>
+    </Grid>
+</Window>

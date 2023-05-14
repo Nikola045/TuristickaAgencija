@@ -3,86 +3,63 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository
 {
-    internal class ReservationRepository
+    public class ReservationRepository
     {
-        private const string FilePath = "../../../Resources/Data/reservations.csv";
+        private List<Reservation> reservations;
+        private IStorage<Reservation> _storage;
 
-        private readonly Serializer<Reservation> _serializer;
-
-        private List<Reservation> _reservations;
-
-        public ReservationRepository()
+        public ReservationRepository(IStorage<Reservation> storage)
         {
-            _serializer = new Serializer<Reservation>();
-            _reservations = _serializer.FromCSV(FilePath);
+            _storage = storage;
+            reservations = _storage.Load();
         }
 
         public Reservation Save(Reservation reservation)
         {
-            _reservations = _serializer.FromCSV(FilePath);
-            _reservations.Add(reservation);
-            _serializer.ToCSV(FilePath, _reservations);
+            reservations.Add(reservation);
+            _storage.Save(reservations);
             return reservation;
         }
 
         public int NextId()
         {
-            _reservations = _serializer.FromCSV(FilePath);
-            if (_reservations.Count < 1)
+            if (reservations.Count < 1)
             {
                 return 1;
             }
-            return _reservations.Max(r => r.Id) + 1;
+            return reservations.Max(r => r.Id) + 1;
         }
 
         public List<Reservation> GetAll()
         {
-            List<Reservation> reservations = new List<Reservation>();
-
-            using (StreamReader sr = new StreamReader(FilePath))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-
-                    string[] fields = line.Split('|');
-                    Reservation reservation = new Reservation();
-                    reservation.Id = Convert.ToInt32(fields[0]);
-                    reservation.GuestUserName = fields[1];
-                    reservation.HotelName = fields[2];
-                    reservation.StartDate = Convert.ToDateTime(fields[3]);
-                    reservation.EndDate = Convert.ToDateTime(fields[4]);
-                    reservation.NumberOfDays = Convert.ToInt32(fields[5]);
-                    reservation.NumberOfGuests = Convert.ToInt32(fields[6]);
-                    reservation.GradeStatus = fields[7];
-                    reservations.Add(reservation);
-
-                }
-            }
             return reservations;
         }
 
         public void Delete(Reservation reservation)
         {
-            _reservations = _serializer.FromCSV(FilePath);
-            Reservation founded = _reservations.Find(c => c.Id == reservation.Id);
-            _reservations.Remove(founded);
-            _serializer.ToCSV(FilePath, _reservations);
+            Reservation founded = reservations.Find(c => c.Id == reservation.Id);
+            reservations.Remove(founded);
+            _storage.Save(reservations);
         }
 
         public Reservation Update(Reservation reservation)
         {
-            _reservations = _serializer.FromCSV(FilePath);
-            Reservation current = _reservations.Find(c => c.Id == reservation.Id);
-            int index = _reservations.IndexOf(current);
-            _reservations.Remove(current);
-            _reservations.Insert(index, reservation);
-            _serializer.ToCSV(FilePath, _reservations);
+            Reservation current = reservations.Find(c => c.Id == reservation.Id);
+            int index = reservations.IndexOf(current);
+            reservations.Remove(current);
+            reservations.Insert(index, reservation);
+            _storage.Save(reservations);
             return reservation;
-        }        
+        }
+        public Reservation Get(int id)
+        {
+            return reservations.FirstOrDefault(r => r.Id == id);
+        }
+
     }
 }

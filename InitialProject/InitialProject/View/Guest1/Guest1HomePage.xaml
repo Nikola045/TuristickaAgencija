@@ -1,0 +1,44 @@
+﻿<Page x:Class="TravelAgency.View.Guest1.Guest1HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelAgency.View.Guest1"
+      mc:Ignorable="d" Height="575" Width="1590">
+    <Canvas Background="White" Margin="0,0,0,0" Loaded="Canvas_Loaded">
+        <Label x:Name="welcomeLabel" Content="Label" Canvas.Left="10" Canvas.Top="10" FontSize="25"/>
+        <Label Content="Name:" Canvas.Left="106" Canvas.Top="424" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Type:" Canvas.Left="118" Canvas.Top="457" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="User rating:" Canvas.Left="58" Canvas.Top="491" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Image x:Name="Hotel" MouseLeftButtonUp="Image_MouseLeftButtonUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Height="337" Canvas.Left="10" Canvas.Top="76" Width="342" Source="/Resources/Images/hotel.jpg" Stretch="UniformToFill" />
+        <Image x:Name="Apartment" MouseLeftButtonUp="Image_MouseLeftButtonUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Height="337" Canvas.Left="654" Canvas.Top="76" Width="337" Source="/Resources/Images/apartment.jpg" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" />
+        <Image x:Name="Hut" MouseLeftButtonUp="Image_MouseLeftButtonUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Height="337" Canvas.Left="1243" Canvas.Top="76" Width="337" Source="/Resources/Images/hut.jpg" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" />
+        <Label Content="Name:" Canvas.Left="751" Canvas.Top="424" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Type:" Canvas.Left="763" Canvas.Top="457" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="User rating:" Canvas.Left="702" Canvas.Top="491" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Name:" Canvas.Left="1352" Canvas.Top="424" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Type:" Canvas.Left="1364" Canvas.Top="457" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="User rating:" Canvas.Left="1303" Canvas.Top="491" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="178" Canvas.Top="499" Width="26" HorizontalAlignment="Left" VerticalAlignment="Center" Source="/Resources/Images/fullstar.png"/>
+        <Image Height="27" Canvas.Left="204" Canvas.Top="499" Width="26" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Image Height="27" Canvas.Left="230" Canvas.Top="499" Width="26" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Image Height="27" Canvas.Left="256" Canvas.Top="499" Width="26" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Image Height="27" Canvas.Left="821" Canvas.Top="499" Width="27" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="847" Canvas.Top="499" Width="27" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="873" Canvas.Top="499" Width="27" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="899" Canvas.Top="499" Width="26" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="1424" Canvas.Top="499" Width="27" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="1450" Canvas.Top="499" Width="27" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="1476" Canvas.Top="499" Width="27" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="1502" Canvas.Top="499" Width="26" Source="/Resources/Images/fullstar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="280" Canvas.Top="499" Width="26" Source="/Resources/Images/halfstar.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Image Height="27" Canvas.Left="924" Canvas.Top="499" Width="26" Source="/Resources/Images/emptystar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Height="27" Canvas.Left="1527" Canvas.Top="499" Width="26" Source="/Resources/Images/emptystar.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="alpinaLabel" Content="Alpina" Canvas.Left="178" Canvas.Top="424" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label x:Name="jabukaLabel" Content="Jabuka" Canvas.Left="823" Canvas.Top="424" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="malinaLabel" Content="Malina" Canvas.Left="1425" Canvas.Top="424" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Hotel" Canvas.Left="178" Canvas.Top="458" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Apartment" Canvas.Left="823" Canvas.Top="458" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Hut" Canvas.Left="1426" Canvas.Top="457" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    </Canvas>
+</Page>
