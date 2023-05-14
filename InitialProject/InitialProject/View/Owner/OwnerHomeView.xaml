@@ -13,29 +13,20 @@
         <Button x:Name="MediaDropBTN" Content="Media" Canvas.Left="455" Height="75" Width="256" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="17" Canvas.Top="1" Margin="482,0,0,0" Click="MediaDrop"/>
         <Button Content="Reservation" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="288" Click="OpenMoveReservation" Canvas.Left="736" FontSize="17" Margin="736,0,0,0" />
         <Button Click="OpenProfil" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="119" Canvas.Left="736" FontSize="17" Margin="880,636,0,0" >
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Ellipse Margin="10,0,0,-13" Fill="Black">
-                        </Ellipse>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
+            <Button.Background>
+                <ImageBrush ImageSource="/View/Owner/profilepic.jpg"/>
+            </Button.Background>
         </Button>
-
-        <Button x:Name="CreateNewAccommodationBTN" Visibility="Hidden" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="95" Click="OpenOwnerForm" Canvas.Left="1081" Canvas.Top="83" FontSize="17" Margin="26,636,0,0" Padding="-7,1,1,1" Foreground="Black" RenderTransformOrigin="0,0" Background="Black" >
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Ellipse Margin="0,0,0,-13" Fill="Black">
-                        </Ellipse>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
+        <Button x:Name="CreateNewAccommodationBTN" Visibility="Hidden" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="95" Click="OpenOwnerForm" Canvas.Left="1081" Canvas.Top="83" FontSize="17" Margin="26,636,0,0" Padding="-7,1,1,1" Foreground="Black" RenderTransformOrigin="0,0" >
+            <Button.Background>
+                <ImageBrush ImageSource="/View/Owner/536-5367699_add-plus-new-user-green-page-file-up.png"/>
+            </Button.Background>
         </Button>
-        <Button Content="Gallery" HorizontalAlignment="Left" Margin="880,573,0,0" VerticalAlignment="Top" Height="58" Width="119" Click="OpenGallery"/>
+        <Button  HorizontalAlignment="Left" Margin="880,573,0,0" VerticalAlignment="Top" Height="58" Width="119" Click="OpenGallery">
+            <Button.Background>
+                <ImageBrush ImageSource="/View/Owner/Gallery-PNG-File.png"/>
+            </Button.Background>
+        </Button>
         <Frame  NavigationUIVisibility="Hidden" x:Name="ShowBigPage" Margin="0,74,0,0" Height="680"/>
         <Frame  NavigationUIVisibility="Hidden" x:Name="ShowSmallPage" Margin="0,131,0,0" Height="620"/>
 
@@ -46,8 +37,9 @@
         <Button x:Name="GradeGuestBTN" Visibility="Hidden"  Content="Grade Guest" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="299" Click="OpenGradeForm" Canvas.Left="1081" Canvas.Top="123" FontSize="17" Margin="0,75,0,0" />
         <Button x:Name="ReviewFormBTN"  Visibility="Hidden" Content="Review Form" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="361" Click="OpenReviewForm" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="299,74,0,0" />
         <Button x:Name="ForumsBTN" Visibility="Hidden"  Content="Forums" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="364" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="660,74,0,0" />
+        <Image HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="101" Source="/View/Owner/back.png" Stretch="Fill"/>
 
-        <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="101" Background="#FFEC1515"/>
+
 
 
     </Grid>

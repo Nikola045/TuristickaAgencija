@@ -29,41 +29,49 @@ namespace TravelAgency.View.Guest1
             LoggedInUser = user;
             InitializeComponent();
         }
-
-        private void LogoutClick(object sender, RoutedEventArgs e)
-        {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            App.Current.Windows[0].Close();
-        }
-
         private void AccountSettingsClick(object sender, RoutedEventArgs e)
         {
-            Guest1AccountForm page = new Guest1AccountForm(LoggedInUser);
-            NavigationService.Navigate(page);
+            AccountSettingsPage page = new AccountSettingsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Visible;
+            Label.Visibility = Visibility.Visible;
+            UsernameLabel.Visibility = Visibility.Collapsed;
         }
 
         private void ForumSettingsClick(object sender, RoutedEventArgs e)
         {
             ForumSettingsPage page = new ForumSettingsPage(LoggedInUser);
-            NavigationService.Navigate(page);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
         }
 
         private void VisitedAccommodationsClick(object sender, RoutedEventArgs e)
         {
             VisitedAccommodationsPage page = new VisitedAccommodationsPage(LoggedInUser);
-            NavigationService.Navigate(page);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
         }
 
         private void ActiveReservationsClick(object sender, RoutedEventArgs e)
         {
             ActiveReservationsPage page = new ActiveReservationsPage(LoggedInUser);
-            NavigationService.Navigate(page);
-        }
-        private void DatePicker_Loaded(object sender, RoutedEventArgs e)
-        {
-            Date1.SelectedDate = new DateTime(2000, 5, 15);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Collapsed;
+            Label.Visibility = Visibility.Collapsed;
+            UsernameLabel.Visibility = Visibility.Visible;
         }
 
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            AccountSettingsPage page = new AccountSettingsPage(LoggedInUser);
+            ShowSmallPage.Content = page;
+            Image.Visibility = Visibility.Visible;
+            Label.Visibility = Visibility.Visible;
+            UsernameLabel.Visibility = Visibility.Collapsed;
+        }
     }
 }
