@@ -25,6 +25,7 @@
     <None Remove="Resources\Images\halfstar.png" />
     <None Remove="Resources\Images\hotel.jpg" />
     <None Remove="Resources\Images\hut.jpg" />
+    <None Remove="Resources\Images\language.png" />
     <None Remove="Resources\Images\logo-instagram-png-2430.png" />
     <None Remove="Resources\Images\logo-twitter-png-5859.png" />
     <None Remove="Resources\Images\profilepic.jpg" />
@@ -57,6 +58,7 @@
     <Resource Include="Resources\Images\halfstar.png" />
     <Resource Include="Resources\Images\hotel.jpg" />
     <Resource Include="Resources\Images\hut.jpg" />
+    <Resource Include="Resources\Images\language.png" />
     <Resource Include="Resources\Images\logo-instagram-png-2430.png" />
     <Resource Include="Resources\Images\logo-twitter-png-5859.png" />
     <Resource Include="Resources\Images\profilepic.jpg" />

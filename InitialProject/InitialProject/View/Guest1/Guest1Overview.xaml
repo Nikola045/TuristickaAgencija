@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ToggleButton Width="47" Height="22" Content="" HorizontalAlignment="Left" Canvas.Left="506" Canvas.Top="168" VerticalAlignment="Top" Margin="1845,82,0,0">
+        <ToggleButton Width="47" Height="22" Content="" HorizontalAlignment="Left" Canvas.Left="506" Canvas.Top="168" VerticalAlignment="Top" Margin="1849,48,0,0">
             <ToggleButton.Template>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid>
@@ -55,16 +55,25 @@
         <Label Content="Social media" HorizontalAlignment="Center" Margin="0,875,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Label Content="Adress" HorizontalAlignment="Left" Margin="1674,875,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Label Content="Petra Petrovica 14, Novi Sad" HorizontalAlignment="Left" Margin="1498,923,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-30,0,0">
             <Image x:Name="Image" HorizontalAlignment="Left" Height="166" VerticalAlignment="Top" Width="698" Source="/Resources/Images/Ta.jpg" Stretch="None" Margin="16,16,0,0" MouseLeftButtonUp="Image_MouseLeftButtonUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"/>
         </Grid>
 
-        <Button Content="Search accommodations"  HorizontalAlignment="Left" Margin="722,78,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20" Click="OpenGuest1Form"/>
-        <Button Content="Make a reservation"  Click="OpenReserveForm" HorizontalAlignment="Left" Margin="974,78,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20"/>
-        <Button Content="Account" Click="OpenAccount" HorizontalAlignment="Left" Margin="1225,78,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20"/>
-        <Button Content="Forum" HorizontalAlignment="Left" Margin="1477,78,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20"/>
-        <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="1751,119,0,0" VerticalAlignment="Top" Width="147"/>
-        <Label Content="Dark theme" HorizontalAlignment="Left" Margin="1747,78,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button Content="Search accommodations"  HorizontalAlignment="Left" Margin="722,48,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20" Click="OpenGuest1Form"/>
+        <Button Content="Make a reservation"  Click="OpenReserveForm" HorizontalAlignment="Left" Margin="974,48,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20"/>
+        <Button Content="Account" Click="OpenAccount" HorizontalAlignment="Left" Margin="1225,48,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20"/>
+        <Button Content="Forum" HorizontalAlignment="Left" Margin="1477,48,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20"/>
+        <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="1751,79,0,0" FontSize="16" VerticalAlignment="Top" Width="147" Height="32">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/language.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                        <TextBlock Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Content="Dark theme" HorizontalAlignment="Left" Margin="1747,43,0,0" VerticalAlignment="Top" FontSize="16"/>
 
         <Frame NavigationUIVisibility="Hidden" x:Name="ShowPage" Canvas.Top="0" Margin="165,192,165,292"/>
         <Image x:Name="Facebook" MouseEnter="Facebook_MouseEnter" MouseLeave="Facebook_MouseLeave" HorizontalAlignment="Left" Height="37" Margin="890,917,0,0" VerticalAlignment="Top" Width="37" Source="/Resources/Images/facebook-logo-493.png" MouseLeftButtonUp="Facebook_MouseLeftButtonUp"/>
