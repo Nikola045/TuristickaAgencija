@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Graph.Models.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,9 @@ namespace TravelAgency.View.Guest2
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+
             this.Close();
+          
         }
 
         private void Fill1(object sender, RoutedEventArgs e)
