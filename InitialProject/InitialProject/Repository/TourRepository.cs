@@ -472,7 +472,13 @@ namespace TravelAgency.Repository
             }
             return statistic;        
         }
-
+        public void Delete(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour founded = _tours.Find(c => c.Id == tour.Id);
+            _tours.Remove(founded);
+            _serializer.ToCSV(FilePath, _tours);
+        }
     }
 
 }

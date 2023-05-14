@@ -38,5 +38,12 @@ namespace TravelAgency.Repository.UserRepo
             _storage.Save(users);
             return entity;
         }
+        public void Delete(User user)
+        {
+            users = _storage.Load();
+            User founded = users.Find(c => c.Id == user.Id);
+            users.Remove(founded);
+            _storage.Save(users);
+        }
     }
 }

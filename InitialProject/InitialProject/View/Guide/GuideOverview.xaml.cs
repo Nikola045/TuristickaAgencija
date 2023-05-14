@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Repository;
+using TravelAgency.Repository.UserRepo;
 using TravelAgency.View.Guide;
 
 namespace TravelAgency.View
@@ -21,6 +23,10 @@ namespace TravelAgency.View
     /// </summary>
     public partial class GuideOverview : Window
     {
+        private const string FilePath = "../../../Resources/Data/tours.csv";
+        private readonly App app = (App)App.Current;
+        private readonly UserRepository userRepository;
+        private readonly TourRepository tourRepository;
         public GuideOverview()
         {
         }
@@ -31,6 +37,8 @@ namespace TravelAgency.View
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
+            tourRepository = new TourRepository();
+            userRepository = app.UserRepository;
         }
 
         private void OpenGuideForm(object sender, RoutedEventArgs e)
@@ -49,6 +57,31 @@ namespace TravelAgency.View
         {
             TourStatistic createTourStatistic = new TourStatistic();
             createTourStatistic.Show();
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            DataPanel.ItemsSource = tourRepository.ReadFromToursCsv(FilePath);
+
+        }
+
+        private void DeleteTour(object sender, RoutedEventArgs e)
+        {
+            Tour SelectedTour = DataPanel.SelectedItem as Tour;
+            tourRepository.Delete(SelectedTour);
+            DataPanel.ItemsSource = tourRepository.ReadFromToursCsv(FilePath);
+        }
+        private void GetFired(object sender, RoutedEventArgs e)
+        {
+            userRepository.Delete(LoggedInUser);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
         }
     }
 }
