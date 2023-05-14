@@ -29,6 +29,10 @@
     <None Remove="Resources\Images\logo-twitter-png-5859.png" />
     <None Remove="Resources\Images\profilepic.jpg" />
     <None Remove="Resources\Images\Ta.jpg" />
+    <None Remove="View\Owner\536-5367699_add-plus-new-user-green-page-file-up.png" />
+    <None Remove="View\Owner\back.png" />
+    <None Remove="View\Owner\Gallery-PNG-File.png" />
+    <None Remove="View\Owner\profilepic.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +61,10 @@
     <Resource Include="Resources\Images\logo-twitter-png-5859.png" />
     <Resource Include="Resources\Images\profilepic.jpg" />
     <Resource Include="Resources\Images\Ta.jpg" />
+    <Resource Include="View\Owner\536-5367699_add-plus-new-user-green-page-file-up.png" />
+    <Resource Include="View\Owner\back.png" />
+    <Resource Include="View\Owner\Gallery-PNG-File.png" />
+    <Resource Include="View\Owner\profilepic.jpg" />
   </ItemGroup>
 
 </Project>
