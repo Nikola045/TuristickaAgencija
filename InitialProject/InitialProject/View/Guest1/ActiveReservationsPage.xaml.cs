@@ -27,30 +27,7 @@ namespace TravelAgency.View.Guest1
             LoggedInUser = user;
             InitializeComponent();
         }
-        private void AccountSettingsClick(object sender, RoutedEventArgs e)
-        {
-            Guest1AccountForm page = new Guest1AccountForm(LoggedInUser);
-            NavigationService.Navigate(page);
-        }
-
-        private void ForumSettingsClick(object sender, RoutedEventArgs e)
-        {
-            ForumSettingsPage page = new ForumSettingsPage(LoggedInUser);
-            NavigationService.Navigate(page);
-        }
-
-        private void VisitedAccommodationsClick(object sender, RoutedEventArgs e)
-        {
-            VisitedAccommodationsPage page = new VisitedAccommodationsPage(LoggedInUser);
-            NavigationService.Navigate(page);
-        }
-
-        private void ActiveReservationsClick(object sender, RoutedEventArgs e)
-        {
-            ActiveReservationsPage page = new ActiveReservationsPage(LoggedInUser);
-            NavigationService.Navigate(page);
-        }
-
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MoveReservationForm moveReservationForm = new MoveReservationForm(LoggedInUser);

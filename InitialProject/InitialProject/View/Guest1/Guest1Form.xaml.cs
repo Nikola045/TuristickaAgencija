@@ -56,8 +56,23 @@ namespace TravelAgency.View
                 
             }
             DataPanel.ItemsSource = hotelService.SortBySuperOwner(hotels);
+            ExpandColumns(DataPanel);
         }
+        private void ExpandColumns(DataGrid dataGrid)
+        {
+            double totalWidth = dataGrid.ActualWidth;
+            int columnCount = dataGrid.Columns.Count;
 
+            if (columnCount > 0)
+            {
+                double columnWidth = totalWidth / columnCount;
+
+                foreach (DataGridColumn column in dataGrid.Columns)
+                {
+                    column.Width = new DataGridLength(columnWidth);
+                }
+            }
+        }
         private void Search(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();

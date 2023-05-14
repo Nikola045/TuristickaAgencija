@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
+using TravelAgency.View.Guest2;
 
 namespace TravelAgency.Repository
 {
@@ -49,9 +50,10 @@ namespace TravelAgency.Repository
             return _vouchers.Max(t => t.Id) + 1;
         }
 
-        public void CreateVouchersForCancelling(Tour tour, int guestId)
+        /*public List<Voucher> CreateVouchersForCancelling(Tour tour, int guestId)
         {
             List<GuestOnTour> guestOnTours = _tourRepository.ReadFromGuestOnTour(FilePathGuest);
+            List<Voucher> vouchers = new List<Voucher>();
             for(int i = 0; i< guestOnTours.Count; i++)
             {
                 if (guestOnTours[i].TourId == tour.Id) 
@@ -64,7 +66,8 @@ namespace TravelAgency.Repository
                     Save(voucher);
                 }
             }
-        }
+            return vouchers;
+        }*/
 
         public List<Voucher> ReadFromVouchersCsv(string FileName)
         {

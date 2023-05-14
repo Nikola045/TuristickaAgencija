@@ -24,7 +24,7 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for GradeOwnerForm.xaml
     /// </summary>
-    public partial class GradeOwnerForm : Window
+    public partial class GradeOwnerForm : Page
     {
         private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
@@ -157,7 +157,6 @@ namespace TravelAgency.View.Guest1
             recommendationForRenovation.HotelChoice(selectedHotel);
 
             recommendationForRenovation.Show();
-            this.Close();
         }
 
         private void LoadHotels(object sender, RoutedEventArgs e)
