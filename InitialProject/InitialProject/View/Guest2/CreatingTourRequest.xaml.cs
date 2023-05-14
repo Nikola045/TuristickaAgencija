@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +19,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
+using static Azure.Core.HttpHeader;
 
 namespace TravelAgency.View.Guest2
 {
@@ -46,6 +48,53 @@ namespace TravelAgency.View.Guest2
 
         }
 
+        public bool ButtonActivator()
+        {
+            if (
+                CityV == "" &&
+                CountryV == "" &&
+                MaxV == "" &&
+                DescriptionV == "" &&
+                LanguageV == "" &&
+
+                City != "" &&
+                Country != "" &&
+                Max.ToString() != "" &&
+                Description != "" &&
+                Language != ""
+
+            {
+                return true;
+            }
+            else
+            { return false; }
+        }
+
+        private void CityValidation(object sender, TextChangedEventArgs e)
+        {
+            string city = City;
+            if (Regex.IsMatch(city, @"^[a-zA-Z\s]+$"))
+            {
+                CityV = "";
+            }
+            else
+            {
+                CityV = "Please enter valid value";
+            }
+        }
+
+        private void CountryValidation(object sender, TextChangedEventArgs e)
+        {
+            string country = Country;
+            if (Regex.IsMatch(country, @"^[a-zA-Z\s]+$"))
+            {
+                CountryV = "";
+            }
+            else
+            {
+                CountryV = "Please enter valid value";
+            }
+        }
         private void SaveTourRequest(object sender, RoutedEventArgs e)
         {
             TourRequests newTourRequests = new TourRequests(
@@ -59,14 +108,20 @@ namespace TravelAgency.View.Guest2
                 Convert.ToDateTime(FirstDateBox.Text),
                 Convert.ToDateTime(SecondDateBox.Text));
 
-                TourRequests savedTourRequests = tourRequestsRepository.Save(newTourRequests);
-
-
-            MessageBox.Show("Uspesno kreiran zahtev za turu.");
+                tourRequestsRepository.Save(ButtonActivator(), newTourRequests);
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {
+            Guest2Overview guest2Overview = new Guest2Overview(LoggedInUser);
             this.Close();
+            guest2Overview.Show();
+
+        }
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Guest2Overview guest2Overview = new Guest2Overview(LoggedInUser);
+            this.Close();
+            guest2Overview.Show();
 
         }
 

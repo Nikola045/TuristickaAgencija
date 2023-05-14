@@ -46,7 +46,7 @@ namespace TravelAgency.View.Guest2
 
         private void OpenVouchers(object sender, RoutedEventArgs e)
         {
-            VouchersView createVouchers = new VouchersView();
+            VouchersView createVouchers = new VouchersView(LoggedInUser);
             Close();
             createVouchers.Show();
         }

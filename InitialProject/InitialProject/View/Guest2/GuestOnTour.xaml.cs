@@ -48,7 +48,9 @@ namespace TravelAgency.View.Guest2
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+            Guest2Overview guest2Overview = new Guest2Overview(LogedUser);
             this.Close();
+            guest2Overview.Show();
         }
 
 

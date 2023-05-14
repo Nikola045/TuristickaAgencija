@@ -27,10 +27,11 @@ namespace TravelAgency.View.Guest2
         private const string FilePath = "../../../Resources/Data/vouchers.csv";
         User LogedUser = new Domain.Model.User();
 
-        public VouchersView()
+        public VouchersView(User user)
         {
             InitializeComponent();
             _repository = new VoucherRepository();
+            LogedUser = user;
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
@@ -42,7 +43,9 @@ namespace TravelAgency.View.Guest2
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+            Guest2Overview guest2Overview = new Guest2Overview(LogedUser);
             this.Close();
+            guest2Overview.Show();
         }
     
     }

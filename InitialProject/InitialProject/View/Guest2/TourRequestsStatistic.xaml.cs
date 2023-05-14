@@ -72,5 +72,13 @@ namespace TravelAgency.View.Guest2
             txt4.Text = Info[3].ToString();*/
         }
 
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Guest2Overview guest2Overview = new Guest2Overview(LoggedInUser);
+            this.Close();
+            guest2Overview.Show();
+
+        }
+
     }
 }

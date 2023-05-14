@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TravelAgency.Domain.Model;
 using TravelAgency.Serializer;
 
@@ -28,13 +29,20 @@ namespace TravelAgency.Repository
         }
 
 
-        public TourRequests Save(TourRequests tourRequest)
+        public void Save(bool validator, TourRequests tourRequest)
         {
-            tourRequest.Id = NextId();
-            _tourRequests = _serializer.FromCSV(FilePath);
-            _tourRequests.Add(tourRequest);
-            _serializer.ToCSV(FilePath, _tourRequests);
-            return tourRequest;
+            if (validator)
+            {
+                tourRequest.Id = NextId();
+                _tourRequests = _serializer.FromCSV(FilePath);
+                _tourRequests.Add(tourRequest);
+                _serializer.ToCSV(FilePath, _tourRequests);
+                MessageBox.Show("Uspesno kreiran zahtev za turu.");
+            }
+            else
+            {
+                MessageBox.Show("Please check your input datas");
+            }
         }
 
         public int NextId()
