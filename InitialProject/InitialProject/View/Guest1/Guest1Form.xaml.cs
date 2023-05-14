@@ -86,10 +86,11 @@ namespace TravelAgency.View
         }
         private void DataPanel_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyName == "NumberOfDaysToCancel")
+            if (e.PropertyName == "NumberOfDaysToCancel" || e.PropertyName == "OwnerUsername" || e.PropertyName == "RenovationStatus")
             {
                 e.Cancel = true;
             }
         }
+
     }
 }

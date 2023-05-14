@@ -7,37 +7,58 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="TravelAgency.View.Guest1.GradeOwnerForm"
         mc:Ignorable="d" Height="516" Width="1319">
     <Canvas Background="White">
-        <Label Content="Owner of:" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="894" Canvas.Top="136"/>
-        <ComboBox x:Name="cbHotelName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Loaded="LoadHotels" SelectionChanged="cbHotelName_SelectionChanged" Canvas.Left="894" Canvas.Top="166"/>
-        <Label Content="Additional comment:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="24" Canvas.Top="177"/>
-        <Label Content="Add photos of accommodation:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="22" Canvas.Top="337"/>
-        <TextBox x:Name="txtComment" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="653" Height="116" TextChanged="txtComment_TextChanged" Canvas.Left="33" Canvas.Top="215"/>
-        <TextBox x:Name="txtImg" HorizontalAlignment="Left" Margin="22,373,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="356" Height="20"/>
-        <Button x:Name="btnPlus" Content="+" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Click="btnPlus_Click" Canvas.Left="323" Canvas.Top="336"/>
-        <Button x:Name="btnAddImage" FontSize="20" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnAddImage_Click" Canvas.Left="349" Canvas.Top="336"/>
-        <Button x:Name="btnDeleteImage" FontSize="20" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnDeleteImage_Click" Canvas.Left="381" Canvas.Top="336"/>
-        <ListBox x:Name="ListViewImg" Height="80" Canvas.Top="398" Width="354" Canvas.Left="24" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button x:Name="btnGrade" FontSize="20" Content="Grade" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Grade" Canvas.Left="33" Canvas.Top="486"/>
-        <Label Content="Cleanliness:" FontSize="20" HorizontalAlignment="Left" Margin="33,120,0,0" VerticalAlignment="Top"/>
-        <Label Content="Host:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="387" Canvas.Top="123"/>
+        <Label Content="Owner of:" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="894" Canvas.Top="136"/>
+        <ComboBox x:Name="cbHotelName" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Loaded="LoadHotels" SelectionChanged="cbHotelName_SelectionChanged" Canvas.Left="894" Canvas.Top="166"/>
+        <Label Content="Additional comment:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="151"/>
+        <Label Content="Add photos of accommodation:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="339"/>
+        <TextBox x:Name="txtComment" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1289" Height="139" TextChanged="txtComment_TextChanged" Canvas.Left="10" Canvas.Top="188"/>
+        <Button x:Name="btnPlus" Content="+" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Width="31" Click="btnPlus_Click" Canvas.Left="305" Canvas.Top="339" Height="37"/>
+        <Button x:Name="btnDeleteImage" FontSize="20" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Center" Click="btnDeleteImage_Click" Canvas.Left="335" Canvas.Top="339" Height="37" Width="80"/>
+        <ListView x:Name="ListViewImg" Height="80" Canvas.Top="389" Width="405" Canvas.Left="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding}" Width="70" Height="70" Margin="5"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-        <StackPanel Orientation ="Horizontal" Canvas.Left="156" Canvas.Top="130">
+        <Button x:Name="btnGrade" IsEnabled="False" FontSize="20" Content="Grade" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Grade" Canvas.Left="10" Canvas.Top="485"/>
+        <Label Content="Cleanliness:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="109"/>
+        <Label Content="Host:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="334" Canvas.Top="109"/>
+
+        <StackPanel Orientation ="Horizontal" Canvas.Left="139" Canvas.Top="118" HorizontalAlignment="Center" VerticalAlignment="Top">
             <RadioButton x:Name="rbHotelOption1" FontSize="20" VerticalContentAlignment="Center" Content="1" />
             <RadioButton x:Name="rbHotelOption2" FontSize="20" VerticalContentAlignment="Center" Content="2" Margin="5,0,0,0" />
             <RadioButton x:Name="rbHotelOption3" FontSize="20" VerticalContentAlignment="Center" Content="3" Margin="5,0,0,0" />
             <RadioButton x:Name="rbHotelOption4" FontSize="20" VerticalContentAlignment="Center" Content="4" Margin="5,0,0,0" />
             <RadioButton x:Name="rbHotelOption5" FontSize="20" VerticalContentAlignment="Center" Content="5" Margin="5,0,0,0" />
         </StackPanel>
-        <StackPanel Orientation ="Horizontal" Canvas.Left="481" Canvas.Top="134" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <StackPanel Orientation ="Horizontal" Canvas.Left="407" Canvas.Top="118" HorizontalAlignment="Center" VerticalAlignment="Top">
             <RadioButton x:Name="rbOwnerOption1" FontSize="20" VerticalContentAlignment="Center" Content="1" />
             <RadioButton x:Name="rbOwnerOption2" FontSize="20" VerticalContentAlignment="Center" Content="2" Margin="5,0,0,0" />
             <RadioButton x:Name="rbOwnerOption3" FontSize="20" VerticalContentAlignment="Center" Content="3" Margin="5,0,0,0" />
             <RadioButton x:Name="rbOwnerOption4" FontSize="20" VerticalContentAlignment="Center" Content="4" Margin="5,0,0,0" />
             <RadioButton x:Name="rbOwnerOption5" FontSize="20" VerticalContentAlignment="Center" Content="5" Margin="5,0,0,0" />
         </StackPanel>
-        <Rectangle Height="35" Canvas.Left="148" Stroke="Black" Canvas.Top="122" Width="201" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Rectangle Height="35" Canvas.Left="476" Stroke="Black" Canvas.Top="125" Width="193" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Content="Rate accommodation:" FontSize="20" Canvas.Left="51" Canvas.Top="22"/>
-        <DataGrid Height="56" Width="1271" d:ItemsSource="{d:SampleData ItemCount=5}" Canvas.Left="51" Canvas.Top="59" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Rectangle Height="42" Canvas.Left="394" Stroke="Black" Canvas.Top="110" Width="194" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Rate accommodation:" FontSize="20" Canvas.Left="10" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="-8"/>
+        <DataGrid x:Name="DataPanel" FontSize="16" Height="75" Width="1289"  Canvas.Left="10" Canvas.Top="29" HorizontalAlignment="Center" VerticalAlignment="Top" Loaded="OnLoad">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Hotel Name" Binding="{Binding Name, StringFormat={}{0} }" />
+                <DataGridTextColumn Header="City" Binding="{Binding City, StringFormat={}{0} }" />
+                <DataGridTextColumn Header="Country" Binding="{Binding Country, StringFormat={}{0} }" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type, StringFormat={}{0} }" />
+                <DataGridTextColumn Header="Number of Guests" Binding="{Binding NumberOfGuests, StringFormat={}{0} }" />
+                <DataGridTextColumn Header="Number of Days" Binding="{Binding NumberOfDays, StringFormat={}{0} }" />
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Rectangle Height="42" Canvas.Left="127" Stroke="Black" Canvas.Top="110" Width="193" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Canvas>
 </Page>

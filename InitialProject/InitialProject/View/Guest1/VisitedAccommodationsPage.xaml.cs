@@ -59,8 +59,7 @@ namespace TravelAgency.View.Guest1
                         OwnerOf = reservation.HotelName,
                         Cleanliness = grade.Cleanliness,
                         Politeness = grade.Respecting,
-                        Comment = grade.CommentText,
-                        ReservationId = grade.ReservationId
+                        Comment = grade.CommentText
                     };
                     filteredGrades.Add(obj);
                 }
@@ -177,22 +176,6 @@ namespace TravelAgency.View.Guest1
         }
 
         private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var textBlock = sender as TextBlock;
-            var item = textBlock.DataContext;
-
-            var propertyInfo = item.GetType().GetProperty("IsRated");
-            var isRatedValue = propertyInfo?.GetValue(item);
-
-            if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
-            {
-                GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser);
-                NavigationService.Navigate(gradeOwnerPage);
-            }
-        }
-
-
-        private void IsRated_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var textBlock = sender as TextBlock;
             var item = textBlock.DataContext;
