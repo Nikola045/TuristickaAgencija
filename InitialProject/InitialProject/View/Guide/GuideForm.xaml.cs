@@ -39,11 +39,13 @@ namespace TravelAgency.View
 
         private readonly ImageRepository tourImageRepository;
 
+        public User LoggedUser { get; set; }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public GuideForm()
+        public GuideForm(User user)
         {
             InitializeComponent();
             Title = "Create new tour";
@@ -51,6 +53,7 @@ namespace TravelAgency.View
             tourRepository = new TourRepository();
             checkPointRepository = new CheckPointRepository();
             tourImageRepository = app.ImageRepository;
+            LoggedUser = user;
         }
 
         private void SaveTour(object sender, RoutedEventArgs e)
@@ -81,6 +84,7 @@ namespace TravelAgency.View
                     Convert.ToInt32(txtMaxNumberOfGuests.Text),
                     Convert.ToDateTime(DateList.Items[i]),
                     Convert.ToInt32(txtTourDuration.Text),
+                    Convert.ToInt32(LoggedUser.Id),
                     checkPoints);
                 Tour savedTour = tourRepository.Save(newTour);
                 

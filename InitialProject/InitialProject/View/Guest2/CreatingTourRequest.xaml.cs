@@ -67,6 +67,7 @@ namespace TravelAgency.View.Guest2
         private void Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
+
         }
 
     }

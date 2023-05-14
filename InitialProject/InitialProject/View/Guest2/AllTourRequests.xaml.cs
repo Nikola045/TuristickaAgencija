@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Graph.Models.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,11 @@ namespace TravelAgency.View.Guest2
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+
+            Guest2Overview guest2Overview = new Guest2Overview(LogedUser);
             this.Close();
+            guest2Overview.Show();
+
         }
 
 

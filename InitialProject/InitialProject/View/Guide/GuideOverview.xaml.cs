@@ -35,7 +35,7 @@ namespace TravelAgency.View
 
         private void OpenGuideForm(object sender, RoutedEventArgs e)
         {
-            GuideForm createGuideForm = new GuideForm();
+            GuideForm createGuideForm = new GuideForm(LoggedInUser);
             createGuideForm.Show();
         }
 

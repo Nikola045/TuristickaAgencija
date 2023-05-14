@@ -89,9 +89,10 @@ namespace TravelAgency.Repository
                     tour.StartTime = Convert.ToDateTime(fields[8]);
                     tour.TourDuration = Convert.ToInt32(fields[9]);
                     tour.TourStatus = fields[10];
-                    int i = 11;
-                    int j = 12;
-                    int k = 13;
+                    tour.GuideId = Convert.ToInt32(fields[11]); 
+                    int i = 12;
+                    int j = 13;
+                    int k = 14;
                     List<CheckPoint> checkPoints = new List<CheckPoint>();
                     while (k <= fields.Count())
                     {
