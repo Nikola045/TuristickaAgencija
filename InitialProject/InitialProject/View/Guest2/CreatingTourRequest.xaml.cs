@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
@@ -30,6 +31,7 @@ namespace TravelAgency.View.Guest2
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly TourRequestsRepository tourRequestsRepository;
+        private readonly OwnerService ownerService;
         public User LoggedInUser { get; set; }
 
 
@@ -43,6 +45,7 @@ namespace TravelAgency.View.Guest2
             InitializeComponent();
             LoggedInUser = user;
             tourRequestsRepository = new TourRequestsRepository();
+            ownerService = new OwnerService();
 
         }
 
@@ -50,7 +53,7 @@ namespace TravelAgency.View.Guest2
         {
             TourRequests newTourRequests = new TourRequests(
                 tourRequestsRepository.NextId(),
-                LoggedInUser.Id,
+                ownerService.GetOwnerByUsername(LoggedInUser.Username),
                 txtCity.Text,
                 txtCountry.Text,
                 txtDescription.Text,

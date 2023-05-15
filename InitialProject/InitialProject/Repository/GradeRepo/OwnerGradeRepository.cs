@@ -29,7 +29,7 @@ namespace TravelAgency.Repository.GradeRepo
         {
             foreach (OwnerGrade grade in ownerGrades)
             {
-                if (grade.ReservationId == id)
+                if (grade.Reservation.Id == id)
                 {
                     return grade;
                 }

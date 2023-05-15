@@ -38,5 +38,14 @@ namespace TravelAgency.Repository
             _storage.Save(renovations);
         }
 
+        public int NextId()
+        {
+            if (renovations.Count < 1)
+            {
+                return 1;
+            }
+            return renovations.Max(h => h.Id) + 1;
+        }
+
     }
 }

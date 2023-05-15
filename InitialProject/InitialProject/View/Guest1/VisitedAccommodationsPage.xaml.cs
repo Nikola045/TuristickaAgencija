@@ -50,7 +50,7 @@ namespace TravelAgency.View.Guest1
 
             foreach (GuestGrade grade in guestGrades)
             {
-                Reservation reservation = reservationRepository.Get(grade.ReservationId);
+                Reservation reservation = reservationRepository.Get(grade.Reservation.Id);
 
                 if (reservation != null && gradeService.IsOwnerGradeExists(reservation.Id))
                 {

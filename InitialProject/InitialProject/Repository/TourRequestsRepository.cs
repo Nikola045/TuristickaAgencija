@@ -55,7 +55,7 @@ namespace TravelAgency.Repository
 
             for (int i = 0; i < _tourRequests.Count(); i++)
             {
-                if (_tourRequests[i].GuestId == id && _tourRequests[i].Status == "Pending")
+                if (_tourRequests[i].Guest2.Id == id && _tourRequests[i].Status == "Pending")
                 {
                     tourRequests.Add(_tourRequests[i]);
                 }
