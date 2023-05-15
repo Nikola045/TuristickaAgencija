@@ -82,7 +82,7 @@ namespace TravelAgency.View.Guest1
 
             private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            AnywhereAnytime page = new AnywhereAnytime();
+            AnywhereAnytime page = new AnywhereAnytime(LoggedInUser);
             NavigationService.Navigate(page);
 
             e.Handled = true;

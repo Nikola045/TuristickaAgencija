@@ -62,6 +62,7 @@ namespace TravelAgency.View
 
             Guest1HomePage page = new Guest1HomePage(LoggedInUser);
             ShowPage.Content = page;
+
         }
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

@@ -26,7 +26,7 @@
         </TextBox>
         <TextBox x:Name="txtNoDays" TextWrapping="Wrap" Height="32" FontSize="16" VerticalContentAlignment="Center"
             Text="{Binding DaysLeft, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="3" Canvas.Top="436" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Click="Search" Content="Search"  FontSize="20" Canvas.Left="6" Canvas.Top="483" Height="40" Width="115" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Click="Search" Content="Search"  FontSize="20" Canvas.Left="3" Canvas.Top="483" Height="40" Width="115" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <RadioButton x:Name="RadioHouse" VerticalContentAlignment="Center" Content="House" GroupName="type" FontSize="20" Canvas.Left="59" Canvas.Top="293" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <RadioButton x:Name="RadioHotel" VerticalContentAlignment="Center" Content="Hotel" GroupName="type" FontSize="20" Canvas.Left="247" Canvas.Top="293" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <RadioButton x:Name="RadioApartment" VerticalContentAlignment="Center" Content="Apartment" GroupName="type" FontSize="20" Canvas.Left="344" Canvas.Top="293" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -34,8 +34,8 @@
         <Label Content="City:" FontSize="20" Canvas.Left="3" Canvas.Top="134" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Country:" FontSize="20" Canvas.Top="211" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox x:Name="txtCountry" VerticalContentAlignment="Center" FontSize="16" TextWrapping="Wrap" Canvas.Left="3" Canvas.Top="249" Width="454" Height="32" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <DataGrid x:Name="DataPanel" AutoGenerateColumns="True" AutoGeneratingColumn="DataPanel_AutoGeneratingColumn"   
-            ItemsSource="{Binding Hotels}" SelectedItem="{Binding SelectedHotel}" Loaded="OnLoad" Height="410" Canvas.Left="594" Canvas.Top="58" Width="986" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Searched accommodations:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Canvas.Left="594" Canvas.Top="16"/>
+        <DataGrid x:Name="DataPanel" FontSize="16" AutoGenerateColumns="True" AutoGeneratingColumn="DataPanel_AutoGeneratingColumn"   
+            ItemsSource="{Binding Hotels}" SelectedItem="{Binding SelectedHotel}" Loaded="OnLoad" Height="410" Canvas.Left="495" Canvas.Top="58" Width="1085" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Searched accommodations:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Canvas.Left="496" Canvas.Top="16"/>
     </Canvas>
 </Page>
