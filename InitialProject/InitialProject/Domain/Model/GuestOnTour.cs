@@ -10,8 +10,8 @@ namespace TravelAgency.Domain.Model
     public class GuestOnTour : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
-        public int GuestId { get; set; }
-        public int TourId { get; set; }
+        public User Guest2 = new User();
+        public Tour Tour = new Tour();
         public string TourName { get; set; }
         public string StartingPoint { get; set; }
         public int NumOfGuests { get; set; }
@@ -21,12 +21,12 @@ namespace TravelAgency.Domain.Model
 
         public GuestOnTour() { }
 
-        public GuestOnTour(int id, int userId, int tourId, string tourName, List<CheckPoint> checkPoint, string Status, int numOfGuests, int guestAge, string withVoucher)
+        public GuestOnTour(int id, User guest2, Tour tour, string tourName, List<CheckPoint> checkPoint, string Status, int numOfGuests, int guestAge, string withVoucher)
         {
 
             Id = id;
-            GuestId = userId;
-            TourId = tourId;
+            Guest2 = guest2;
+            Tour = tour;
             TourName = tourName;
             CurentCheckPoints = checkPoint;
             StartingPoint = Status;
@@ -47,7 +47,7 @@ namespace TravelAgency.Domain.Model
                 CheckPointsList = CheckPointsList + point.Id.ToString() + "|" + point.Name + "|" + point.Status + delimiter;
                 currentIndex++;
             }
-            string[] csvValues = { Id.ToString(), GuestId.ToString(), TourId.ToString(), TourName, StartingPoint, NumOfGuests.ToString(), GuestAge.ToString(),WithVoucher, CheckPointsList};
+            string[] csvValues = { Id.ToString(), Guest2.Id.ToString(), Tour.Id.ToString(), TourName, StartingPoint, NumOfGuests.ToString(), GuestAge.ToString(),WithVoucher, CheckPointsList};
             return csvValues;
         }
 
@@ -71,8 +71,8 @@ namespace TravelAgency.Domain.Model
             }
             CurentCheckPoints = checkPoints;
             Id = Convert.ToInt32(values[0]);
-            GuestId = Convert.ToInt32(values[1]);
-            TourId = Convert.ToInt32(values[2]);
+            Guest2.Id = Convert.ToInt32(values[1]);
+            Tour.Id = Convert.ToInt32(values[2]);
             TourName= values[3];
             StartingPoint = values[4];
             NumOfGuests = Convert.ToInt32(values[5]);

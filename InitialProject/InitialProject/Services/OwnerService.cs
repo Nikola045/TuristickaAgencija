@@ -23,7 +23,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach(OwnerGrade grade in grades)
             {
-                if (grade.OwnerUsername == OwnerUserName)
+                if (grade.Owner.Username == OwnerUserName)
                     count++;
             }
             return count;
@@ -34,7 +34,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach (OwnerGrade grade in grades)
             {
-                if (grade.OwnerUsername == OwnerUserName)
+                if (grade.Owner.Username == OwnerUserName)
                     Grade = Grade + grade.OwnerRating;
             }
             return Grade / CountGradesFromOwnerRating(OwnerUserName);
@@ -88,6 +88,16 @@ namespace TravelAgency.Services
         public void UpadateUsername(User user)
         {
             userRepository.Update(user); 
+        }
+
+        public User GetOwnerByUsername(string username)
+        {
+            List<User> users = userRepository.GetAll();
+            foreach(User user in users)
+            {
+                if(username == user.Username) return user;
+            }
+            return null;
         }
     }
 }

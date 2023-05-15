@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Repository.GradeRepo;
+using TravelAgency.Repository.UserRepo;
 
 namespace TravelAgency.Services
 {
@@ -13,11 +14,13 @@ namespace TravelAgency.Services
         private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
+        private readonly UserRepository userRepository;
         private readonly ReservationService reservationService;
         public GradeService() 
         {
             ownerGradeRepository = app.OwnerGradeRepository;
             reservationRepository = app.ReservationRepository;
+            userRepository = app.UserRepository;
             reservationService = new ReservationService();
         }
 
@@ -26,7 +29,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach(OwnerGrade grade in grades)
             {
-                if (grade.ReservationId == id)
+                if (grade.Reservation.Id == id)
                 {
                     return grade;
                 }
@@ -39,7 +42,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach (OwnerGrade grade in grades)
             {
-                if (grade.ReservationId == id)
+                if (grade.Reservation.Id == id)
                 {
                     return true;
                 }
@@ -134,11 +137,25 @@ namespace TravelAgency.Services
         public bool IsOwnerAlreadyRatedByGuest(int reservationId, string guestUsername)
         {
             OwnerGrade ownerGrade = ownerGradeRepository.GetByReservationId(reservationId);
-            if (ownerGrade != null && ownerGrade.Guest1Username == guestUsername)
+            if (ownerGrade != null && ownerGrade.Guest1.Username == guestUsername)
             {
                 return true;
             }
             return false;
+        }
+
+        public User FindGuestByUsername(string username)
+        {
+            List<User> guests = userRepository.GetAll();
+            foreach (User user in guests)
+            {
+                if (user.Username == username)
+                {
+                    return user;
+                }
+                
+            }
+            return null;
         }
 
     }

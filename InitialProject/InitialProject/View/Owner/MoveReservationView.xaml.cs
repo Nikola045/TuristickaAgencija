@@ -55,7 +55,7 @@ namespace TravelAgency.View.Owner
         private void AcceptMoveReservation(object sender, RoutedEventArgs e)
         {
             SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-            reservationService.MoveReservation(SelectedReservation.ReservationId, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+            reservationService.MoveReservation(SelectedReservation.Reservation.Id, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
             DataPanel.ItemsSource = moveReservationRepository.GetAll();
         }
 
@@ -69,7 +69,7 @@ namespace TravelAgency.View.Owner
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-            ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.ReservationId, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+            ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.Reservation.Id, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
         }
 
         public string HotelName
