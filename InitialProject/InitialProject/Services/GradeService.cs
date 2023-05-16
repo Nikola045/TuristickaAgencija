@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.GradeRepo;
 using TravelAgency.Repository.UserRepo;
@@ -11,16 +12,15 @@ namespace TravelAgency.Services
 {
     internal class GradeService
     {
-        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
         private readonly UserRepository userRepository;
         private readonly ReservationService reservationService;
         public GradeService() 
         {
-            ownerGradeRepository = app.OwnerGradeRepository;
-            reservationRepository = app.ReservationRepository;
-            userRepository = app.UserRepository;
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
             reservationService = new ReservationService();
         }
 

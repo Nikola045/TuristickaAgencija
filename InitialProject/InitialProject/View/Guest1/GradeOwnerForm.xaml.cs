@@ -20,6 +20,7 @@ using TravelAgency.Repository.HotelRepo;
 using DevExpress.XtraEditors.Filtering;
 using static TravelAgency.View.Guest1.GradeOwnerForm;
 using System.Collections.ObjectModel;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.View.Guest1
 {
@@ -28,7 +29,6 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class GradeOwnerForm : Page
     {
-        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
         public HotelRepository hotelRepository { get; }
@@ -44,9 +44,9 @@ namespace TravelAgency.View.Guest1
             InitializeComponent();
             Title = "Grade owner";
             DataContext = this;
-            ownerGradeRepository = app.OwnerGradeRepository;
-            reservationRepository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();

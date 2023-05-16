@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Forms;
 using TravelAgency.Repository.HotelRepo;
 using Image = TravelAgency.Domain.Model.Image;
@@ -14,14 +15,13 @@ namespace TravelAgency.Services
 {
     internal class HotelService
     {
-        private readonly App app = (App)App.Current;
         private ImageRepository imageRepository { get; }
         private HotelRepository hotelRepository { get; }
 
         public HotelService() 
         {
-            imageRepository = app.ImageRepository;
-            hotelRepository = app.HotelRepository;
+            imageRepository = new(InjectorService.CreateInstance<IStorage<Image>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
         }
 
         public List<Hotel> FindHotel(string name, string city, string country, string type, string max, string days)
