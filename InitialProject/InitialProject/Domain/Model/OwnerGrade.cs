@@ -9,20 +9,20 @@ namespace TravelAgency.Domain.Model
 {
     public class OwnerGrade : ISerializable
     {
-        public string Guest1Username { get; set; }
-        public string OwnerUsername { get; set; }
-        public int ReservationId { get; set; }
+        public User Guest1 = new User();
+        public User Owner = new User();
+        public Reservation Reservation = new Reservation();
         public int HotelRating { get; set; }
         public int OwnerRating { get; set; }
         public string Comment { get; set; }
 
         public OwnerGrade() { }
 
-        public OwnerGrade(string guset1Username, string ownerUsername, int reservationId, int hotelRating, int ownerRating, string comment)
+        public OwnerGrade(User guset1, User owner, Reservation reservation, int hotelRating, int ownerRating, string comment)
         {
-            Guest1Username = guset1Username;
-            OwnerUsername = ownerUsername;
-            ReservationId = reservationId;
+            Guest1 = guset1;
+            Owner = owner;
+            Reservation = reservation;
             HotelRating = hotelRating;
             OwnerRating = ownerRating;
             Comment = comment;
@@ -30,15 +30,15 @@ namespace TravelAgency.Domain.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Guest1Username, OwnerUsername, ReservationId.ToString(), HotelRating.ToString(), OwnerRating.ToString(), Comment };
+            string[] csvValues = { Guest1.Username, Owner.Username, Reservation.Id.ToString(), HotelRating.ToString(), OwnerRating.ToString(), Comment };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            Guest1Username = values[0];
-            OwnerUsername = values[1];
-            ReservationId = Convert.ToInt32(values[2]);
+            Guest1.Username = values[0];
+            Owner.Username = values[1];
+            Reservation.Id = Convert.ToInt32(values[2]);
             HotelRating = Convert.ToInt32(values[3]);
             OwnerRating = Convert.ToInt32(values[4]);
             Comment = values[5];

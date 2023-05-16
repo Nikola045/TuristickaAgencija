@@ -35,6 +35,7 @@ namespace TravelAgency.View.Guest1
         private readonly GradeService gradeService;
         private readonly HotelService hotelService;
         private readonly ReservationService reservationService;
+        private readonly OwnerService ownerService;
         private User LogedUser { get; set; }
         public ObservableCollection<Accommodation> Accommodations { get; set; }
 
@@ -49,6 +50,7 @@ namespace TravelAgency.View.Guest1
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();
+            ownerService = new OwnerService();
             LogedUser = user;
         }
 
@@ -193,9 +195,9 @@ namespace TravelAgency.View.Guest1
             Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
 
             OwnerGrade newGrade = new OwnerGrade(
-                LogedUser.Username,
-                selectedOwnerUsername.OwnerUsername,
-                id,
+                ownerService.GetOwnerByUsername(LogedUser.Username),
+                ownerService.GetOwnerByUsername(selectedOwnerUsername.OwnerUsername),
+                reservationService.FindReservationByID(id),
                 hotelRating,
                 ownerRating,
                 txtComment.Text

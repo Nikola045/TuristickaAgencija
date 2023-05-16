@@ -64,7 +64,7 @@ namespace TravelAgency.View.Guest1
             if (SelectedReservation != null && AllFieldsValid())
             {
                 MoveReservation newRequest = new MoveReservation(
-                    SelectedReservation.Id,
+                    SelectedReservation,
                     SelectedReservation.HotelName,
                     LogedUser.Username,
                     SelectedReservation.StartDate,

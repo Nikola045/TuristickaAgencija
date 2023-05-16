@@ -201,7 +201,11 @@ namespace TravelAgency.Services
             {
                 if (IsAvailable(reservations, comboBoxItem.Content.ToString(), startDate, endDate))
                 {
-                    RenovationRequest renovationRequest = new RenovationRequest(Convert.ToInt32(comboBoxItem.Tag), comboBoxItem.Content.ToString(), startDate, endDate);
+                    RenovationRequest renovationRequest = new RenovationRequest(
+                        renovationRequestRepository.NextId(),
+                        hotelService.GetHotelById(Convert.ToInt32(comboBoxItem.Tag.ToString())),
+                        startDate, 
+                        endDate);
                     renovationRequestRepository.Save(renovationRequest);
                     MessageBox.Show("Success");
                 }
@@ -224,6 +228,10 @@ namespace TravelAgency.Services
                 {
                     renovationRequestRepository.Delete(renovation);
                 }
+                else
+                {
+                    MessageBox.Show("You can't cancel renovation.");
+                }
             }
         }
 
@@ -233,13 +241,11 @@ namespace TravelAgency.Services
             List<Hotel> hotels = hotelRepository.GetAll();
             List<Hotel> changedHotels = new List<Hotel>();
             List<RenovationRequest> renovations = renovationRequestRepository.GetAll(); 
-            if(renovations.Count != 0 && hotels.Count != 0)
-            {
-                foreach (Hotel hotel in hotels)
+            foreach (Hotel hotel in hotels)
                 {
                     foreach (RenovationRequest renovation in renovations)
                     {
-                        if (hotel.Id == renovation.Id)
+                        if (hotel.Id == renovation.Hotel.Id)
                         {
                             if (renovation.StartDate <= dateTime && dateTime <= renovation.EndDate)
                             {
@@ -251,16 +257,21 @@ namespace TravelAgency.Services
                                 hotel.RenovationStatus = "Renovated";
                                 changedHotels.Add(hotel);
                             }
+                            else if(dateTime < renovation.EndDate && dateTime.Year - renovation.EndDate.Year == 0)
+                            {
+                                hotel.RenovationStatus = "Not Renovated";
+                                changedHotels.Add(hotel);
+                            }
                             else
                             {
                                 hotel.RenovationStatus = "Not Renovated";
                                 changedHotels.Add(hotel);
                                 renovationRequestRepository.Delete(renovation);
-                            }
+                        }
+
                         }
                         if (renovations.Count == 0) break;
                     }
-                }
             }
             return changedHotels;
         }

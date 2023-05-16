@@ -20,6 +20,7 @@ namespace TravelAgency.View.Owner
         public Hotel SelectedHotel { get; set; }
         private readonly HotelService hotelService;
         private ReservationService reservationService;
+        public static Stack<Page> pages = new Stack<Page>();
         static int ClickAccommodationCount = 1;
         static int ClickMediaCount = 1;
         public OwnerHome(User user)
@@ -41,20 +42,23 @@ namespace TravelAgency.View.Owner
 
         private void OpenGradeForm(object sender, RoutedEventArgs e)
         {
-            GradePage page = new GradePage();
-            ShowSmallPage.Content = page;
+            GradePage gradePage = new GradePage();
+            ShowSmallPage.Content = gradePage;
+            pages.Push(gradePage);
         }
 
         private void OpenMoveReservation(object sender, RoutedEventArgs e)
         {
-            MoveReservationPage page = new MoveReservationPage();
-            ShowBigPage.Content = page;
+            MoveReservationPage reservationPage = new MoveReservationPage();
+            ShowBigPage.Content = reservationPage;
+            pages.Push(reservationPage);
         }
 
         private void OpenReviewForm(object sender, RoutedEventArgs e)
         {
-            ReviewPage page = new ReviewPage(LoggedInUser);
-            ShowSmallPage.Content = page;
+            ReviewPage reviewPage = new ReviewPage(LoggedInUser);
+            ShowSmallPage.Content = reviewPage;
+            pages.Push(reviewPage);
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
@@ -130,20 +134,39 @@ namespace TravelAgency.View.Owner
 
         private void OpenStatistic(object sender, RoutedEventArgs e)
         {
-            StatisticPage page = new StatisticPage(LoggedInUser);
-            ShowSmallPage.Content = page;
+            StatisticPage statisticPage = new StatisticPage(LoggedInUser,ShowSmallPage);
+            ShowSmallPage.Content = statisticPage;
+            pages.Push(statisticPage);
         }
 
         private void OpenRenovation(object sender, RoutedEventArgs e)
         {
-            RenovationPage page = new RenovationPage(LoggedInUser);
-            ShowSmallPage.Content = page;
+            RenovationPage renovationPage = new RenovationPage(LoggedInUser);
+            ShowSmallPage.Content = renovationPage;
+            pages.Push(renovationPage);
         }
 
         private void OpenRenovationReview(object sender, RoutedEventArgs e)
         {
-            RenovationReview page = new RenovationReview();
-            ShowSmallPage.Content = page;
+            RenovationReview renovationReviewPage = new RenovationReview();
+            ShowSmallPage.Content = renovationReviewPage;
+            pages.Push(renovationReviewPage);
+        }
+
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            if (pages.Count > 0)
+            {
+                pages.Pop();
+                if (pages.Count > 0)
+                {
+                    ShowSmallPage.Content = pages.Peek();     
+                }
+                else
+                {
+                    HomeButton(sender, e);
+                }
+            }
         }
     }
 }

@@ -74,11 +74,11 @@ namespace TravelAgency.View.Owner
             if (comboBoxItem != null && CB1Text != null && CB2Text != null && Comment != null)
             {
                 GuestGrade newGrade = new GuestGrade(
-                comboBoxItem.Content.ToString(),
+                gradeService.FindGuestByUsername(comboBoxItem.Content.ToString()),
                 CB1Text,
                 CB2Text,
                 Comment,    
-                Convert.ToInt32(comboBoxItem.Tag));
+                reservationService.FindReservationByID(Convert.ToInt32(comboBoxItem.Tag)));
                 gradeGuest1Repository.Save(newGrade);
 
                 CommentText.Clear();

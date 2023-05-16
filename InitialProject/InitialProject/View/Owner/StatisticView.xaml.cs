@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using TravelAgency.Domain.Model;
 using TravelAgency.Services;
+using PieSeries = LiveCharts.Wpf.PieSeries;
 
 namespace TravelAgency.View.Owner
 {
@@ -25,17 +26,18 @@ namespace TravelAgency.View.Owner
         private SeriesCollection _data;
         private string _hotelName;
         private int _year;
+        private Frame ShowSmallFrame;
         public event PropertyChangedEventHandler? PropertyChanged;
         private User LogedUser { get; }
-        public StatisticPage(User user)
+        public StatisticPage(User user, Frame frame)
         {
-            
             InitializeComponent();
             DataContext = this;
             reservationService = new ReservationService();
             hotelService = new HotelService();
             LogedUser = user;
             DataChart = new SeriesCollection();
+            ShowSmallFrame = frame;
         }
 
         private void YearStatistic(object sender, RoutedEventArgs e)
@@ -69,6 +71,7 @@ namespace TravelAgency.View.Owner
             Label1.Visibility = Visibility.Visible;
             Label2.Visibility = Visibility.Visible;
             YearCB.Visibility = Visibility.Visible;
+            PdfButton.IsEnabled = true;
             XTitle = "Months";
             XLabels = months;
         }
@@ -136,6 +139,13 @@ namespace TravelAgency.View.Owner
                 }
             }
             MessageBox.Show(HotelName + " was the busiest in year: " + YearForStatistic.ToString() + " month: " + ConvertIntToMonth(month) + " with number of reservations: " + max.ToString());
+        }
+
+        private void PdfButton_Click(object sender, RoutedEventArgs e)
+        {
+            StatisticPdf statisticPdfPage = new StatisticPdf();
+            ShowSmallFrame.Content = statisticPdfPage;
+            OwnerHome.pages.Push(statisticPdfPage);
         }
 
         public string ConvertIntToMonth(int i)
