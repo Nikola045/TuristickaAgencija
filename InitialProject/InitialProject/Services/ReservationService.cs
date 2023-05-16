@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Storage.FileStorage;
@@ -14,8 +15,7 @@ using TravelAgency.Storage.FileStorage;
 namespace TravelAgency.Services
 {
     internal class ReservationService
-    {
-        private readonly App app = (App)App.Current;
+    { 
         public HotelRepository hotelRepository;
         private ReservationRepository reservationRepository;
         private MoveReservationRepository moveReservationRepository;
@@ -23,10 +23,10 @@ namespace TravelAgency.Services
         private RenovationRequestRepository renovationRequestRepository;
         public ReservationService() 
         {
-            reservationRepository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
-            moveReservationRepository = app.MoveReservationRepository;
-            renovationRequestRepository = app.RenovationRequestRepository;
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
+            moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
+            renovationRequestRepository = new(InjectorService.CreateInstance<IStorage<RenovationRequest>>());
             hotelService = new HotelService();
         }
 

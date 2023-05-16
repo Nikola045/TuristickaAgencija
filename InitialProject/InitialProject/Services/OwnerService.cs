@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository.GradeRepo;
 using TravelAgency.Repository.UserRepo;
 
@@ -8,13 +9,12 @@ namespace TravelAgency.Services
 {
     internal class OwnerService
     {
-        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly UserRepository userRepository;
         public OwnerService()
         {
-            ownerGradeRepository = app.OwnerGradeRepository;
-            userRepository = app.UserRepository;
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
         }
 
         public int CountGradesFromOwnerRating(string OwnerUserName)

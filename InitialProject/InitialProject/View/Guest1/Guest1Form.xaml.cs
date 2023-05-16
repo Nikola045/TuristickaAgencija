@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
 
@@ -22,7 +23,6 @@ namespace TravelAgency.View
     /// </summary>
     public partial class Guest1Form : Page
     {
-        private readonly App app = (App)App.Current;
         public HotelRepository hotelRepository { get; }
         private readonly HotelService hotelService;
         private readonly OwnerService ownerService;
@@ -34,7 +34,7 @@ namespace TravelAgency.View
             InitializeComponent();
             Title = "Search hotel";
             DataContext = this;
-            hotelRepository = app.HotelRepository;
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             hotelService = new HotelService();
             ownerService = new OwnerService();
             reservationService = new ReservationService();

@@ -7,7 +7,15 @@
         mc:Ignorable="d"
         Title="OwnerHome" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="DataPanel" Height="677" Width="1024" HorizontalAlignment="Center" Canvas.Top="75" VerticalAlignment="Top" Margin="0,74,0,0" Loaded="OnLoad" FontSize="14"/>
+        <DataGrid x:Name="DataPanel" ItemsSource="{Binding Hotels}" Height="677" Width="1004" HorizontalAlignment="Center" Canvas.Top="75" VerticalAlignment="Top" Margin="0,74,0,0" Loaded="OnLoad" FontSize="14">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="200" Header="Accommodation" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="200" Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="200" Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Width="200" Header="Type" Binding="{Binding TypeOfHotel}"/>
+                <DataGridTextColumn Width="200" Header="Renovation status" Binding="{Binding RenovationStatus}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Home" Height="75" Width="201" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,0,0,0" Click="HomeButton"/>
         <Button x:Name="AccommodationDropBTN" Content="Accommodation" Canvas.Left="242" Height="75" Width="183" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="17" Margin="300,0,0,0" Click="AccommodationDrop"/>
         <Button x:Name="MediaDropBTN" Content="Media" Canvas.Left="455" Height="75" Width="256" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="17" Canvas.Top="1" Margin="482,0,0,0" Click="MediaDrop"/>
