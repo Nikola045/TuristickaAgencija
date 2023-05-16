@@ -12,7 +12,7 @@ namespace TravelAgency.Domain.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public User Guest2 = new User();
+        public User Guest2 { get; set; } = new User();
 
         public Voucher() { }
         public Voucher(int id, string name, DateTime expirationDate, User guest2)

@@ -16,11 +16,13 @@ namespace TravelAgency.Services
         private readonly ReservationRepository reservationRepository;
         private readonly UserRepository userRepository;
         private readonly ReservationService reservationService;
+        private readonly HotelService hotelService;
         public GradeService() 
         {
             ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
+            hotelService = new HotelService();
             reservationService = new ReservationService();
         }
 
@@ -60,6 +62,8 @@ namespace TravelAgency.Services
                 {
                     if (IsOwnerGradeExists(reservation.Id))
                     {
+                        OwnerGrade ownerGrade = FindOwnerGradeByReservationId(reservation.Id);
+                        ownerGrade.Reservation.HotelName = hotelService.GetHotelByIdOfReservation(reservation.Id);
                         ownerGrades.Add(FindOwnerGradeByReservationId(reservation.Id));
                     }
                 }

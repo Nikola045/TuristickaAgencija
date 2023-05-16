@@ -10,7 +10,7 @@ namespace TravelAgency.Domain.Model
 {
     public class MoveReservation : ISerializable
     {
-        public Reservation Reservation = new Reservation();
+        public Reservation Reservation { get; set; } = new Reservation();
         public string HotelName { get; set; }
         public string GuestUsername { get; set; }
         public DateTime OldStartDate { get; set; }

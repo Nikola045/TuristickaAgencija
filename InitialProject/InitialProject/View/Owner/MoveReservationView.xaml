@@ -13,7 +13,15 @@
         <con:DateTimeConverter x:Key="dateTimeCon"/>
     </Page.Resources>
     <Grid Background="White">
-        <DataGrid x:Name="DataPanel" ItemsSource="{Binding Path=Data, UpdateSourceTrigger=PropertyChanged}" Margin="69,44,69,289" Loaded="OnLoad">
+        <DataGrid ItemsSource="{Binding Path=Reservations,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedReservation}" Margin="69,44,69,289" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Guest Username" Binding="{Binding GuestUsername}"/>
+                <DataGridTextColumn Width="*" Header="Accommodation Name" Binding="{Binding HotelName}"/>
+                <DataGridTextColumn Width="*" Header="Old Start Date" Binding="{Binding OldStartDate}"/>
+                <DataGridTextColumn Width="*" Header="Old End Date" Binding="{Binding OldEndDate}"/>
+                <DataGridTextColumn Width="*" Header="New Start Date" Binding="{Binding NewStartDate}"/>
+                <DataGridTextColumn Width="*" Header="New Start Date" Binding="{Binding NewStartDate}"/>
+            </DataGrid.Columns>
         </DataGrid>
 
         <Label x:Name="ReservationInfoLabel" Content="" HorizontalAlignment="Left" Margin="634,479,0,0" VerticalAlignment="Top" Height="66" Width="321"/>
