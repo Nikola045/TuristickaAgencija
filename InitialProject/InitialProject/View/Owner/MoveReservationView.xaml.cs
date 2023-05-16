@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Services;
 
@@ -25,7 +26,6 @@ namespace TravelAgency.View.Owner
     /// </summary>
     public partial class MoveReservationPage : Page, INotifyPropertyChanged
     {
-        private readonly App app = (App)App.Current;
         private readonly MoveReservationRepository moveReservationRepository;
         private readonly ReservationService reservationService;
 
@@ -43,7 +43,7 @@ namespace TravelAgency.View.Owner
         {
             InitializeComponent();
             DataContext = this;
-            moveReservationRepository = app.MoveReservationRepository;
+            moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
             reservationService = new ReservationService();
         }
 

@@ -1,6 +1,11 @@
-﻿using Microsoft.Graph.Models;
+﻿using iText.StyledXmlParser.Jsoup.Nodes;
+using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Abstractions;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
@@ -14,15 +19,17 @@ namespace TravelAgency.View.Owner
     /// <summary>
     /// Interaction logic for OwnerHome.xaml
     /// </summary>
-    public partial class OwnerHome : Window
+    public partial class OwnerHome : Window, INotifyPropertyChanged
     {
         public User LoggedInUser { get; set; }
         public Hotel SelectedHotel { get; set; }
+        public static ObservableCollection<Hotel> Hotels { get; set; }
         private readonly HotelService hotelService;
         private ReservationService reservationService;
         public static Stack<Page> pages = new Stack<Page>();
         static int ClickAccommodationCount = 1;
         static int ClickMediaCount = 1;
+        public event PropertyChangedEventHandler? PropertyChanged;
         public OwnerHome(User user)
         {
             InitializeComponent();
@@ -30,8 +37,8 @@ namespace TravelAgency.View.Owner
             LoggedInUser = user;    
             hotelService = new HotelService();
             reservationService = new ReservationService();
+            Hotels = new ObservableCollection<Hotel>(hotelService.GetHotelByOwner(LoggedInUser.Username));
         }
-
         public OwnerHome() { }
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)
@@ -64,8 +71,10 @@ namespace TravelAgency.View.Owner
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             reservationService.ChangeAllRenovatedStatus();
-            List<Hotel> hotels = hotelService.GetHotelByOwner(LoggedInUser.Username);
-            DataPanel.ItemsSource = hotels;
+            foreach(Hotel Hotel in Hotels)
+            {
+
+            }
         }
 
         private void AccommodationDrop(object sender, RoutedEventArgs e)
@@ -168,5 +177,11 @@ namespace TravelAgency.View.Owner
                 }
             }
         }
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        
     }
 }

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Graph.Models.Security;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
@@ -20,7 +21,6 @@ namespace TravelAgency.View
     {
         User LogedUser = new User();
 
-        private readonly App app = (App)App.Current;
         private readonly ReservationRepository _repository;
         private readonly HotelRepository hotelRepository;
         private readonly ReservationService reservationService;
@@ -30,8 +30,8 @@ namespace TravelAgency.View
             Title = "Create new reservation";
             DataContext = this;
             LogedUser = user;
-            _repository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
+            _repository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             reservationService = new ReservationService();
         }
         

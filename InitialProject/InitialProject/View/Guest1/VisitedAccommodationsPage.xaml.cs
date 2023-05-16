@@ -18,6 +18,7 @@ using TravelAgency.Repository;
 using TravelAgency.Services;
 using User = TravelAgency.Domain.Model.User;
 using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.View.Guest1
 {
@@ -26,7 +27,6 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class VisitedAccommodationsPage : Page
     {
-        private readonly App app = (App)App.Current;
         private GradeGuest1Repository gradeGuest1Repository;
         private ReservationRepository reservationRepository;
         private HotelRepository hotelRepository;
@@ -37,9 +37,9 @@ namespace TravelAgency.View.Guest1
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            gradeGuest1Repository = app.GradeGuest1Repository;
-            reservationRepository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
+            gradeGuest1Repository = new(InjectorService.CreateInstance<IStorage<GuestGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             gradeService = new GradeService();
         }
 
