@@ -9,7 +9,7 @@ namespace TravelAgency.Domain.Model
     public class TourReview1 : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
-        public Tour Tour = new Tour();
+        public Tour Tour { get; set; } = new Tour();
         public int GuidesKnowlege { get; set; }
         public int GuidesLenguage { get; set; }
         public int Overall { get; set; }

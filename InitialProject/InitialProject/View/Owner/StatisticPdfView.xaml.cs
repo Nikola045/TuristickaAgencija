@@ -19,16 +19,7 @@ namespace TravelAgency.View.Owner
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            /*string pdfPath = "../../../Resources/Data/statistic.pdf";
-            PdfWriter writer = new PdfWriter(pdfPath);
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
-            Paragraph header = new paragraph("HEADER")
-               .SetTextAlignment(TextAlignment.CENTER)
-               .SetFontSize(20);
-
-            document.Add(header);
-            document.Close();*/
+            
         }
     }
 }

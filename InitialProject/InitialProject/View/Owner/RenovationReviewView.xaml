@@ -9,7 +9,14 @@
       Title="RenovationReview">
 
     <Grid Background="white">
-        <DataGrid x:Name="DataPanel" Margin="53,40,47,86" Loaded="OnLoad"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="371,556,0,0" VerticalAlignment="Top" Height="40" Width="288" Click="CancelRenovation"/>
+
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="371,548,0,0" VerticalAlignment="Top" Height="40" Width="288" Click="CancelRenovation"/>
+        <DataGrid ItemsSource="{Binding Renovations}" SelectedItem="{Binding SelectedRenovation}" Margin="24,25,24,86" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Accommodation" Binding="{Binding Hotel.Name}"/>
+                <DataGridTextColumn Width="*" Header="Start Date" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Width="*" Header="End Date" Binding="{Binding EndDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

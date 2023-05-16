@@ -1,47 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Services;
 
 namespace TravelAgency.View.Owner
 {
-    /// <summary>
-    /// Interaction logic for RenovationReview.xaml
-    /// </summary>
-    public partial class RenovationReview : Page
+    public partial class RenovationReview : Page, INotifyPropertyChanged
     {
         ReservationService reservationService;
+        public RenovationRequest SelectedRenovation { get; set; }
+        public static ObservableCollection<RenovationRequest> Renovations { get; set; }
+        public event PropertyChangedEventHandler? PropertyChanged;
         public RenovationReview()
         {
-            reservationService = new ReservationService();
             InitializeComponent();
-        }
-
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {
-            List<RenovationRequest> renovationRequests = new List<RenovationRequest>();
-            renovationRequests = reservationService.ShowAllRenovationForOwnerHotels();
-            DataPanel.ItemsSource = renovationRequests;
+            DataContext = this;
+            reservationService = new ReservationService();
+            Renovations = new ObservableCollection<RenovationRequest>(reservationService.ShowAllRenovationForOwnerHotels());
         }
 
         private void CancelRenovation(object sender, RoutedEventArgs e)
         {
-            RenovationRequest renovationRequest = (RenovationRequest)DataPanel.SelectedItem;
-            reservationService.CancelRenovation(renovationRequest);
-            DataPanel.ItemsSource = reservationService.ShowAllRenovationForOwnerHotels();
+            if(SelectedRenovation != null)
+            {
+                reservationService.CancelRenovation(SelectedRenovation);
+                OnPropertyChanged();
+            }
+        }
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

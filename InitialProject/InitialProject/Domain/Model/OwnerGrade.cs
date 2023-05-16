@@ -9,9 +9,9 @@ namespace TravelAgency.Domain.Model
 {
     public class OwnerGrade : ISerializable
     {
-        public User Guest1 = new User();
-        public User Owner = new User();
-        public Reservation Reservation = new Reservation();
+        public User Guest1 { get; set; } = new User();
+        public User Owner { get; set; } = new User();
+        public Reservation Reservation { get; set; } = new Reservation();
         public int HotelRating { get; set; }
         public int OwnerRating { get; set; }
         public string Comment { get; set; }

@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Microsoft.Graph.Models.Security;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,15 +27,24 @@ namespace TravelAgency.View.Owner
     public partial class ReviewPage : Page
     {
         private readonly GradeService gradeService;
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public ObservableCollection<OwnerGrade> Grades { get; set; }
         public ReviewPage(User user)
         {
             InitializeComponent();
+            DataContext = this;
             gradeService = new GradeService();
+            Grades = new ObservableCollection<OwnerGrade>(gradeService.ShowReviewsForOwner());
         }
 
         private void ShowData(object sender, RoutedEventArgs e)
         {
-            ReviewData.ItemsSource = gradeService.ShowReviewsForOwner();
+            
+        }
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

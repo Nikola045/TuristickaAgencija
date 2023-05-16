@@ -216,6 +216,10 @@ namespace TravelAgency.Services
         public List<RenovationRequest> ShowAllRenovationForOwnerHotels()
         {
             List<RenovationRequest> renovations = renovationRequestRepository.GetAll();
+            foreach (RenovationRequest renovation in renovations)
+            {
+                renovation.Hotel.Name = hotelService.GetHotelById(renovation.Hotel.Id).Name;
+            }
             return renovations;
         }
 
@@ -227,6 +231,7 @@ namespace TravelAgency.Services
                 if (renovation.StartDate.Day - dateTime.Day > 5)
                 {
                     renovationRequestRepository.Delete(renovation);
+                    MessageBox.Show("Sucess");
                 }
                 else
                 {

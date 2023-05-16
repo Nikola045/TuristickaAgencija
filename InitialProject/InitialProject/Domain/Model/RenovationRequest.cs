@@ -10,7 +10,7 @@ namespace TravelAgency.Domain.Model
     public class RenovationRequest : ISerializable
     {
         public int Id { get; set; }
-        public Hotel Hotel = new Hotel();
+        public Hotel Hotel { get; set; } = new Hotel();
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public RenovationRequest() { }
