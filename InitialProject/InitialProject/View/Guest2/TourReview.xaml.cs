@@ -70,7 +70,7 @@ namespace TravelAgency.View.Guest2
         {
             TourReview1 tourReview = new TourReview1();
             tourReview.Id = _repository.NextId();
-            tourReview.TourId = selectedTour.Id;
+            tourReview.Tour.Id = selectedTour.Id;
             tourReview.GuidesKnowlege = Convert.ToInt32(CB1.SelectedItem);
             tourReview.GuidesLenguage = Convert.ToInt32(CB2.SelectedItem);
             tourReview.Overall = Convert.ToInt32(CB3.SelectedItem);

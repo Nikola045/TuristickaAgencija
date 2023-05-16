@@ -23,5 +23,17 @@ namespace TravelAgency.View.Guest1
         {
             InitializeComponent();
         }
+
+        private object selectedHotel;
+
+        public void HotelChoice(object izbor)
+        {
+            selectedHotel = izbor;
+        }
+
+        private void Rate(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

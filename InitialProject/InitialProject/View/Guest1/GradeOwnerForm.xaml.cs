@@ -17,59 +17,116 @@ using TravelAgency.Repository;
 using TravelAgency.Services;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.HotelRepo;
+using DevExpress.XtraEditors.Filtering;
+using static TravelAgency.View.Guest1.GradeOwnerForm;
+using System.Collections.ObjectModel;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
     /// Interaction logic for GradeOwnerForm.xaml
     /// </summary>
-    public partial class GradeOwnerForm : Window
+    public partial class GradeOwnerForm : Page
     {
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
-        private readonly HotelRepository hotelRepository;
+        public HotelRepository hotelRepository { get; }
         private readonly GradeService gradeService;
         private readonly HotelService hotelService;
         private readonly ReservationService reservationService;
+        private readonly OwnerService ownerService;
         private User LogedUser { get; set; }
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
+
         public GradeOwnerForm(User user)
         {
             InitializeComponent();
             Title = "Grade owner";
             DataContext = this;
-            ownerGradeRepository = new OwnerGradeRepository();
-            reservationRepository = new ReservationRepository();
-            hotelRepository = new HotelRepository();
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();
+            ownerService = new OwnerService();
             LogedUser = user;
         }
 
-        
-        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        public class Accommodation
         {
-            OpenFileDialog file = new OpenFileDialog();
-            file.ShowDialog();
-            txtImg.Text = file.FileName;
-        }
+            public string Name { get; set; }
+            public string City { get; set; }
+            public string Country { get; set; }
+            public string Type { get; set; }
+            public int NumberOfGuests { get; set; }
+            public int NumberOfDays { get; set; }
 
-        private void btnAddImage_Click(object sender, RoutedEventArgs e)
-        {
-            string imageUrl = txtImg.Text;
-
-            if (!string.IsNullOrEmpty(imageUrl))
+            public Accommodation(string name, string city, string country, string type, int numberOfGuests, int numberOfDays)
             {
-                ListViewItem item = new ListViewItem
-                {
-                    Content = imageUrl
-                };
-
-                ListViewImg.Items.Add(item);
-
-                txtImg.Text = "";
+                Name = name;
+                City = city;
+                Country = country;
+                Type = type;
+                NumberOfGuests = numberOfGuests;
+                NumberOfDays = numberOfDays;
             }
         }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            Accommodations = new ObservableCollection<Accommodation>();
+            Accommodations.Add(new Accommodation("Alpina", "Beograd", "Serbia", "Apartment", 6, 5));
+
+            DataPanel.ItemsSource = Accommodations;
+            RemoveLastColumns(DataPanel, 6);
+            ExpandColumns(DataPanel);
+        }
+        private void RemoveLastColumns(DataGrid dataGrid, int count)
+        {
+            int columnCount = dataGrid.Columns.Count;
+            int startIndex = columnCount - count;
+
+            // Provera da li ima dovoljno kolona za uklanjanje
+            if (startIndex >= 0)
+            {
+                for (int i = columnCount - 1; i >= startIndex; i--)
+                {
+                    dataGrid.Columns.RemoveAt(i);
+                }
+            }
+        }
+        private void ExpandColumns(DataGrid dataGrid)
+        {
+            double totalWidth = dataGrid.ActualWidth;
+            int columnCount = dataGrid.Columns.Count;
+
+            if (columnCount > 0)
+            {
+                double columnWidth = totalWidth / columnCount;
+
+                foreach (DataGridColumn column in dataGrid.Columns)
+                {
+                    column.Width = new DataGridLength(columnWidth);
+                }
+            }
+        }
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+            {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            // Otvaranje dijaloga fajlova
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result == true && !string.IsNullOrEmpty(openFileDialog.FileName))
+            {
+                BitmapImage image = new BitmapImage(new Uri(openFileDialog.FileName));
+
+                ListViewImg.Items.Add(image);
+            }
+        }
+
 
         private void Grade(object sender, RoutedEventArgs e)
         {
@@ -138,30 +195,24 @@ namespace TravelAgency.View.Guest1
             Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
 
             OwnerGrade newGrade = new OwnerGrade(
-                LogedUser.Username,
-                selectedOwnerUsername.OwnerUsername,
-                id,
+                ownerService.GetOwnerByUsername(LogedUser.Username),
+                ownerService.GetOwnerByUsername(selectedOwnerUsername.OwnerUsername),
+                reservationService.FindReservationByID(id),
                 hotelRating,
                 ownerRating,
                 txtComment.Text
             );
             ownerGradeRepository.Save(newGrade);
 
-            txtComment.Clear();
-            rbHotelOption1.IsChecked = false;
-            rbHotelOption2.IsChecked = false;
-            rbHotelOption3.IsChecked = false;
-            rbHotelOption4.IsChecked = false;
-            rbHotelOption5.IsChecked = false;
-            rbOwnerOption1.IsChecked = false;
-            rbOwnerOption2.IsChecked = false;
-            rbOwnerOption3.IsChecked = false;
-            rbOwnerOption4.IsChecked = false;
-            rbOwnerOption5.IsChecked = false;
-            ListViewImg.Items.Clear();
+            
+            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation();
+
+            var selectedHotel = cbHotelName.SelectedItem;
+
+            recommendationForRenovation.HotelChoice(selectedHotel);
+
+            recommendationForRenovation.Show();
         }
-
-
 
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
@@ -188,5 +239,47 @@ namespace TravelAgency.View.Guest1
                 ListViewImg.Items.Remove(ListViewImg.SelectedItem);
             }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            btnGrade.IsEnabled = false;
+        }
+        private void EnableGradeButton()
+        {
+            bool isHotelOptionSelected = rbHotelOption1.IsChecked == true || rbHotelOption2.IsChecked == true || rbHotelOption3.IsChecked == true || rbHotelOption4.IsChecked == true || rbHotelOption5.IsChecked == true;
+            bool isOwnerOptionSelected = rbOwnerOption1.IsChecked == true || rbOwnerOption2.IsChecked == true || rbOwnerOption3.IsChecked == true || rbOwnerOption4.IsChecked == true || rbOwnerOption5.IsChecked == true;
+            bool isHotelNameSelected = cbHotelName.SelectedItem != null;
+            bool isCommentEntered = !string.IsNullOrWhiteSpace(txtComment.Text);
+ 
+            if (isHotelOptionSelected && isOwnerOptionSelected && isHotelNameSelected && isCommentEntered)
+            {
+                btnGrade.IsEnabled = true;
+            }
+            else
+            {
+                btnGrade.IsEnabled = false;
+            }
+        }
+
+        private void rbHotelOption_Checked(object sender, RoutedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void rbOwnerOption_Checked(object sender, RoutedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void cbHotelName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
+        private void txtComment_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableGradeButton();
+        }
+
     }
 }

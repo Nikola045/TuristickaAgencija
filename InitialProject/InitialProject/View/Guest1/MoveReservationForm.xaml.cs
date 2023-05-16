@@ -16,6 +16,7 @@ using DevExpress.Xpo.Logger;
 using DevExpress.XtraEditors.Filtering;
 using Microsoft.Kiota.Abstractions;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
@@ -36,8 +37,8 @@ namespace TravelAgency.View.Guest1
         {
             InitializeComponent();
             reservationService = new ReservationService();
-            moveReservationRepository = new MoveReservationRepository();
-            reservationRepository = new ReservationRepository();
+            moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             hotelService = new HotelService();
             LogedUser = user;
         }
@@ -63,7 +64,7 @@ namespace TravelAgency.View.Guest1
             if (SelectedReservation != null && AllFieldsValid())
             {
                 MoveReservation newRequest = new MoveReservation(
-                    SelectedReservation.Id,
+                    SelectedReservation,
                     SelectedReservation.HotelName,
                     LogedUser.Username,
                     SelectedReservation.StartDate,
@@ -107,11 +108,29 @@ namespace TravelAgency.View.Guest1
         }
         private void NewStartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            DateTime today = DateTime.Now.Date;
+            if (NewStartDate.SelectedDate.HasValue && NewStartDate.SelectedDate.Value.Date < today)
+            {
+                if (NewStartDate.SelectedDate.Value.Date != today)
+                {
+                    MessageBox.Show("It is not possible to select a date before today.");
+                }
+                NewStartDate.SelectedDate = today;
+            }
             btnRequest.IsEnabled = AllFieldsValid();
         }
 
         private void NewEndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            DateTime today = DateTime.Now.Date;
+            if (NewEndDate.SelectedDate.HasValue && NewEndDate.SelectedDate.Value.Date < today)
+            {
+                if (NewEndDate.SelectedDate.Value.Date != today)
+                {
+                    MessageBox.Show("It is not possible to select a date before today.");
+                }
+                NewEndDate.SelectedDate = today;
+            }
             btnRequest.IsEnabled = AllFieldsValid();
         }
 

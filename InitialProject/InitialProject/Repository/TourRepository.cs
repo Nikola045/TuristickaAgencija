@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Xml.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository
 {
-    internal class TourRepository
+    public class TourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
@@ -119,7 +120,7 @@ namespace TravelAgency.Repository
             {
                 for (int i = 0; i < allMyTours.Count; i++)
                 {
-                    if (allMyTours[i].TourStatus == "Finished" && guestOnTours[j].GuestId == id && guestOnTours[j].TourId == allMyTours[i].Id)
+                    if (allMyTours[i].TourStatus == "Finished" && guestOnTours[j].Guest2.Id == id && guestOnTours[j].Tour.Id == allMyTours[i].Id)
                     {
                         Tour tour = allMyTours[i];
                         tours.Add(tour);
@@ -147,8 +148,8 @@ namespace TravelAgency.Repository
 
 
                     guest.Id = Convert.ToInt32(fields[0]);
-                    guest.GuestId = Convert.ToInt32(fields[1]);
-                    guest.TourId = Convert.ToInt32(fields[2]);
+                    guest.Guest2.Id = Convert.ToInt32(fields[1]);
+                    guest.Tour.Id = Convert.ToInt32(fields[2]);
                     guest.TourName = fields[3];
                     guest.StartingPoint = fields[4];
                     guest.NumOfGuests = Convert.ToInt32(fields[5]);
@@ -238,7 +239,7 @@ namespace TravelAgency.Repository
 
             for (int i = 0; i < allguests.Count; i++)
             {
-                if (allguests[i].TourId == idT && allguests[i].GuestId == idG)
+                if (allguests[i].Tour.Id == idT && allguests[i].Guest2.Id == idG)
                 {
                     guest = allguests[i];
                 }
@@ -274,7 +275,7 @@ namespace TravelAgency.Repository
             {
                 for (int j = 0; j < guestOnTours.Count; j++)
                 {
-                    if (allTours[i].Id == guestOnTours[j].TourId && guestOnTours[j].GuestId == id)
+                    if (allTours[i].Id == guestOnTours[j].Tour.Id && guestOnTours[j].Guest2.Id == id)
                     {
                         Tour tour = allTours[i];
                         tours.Add(tour);
@@ -291,8 +292,8 @@ namespace TravelAgency.Repository
             GuestOnTour guestOnTour = new GuestOnTour();
             Tour tour = FindById(tourId);
             guestOnTour.Id = NextIdG();
-            guestOnTour.GuestId = user.Id;
-            guestOnTour.TourId = tour.Id;
+            guestOnTour.Guest2.Id = user.Id;
+            guestOnTour.Tour.Id = tour.Id;
             guestOnTour.TourName = tour.Name;
             guestOnTour.NumOfGuests = num;
             guestOnTour.CurentCheckPoints = tour.CheckPoints;
@@ -448,7 +449,7 @@ namespace TravelAgency.Repository
 
             for(int i  = 0; i <guestOnTour.Count(); i++)
             {
-                if (guestOnTour[i].TourId == id)
+                if (guestOnTour[i].Tour.Id == id)
                 {
                     if (guestOnTour[i].GuestAge<18)
                     {

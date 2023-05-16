@@ -2,7 +2,16 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="View\GradeForm.xaml.cs">
+    <Compile Update="View\Guest1\AccountSettingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\ActiveReservationsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\AnywhereAnytime.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\ForumSettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\GradeOwnerForm.xaml.cs">
@@ -11,13 +20,19 @@
     <Compile Update="View\Guest1\Guest1AccountForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Guest1\Guest1ShowReview.xaml.cs">
+    <Compile Update="View\Guest1\Guest1HomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\MoveReservationForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\RecommendationForRenovation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\SucessfullReservation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\VisitedAccommodationsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest2\Guest2Overview.xaml.cs">
@@ -50,27 +65,51 @@
     <Compile Update="View\Guide\GuideTourStatistic.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Owner\HotelGalery.xaml.cs">
+    <Compile Update="View\Owner\GradeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\HotelGaleryView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Owner\MoveReservationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Owner\OwnerHome.xaml.cs">
+    <Compile Update="View\Owner\OwnerHomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Owner\OwnerProfil.xaml.cs">
+    <Compile Update="View\Owner\OwnerProfilView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Owner\ReviewForm.xaml.cs">
+    <Compile Update="View\Owner\RenovationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ReservationForm.xaml.cs">
+    <Compile Update="View\Owner\RenovationReviewView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\ReviewView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\StatisticView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\StatisticPdfView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\ReservationForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="View\GradeForm.xaml">
+    <Page Update="View\Guest1\AccountSettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\ActiveReservationsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\AnywhereAnytime.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\ForumSettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\GradeOwnerForm.xaml">
@@ -79,13 +118,19 @@
     <Page Update="View\Guest1\Guest1AccountForm.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Guest1\Guest1ShowReview.xaml">
+    <Page Update="View\Guest1\Guest1HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\MoveReservationForm.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\RecommendationForRenovation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\SucessfullReservation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\VisitedAccommodationsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\Guest2Overview.xaml">
@@ -98,6 +143,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\PastTours.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\TourRequestsStatistic.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\TourReview.xaml">
@@ -118,22 +166,37 @@
     <Page Update="View\Guide\GuideTourStatistic.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Owner\HotelGalery.xaml">
+    <Page Update="View\Owner\GradeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\HotelGaleryView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\MoveReservationView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Owner\OwnerHome.xaml">
+    <Page Update="View\Owner\OwnerHomeView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Owner\OwnerProfil.xaml">
+    <Page Update="View\Owner\OwnerProfilView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Owner\ReviewForm.xaml">
+    <Page Update="View\Owner\RenovationView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\ReservationForm.xaml">
+    <Page Update="View\Owner\RenovationReviewView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\ReviewView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\StatisticView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\StatisticPdfView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\ReservationForm.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

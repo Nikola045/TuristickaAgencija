@@ -3,35 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository
 {
-    internal class ReservationRepository
+    public class ReservationRepository
     {
-        private const string FilePath = "../../../Resources/Data/reservations.csv";
-
-        private readonly Serializer<Reservation> _serializer;
-
         private List<Reservation> reservations;
+        private IStorage<Reservation> _storage;
 
-        public ReservationRepository()
+        public ReservationRepository(IStorage<Reservation> storage)
         {
-            _serializer = new Serializer<Reservation>();
-            reservations = _serializer.FromCSV(FilePath);
+            _storage = storage;
+            reservations = _storage.Load();
         }
 
         public Reservation Save(Reservation reservation)
         {
-            reservations = _serializer.FromCSV(FilePath);
             reservations.Add(reservation);
-            _serializer.ToCSV(FilePath, reservations);
+            _storage.Save(reservations);
             return reservation;
         }
 
         public int NextId()
         {
-            reservations = _serializer.FromCSV(FilePath);
             if (reservations.Count < 1)
             {
                 return 1;
@@ -46,21 +42,24 @@ namespace TravelAgency.Repository
 
         public void Delete(Reservation reservation)
         {
-            reservations = _serializer.FromCSV(FilePath);
             Reservation founded = reservations.Find(c => c.Id == reservation.Id);
             reservations.Remove(founded);
-            _serializer.ToCSV(FilePath, reservations);
+            _storage.Save(reservations);
         }
 
         public Reservation Update(Reservation reservation)
         {
-            reservations = _serializer.FromCSV(FilePath);
             Reservation current = reservations.Find(c => c.Id == reservation.Id);
             int index = reservations.IndexOf(current);
             reservations.Remove(current);
             reservations.Insert(index, reservation);
-            _serializer.ToCSV(FilePath, reservations);
+            _storage.Save(reservations);
             return reservation;
-        }        
+        }
+        public Reservation Get(int id)
+        {
+            return reservations.FirstOrDefault(r => r.Id == id);
+        }
+
     }
 }

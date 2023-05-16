@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
 
@@ -20,11 +21,12 @@ namespace TravelAgency.View
     /// <summary>
     /// Interaction logic for Guest1Form.xaml
     /// </summary>
-    public partial class Guest1Form : Window
+    public partial class Guest1Form : Page
     {
-        private readonly HotelRepository hotelRepository;
+        public HotelRepository hotelRepository { get; }
         private readonly HotelService hotelService;
         private readonly OwnerService ownerService;
+        private readonly ReservationService reservationService;
 
         const string FilePath = "../../../Resources/Data/hotels.csv";
         public Guest1Form()
@@ -32,13 +34,15 @@ namespace TravelAgency.View
             InitializeComponent();
             Title = "Search hotel";
             DataContext = this;
-            hotelRepository = new HotelRepository();
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             hotelService = new HotelService();
             ownerService = new OwnerService();
+            reservationService = new ReservationService();
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
+            reservationService.ChangeAllRenovatedStatus();
             List<Hotel> hotels = new List<Hotel>();
             hotels = hotelRepository.GetAll();
             List<User> superOwners = ownerService.GetAllSuperOwners();
@@ -51,10 +55,24 @@ namespace TravelAgency.View
                 }
                 
             }
-            
             DataPanel.ItemsSource = hotelService.SortBySuperOwner(hotels);
+            ExpandColumns(DataPanel);
         }
+        private void ExpandColumns(DataGrid dataGrid)
+        {
+            double totalWidth = dataGrid.ActualWidth;
+            int columnCount = dataGrid.Columns.Count;
 
+            if (columnCount > 0)
+            {
+                double columnWidth = totalWidth / columnCount;
+
+                foreach (DataGridColumn column in dataGrid.Columns)
+                {
+                    column.Width = new DataGridLength(columnWidth);
+                }
+            }
+        }
         private void Search(object sender, RoutedEventArgs e)
         {
             List<Hotel> hotels = new List<Hotel>();
@@ -68,14 +86,11 @@ namespace TravelAgency.View
         }
         private void DataPanel_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyName == "NumberOfDaysToCancel")
+            if (e.PropertyName == "NumberOfDaysToCancel" || e.PropertyName == "OwnerUsername" || e.PropertyName == "RenovationStatus")
             {
                 e.Cancel = true;
             }
         }
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+
     }
 }

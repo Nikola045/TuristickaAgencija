@@ -43,7 +43,7 @@ namespace TravelAgency.Repository
                     string[] fields = line.Split('|');
                     TourReview1 review = new TourReview1();
                     review.Id = Convert.ToInt32(fields[0]);
-                    review.TourId = Convert.ToInt32(fields[1]);
+                    review.Tour.Id = Convert.ToInt32(fields[1]);
                     review.GuidesKnowlege = Convert.ToInt32(fields[2]);
                     review.GuidesLenguage = Convert.ToInt32(fields[3]);
                     review.Overall = Convert.ToInt32(fields[4]);

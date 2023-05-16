@@ -7,15 +7,13 @@ using TravelAgency.View.Guest2;
 using TravelAgency.View.Owner;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.UserRepo;
+using TravelAgency.Services;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency
 {
-    /// <summary>
-    /// Interaction logic for SignInForm.xaml
-    /// </summary>
     public partial class SignInForm : Window
     {
-
         private readonly UserRepository _repository;
 
         private string _username;
@@ -43,7 +41,7 @@ namespace TravelAgency
         {
             InitializeComponent();
             DataContext = this;
-            _repository = new UserRepository();
+            _repository = new(InjectorService.CreateInstance<IStorage<User>>());
         }
 
         private void SignIn(object sender, RoutedEventArgs e)

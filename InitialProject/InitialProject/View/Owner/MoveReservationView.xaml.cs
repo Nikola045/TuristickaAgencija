@@ -1,73 +1,65 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Services;
 
 namespace TravelAgency.View.Owner
 {
-    /// <summary>
-    /// Interaction logic for MoveReservation.xaml
-    /// </summary>
-    public partial class MoveReservationView : Window
+    public partial class MoveReservationPage : Page, INotifyPropertyChanged
     {
         private readonly MoveReservationRepository moveReservationRepository;
         private readonly ReservationService reservationService;
+        public static ObservableCollection<MoveReservation> Reservations { get; set; }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public MoveReservation SelectedReservation { get; set; }
-        public MoveReservationView()
+        public MoveReservationPage()
         {
-            moveReservationRepository = new MoveReservationRepository();
-            reservationService = new ReservationService();
             InitializeComponent();
-        }
-
-        private void Close(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {
-            DataPanel.ItemsSource = moveReservationRepository.GetAll();
+            DataContext = this;
+            moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
+            reservationService = new ReservationService();
+            Reservations = new ObservableCollection<MoveReservation>(moveReservationRepository.GetAll());
         }
 
         private void AcceptMoveReservation(object sender, RoutedEventArgs e)
         {
-            if (this.SelectedReservation != null)
+            if(SelectedReservation != null)
             {
-                SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-                reservationService.MoveReservation(SelectedReservation.ReservationId, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
-                DataPanel.ItemsSource = moveReservationRepository.GetAll();
+                reservationService.MoveReservation(SelectedReservation.Reservation.Id, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+                OnPropertyChanged(nameof(Reservations));
             }
-            else { }
         }
 
         private void DeclineMoveReservation(object sender, RoutedEventArgs e)
         {
             if (SelectedReservation != null)
             {
-                SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
                 moveReservationRepository.Delete(SelectedReservation);
-                DataPanel.ItemsSource = moveReservationRepository.GetAll();
+                OnPropertyChanged(nameof(Reservations));
             }
-            else { }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-            ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.ReservationId, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+            if (SelectedReservation != null)
+            {
+                ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.Reservation.Id, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+
+            }
         }
-    }       
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }
+

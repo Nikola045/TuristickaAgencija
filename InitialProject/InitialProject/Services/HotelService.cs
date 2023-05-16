@@ -4,21 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Forms;
+using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
+using Image = TravelAgency.Domain.Model.Image;
 
 namespace TravelAgency.Services
 {
     internal class HotelService
     {
-        private readonly HotelImageRepository hotelImageRepository;
-        private readonly HotelRepository hotelRepository;
+        private ImageRepository imageRepository { get; }
+        private HotelRepository hotelRepository { get; }
+        private ReservationRepository reservationRepository { get; }
 
         public HotelService() 
         {
-            hotelImageRepository = new HotelImageRepository();
-            hotelRepository = new HotelRepository();
+            imageRepository = new(InjectorService.CreateInstance<IStorage<Image>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
         }
 
         public List<Hotel> FindHotel(string name, string city, string country, string type, string max, string days)
@@ -91,16 +97,16 @@ namespace TravelAgency.Services
             List<Hotel> findedHotels = new List<Hotel>();
             foreach (Hotel hotel in hotelList)
             {
-                if (hotel.OwnerUsername == username)
+                if (hotel.OwnerUsername == username || hotel.OwnerUsername == username + " Super-Owner")
                     findedHotels.Add(hotel);        
             }
             return findedHotels;
         }
 
-        public HotelImage FindByUrl(string url)
+        public Image FindByUrl(string url)
         {
-            List<HotelImage> hotelImages = hotelImageRepository.GetAll();
-            foreach (HotelImage hotelImage in hotelImages)
+            List<Image> hotelImages = imageRepository.GetAll();
+            foreach (Image hotelImage in hotelImages)
             {
                 if (hotelImage.Url == url)
                 {
@@ -110,13 +116,13 @@ namespace TravelAgency.Services
             return null;
         }
 
-        public List<HotelImage> FindAllById(int id)
+        public List<Image> FindAllById(int id)
         {
-            List<HotelImage> hotelImages = hotelImageRepository.GetAll();
-            List<HotelImage> findedImages = new List<HotelImage>();
-            foreach (HotelImage hotelImage  in hotelImages)
+            List<Image> hotelImages = imageRepository.GetAll();
+            List<Image> findedImages = new List<Image>();
+            foreach (Image hotelImage  in hotelImages)
             {
-                if (hotelImage.HotelId == id)
+                if (hotelImage.Id == id)
                 {
                     findedImages.Add(hotelImage);
                 }
@@ -124,32 +130,17 @@ namespace TravelAgency.Services
             return findedImages;
         }
 
-        public void SaveHotel(bool validator, string username)
+        public void SaveHotel(bool validator, string username, Hotel newHotel)
         {
+            
+
             if (validator) 
             {
-                Hotel newHotel = new Hotel(
-                    
-                     hotelRepository.NextId(),
-                     OwnerForm.ownerForm.txtName.Text,
-                     OwnerForm.ownerForm.txtCity.Text,
-                     OwnerForm.ownerForm.txtCountry.Text,
-                     OwnerForm.ownerForm.Type.Text,
-                     Convert.ToInt32(OwnerForm.ownerForm.brMax.Text),
-                     Convert.ToInt32(OwnerForm.ownerForm.brMin.Text),
-                     Convert.ToInt32(OwnerForm.ownerForm.brDaysLeft.Text));
+                newHotel.Id = hotelRepository.NextId();
                 newHotel.OwnerUsername = username;
                 Hotel savedHotel = hotelRepository.Save(newHotel);
 
                 MessageBox.Show("Accommodation successfully created");
-
-                OwnerForm.ownerForm.txtName.Clear();
-                OwnerForm.ownerForm.txtCity.Clear();
-                OwnerForm.ownerForm.txtCountry.Clear();
-                OwnerForm.ownerForm.brMax.Clear();
-                OwnerForm.ownerForm.brMin.Clear();
-                OwnerForm.ownerForm.brDaysLeft.Clear();
-                OwnerForm.ownerForm.ImageList.Items.Clear();
             }
             else
             {
@@ -175,40 +166,60 @@ namespace TravelAgency.Services
             return sortedHotels;
         }
 
-        public void AddHotelImage()
+        public void AddHotelImage(Image newImage)
         {
-            HotelImage newImage = new HotelImage(
-               hotelImageRepository.NextId(),
-               OwnerForm.ownerForm.txtImg.Text);
-
-            HotelImage savedImage = hotelImageRepository.Save(newImage);
-            OwnerForm.ownerForm.ImageList.Items.Add(OwnerForm.ownerForm.txtImg.Text);
+            newImage.Id = imageRepository.NextId();
+            imageRepository.Save(newImage);
             MessageBox.Show("You have successfully added an image");
-            OwnerForm.ownerForm.LabelImgValidator.Content = "";
-            OwnerForm.ownerForm.txtImg.Clear();
         }
 
-        public void DeleteHotelImage()
-        {
-            object selectedItem = OwnerForm.ownerForm.ImageList.SelectedItem;
-            HotelImage hotelImage = FindByUrl(selectedItem.ToString());
+        public void DeleteHotelImage(string url)
+        {    
+            Image hotelImage = FindByUrl(url);
+            imageRepository.Delete(hotelImage);
+        }
 
-            OwnerForm.ownerForm.ImageList.Items.Remove(selectedItem);
-            hotelImageRepository.Delete(hotelImage);
-            if (OwnerForm.ownerForm.ImageList.Items.IsEmpty == true)
+        public void ClearListOfImage(List<string> urls)
+        {
+            foreach (object item in urls)
             {
-                OwnerForm.ownerForm.LabelImgValidator.Content = "Please add at least one image";
+                Image hotelImage = FindByUrl(item.ToString());
+                imageRepository.Delete(hotelImage);
+            }
+
+        }
+
+        public List<ComboBoxItem> FillForComboBoxHotels(User user)
+        {
+            List<ComboBoxItem> hotelsCB = new List<ComboBoxItem>();
+            List<Hotel> hotels = GetHotelByOwner(user.Username);
+            foreach (Hotel hotel in hotels)
+            {
+                ComboBoxItem cbItem = new ComboBoxItem();
+                cbItem.Tag = hotel.Id.ToString();
+                cbItem.Content = hotel.Name;
+                hotelsCB.Add(cbItem);
+            }
+            return hotelsCB;
+        }
+
+        public void UpdateAll(List<Hotel> hotels)
+        {
+            foreach (Hotel hotel in hotels)
+            {
+                hotelRepository.Update(hotel);
             }
         }
 
-        public void ClearListOfImage()
+        internal string GetHotelByIdOfReservation(int idReservation)
         {
-            foreach (object item in OwnerForm.ownerForm.ImageList.Items)
+            List<Reservation> reservations = reservationRepository.GetAll();
+            foreach(Reservation reservation in reservations)
             {
-                HotelImage hotelImage = FindByUrl(item.ToString());
-                hotelImageRepository.Delete(hotelImage);
+                if (reservation.Id == idReservation)
+                    return reservation.HotelName;
             }
-
+            return null;
         }
     }
 }

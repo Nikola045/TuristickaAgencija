@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository.GradeRepo;
 using TravelAgency.Repository.UserRepo;
 
@@ -12,8 +13,8 @@ namespace TravelAgency.Services
         private readonly UserRepository userRepository;
         public OwnerService()
         {
-            ownerGradeRepository = new OwnerGradeRepository();
-            userRepository = new UserRepository();
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
         }
 
         public int CountGradesFromOwnerRating(string OwnerUserName)
@@ -22,7 +23,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach(OwnerGrade grade in grades)
             {
-                if (grade.OwnerUsername == OwnerUserName)
+                if (grade.Owner.Username == OwnerUserName)
                     count++;
             }
             return count;
@@ -33,7 +34,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach (OwnerGrade grade in grades)
             {
-                if (grade.OwnerUsername == OwnerUserName)
+                if (grade.Owner.Username == OwnerUserName)
                     Grade = Grade + grade.OwnerRating;
             }
             return Grade / CountGradesFromOwnerRating(OwnerUserName);
@@ -41,9 +42,9 @@ namespace TravelAgency.Services
 
         public string SuperOwner(string username)
         {
-            if (CountGradesFromOwnerRating(username) >= 1)
+            if (CountGradesFromOwnerRating(username) >= 50)
             {
-                if (GetAverageOwnerRating(username) < 1)
+                if (GetAverageOwnerRating(username) < 4.5)
                 {
                     return "Owner";
                 }
@@ -82,7 +83,21 @@ namespace TravelAgency.Services
                     superOwners.Add(owner);
             }
             return superOwners.Distinct().ToList();
+        }
 
+        public void UpadateUsername(User user)
+        {
+            userRepository.Update(user); 
+        }
+
+        public User GetOwnerByUsername(string username)
+        {
+            List<User> users = userRepository.GetAll();
+            foreach(User user in users)
+            {
+                if(username == user.Username) return user;
+            }
+            return null;
         }
     }
 }

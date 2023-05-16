@@ -17,8 +17,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
+using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Services;
 using static Azure.Core.HttpHeader;
+using Image = TravelAgency.Domain.Model.Image;
 
 namespace TravelAgency.View
 {
@@ -27,15 +31,13 @@ namespace TravelAgency.View
     /// </summary>
     public partial class GuideForm : Window
     {
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly TourRepository tourRepository;
 
         private readonly CheckPointRepository checkPointRepository;
 
-        private readonly TourImageRepository tourImageRepository;
+        private readonly ImageRepository tourImageRepository;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -48,7 +50,7 @@ namespace TravelAgency.View
             DataContext = this;
             tourRepository = new TourRepository();
             checkPointRepository = new CheckPointRepository();
-            tourImageRepository = new TourImageRepository();
+            tourImageRepository = new(InjectorService.CreateInstance<IStorage<Image>>());
         }
 
         private void SaveTour(object sender, RoutedEventArgs e)
@@ -86,7 +88,7 @@ namespace TravelAgency.View
 
             foreach(string image  in ImageList.Items)
             {
-                HotelImage img = new HotelImage();
+                Image img = new Image();
                 img.Url = image;
                 tourImageRepository.Save(img);
             }

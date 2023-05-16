@@ -5,33 +5,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository
 {
-    internal class MoveReservationRepository
+    public class MoveReservationRepository
     {
-        private const string FilePath = "../../../Resources/Data/moveReservationRequest.csv";
-        private readonly Serializer<MoveReservation> _serializer;
         private List<MoveReservation> reservations;
+        private IStorage<MoveReservation> _storage;
 
-        public MoveReservationRepository() 
+        public MoveReservationRepository(IStorage<MoveReservation> storage)
         {
-            _serializer = new Serializer<MoveReservation>();
-            reservations = _serializer.FromCSV(FilePath);
+            _storage = storage;
+            reservations = _storage.Load();
         }
 
         public List<MoveReservation> GetAll()
         {
+            reservations = _storage.Load();
             return reservations;
         }
 
         public MoveReservation GetById(int id)
         {
-            List<MoveReservation> reservations = GetAll();
             foreach(MoveReservation reservation in reservations)
             {
-                if (reservation.ReservationId == id)
+                if (reservation.Reservation.Id == id)
                     return reservation;
             }
             return null;
@@ -39,17 +39,15 @@ namespace TravelAgency.Repository
 
         public void Delete(MoveReservation reservation)
         {
-            reservations = _serializer.FromCSV(FilePath);
-            MoveReservation founded = reservations.Find(c => c.ReservationId == reservation.ReservationId);
+            MoveReservation founded = reservations.Find(c => c.Reservation.Id == reservation.Reservation.Id);
             reservations.Remove(founded);
-            _serializer.ToCSV(FilePath, reservations);
+            _storage.Save(reservations);
         }
 
         public MoveReservation Save(MoveReservation moveReservation)
         {
-            reservations = _serializer.FromCSV(FilePath);
             reservations.Add(moveReservation);
-            _serializer.ToCSV(FilePath, reservations);
+            _storage.Save(reservations);
             return moveReservation;
         }
     }
