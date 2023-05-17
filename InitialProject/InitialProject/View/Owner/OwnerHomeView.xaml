@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="OwnerHome" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="DataPanel" ItemsSource="{Binding Hotels}" Height="677" Width="1004" HorizontalAlignment="Center" Canvas.Top="75" VerticalAlignment="Top" Margin="0,74,0,0" Loaded="OnLoad" FontSize="14">
+        <DataGrid x:Name="DataPanel" ItemsSource="{Binding Hotels}" Height="677" Width="1004" HorizontalAlignment="Center" Canvas.Top="75" VerticalAlignment="Top" Margin="0,74,0,0" Loaded="OnLoad" FontSize="14" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="200" Header="Accommodation" Binding="{Binding Name}"/>
-                <DataGridTextColumn Width="200" Header="City" Binding="{Binding City}"/>
-                <DataGridTextColumn Width="200" Header="Country" Binding="{Binding Country}"/>
-                <DataGridTextColumn Width="200" Header="Type" Binding="{Binding TypeOfHotel}"/>
-                <DataGridTextColumn Width="200" Header="Renovation status" Binding="{Binding RenovationStatus}"/>
+                <DataGridTextColumn Width="*" Header="Accommodation" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Width="*" Header="Type" Binding="{Binding TypeOfHotel}"/>
+                <DataGridTextColumn Width="*" Header="Renovation status" Binding="{Binding RenovationStatus}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Home" Height="75" Width="201" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,0,0,0" Click="HomeButton"/>

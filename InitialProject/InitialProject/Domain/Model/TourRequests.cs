@@ -9,7 +9,7 @@ namespace TravelAgency.Domain.Model
     internal class TourRequests : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
-        public User Guest2 = new User();
+        public User Guest2 { get; set; } = new User();
         public string City { get; set; }
         public string Country { get; set; }
         public string Description { get; set; }

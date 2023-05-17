@@ -9,7 +9,7 @@ namespace TravelAgency.Domain.Model
 {
     public class GuestGrade : Serializer.ISerializable
     {
-        public User Guest1 = new User();
+        public User Guest1 { get; set; } = new User();
         public int Cleanliness { get; set; }
         public int Respecting { get; set; }
         public string CommentText { get; set; }

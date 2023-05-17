@@ -10,8 +10,8 @@ namespace TravelAgency.Domain.Model
     public class GuestOnTour : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
-        public User Guest2 = new User();
-        public Tour Tour = new Tour();
+        public User Guest2 { get; set; } = new User();
+        public Tour Tour { get; set; } = new Tour();
         public string TourName { get; set; }
         public string StartingPoint { get; set; }
         public int NumOfGuests { get; set; }

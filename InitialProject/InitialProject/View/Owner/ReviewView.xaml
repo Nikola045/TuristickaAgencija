@@ -9,6 +9,14 @@
       Title="ReviewPage">
 
     <Grid Background="White">
-        <DataGrid x:Name="ReviewData" Margin="32,22,32,58" Loaded="ShowData"/>
+        <DataGrid ItemsSource="{Binding Grades}" Margin="32,22,32,58" Loaded="ShowData" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Guest Username" Binding="{Binding Guest1.Username}"/>
+                <DataGridTextColumn Width="*" Header="Reservation Id" Binding="{Binding Reservation.HotelName}"/>
+                <DataGridTextColumn Width="*" Header="Hotel Rating" Binding="{Binding HotelRating}"/>
+                <DataGridTextColumn Width="*" Header="Owner Rating" Binding="{Binding OwnerRating}"/>
+                <DataGridTextColumn Width="*" Header="Comment" Binding="{Binding Comment}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
@@ -21,20 +11,11 @@ using TravelAgency.Services;
 
 namespace TravelAgency.View.Owner
 {
-    /// <summary>
-    /// Interaction logic for MoveReservationPage.xaml
-    /// </summary>
     public partial class MoveReservationPage : Page, INotifyPropertyChanged
     {
         private readonly MoveReservationRepository moveReservationRepository;
         private readonly ReservationService reservationService;
-
-        private string _hotelName;
-        private string _guestUsername;
-        private DateTime _oldStartDate;
-        private DateTime _newStartDate;
-        private DateTime _oldEndDate;
-        private DateTime _newEndDate;
+        public static ObservableCollection<MoveReservation> Reservations { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -45,43 +26,33 @@ namespace TravelAgency.View.Owner
             DataContext = this;
             moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
             reservationService = new ReservationService();
-        }
-
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {
-            DataPanel.ItemsSource = moveReservationRepository.GetAll();
+            Reservations = new ObservableCollection<MoveReservation>(moveReservationRepository.GetAll());
         }
 
         private void AcceptMoveReservation(object sender, RoutedEventArgs e)
         {
-            SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-            reservationService.MoveReservation(SelectedReservation.Reservation.Id, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
-            DataPanel.ItemsSource = moveReservationRepository.GetAll();
+            if(SelectedReservation != null)
+            {
+                reservationService.MoveReservation(SelectedReservation.Reservation.Id, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+                OnPropertyChanged(nameof(Reservations));
+            }
         }
 
         private void DeclineMoveReservation(object sender, RoutedEventArgs e)
         {
-            SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-            moveReservationRepository.Delete(SelectedReservation);
-            DataPanel.ItemsSource = moveReservationRepository.GetAll();
+            if (SelectedReservation != null)
+            {
+                moveReservationRepository.Delete(SelectedReservation);
+                OnPropertyChanged(nameof(Reservations));
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SelectedReservation = (MoveReservation)DataPanel.SelectedItem;
-            ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.Reservation.Id, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
-        }
-
-        public string HotelName
-        {
-            get => _hotelName;
-            set
+            if (SelectedReservation != null)
             {
-                if (_hotelName != value)
-                {
-                    _hotelName = value;
-                    OnPropertyChanged();
-                }
+                ReservationInfoLabel.Content = reservationService.TextForReservationInfo(SelectedReservation.Reservation.Id, SelectedReservation.HotelName, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
+
             }
         }
 
