@@ -119,7 +119,7 @@ namespace TravelAgency.View.Guest1
                     }
                 }
             };
-            RemoveLastColumns(ShowVisited, 7);
+            
             ExpandColumns(ShowVisited);
         }
         private void ExpandColumns(DataGrid dataGrid)
