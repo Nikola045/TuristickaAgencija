@@ -17,8 +17,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Forms;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
@@ -28,14 +30,13 @@ namespace TravelAgency.View.Guest2
     public partial class Guest2Form : Window
     {
         private readonly TourRepository _repository;
-
-        const string FilePath = "../../../Resources/Data/tours.csv";
+        private readonly TourService tourService;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Tour selectedTour;
 
-        User LogedUser = new Domain.Model.User();
+        User LogedUser = new User();
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -48,14 +49,14 @@ namespace TravelAgency.View.Guest2
             LogedUser = logedUser;
             Title = "Search tours";
             DataContext = this;
-            _repository = new TourRepository();
+            _repository = new(InjectorService.CreateInstance<IStorage<Tour>>());
+            tourService = new TourService();
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
             List<Tour> tours = new List<Tour>();
-            const string FilePath = "../../../Resources/Data/tours.csv";
-            tours = _repository.ReadFromToursCsv(FilePath);
+            tours = _repository.GetAll();
             DataPanel.ItemsSource = tours;
         }
 
@@ -68,15 +69,14 @@ namespace TravelAgency.View.Guest2
         {
             List<Tour> tours = new List<Tour>();
             
-            tours = _repository.FilterTours(FilePath, txtCity.Text, txtCountry.Text, txtLeng.Text, txtDuration.Text, txtNum.Text);
+            tours = tourService.FilterTours(txtCity.Text, txtCountry.Text, txtLeng.Text, txtDuration.Text, txtNum.Text);
             DataPanel.ItemsSource = tours;
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
         {
-            const string FilePath = "../../../Resources/Data/tours.csv";
             List<Tour> tours = new List<Tour>();
-            tours = _repository.ReadFromToursCsv(FilePath);
+            tours = _repository.GetAll();
             DataPanel.ItemsSource = tours;
         }
 
