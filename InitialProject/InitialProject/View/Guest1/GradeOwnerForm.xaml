@@ -8,7 +8,7 @@
         mc:Ignorable="d" Height="516" Width="1319">
     <Canvas Background="White">
         <Label Content="Owner of:" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="894" Canvas.Top="136"/>
-        <ComboBox x:Name="cbHotelName" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Loaded="LoadHotels" SelectionChanged="cbHotelName_SelectionChanged" Canvas.Left="894" Canvas.Top="166"/>
+        <ComboBox x:Name="cbHotelName" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Loaded="LoadHotels" SelectionChanged="cbHotelName_SelectionChanged" Canvas.Left="216" Canvas.Top="1"/>
         <Label Content="Additional comment:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="151"/>
         <Label Content="Add photos of accommodation:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="339"/>
         <TextBox x:Name="txtComment" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1289" Height="139" TextChanged="txtComment_TextChanged" Canvas.Left="10" Canvas.Top="188"/>
@@ -55,9 +55,7 @@
                 <DataGridTextColumn Header="Type" Binding="{Binding Type, StringFormat={}{0} }" />
                 <DataGridTextColumn Header="Number of Guests" Binding="{Binding NumberOfGuests, StringFormat={}{0} }" />
                 <DataGridTextColumn Header="Number of Days" Binding="{Binding NumberOfDays, StringFormat={}{0} }" />
-
             </DataGrid.Columns>
-
         </DataGrid>
         <Rectangle Height="42" Canvas.Left="127" Stroke="Black" Canvas.Top="110" Width="193" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Canvas>
