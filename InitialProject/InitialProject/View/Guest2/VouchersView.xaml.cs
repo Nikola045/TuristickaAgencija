@@ -13,7 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
@@ -24,19 +26,17 @@ namespace TravelAgency.View.Guest2
     {
 
         private readonly VoucherRepository _repository;
-        private const string FilePath = "../../../Resources/Data/vouchers.csv";
-        User LogedUser = new Domain.Model.User();
 
         public VouchersView()
         {
             InitializeComponent();
-            _repository = new VoucherRepository();
+            _repository = new(InjectorService.CreateInstance<IStorage<Voucher>>());
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
         {
             List<Voucher> vouchers = new List<Voucher>();
-            vouchers = _repository.ReadFromVouchersCsv(FilePath);
+            vouchers = _repository.GetAll();
             DataPanel.ItemsSource = vouchers;
         }
 
