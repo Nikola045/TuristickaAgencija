@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Storage.FileStorage
 {
-    internal class TourRequestsFileStorage
+    public class TourRequestsFileStorage : IStorage<TourRequests>
     {
         private Serializer<TourRequests> _serializer;
         private readonly string _file = "../../../Resources/Data/tourRequests.csv";

@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
@@ -22,22 +24,24 @@ namespace TravelAgency.View.Guest2
     public partial class PastTours : Window
     {
         private readonly TourRepository _repository;
+        private readonly TourService tourService;
         private const string FilePath = "../../../Resources/Data/tours.csv";
-        User LogedUser = new Domain.Model.User();
+        User LogedUser = new User();
         private Tour selectedTour;
 
         public PastTours(User logedUser)
         {
             InitializeComponent();
             LogedUser = logedUser;
-            _repository = new TourRepository();
+            _repository = new(InjectorService.CreateInstance<IStorage<Tour>>());
+            tourService = new TourService();
         }
 
 
         private void LoadData(object sender, RoutedEventArgs e)
         {
             List<Tour> tour = new List<Tour>();
-            tour = _repository.ReadMyPastToursCsv(FilePath, LogedUser.Id);
+            tour = tourService.ReadMyPastToursCsv(LogedUser.Id);
 
             DataPanel.ItemsSource = tour;
         }
