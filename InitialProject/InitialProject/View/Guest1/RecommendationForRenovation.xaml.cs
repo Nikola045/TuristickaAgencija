@@ -17,7 +17,7 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for RecommendationForRenovation.xaml
     /// </summary>
-    public partial class RecommendationForRenovation : Window
+    public partial class RecommendationForRenovation : Page
     {
         public RecommendationForRenovation()
         {
