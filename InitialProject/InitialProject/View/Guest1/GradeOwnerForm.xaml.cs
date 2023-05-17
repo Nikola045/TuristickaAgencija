@@ -18,6 +18,9 @@ using TravelAgency.Services;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.HotelRepo;
 using DevExpress.XtraEditors.Filtering;
+using static TravelAgency.View.Guest1.GradeOwnerForm;
+using System.Collections.ObjectModel;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.View.Guest1
 {
@@ -26,52 +29,104 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class GradeOwnerForm : Page
     {
-        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
         public HotelRepository hotelRepository { get; }
         private readonly GradeService gradeService;
         private readonly HotelService hotelService;
         private readonly ReservationService reservationService;
+        private readonly OwnerService ownerService;
         private User LogedUser { get; set; }
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
+
         public GradeOwnerForm(User user)
         {
             InitializeComponent();
             Title = "Grade owner";
             DataContext = this;
-            ownerGradeRepository = app.OwnerGradeRepository;
-            reservationRepository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();
+            ownerService = new OwnerService();
             LogedUser = user;
         }
 
-        
-        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        public class Accommodation
         {
-            OpenFileDialog file = new OpenFileDialog();
-            file.ShowDialog();
-            txtImg.Text = file.FileName;
-        }
+            public string Name { get; set; }
+            public string City { get; set; }
+            public string Country { get; set; }
+            public string Type { get; set; }
+            public int NumberOfGuests { get; set; }
+            public int NumberOfDays { get; set; }
 
-        private void btnAddImage_Click(object sender, RoutedEventArgs e)
-        {
-            string imageUrl = txtImg.Text;
-
-            if (!string.IsNullOrEmpty(imageUrl))
+            public Accommodation(string name, string city, string country, string type, int numberOfGuests, int numberOfDays)
             {
-                ListViewItem item = new ListViewItem
-                {
-                    Content = imageUrl
-                };
-
-                ListViewImg.Items.Add(item);
-
-                txtImg.Text = "";
+                Name = name;
+                City = city;
+                Country = country;
+                Type = type;
+                NumberOfGuests = numberOfGuests;
+                NumberOfDays = numberOfDays;
             }
         }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            Accommodations = new ObservableCollection<Accommodation>();
+            Accommodations.Add(new Accommodation("Alpina", "Beograd", "Serbia", "Apartment", 6, 5));
+
+            DataPanel.ItemsSource = Accommodations;
+            RemoveLastColumns(DataPanel, 6);
+            ExpandColumns(DataPanel);
+        }
+        private void RemoveLastColumns(DataGrid dataGrid, int count)
+        {
+            int columnCount = dataGrid.Columns.Count;
+            int startIndex = columnCount - count;
+
+            // Provera da li ima dovoljno kolona za uklanjanje
+            if (startIndex >= 0)
+            {
+                for (int i = columnCount - 1; i >= startIndex; i--)
+                {
+                    dataGrid.Columns.RemoveAt(i);
+                }
+            }
+        }
+        private void ExpandColumns(DataGrid dataGrid)
+        {
+            double totalWidth = dataGrid.ActualWidth;
+            int columnCount = dataGrid.Columns.Count;
+
+            if (columnCount > 0)
+            {
+                double columnWidth = totalWidth / columnCount;
+
+                foreach (DataGridColumn column in dataGrid.Columns)
+                {
+                    column.Width = new DataGridLength(columnWidth);
+                }
+            }
+        }
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+            {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            // Otvaranje dijaloga fajlova
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result == true && !string.IsNullOrEmpty(openFileDialog.FileName))
+            {
+                BitmapImage image = new BitmapImage(new Uri(openFileDialog.FileName));
+
+                ListViewImg.Items.Add(image);
+            }
+        }
+
 
         private void Grade(object sender, RoutedEventArgs e)
         {
@@ -140,23 +195,20 @@ namespace TravelAgency.View.Guest1
             Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
 
             OwnerGrade newGrade = new OwnerGrade(
-                LogedUser.Username,
-                selectedOwnerUsername.OwnerUsername,
-                id,
+                ownerService.GetOwnerByUsername(LogedUser.Username),
+                ownerService.GetOwnerByUsername(selectedOwnerUsername.OwnerUsername),
+                reservationService.FindReservationByID(id),
                 hotelRating,
                 ownerRating,
                 txtComment.Text
             );
             ownerGradeRepository.Save(newGrade);
 
-            
-            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation();
+
+            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation(LogedUser);
 
             var selectedHotel = cbHotelName.SelectedItem;
-
-            recommendationForRenovation.HotelChoice(selectedHotel);
-
-            recommendationForRenovation.Show();
+            NavigationService.Navigate(recommendationForRenovation);
         }
 
         private void LoadHotels(object sender, RoutedEventArgs e)

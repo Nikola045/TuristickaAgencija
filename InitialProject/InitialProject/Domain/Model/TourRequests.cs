@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TravelAgency.Domain.Model
 {
-    internal class TourRequests : TravelAgency.Serializer.ISerializable
+    public class TourRequests : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
-        public int GuestId { get; set; }
+        public User Guest2 { get; set; } = new User();
         public string City { get; set; }
         public string Country { get; set; }
         public string Description { get; set; }
@@ -23,10 +19,10 @@ namespace TravelAgency.Domain.Model
 
         public TourRequests() { }
 
-        public TourRequests(int id , int guestId, string city, string country, string description, string language, int maxNumberOfGuests, DateTime firstTime, DateTime secondTime)
+        public TourRequests(int id , User guest2, string city, string country, string description, string language, int maxNumberOfGuests, DateTime firstTime, DateTime secondTime)
         {
             Id = id;
-            GuestId = guestId;
+            Guest2 = guest2;
             City = city;
             Country = country;
             Description = description;
@@ -41,8 +37,7 @@ namespace TravelAgency.Domain.Model
         {
             string CheckPointsList = null;
             int currentIndex = 0;
-            
-            string[] csvValues = { Id.ToString(), GuestId.ToString(), City, Country, Description, Language, MaxNumberOfGuests.ToString(), FirstTime.ToString(), SecondTime.ToString(), Status};
+            string[] csvValues = { Id.ToString(), Guest2.Id.ToString(), City, Country, Description, Language, MaxNumberOfGuests.ToString(), FirstTime.ToString(), SecondTime.ToString(), Status};
             return csvValues;
         }
 
@@ -52,7 +47,7 @@ namespace TravelAgency.Domain.Model
         {
      
             Id = Convert.ToInt32(values[0]);
-            GuestId = Convert.ToInt32(values[1]);
+            Guest2.Id = Convert.ToInt32(values[1]);
             City = values[2];
             Country = values[3];
             Description = values[4];

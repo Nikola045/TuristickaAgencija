@@ -18,6 +18,7 @@ using TravelAgency.Repository;
 using TravelAgency.Services;
 using User = TravelAgency.Domain.Model.User;
 using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.View.Guest1
 {
@@ -26,7 +27,6 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class VisitedAccommodationsPage : Page
     {
-        private readonly App app = (App)App.Current;
         private GradeGuest1Repository gradeGuest1Repository;
         private ReservationRepository reservationRepository;
         private HotelRepository hotelRepository;
@@ -37,9 +37,9 @@ namespace TravelAgency.View.Guest1
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            gradeGuest1Repository = app.GradeGuest1Repository;
-            reservationRepository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
+            gradeGuest1Repository = new(InjectorService.CreateInstance<IStorage<GuestGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             gradeService = new GradeService();
         }
 
@@ -50,7 +50,7 @@ namespace TravelAgency.View.Guest1
 
             foreach (GuestGrade grade in guestGrades)
             {
-                Reservation reservation = reservationRepository.Get(grade.ReservationId);
+                Reservation reservation = reservationRepository.Get(grade.Reservation.Id);
 
                 if (reservation != null && gradeService.IsOwnerGradeExists(reservation.Id))
                 {
@@ -59,8 +59,7 @@ namespace TravelAgency.View.Guest1
                         OwnerOf = reservation.HotelName,
                         Cleanliness = grade.Cleanliness,
                         Politeness = grade.Respecting,
-                        Comment = grade.CommentText,
-                        ReservationId = grade.ReservationId
+                        Comment = grade.CommentText
                     };
                     filteredGrades.Add(obj);
                 }
@@ -177,22 +176,6 @@ namespace TravelAgency.View.Guest1
         }
 
         private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var textBlock = sender as TextBlock;
-            var item = textBlock.DataContext;
-
-            var propertyInfo = item.GetType().GetProperty("IsRated");
-            var isRatedValue = propertyInfo?.GetValue(item);
-
-            if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
-            {
-                GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser);
-                NavigationService.Navigate(gradeOwnerPage);
-            }
-        }
-
-
-        private void IsRated_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var textBlock = sender as TextBlock;
             var item = textBlock.DataContext;

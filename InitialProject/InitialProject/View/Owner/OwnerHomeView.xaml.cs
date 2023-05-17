@@ -1,6 +1,10 @@
 ﻿using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Abstractions;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
@@ -14,14 +18,17 @@ namespace TravelAgency.View.Owner
     /// <summary>
     /// Interaction logic for OwnerHome.xaml
     /// </summary>
-    public partial class OwnerHome : Window
+    public partial class OwnerHome : Window, INotifyPropertyChanged
     {
         public User LoggedInUser { get; set; }
         public Hotel SelectedHotel { get; set; }
+        public static ObservableCollection<Hotel> Hotels { get; set; }
         private readonly HotelService hotelService;
         private ReservationService reservationService;
+        public static Stack<Page> pages = new Stack<Page>();
         static int ClickAccommodationCount = 1;
         static int ClickMediaCount = 1;
+        public event PropertyChangedEventHandler? PropertyChanged;
         public OwnerHome(User user)
         {
             InitializeComponent();
@@ -29,8 +36,8 @@ namespace TravelAgency.View.Owner
             LoggedInUser = user;    
             hotelService = new HotelService();
             reservationService = new ReservationService();
+            Hotels = new ObservableCollection<Hotel>(hotelService.GetHotelByOwner(LoggedInUser.Username));
         }
-
         public OwnerHome() { }
 
         private void OpenOwnerForm(object sender, RoutedEventArgs e)
@@ -41,27 +48,32 @@ namespace TravelAgency.View.Owner
 
         private void OpenGradeForm(object sender, RoutedEventArgs e)
         {
-            GradePage page = new GradePage();
-            ShowSmallPage.Content = page;
+            GradePage gradePage = new GradePage();
+            ShowSmallPage.Content = gradePage;
+            pages.Push(gradePage);
         }
 
         private void OpenMoveReservation(object sender, RoutedEventArgs e)
         {
-            MoveReservationPage page = new MoveReservationPage();
-            ShowBigPage.Content = page;
+            MoveReservationPage reservationPage = new MoveReservationPage();
+            ShowBigPage.Content = reservationPage;
+            pages.Push(reservationPage);
         }
 
         private void OpenReviewForm(object sender, RoutedEventArgs e)
         {
-            ReviewPage page = new ReviewPage(LoggedInUser);
-            ShowSmallPage.Content = page;
+            ReviewPage reviewPage = new ReviewPage(LoggedInUser);
+            ShowSmallPage.Content = reviewPage;
+            pages.Push(reviewPage);
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             reservationService.ChangeAllRenovatedStatus();
-            List<Hotel> hotels = hotelService.GetHotelByOwner(LoggedInUser.Username);
-            DataPanel.ItemsSource = hotels;
+            foreach(Hotel Hotel in Hotels)
+            {
+
+            }
         }
 
         private void AccommodationDrop(object sender, RoutedEventArgs e)
@@ -130,20 +142,45 @@ namespace TravelAgency.View.Owner
 
         private void OpenStatistic(object sender, RoutedEventArgs e)
         {
-            StatisticPage page = new StatisticPage(LoggedInUser);
-            ShowSmallPage.Content = page;
+            StatisticPage statisticPage = new StatisticPage(LoggedInUser,ShowSmallPage);
+            ShowSmallPage.Content = statisticPage;
+            pages.Push(statisticPage);
         }
 
         private void OpenRenovation(object sender, RoutedEventArgs e)
         {
-            RenovationPage page = new RenovationPage(LoggedInUser);
-            ShowSmallPage.Content = page;
+            RenovationPage renovationPage = new RenovationPage(LoggedInUser);
+            ShowSmallPage.Content = renovationPage;
+            pages.Push(renovationPage);
         }
 
         private void OpenRenovationReview(object sender, RoutedEventArgs e)
         {
-            RenovationReview page = new RenovationReview();
-            ShowSmallPage.Content = page;
+            RenovationReview renovationReviewPage = new RenovationReview();
+            ShowSmallPage.Content = renovationReviewPage;
+            pages.Push(renovationReviewPage);
         }
+
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            if (pages.Count > 0)
+            {
+                pages.Pop();
+                if (pages.Count > 0)
+                {
+                    ShowSmallPage.Content = pages.Peek();     
+                }
+                else
+                {
+                    HomeButton(sender, e);
+                }
+            }
+        }
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        
     }
 }

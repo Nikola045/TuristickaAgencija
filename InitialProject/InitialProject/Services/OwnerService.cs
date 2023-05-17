@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository.GradeRepo;
 using TravelAgency.Repository.UserRepo;
 
@@ -8,13 +9,12 @@ namespace TravelAgency.Services
 {
     internal class OwnerService
     {
-        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly UserRepository userRepository;
         public OwnerService()
         {
-            ownerGradeRepository = app.OwnerGradeRepository;
-            userRepository = app.UserRepository;
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
         }
 
         public int CountGradesFromOwnerRating(string OwnerUserName)
@@ -23,7 +23,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach(OwnerGrade grade in grades)
             {
-                if (grade.OwnerUsername == OwnerUserName)
+                if (grade.Owner.Username == OwnerUserName)
                     count++;
             }
             return count;
@@ -34,7 +34,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach (OwnerGrade grade in grades)
             {
-                if (grade.OwnerUsername == OwnerUserName)
+                if (grade.Owner.Username == OwnerUserName)
                     Grade = Grade + grade.OwnerRating;
             }
             return Grade / CountGradesFromOwnerRating(OwnerUserName);
@@ -88,6 +88,16 @@ namespace TravelAgency.Services
         public void UpadateUsername(User user)
         {
             userRepository.Update(user); 
+        }
+
+        public User GetOwnerByUsername(string username)
+        {
+            List<User> users = userRepository.GetAll();
+            foreach(User user in users)
+            {
+                if(username == user.Username) return user;
+            }
+            return null;
         }
     }
 }

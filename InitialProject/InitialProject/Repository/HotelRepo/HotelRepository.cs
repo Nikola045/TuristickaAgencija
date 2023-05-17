@@ -57,10 +57,6 @@ namespace TravelAgency.Repository.HotelRepo
             _storage.Save(hotels);
             return entity;
         }
-        public Hotel Get(int id)
-        {
-            return hotels.Find(h => h.Id == id);
-        }
         public Hotel GetByHotelName(string hotelName)
         {
             return hotels.FirstOrDefault(h => h.Name == hotelName);

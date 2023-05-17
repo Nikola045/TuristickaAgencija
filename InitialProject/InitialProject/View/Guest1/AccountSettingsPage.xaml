@@ -4,16 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TravelAgency.View.Guest1"
-      mc:Ignorable="d" Height="516" Width="1319"
-    >
+      mc:Ignorable="d" Height="516" Width="1319">
     <Canvas Background="White">
-        <Button x:Name="Logout" Content="Log out" Height="32" Width="139" FontSize="20" Canvas.Left="1167" Canvas.Top="422" Click="LogoutClick" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="Logout" Content="Log out" Height="32" Width="139" FontSize="20" Canvas.Left="1170" Canvas.Top="482" Click="LogoutClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Period of time you want check:" FontSize="20" Canvas.Left="932" Canvas.Top="6" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="-" FontSize="20" Canvas.Left="1102" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <DatePicker Canvas.Left="936" Canvas.Top="48" FontSize="20" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <DatePicker Canvas.Left="1127" Canvas.Top="48" FontSize="20" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button Content="Report of every made resevation" FontSize="20" Canvas.Left="936" Canvas.Top="92" Width="351" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="Report of every cenceled resevation" FontSize="20" Canvas.Left="935" Canvas.Top="132" Width="352" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Report of every canceled resevation" FontSize="20" Canvas.Left="935" Canvas.Top="132" Width="352" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Rectangle Height="176" Canvas.Left="916" Stroke="Black" Canvas.Top="6" Width="390" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="First name:" FontSize="18" Canvas.Left="333" Canvas.Top="27" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Last name:" FontSize="18" Canvas.Left="335" Canvas.Top="62" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -27,8 +26,8 @@
         <Label Content="Is super-guest:" FontSize="18" Canvas.Left="303" Canvas.Top="344" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Bonus points:" FontSize="18" Canvas.Left="312" Canvas.Top="378" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button Content="Save changes" FontSize="18" Canvas.Left="434" Canvas.Top="418" Width="214" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Yes" FontSize="18" Canvas.Left="434" Canvas.Top="344" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="15" FontSize="18" Canvas.Left="434" Canvas.Top="378" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="SuperGuestLabel" Content="Yes" FontSize="18" Canvas.Left="434" Canvas.Top="344" HorizontalAlignment="Center" VerticalAlignment="Top" Loaded="SuperGuestLabel_Loaded"/>
+        <Label x:Name="BonusPointsLabel" Content="15" FontSize="18" Canvas.Left="434" Canvas.Top="378" HorizontalAlignment="Center" VerticalAlignment="Top" Loaded="BonusPointsLabel_Loaded"/>
         <TextBox Canvas.Left="434" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="Marko" Canvas.Top="31" Width="214" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox Canvas.Left="434" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="Markovic" Canvas.Top="66" Width="214" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox Canvas.Left="434" FontSize="18" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="rista" Canvas.Top="101" Width="214" HorizontalAlignment="Center" VerticalAlignment="Top"/>

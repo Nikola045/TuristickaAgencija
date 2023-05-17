@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
@@ -22,9 +14,7 @@ namespace TravelAgency.View.Guest2
     /// </summary>
     public partial class OneTour : Window
     {
-        User LogedUser = new Domain.Model.User();
-        const string FilePath = "../../../Resources/Data/tours.csv";
-        const string FilePath1 = "../../../Resources/Data/vouchers.csv";
+        User LogedUser = new User();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,14 +22,16 @@ namespace TravelAgency.View.Guest2
 
         private readonly TourRepository _repository;
         private readonly VoucherRepository _vouchersRepository;
+        private readonly TourService tourService;
 
         public OneTour(User logedUser, Tour tour)
         {
             InitializeComponent();
             LogedUser = logedUser;
             selectedTour = tour;
-            _repository = new TourRepository();
-            _vouchersRepository = new VoucherRepository();
+            _repository = new(InjectorService.CreateInstance<IStorage<Tour>>());
+            _vouchersRepository = new(InjectorService.CreateInstance<IStorage<Voucher>>());
+            tourService = new TourService();
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -49,8 +41,6 @@ namespace TravelAgency.View.Guest2
 
         private void AddPeopleOnSelectedTour(object sender, RoutedEventArgs e)
         {
-
-            const string FilePath1 = "../../../Resources/Data/guestOnTour.csv";
             int numGuests = Convert.ToInt32(txtNumOfGuests.Text);
             bool hasVoucher = false;
             if(Vouchers.SelectedItem != null)
@@ -72,7 +62,7 @@ namespace TravelAgency.View.Guest2
                 else
                 {
 
-                    if (_repository.ReserveTour(selectedTour.Id, LogedUser, FilePath1, numGuests, hasVoucher))
+                    if (tourService.ReserveTour(selectedTour.Id, LogedUser, numGuests, hasVoucher))
                     {
                         selectedTour.CurentNumberOfGuests = selectedTour.CurentNumberOfGuests + numGuests;
                         _repository.Update(selectedTour);
@@ -114,7 +104,7 @@ namespace TravelAgency.View.Guest2
 
         private void Vouchers_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Voucher> vouchers = _vouchersRepository.ReadFromVouchersCsv(FilePath1);
+            List<Voucher> vouchers = _vouchersRepository.GetAll();
             for (int i = 0; i < vouchers.Count; i++) {
                 Vouchers.Items.Add(vouchers[i]);
             }

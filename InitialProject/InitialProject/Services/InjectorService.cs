@@ -27,7 +27,9 @@ namespace TravelAgency.Services
             { typeof(IStorage < Reservation >), new ReservationFileStorage()},
             { typeof(IStorage < Image >), new ImageFileStorage()},
             { typeof(IStorage < Voucher >), new VoucherFileStorage()},
-            { typeof(IStorage < RenovationRequest >), new RenovationRequestFileStorage()}
+            { typeof(IStorage < RenovationRequest >), new RenovationRequestFileStorage()},
+            { typeof(IStorage < TourRequests >), new TourRequestsFileStorage()},
+            { typeof(IStorage < TourReview1 >), new GuideReviewFileStorage()}
         };
 
         public static T CreateInstance<T>()

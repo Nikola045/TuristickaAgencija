@@ -5,6 +5,8 @@ using TravelAgency.Domain.Model;
 using System.IO;
 using System;
 using TravelAgency.Domain.RepositoryInterfaces;
+using Cake.Core.IO;
+using System.Xml.Linq;
 
 namespace TravelAgency.Repository.UserRepo
 {

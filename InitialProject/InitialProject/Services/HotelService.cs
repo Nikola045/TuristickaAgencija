@@ -6,7 +6,9 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Forms;
+using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using Image = TravelAgency.Domain.Model.Image;
 
@@ -14,14 +16,15 @@ namespace TravelAgency.Services
 {
     internal class HotelService
     {
-        private readonly App app = (App)App.Current;
         private ImageRepository imageRepository { get; }
         private HotelRepository hotelRepository { get; }
+        private ReservationRepository reservationRepository { get; }
 
         public HotelService() 
         {
-            imageRepository = app.ImageRepository;
-            hotelRepository = app.HotelRepository;
+            imageRepository = new(InjectorService.CreateInstance<IStorage<Image>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
         }
 
         public List<Hotel> FindHotel(string name, string city, string country, string type, string max, string days)
@@ -206,6 +209,17 @@ namespace TravelAgency.Services
             {
                 hotelRepository.Update(hotel);
             }
+        }
+
+        internal string GetHotelByIdOfReservation(int idReservation)
+        {
+            List<Reservation> reservations = reservationRepository.GetAll();
+            foreach(Reservation reservation in reservations)
+            {
+                if (reservation.Id == idReservation)
+                    return reservation.HotelName;
+            }
+            return null;
         }
     }
 }

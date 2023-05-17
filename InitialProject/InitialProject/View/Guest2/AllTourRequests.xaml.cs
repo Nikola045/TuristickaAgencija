@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
@@ -22,8 +23,8 @@ namespace TravelAgency.View.Guest2
     public partial class AllTourRequests : Window
     {
 
-        private readonly TourRequestsRepository _repository;
-        User LogedUser = new Domain.Model.User();
+        private readonly TourService tourService;
+        User LogedUser = new User();
         private Tour selectedTour;
 
 
@@ -31,12 +32,12 @@ namespace TravelAgency.View.Guest2
         {
             InitializeComponent();
             LogedUser = user;
-            _repository = new TourRequestsRepository();
+            tourService = new TourService();
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
         {
-            List<TourRequests> requests  = _repository.MyRequests(LogedUser.Id);
+            List<TourRequests> requests  = tourService.MyRequests(LogedUser.Id);
 
             DataPanel.ItemsSource = requests;
         }

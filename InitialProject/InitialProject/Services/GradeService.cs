@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.GradeRepo;
+using TravelAgency.Repository.UserRepo;
 
 namespace TravelAgency.Services
 {
     internal class GradeService
     {
-        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
+        private readonly UserRepository userRepository;
         private readonly ReservationService reservationService;
+        private readonly HotelService hotelService;
         public GradeService() 
         {
-            ownerGradeRepository = app.OwnerGradeRepository;
-            reservationRepository = app.ReservationRepository;
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
+            hotelService = new HotelService();
             reservationService = new ReservationService();
         }
 
@@ -26,7 +31,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach(OwnerGrade grade in grades)
             {
-                if (grade.ReservationId == id)
+                if (grade.Reservation.Id == id)
                 {
                     return grade;
                 }
@@ -39,7 +44,7 @@ namespace TravelAgency.Services
             List<OwnerGrade> grades = ownerGradeRepository.GetAll();
             foreach (OwnerGrade grade in grades)
             {
-                if (grade.ReservationId == id)
+                if (grade.Reservation.Id == id)
                 {
                     return true;
                 }
@@ -57,6 +62,8 @@ namespace TravelAgency.Services
                 {
                     if (IsOwnerGradeExists(reservation.Id))
                     {
+                        OwnerGrade ownerGrade = FindOwnerGradeByReservationId(reservation.Id);
+                        ownerGrade.Reservation.HotelName = hotelService.GetHotelByIdOfReservation(reservation.Id);
                         ownerGrades.Add(FindOwnerGradeByReservationId(reservation.Id));
                     }
                 }
@@ -134,11 +141,25 @@ namespace TravelAgency.Services
         public bool IsOwnerAlreadyRatedByGuest(int reservationId, string guestUsername)
         {
             OwnerGrade ownerGrade = ownerGradeRepository.GetByReservationId(reservationId);
-            if (ownerGrade != null && ownerGrade.Guest1Username == guestUsername)
+            if (ownerGrade != null && ownerGrade.Guest1.Username == guestUsername)
             {
                 return true;
             }
             return false;
+        }
+
+        public User FindGuestByUsername(string username)
+        {
+            List<User> guests = userRepository.GetAll();
+            foreach (User user in guests)
+            {
+                if (user.Username == username)
+                {
+                    return user;
+                }
+                
+            }
+            return null;
         }
 
     }

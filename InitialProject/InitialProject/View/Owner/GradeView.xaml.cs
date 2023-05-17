@@ -9,6 +9,7 @@ using TravelAgency.Domain.Model;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls.Primitives;
+using TravelAgency.Domain.RepositoryInterfaces;
 
 namespace TravelAgency.View.Owner
 {
@@ -17,7 +18,6 @@ namespace TravelAgency.View.Owner
     /// </summary>
     public partial class GradePage : Page, INotifyPropertyChanged
     {
-        private readonly App app = (App)App.Current;
         private readonly GradeGuest1Repository gradeGuest1Repository;
         private readonly ReservationRepository reservationRepository;
         private readonly GradeService gradeService;
@@ -35,8 +35,8 @@ namespace TravelAgency.View.Owner
             InitializeComponent();
             Title = "Create new comment";
             DataContext = this;
-            gradeGuest1Repository = app.GradeGuest1Repository;
-            reservationRepository = app.ReservationRepository;
+            gradeGuest1Repository = new(InjectorService.CreateInstance<IStorage<GuestGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             gradeService = new GradeService();
             reservationService = new ReservationService();
         }
@@ -74,11 +74,11 @@ namespace TravelAgency.View.Owner
             if (comboBoxItem != null && CB1Text != null && CB2Text != null && Comment != null)
             {
                 GuestGrade newGrade = new GuestGrade(
-                comboBoxItem.Content.ToString(),
+                gradeService.FindGuestByUsername(comboBoxItem.Content.ToString()),
                 CB1Text,
                 CB2Text,
                 Comment,    
-                Convert.ToInt32(comboBoxItem.Tag));
+                reservationService.FindReservationByID(Convert.ToInt32(comboBoxItem.Tag)));
                 gradeGuest1Repository.Save(newGrade);
 
                 CommentText.Clear();
