@@ -19,6 +19,7 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class RecommendationForRenovation : Page
     {
+
         public RecommendationForRenovation()
         {
             InitializeComponent();
