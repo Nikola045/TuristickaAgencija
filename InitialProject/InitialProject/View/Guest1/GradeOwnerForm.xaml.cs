@@ -37,7 +37,8 @@ namespace TravelAgency.View.Guest1
         private readonly ReservationService reservationService;
         private readonly OwnerService ownerService;
         private User LogedUser { get; set; }
-        public ObservableCollection<Accommodation> Accommodations { get; set; }
+        public VisitedHotel SelectedItem{ get; set; }
+        public ObservableCollection<VisitedHotel> Hotels { get; set; }
 
         public GradeOwnerForm(User user)
         {
@@ -52,50 +53,33 @@ namespace TravelAgency.View.Guest1
             reservationService = new ReservationService();
             ownerService = new OwnerService();
             LogedUser = user;
+            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());    
         }
-
-        public class Accommodation
+        public GradeOwnerForm(VisitedHotel hotel)
         {
-            public string Name { get; set; }
-            public string City { get; set; }
-            public string Country { get; set; }
-            public string Type { get; set; }
-            public int NumberOfGuests { get; set; }
-            public int NumberOfDays { get; set; }
-
-            public Accommodation(string name, string city, string country, string type, int numberOfGuests, int numberOfDays)
-            {
-                Name = name;
-                City = city;
-                Country = country;
-                Type = type;
-                NumberOfGuests = numberOfGuests;
-                NumberOfDays = numberOfDays;
-            }
+            SelectedItem = hotel;
+            InitializeComponent();
+            Title = "Grade owner";
+            DataContext = this;
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
+            gradeService = new GradeService();
+            hotelService = new HotelService();
+            reservationService = new ReservationService();
+            ownerService = new OwnerService();
+            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());
         }
 
+        public List<VisitedHotel> AddHotel()
+        {
+            List<VisitedHotel> hotels = new List<VisitedHotel>();
+            hotels.Add(SelectedItem);
+            return hotels;  
+        }
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            Accommodations = new ObservableCollection<Accommodation>();
-            Accommodations.Add(new Accommodation("Alpina", "Beograd", "Serbia", "Apartment", 6, 5));
-
-            DataPanel.ItemsSource = Accommodations;
-            RemoveLastColumns(DataPanel, 6);
-            ExpandColumns(DataPanel);
-        }
-        private void RemoveLastColumns(DataGrid dataGrid, int count)
-        {
-            int columnCount = dataGrid.Columns.Count;
-            int startIndex = columnCount - count;
-
-            // Provera da li ima dovoljno kolona za uklanjanje
-            if (startIndex >= 0)
-            {
-                for (int i = columnCount - 1; i >= startIndex; i--)
-                {
-                    dataGrid.Columns.RemoveAt(i);
-                }
-            }
+            
         }
         private void ExpandColumns(DataGrid dataGrid)
         {
