@@ -52,6 +52,7 @@ namespace TravelAgency.Repository
             _storage.Save(_tours);
             return entity;
         }
+
     }
 
 }
