@@ -9,9 +9,6 @@ using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
-    /// <summary>
-    /// Interaction logic for CreatingTourRequest.xaml
-    /// </summary>
     public partial class CreatingTourRequest : Window
     {
 

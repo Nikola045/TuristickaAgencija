@@ -1,28 +1,27 @@
-﻿using System;
+
+using LiveCharts;
+using LiveCharts.Definitions.Charts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Services;
 
 namespace TravelAgency.View.Guide
 {
-    /// <summary>
-    /// Interaction logic for TourStatistic.xaml
-    /// </summary>
-    public partial class TourStatistic : Window
+    public partial class TourStatistic : Window, INotifyPropertyChanged
     {
+        private SeriesCollection _data;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private readonly TourRepository tourRepository;
         private readonly TourService tourService;
         private readonly GuestOnTourService guestOnTourService;
@@ -34,6 +33,7 @@ namespace TravelAgency.View.Guide
             tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
             tourService = new TourService();
             guestOnTourService = new GuestOnTourService();
+
         }
 
         private void PerYearRB_Checked(object sender, RoutedEventArgs e)
@@ -81,6 +81,35 @@ namespace TravelAgency.View.Guide
             txt2.Text = Info[1].ToString();
             txt3.Text = Info[2].ToString();
             txt4.Text = Info[3].ToString();
+            string[] titles = { "a", "b", "c" };
+            for (int i=0;i<Info.Length-1;i++)
+            {
+                
+                pieChart.Series.Add(new PieSeries
+                {
+                    Title = titles[i],
+                    Values = new ChartValues<double> { Info[i] },
+                    DataLabels = true
+                });
+            }
+
+        }
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public SeriesCollection DataChart
+        {
+            get => _data;
+            set
+            {
+                if (_data != value)
+                {
+                    _data = value;
+                    OnPropertyChanged();
+                }
+
+            }
         }
     }
 }

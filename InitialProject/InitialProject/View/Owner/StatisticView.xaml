@@ -32,7 +32,7 @@
                 <lvc:Axis Title="{Binding Path=XTitle,UpdateSourceTrigger=PropertyChanged}" Labels="{Binding Path=XLabels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Number Of Reservations" Labels="{Binding Path=YLabels}"></lvc:Axis>
+                <lvc:Axis Title="Data" Labels="{Binding Path=YLabels}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </Grid>
