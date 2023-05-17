@@ -1,22 +1,9 @@
-﻿using Cake.Core.Tooling;
-using Microsoft.Graph.Models.Security;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Services;
 
@@ -44,9 +31,8 @@ namespace TravelAgency.View.Guest2
         {
             InitializeComponent();
             LoggedInUser = user;
-            tourRequestsRepository = new TourRequestsRepository();
+            tourRequestsRepository = new(InjectorService.CreateInstance<IStorage<TourRequests>>());
             ownerService = new OwnerService();
-
         }
 
         private void SaveTourRequest(object sender, RoutedEventArgs e)

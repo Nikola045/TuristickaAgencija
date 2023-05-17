@@ -15,7 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guide
 {
@@ -42,7 +44,7 @@ namespace TravelAgency.View.Guide
             DataContext = this;
             LogedUser = user;
             tourRepository = new TourRepository();
-            checkPointRepository = new CheckPointRepository();
+            checkPointRepository = new(InjectorService.CreateInstance<IStorage<CheckPoint>>());
         }
 
         private void ShowTours(object sender, RoutedEventArgs e)

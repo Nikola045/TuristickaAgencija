@@ -35,6 +35,7 @@ namespace TravelAgency.View
 
         private readonly TourRepository tourRepository;
 
+        private readonly CheckPointService checkPointService;
         private readonly CheckPointRepository checkPointRepository;
 
         private readonly ImageRepository tourImageRepository;
@@ -49,8 +50,9 @@ namespace TravelAgency.View
             Title = "Create new tour";
             DataContext = this;
             tourRepository = new TourRepository();
-            checkPointRepository = new CheckPointRepository();
+            checkPointService = new CheckPointService();
             tourImageRepository = new(InjectorService.CreateInstance<IStorage<Image>>());
+            checkPointRepository = new(InjectorService.CreateInstance<IStorage<CheckPoint>>());
         }
 
         private void SaveTour(object sender, RoutedEventArgs e)
@@ -62,7 +64,7 @@ namespace TravelAgency.View
             {
                 CheckPoint checkPoint = new CheckPoint();
                 checkPoint.Name = item.ToString();
-                checkPoint.Id = checkPointRepository.GetByName(FilePath, checkPoint.Name).Id;
+                checkPoint.Id = checkPointService.GetByName(checkPoint.Name).Id;
                 checkPoint.Status = "Neaktivna";
                 checkPoints.Add(checkPoint);
             }
@@ -111,7 +113,7 @@ namespace TravelAgency.View
         {
             List<CheckPoint> checkPoints = new List<CheckPoint>();
             string FilePath = "../../../Resources/Data/checkPoints.csv";
-            checkPoints = checkPointRepository.ReadFromCheckPointsCsv(FilePath);
+            checkPoints = checkPointRepository.GetAll();
 
             for (int i = 0; i < checkPoints.Count; i++)
             {

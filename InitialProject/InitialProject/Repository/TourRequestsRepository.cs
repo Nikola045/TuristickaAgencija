@@ -1,12 +1,7 @@
-﻿using Cake.Core.IO;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
 
 namespace TravelAgency.Repository
@@ -17,53 +12,38 @@ namespace TravelAgency.Repository
         private const string FilePath = "../../../Resources/Data/tourRequests.csv";
 
         private readonly Serializer<TourRequests> _serializer;
+        private readonly IStorage<TourRequests> _storage;
 
         private List<TourRequests> _tourRequests;
 
 
-        public TourRequestsRepository()
+        public TourRequestsRepository(IStorage<TourRequests> storage)
         {
             _serializer = new Serializer<TourRequests>();
             _tourRequests = _serializer.FromCSV(FilePath);
+            _storage = storage;
         }
 
 
-        public TourRequests Save(TourRequests tourRequest)
+        public TourRequests Save(TourRequests entity)
         {
-            tourRequest.Id = NextId();
-            _tourRequests = _serializer.FromCSV(FilePath);
-            _tourRequests.Add(tourRequest);
-            _serializer.ToCSV(FilePath, _tourRequests);
-            return tourRequest;
+            _tourRequests.Add(entity);
+            _storage.Save(_tourRequests);
+            return entity;
         }
 
         public int NextId()
         {
-            _tourRequests = _serializer.FromCSV(FilePath);
             if (_tourRequests.Count < 1)
             {
                 return 1;
             }
-            return _tourRequests.Max(t => t.Id) + 1;
+            return _tourRequests.Max(h => h.Id) + 1;
         }
 
-
-        public List<TourRequests> MyRequests(int id)
+        public List<TourRequests> GetAll()
         {
-            _tourRequests = _serializer.FromCSV(FilePath);
-            List<TourRequests> tourRequests = new List<TourRequests>();
-
-            for (int i = 0; i < _tourRequests.Count(); i++)
-            {
-                if (_tourRequests[i].Guest2.Id == id && _tourRequests[i].Status == "Pending")
-                {
-                    tourRequests.Add(_tourRequests[i]);
-                }
-            }
-
-            return tourRequests;
+            return _tourRequests;
         }
-
-
     }
 }
