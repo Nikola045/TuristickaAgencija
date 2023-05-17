@@ -188,14 +188,11 @@ namespace TravelAgency.View.Guest1
             );
             ownerGradeRepository.Save(newGrade);
 
-            
+
             RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation();
 
             var selectedHotel = cbHotelName.SelectedItem;
-
-            recommendationForRenovation.HotelChoice(selectedHotel);
-
-            recommendationForRenovation.Show();
+            NavigationService.Navigate(recommendationForRenovation);
         }
 
         private void LoadHotels(object sender, RoutedEventArgs e)
