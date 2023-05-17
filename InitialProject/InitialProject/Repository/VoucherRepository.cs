@@ -14,81 +14,34 @@ namespace TravelAgency.Repository
 {
     public class VoucherRepository
     {
-
-        private const string FilePath = "../../../Resources/Data/vouchers.csv";
-        private const string FilePathGuest = "../../../Resources/Data/guestOnTour.csv";
-
-
-        private readonly Serializer<Voucher> _serializer;
-
-        private readonly TourRepository _tourRepository;    
-
+        private IStorage<Voucher> _storage;
         private List<Voucher> _vouchers;
 
-        public VoucherRepository()
+        public VoucherRepository(IStorage<Voucher> storage)
         {
-            _serializer = new Serializer<Voucher>();
-            _vouchers = _serializer.FromCSV(FilePath);
+            _storage = storage;
+            _vouchers = _storage.Load();
         }
 
-        public Voucher Save(Voucher voucher)
+        public Voucher Save(Voucher entity)
         {
-            voucher.Id = NextId();
-            _vouchers = _serializer.FromCSV(FilePath);
-            _vouchers.Add(voucher);
-            _serializer.ToCSV(FilePath, _vouchers);
-            return voucher;
+            _vouchers.Add(entity);
+            _storage.Save(_vouchers);
+            return entity;
         }
 
         public int NextId()
         {
-            _vouchers = _serializer.FromCSV(FilePath);
             if (_vouchers.Count < 1)
             {
                 return 1;
             }
-            return _vouchers.Max(t => t.Id) + 1;
+            return _vouchers.Max(h => h.Id) + 1;
         }
 
-        /*public List<Voucher> CreateVouchersForCancelling(Tour tour, int guestId)
+        public List<Voucher> GetAll()
         {
-            List<GuestOnTour> guestOnTours = _tourRepository.ReadFromGuestOnTour(FilePathGuest);
-            List<Voucher> vouchers = new List<Voucher>();
-            for(int i = 0; i< guestOnTours.Count; i++)
-            {
-                if (guestOnTours[i].TourId == tour.Id) 
-                { 
-                    Voucher voucher = new Voucher();
-                    voucher.Id = NextId();
-                    voucher.ExpirationDate = DateTime.Now;
-                    voucher.Name = "Voucher for canceling";
-                    voucher.GuestId = guestId;
-                    Save(voucher);
-                }
-            }
-            return vouchers;
-        }*/
-
-        public List<Voucher> ReadFromVouchersCsv(string FileName)
-        {
-            List<Voucher> vouchers = new List<Voucher>();
-
-            using (StreamReader sr = new StreamReader(FileName))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-
-                    string[] fields = line.Split('|');
-                    Voucher voucher = new Voucher();
-
-                    voucher.Id = Convert.ToInt32(fields[0]);
-                    voucher.Name = fields[1];
-                    voucher.ExpirationDate = Convert.ToDateTime(fields[2]);
-                    vouchers.Add(voucher);
-                }
-            }
-            return vouchers;
+            return _vouchers;
         }
 
 

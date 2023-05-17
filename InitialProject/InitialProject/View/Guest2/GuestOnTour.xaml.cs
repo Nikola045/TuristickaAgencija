@@ -26,7 +26,6 @@ namespace TravelAgency.View.Guest2
         const string FilePath = "../../../Resources/Data/tours.csv";
 
         private readonly TourRepository _repository;
-        private readonly CheckPointRepository _CPrepository;
 
         public Tour selectedTour;
         public CheckPoint selectedCheckPoint;
@@ -36,7 +35,6 @@ namespace TravelAgency.View.Guest2
             InitializeComponent();
             LogedUser = logedUser;
             _repository = new TourRepository();
-            _CPrepository = new CheckPointRepository();
         }
 
         private void LoadData(object sender, RoutedEventArgs e)

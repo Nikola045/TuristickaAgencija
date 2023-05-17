@@ -13,7 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
@@ -39,7 +41,7 @@ namespace TravelAgency.View.Guest2
             LogedUser = logedUser;
             selectedTour = tour;
             _repository = new TourRepository();
-            _vouchersRepository = new VoucherRepository();
+            _vouchersRepository = new(InjectorService.CreateInstance<IStorage<Voucher>>());
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -114,7 +116,7 @@ namespace TravelAgency.View.Guest2
 
         private void Vouchers_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Voucher> vouchers = _vouchersRepository.ReadFromVouchersCsv(FilePath1);
+            List<Voucher> vouchers = _vouchersRepository.GetAll();
             for (int i = 0; i < vouchers.Count; i++) {
                 Vouchers.Items.Add(vouchers[i]);
             }
