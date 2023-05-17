@@ -1,29 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Services;
 
 namespace TravelAgency.View.Guide
 {
-    /// <summary>
-    /// Interaction logic for TourStatistic.xaml
-    /// </summary>
     public partial class TourStatistic : Window
     {
-        private readonly TourRepository tourRepository;
         private readonly TourService tourService;
         private readonly GuestOnTourService guestOnTourService;
         public Tour selectedTour;
@@ -31,7 +15,6 @@ namespace TravelAgency.View.Guide
         public TourStatistic()
         {
             InitializeComponent();
-            tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
             tourService = new TourService();
             guestOnTourService = new GuestOnTourService();
         }

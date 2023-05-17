@@ -1,16 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
@@ -18,14 +8,11 @@ using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
-    /// <summary>
-    /// Interaction logic for TourReview.xaml
-    /// </summary>
     public partial class TourReview : Window
     {
         private readonly GuideReviewRepository _repository;
 
-        User LogedUser = new Domain.Model.User();
+        User LogedUser = new User();
         public Tour selectedTour;
         public TourReview(User logedUser, Tour tour)
         {

@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
@@ -18,16 +7,10 @@ using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
-    /// <summary>
-    /// Interaction logic for GuestOnTour.xaml
-    /// </summary>
     public partial class GuestOnTour : Window
     {
         User LogedUser = new User();
         private readonly TourService tourService;
-
-        private readonly TourRepository _repository;
-
         public Tour selectedTour;
         public CheckPoint selectedCheckPoint;
 
@@ -35,7 +18,6 @@ namespace TravelAgency.View.Guest2
         {
             InitializeComponent();
             LogedUser = logedUser;
-            _repository = new(InjectorService.CreateInstance<IStorage<Tour>>());
             tourService = new TourService();
         }
 
@@ -62,7 +44,6 @@ namespace TravelAgency.View.Guest2
             {
                 if(selectedCheckPoint != null)
                 {
-                    //GuestOnTour guestOnTour = _repository.FindGuestByTourIdAndGuestId(selectedTour.Id, LogedUser.Id);
                 }
             }
 
