@@ -20,31 +20,17 @@
         <DataGrid x:Name="DataPanel" Loaded="OnLoad" FontSize="16" Height="212" Canvas.Left="27" Canvas.Top="304" Width="1267" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="How owners rated you:" FontSize="20" Canvas.Left="28" Canvas.Top="266" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Visited accommodations:" FontSize="20" Canvas.Left="29" Canvas.Top="-5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <DataGrid x:Name="ShowVisited" AutoGenerateColumns="False" FontSize="16" Height="194" Width="1266" Canvas.Left="28" Canvas.Top="33" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="LoadVisited">
+        <DataGrid   AutoGenerateColumns="False" ItemsSource="{Binding VisitedHotels}" SelectedItem="{Binding SelectedHotel}" FontSize="16" Height="194" Width="1266" Canvas.Left="28" Canvas.Top="33" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="LoadVisited">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Hotel Name" Binding="{Binding HotelName}" />
+                <DataGridTextColumn Header="Hotel Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="City" Binding="{Binding City}" />
                 <DataGridTextColumn Header="Country" Binding="{Binding Country}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Number of Guests" Binding="{Binding NumberOfGuests}" />
-                <DataGridTextColumn Header="Number of Days" Binding="{Binding NumberOfDays}" />
-                <DataGridTemplateColumn Header="Rate accommodation and owner(if not rated)">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <WrapPanel>
-                                <TextBlock Text="Rate accommodation" TextWrapping="Wrap" />
-                                <TextBlock Text="and owner(if not rated)" />
-                            </WrapPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock x:Name="IsRatedTextBlock" Text="{Binding IsRated}" Style="{StaticResource IsRatedTextBlockStyle}" MouseLeftButtonDown="TextBlock_PreviewMouseDown" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
+                <DataGridTextColumn Header="Type" Binding="{Binding TypeOfHotel}" />
+                <DataGridTextColumn Header="Number of Guests" Binding="{Binding MaxNumberOfGuests}" />
+                <DataGridTextColumn Header="Number of Days" Binding="{Binding MinNumberOfDays}" />
+                <DataGridTextColumn Header="Grade Status" Binding="{Binding GradeStatus}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Button" Canvas.Left="149" Canvas.Top="240" Click="Button_Click"/>
     </Canvas>
 </Page>

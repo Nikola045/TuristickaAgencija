@@ -20,9 +20,12 @@ namespace TravelAgency.View.Guest1
     public partial class RecommendationForRenovation : Page
     {
 
+       // private readonly RecomodationRepositroy recomodatioRepsitory;
+
         public RecommendationForRenovation()
         {
             InitializeComponent();
+            //recomodationRepositoyr = new(InjectorService.CreateInstance<IStorage<Recomodaiton>>());
         }
 
         private object selectedHotel;
@@ -34,7 +37,8 @@ namespace TravelAgency.View.Guest1
 
         private void Rate(object sender, RoutedEventArgs e)
         {
-
+            //novi recomodaiotn
+            //recomodaitonRepository.Save(recomodation);
         }
     }
 }

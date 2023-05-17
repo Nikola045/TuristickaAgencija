@@ -53,6 +53,13 @@ namespace TravelAgency.Repository
             return entity;
         }
 
+        public void Delete(Tour entity)
+        {
+            Tour founded = _tours.Find(c => c.Id == entity.Id);
+            _tours.Remove(founded);
+            _storage.Save(_tours);
+        }
+
     }
 
 }

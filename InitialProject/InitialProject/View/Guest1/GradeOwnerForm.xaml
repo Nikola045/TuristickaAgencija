@@ -47,14 +47,16 @@
         </StackPanel>
         <Rectangle Height="42" Canvas.Left="394" Stroke="Black" Canvas.Top="110" Width="194" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Rate accommodation:" FontSize="20" Canvas.Left="10" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="-8"/>
-        <DataGrid x:Name="DataPanel" FontSize="16" Height="75" Width="1289"  Canvas.Left="10" Canvas.Top="29" HorizontalAlignment="Center" VerticalAlignment="Top" Loaded="OnLoad">
+        <DataGrid ItemsSource="{Binding Hotels}" FontSize="16" Height="75" Width="1289"  Canvas.Left="10" Canvas.Top="29" HorizontalAlignment="Center" VerticalAlignment="Top" Loaded="OnLoad" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Hotel Name" Binding="{Binding Name, StringFormat={}{0} }" />
-                <DataGridTextColumn Header="City" Binding="{Binding City, StringFormat={}{0} }" />
-                <DataGridTextColumn Header="Country" Binding="{Binding Country, StringFormat={}{0} }" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Type, StringFormat={}{0} }" />
-                <DataGridTextColumn Header="Number of Guests" Binding="{Binding NumberOfGuests, StringFormat={}{0} }" />
-                <DataGridTextColumn Header="Number of Days" Binding="{Binding NumberOfDays, StringFormat={}{0} }" />
+
+                <DataGridTextColumn Header="Hotel Name" Binding="{Binding Name }" />
+                <DataGridTextColumn Header="City" Binding="{Binding City}" />
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Number of Guests" Binding="{Binding NumberOfGuests}" />
+                <DataGridTextColumn Header="Number of Days" Binding="{Binding NumberOfDays}" />
+
             </DataGrid.Columns>
         </DataGrid>
         <Rectangle Height="42" Canvas.Left="127" Stroke="Black" Canvas.Top="110" Width="193" HorizontalAlignment="Center" VerticalAlignment="Top"/>

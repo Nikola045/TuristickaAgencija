@@ -115,7 +115,6 @@ namespace TravelAgency.View.Owner
         {
             foreach(ColumnSeries column in DataChart)
             {
-                ;
                 if (column.Title.Split(":")[0] == HotelName)
                 {
                     DataChart.Remove(column);
