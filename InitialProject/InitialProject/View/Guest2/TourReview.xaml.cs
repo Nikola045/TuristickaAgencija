@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
+using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
@@ -21,7 +23,7 @@ namespace TravelAgency.View.Guest2
     /// </summary>
     public partial class TourReview : Window
     {
-        private readonly GuideReviewRepository _repository = new GuideReviewRepository();
+        private readonly GuideReviewRepository _repository;
 
         User LogedUser = new Domain.Model.User();
         public Tour selectedTour;
@@ -31,7 +33,7 @@ namespace TravelAgency.View.Guest2
             LogedUser = logedUser;
             DataContext = this;
             selectedTour = tour;
-            _repository = new GuideReviewRepository();
+            _repository = new(InjectorService.CreateInstance<IStorage<TourReview1>>());
         }
 
         private void Exit(object sender, RoutedEventArgs e)

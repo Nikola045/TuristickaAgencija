@@ -49,7 +49,7 @@ namespace TravelAgency.View
             InitializeComponent();
             Title = "Create new tour";
             DataContext = this;
-            tourRepository = new TourRepository();
+            tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
             checkPointService = new CheckPointService();
             tourImageRepository = new(InjectorService.CreateInstance<IStorage<Image>>());
             checkPointRepository = new(InjectorService.CreateInstance<IStorage<CheckPoint>>());

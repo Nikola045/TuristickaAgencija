@@ -1,19 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Printing;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
@@ -28,12 +16,12 @@ namespace TravelAgency.View.Guide
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        User LogedUser = new Domain.Model.User();
+        User LogedUser = new User();
 
         Tour CurrentSelectedTour = new Tour();
 
         private readonly TourRepository tourRepository;
-        private readonly VoucherRepository voucherRepository;
+        private readonly TourService tourService;
 
         private readonly CheckPointRepository checkPointRepository;
 
@@ -43,31 +31,30 @@ namespace TravelAgency.View.Guide
             Title = "Create new tour";
             DataContext = this;
             LogedUser = user;
-            tourRepository = new TourRepository();
+            tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
             checkPointRepository = new(InjectorService.CreateInstance<IStorage<CheckPoint>>());
+            tourService = new TourService();
         }
 
         private void ShowTours(object sender, RoutedEventArgs e)
         {
-            const string FilePath = "../../../Resources/Data/tours.csv";
             List<Tour> tours = new List<Tour>();
-            tours = tourRepository.GetTodaysTours(FilePath);
+            tours = tourService.GetTodaysTours();
             DataPanel.ItemsSource = tours;
 
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            const string FilePath = "../../../Resources/Data/tours.csv";
             DateTime dateTimeNow = DateTime.Now;
             List<Tour> tours = new List<Tour>();
-            tours = tourRepository.ReadFromToursCsv(FilePath);
+            tours = tourRepository.GetAll();
             DataPanel.ItemsSource = tours;
         }
 
         private void StartTour(object sender, RoutedEventArgs e)
         {
-            bool IsTourStarted = tourRepository.IsStarted();
+            bool IsTourStarted = tourService.IsStarted();
 
             if(IsTourStarted == true)
             {

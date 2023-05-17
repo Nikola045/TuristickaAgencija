@@ -17,8 +17,8 @@ namespace TravelAgency.Repository
 
         public CheckPointRepository(IStorage<CheckPoint> storage)
         {
-            _checkPoints = _storage.Load();
             _storage = storage;
+            _checkPoints = _storage.Load(); 
         }
 
         public List<CheckPoint> GetAll()
