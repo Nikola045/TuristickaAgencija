@@ -89,6 +89,7 @@ namespace TravelAgency.View.Guest1
                 if (hotel.NumberOfDaysToCancel <= daysUntilCheckin)
                 {
                     findedReservation.GradeStatus = "Canceled";
+                    findedReservation.IsCanceled = 1;
                     reservationRepository.Update(findedReservation);
                     MessageBox.Show("Reservation successfully canceled.");
                 }

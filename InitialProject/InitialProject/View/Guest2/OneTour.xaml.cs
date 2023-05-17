@@ -9,9 +9,6 @@ using TravelAgency.Services;
 
 namespace TravelAgency.View.Guest2
 {
-    /// <summary>
-    /// Interaction logic for OneTour.xaml
-    /// </summary>
     public partial class OneTour : Window
     {
         User LogedUser = new User();
@@ -98,8 +95,6 @@ namespace TravelAgency.View.Guest2
             List < CheckPoint >  checkPoints = selectedTour.CheckPoints;
             CheckPoints.ItemsSource = checkPoints;
             List<string> dates = new List<string>();
-            //dates[1] = selectedTour.StartTime.ToString();
-            //Dates.ItemsSource = dates;
         }
 
         private void Vouchers_Loaded(object sender, RoutedEventArgs e)

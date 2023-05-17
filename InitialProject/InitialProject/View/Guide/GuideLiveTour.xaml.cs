@@ -9,20 +9,13 @@ using TravelAgency.Services;
 
 namespace TravelAgency.View.Guide
 {
-    /// <summary>
-    /// Interaction logic for GuideLiveTour.xaml
-    /// </summary>
     public partial class GuideLiveTour : Window
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         User LogedUser = new User();
-
         Tour CurrentSelectedTour = new Tour();
-
         private readonly TourRepository tourRepository;
         private readonly TourService tourService;
-
         private readonly CheckPointRepository checkPointRepository;
 
         public GuideLiveTour(User user)
@@ -81,7 +74,6 @@ namespace TravelAgency.View.Guide
                         if(NumOfPoint == 0)
                         {
                             point.Status = "Active";
-                            //checkPointRepository.Update(point);
                         }
                         ListCheckPoints.Items.Add(point);
                         NumOfPoint++;
@@ -102,7 +94,6 @@ namespace TravelAgency.View.Guide
             {
                 selectedCheckPoint = ListCheckPoints.SelectedItem as CheckPoint;
                 selectedCheckPoint.Status = "Active";
-                //selectedCheckPoint = checkPointRepository.Update(selectedCheckPoint);
                 MessageBox.Show("Done");
             }
             int NumOfActivatePoints = 0;
@@ -167,27 +158,11 @@ namespace TravelAgency.View.Guide
                 }
                 else
                 {
-                    //List<Voucher> vouchers = voucherRepository.CreateVouchersForCancelling(selectedTour,LogedUser.Id);
                     CurrentSelectedTour.TourStatus = "Cancelled";
                     CurrentSelectedTour = tourRepository.Update(CurrentSelectedTour);
                     MessageBox.Show("Tour cancelled");
                 }
             }
         }
-
-        /*private void LoadCheckPoints(object sender, RoutedEventArgs e)
-        {
-            List<CheckPoint> checkPoints = new List<CheckPoint>();
-            string FilePath = "../../../Resources/Data/checkPoints.csv";
-            checkPoints = checkPointRepository.ReadFromCheckPointsCsv(FilePath);
-
-            for (int i = 0; i < checkPoints.Count; i++)
-            {
-
-                CheckPointsCB.Items.Add(checkPoints[i].Name);
-            }
-
-        }
-        */
     }
 }

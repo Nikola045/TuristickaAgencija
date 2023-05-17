@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Repository.UserRepo;
@@ -18,9 +6,6 @@ using TravelAgency.View.Guide;
 
 namespace TravelAgency.View
 {
-    /// <summary>
-    /// Interaction logic for GuideOverview.xaml
-    /// </summary>
     public partial class GuideOverview : Window
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";

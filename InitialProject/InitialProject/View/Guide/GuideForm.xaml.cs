@@ -1,34 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.Metrics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
-using static Azure.Core.HttpHeader;
 using Image = TravelAgency.Domain.Model.Image;
 
 namespace TravelAgency.View
 {
-    /// <summary>
-    /// Interaction logic for GuideForm.xaml
-    /// </summary>
     public partial class GuideForm : Window
     {
         public event PropertyChangedEventHandler PropertyChanged;
