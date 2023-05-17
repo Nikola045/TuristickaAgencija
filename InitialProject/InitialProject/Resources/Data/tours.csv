@@ -2,5 +2,7 @@
 2|b|b|b|b|b|1000|55|04/18/2023 12:00:00 AM|2|Nezapoceta|1|Prva|Neaktivna|3|Treca|Neaktivna|5|Peta|Neaktivna
 3|a|a|a|a|a|100|12|05/11/2022 12:00:00 AM|2|Nezapoceta|1|Prva|Neaktivna|4|Cetvrta|Neaktivna|6|Sesta|Neaktivna
 4|a|a|a|a|a|10|5|02/12/2020 12:00:00 AM|2|Nezapoceta|1|Prva|Neaktivna|2|Druga|Neaktivna
-5|a|q|a|a|a|1|0|04/17/2023 12:00:00 AM|1|Nezapoceta|1|Prva|Neaktivna|2|Druga|Neaktivna
-6|a|a|a|a|a|100|0|04/30/2023 12:00:00 AM|2|Nezapoceta|1|Prva|Neaktivna|3|Treca|Neaktivna|4|Cetvrta|Neaktivna
+5|a|q|a|a|a|1|0|04/17/2023 12:00:00 AM|1|Zapoceta|1|Prva|Neaktivna|2|Druga|Neaktivna
+6|a|a|a|a|a|100|0|04/30/2023 12:00:00 AM|2|Finished|1|Prva|Neaktivna|3|Treca|Neaktivna|4|Cetvrta|Neaktivna
+7|d|d|d|d|d|100|10|05/25/2023 12:00:00 AM|2|Cancelled|4|Cetvrta|Neaktivna|5|Peta|Neaktivna|4|Cetvrta|Neaktivna
+8|d|d|d|d|d|100|0|05/26/2023 12:00:00 AM|2|Nezapoceta|4|Cetvrta|Neaktivna|5|Peta|Neaktivna|4|Cetvrta|Neaktivna

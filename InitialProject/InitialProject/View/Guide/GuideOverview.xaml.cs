@@ -12,8 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.UserRepo;
+using TravelAgency.Services;
 using TravelAgency.View.Guide;
 
 namespace TravelAgency.View
@@ -23,8 +25,6 @@ namespace TravelAgency.View
     /// </summary>
     public partial class GuideOverview : Window
     {
-        private const string FilePath = "../../../Resources/Data/tours.csv";
-        private readonly App app = (App)App.Current;
         private readonly UserRepository userRepository;
         private readonly TourRepository tourRepository;
         public GuideOverview()
@@ -37,8 +37,8 @@ namespace TravelAgency.View
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
-            tourRepository = new TourRepository();
-            userRepository = app.UserRepository;
+            tourRepository = new (InjectorService.CreateInstance<IStorage<Tour>>());
+            userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
         }
 
         private void OpenGuideForm(object sender, RoutedEventArgs e)
@@ -61,7 +61,7 @@ namespace TravelAgency.View
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            DataPanel.ItemsSource = tourRepository.ReadFromToursCsv(FilePath);
+            DataPanel.ItemsSource = tourRepository.GetAll();
 
         }
 
@@ -69,7 +69,7 @@ namespace TravelAgency.View
         {
             Tour SelectedTour = DataPanel.SelectedItem as Tour;
             tourRepository.Delete(SelectedTour);
-            DataPanel.ItemsSource = tourRepository.ReadFromToursCsv(FilePath);
+            DataPanel.ItemsSource = tourRepository.GetAll();
         }
         private void GetFired(object sender, RoutedEventArgs e)
         {
@@ -82,6 +82,13 @@ namespace TravelAgency.View
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();
+        }
+
+        private void OpenReviews(object sender, RoutedEventArgs e)
+        {
+            Tour SelectedTour = DataPanel.SelectedItem as Tour;
+            GuideReviews createGuideReviewsForm = new GuideReviews(SelectedTour);
+            createGuideReviewsForm.Show();
         }
     }
 }
