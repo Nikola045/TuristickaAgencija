@@ -13,18 +13,19 @@ namespace TravelAgency.Services
     {
         private readonly ReservationRepository reservationRepository;
         private readonly UserRepository userRepository;
-
+        private readonly OwnerService ownerService;
         public Guest1Service()
         {
             reservationRepository = new ReservationRepository(InjectorService.CreateInstance<IStorage<Reservation>>());
             userRepository = new UserRepository(InjectorService.CreateInstance<IStorage<User>>());
+            ownerService = new OwnerService();
         }
 
         public int CountReservationsFromGuest(string guestUserName)
         {
-            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+            int currentYear = DateTime.Now.Year;
             List<Reservation> reservations = reservationRepository.GetAll();
-            return reservations.Count(reservation => reservation.GuestUserName == guestUserName && reservation.StartDate >= oneYearAgo);
+            return reservations.Count(reservation => reservation.GuestUserName == guestUserName && reservation.StartDate.Year == currentYear);
         }
 
         public string GetGuestStatus(string guestUserName)
@@ -34,6 +35,7 @@ namespace TravelAgency.Services
             {
                 return "Yes";
             }
+
             else
             {
                 return "No";
@@ -42,15 +44,15 @@ namespace TravelAgency.Services
 
         public int GetBonusPoints(string guestUserName)
         {
+            DateTime dateTime = DateTime.Now;
             string guestStatus = GetGuestStatus(guestUserName);
-            if (guestStatus == "Yes")
-            {
-                return 5;
+            User guest1 = ownerService.GetOwnerByUsername(guestUserName);
+            if (guestStatus == "No")
+            {                                
+                guest1.BonusPoints = 0;
+                userRepository.Update(guest1);
             }
-            else
-            {
-                return 0;
-            }
+            return guest1.BonusPoints;
         }
     }
 }

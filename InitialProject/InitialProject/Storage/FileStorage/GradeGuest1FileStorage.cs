@@ -9,7 +9,7 @@ using TravelAgency.Serializer;
 
 namespace TravelAgency.Storage.FileStorage
 {
-    internal class GradeGuest1FileStorage : IStorage<GuestGrade>
+    public class GradeGuest1FileStorage : IStorage<GuestGrade>
     {
         private Serializer<GuestGrade> _serializer;
         private readonly string _file = "../../../Resources/Data/GuestRating.csv";

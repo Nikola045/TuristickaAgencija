@@ -9,6 +9,7 @@ using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Repository.UserRepo;
 using TravelAgency.Services;
 using TravelAgency.View.Guest1;
 
@@ -24,6 +25,8 @@ namespace TravelAgency.View
         private readonly ReservationRepository _repository;
         private readonly HotelRepository hotelRepository;
         private readonly ReservationService reservationService;
+        private readonly UserRepository userRepository;
+        private readonly Guest1Service guest1Service;
         public ReservationForm(User user)
         {
             InitializeComponent();
@@ -32,7 +35,9 @@ namespace TravelAgency.View
             LogedUser = user;
             _repository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
+            userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
             reservationService = new ReservationService();
+            guest1Service = new Guest1Service();
         }
         
         private void Reserve(object sender, RoutedEventArgs e)
@@ -119,6 +124,24 @@ namespace TravelAgency.View
                     Convert.ToInt32(txtNumberOfDays.Text),
                     Convert.ToInt32(txtNumberOfGuests.Text));
                 _repository.Save(newReservation);
+                if(guest1Service.GetGuestStatus(LogedUser.Username) == "Yes")
+                {
+                    if(LogedUser.BonusPoints != 0)
+                    {
+                        LogedUser.BonusPoints--;
+                        userRepository.Update(LogedUser);
+                    }
+                    
+                    else
+                    {
+                        MessageBox.Show("No more Bonus Points!");
+                    }
+                }
+                if(guest1Service.CountReservationsFromGuest(LogedUser.Username) == 9)
+                {
+                    LogedUser.BonusPoints = 5;
+                    userRepository.Update(LogedUser);
+                }
                 SucessfullReservation sucessfullReservationPage = new SucessfullReservation();
                 NavigationService.Navigate(sucessfullReservationPage);
             }
