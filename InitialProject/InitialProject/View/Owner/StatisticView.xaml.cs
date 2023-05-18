@@ -102,10 +102,10 @@ namespace TravelAgency.View.Owner
             }
             else if(XTitle == "Months")
             {
-                ColumnSeries columnSeries = new ColumnSeries();
-                columnSeries.Title = HotelName + YearForStatistic.ToString();
-                columnSeries.Values = new ChartValues<int>(reservationService.ShowHotelReservationPerMonth(HotelName, YearForStatistic));
-                DataChart.Add(columnSeries);
+                for (int i = 0; i < 4; i++)
+                {
+                    DataChart.Add(reservationService.ShowHotelReservationPerMonth(HotelName, YearForStatistic)[i]);
+                }
             }
             else { }
             
@@ -136,7 +136,8 @@ namespace TravelAgency.View.Owner
         }
         private void Detect(object sender, RoutedEventArgs e)
         {
-            List<int> monthValues = reservationService.ShowHotelReservationPerMonth(HotelName, YearForStatistic);
+            LiveCharts.ChartValues<int> chartValues = (LiveCharts.ChartValues<int>)reservationService.ShowHotelReservationPerMonth(HotelName, YearForStatistic)[0].Values;
+            List<int> monthValues = chartValues.ToList();
             int i = 0;
             int max = monthValues[i];
             int month = i;
