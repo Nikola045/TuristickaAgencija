@@ -21,6 +21,7 @@ using DevExpress.XtraEditors.Filtering;
 using static TravelAgency.View.Guest1.GradeOwnerForm;
 using System.Collections.ObjectModel;
 using TravelAgency.Domain.RepositoryInterfaces;
+using Microsoft.Kiota.Abstractions;
 
 namespace TravelAgency.View.Guest1
 {
@@ -40,7 +41,7 @@ namespace TravelAgency.View.Guest1
         public VisitedHotel SelectedItem{ get; set; }
         public ObservableCollection<VisitedHotel> Hotels { get; set; }
 
-        public GradeOwnerForm(User user)
+        public GradeOwnerForm(User user, VisitedHotel hotel)
         {
             InitializeComponent();
             Title = "Grade owner";
@@ -53,22 +54,8 @@ namespace TravelAgency.View.Guest1
             reservationService = new ReservationService();
             ownerService = new OwnerService();
             LogedUser = user;
-            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());    
-        }
-        public GradeOwnerForm(VisitedHotel hotel)
-        {
             SelectedItem = hotel;
-            InitializeComponent();
-            Title = "Grade owner";
-            DataContext = this;
-            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
-            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
-            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
-            gradeService = new GradeService();
-            hotelService = new HotelService();
-            reservationService = new ReservationService();
-            ownerService = new OwnerService();
-            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());
+            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());    
         }
 
         public List<VisitedHotel> AddHotel()
@@ -100,7 +87,6 @@ namespace TravelAgency.View.Guest1
             {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            // Otvaranje dijaloga fajlova
             bool? result = openFileDialog.ShowDialog();
 
             if (result == true && !string.IsNullOrEmpty(openFileDialog.FileName))
@@ -110,7 +96,6 @@ namespace TravelAgency.View.Guest1
                 ListViewImg.Items.Add(image);
             }
         }
-
 
         private void Grade(object sender, RoutedEventArgs e)
         {
@@ -188,10 +173,7 @@ namespace TravelAgency.View.Guest1
             );
             ownerGradeRepository.Save(newGrade);
 
-
-            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation();
-
-            var selectedHotel = cbHotelName.SelectedItem;
+            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation(LogedUser, hotelName, id);
             NavigationService.Navigate(recommendationForRenovation);
         }
 
