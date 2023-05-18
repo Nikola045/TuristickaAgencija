@@ -15,9 +15,9 @@
         <MenuItem Header="Home" FontSize="24"></MenuItem>
         <Separator></Separator>
         <MenuItem Header="Tours" FontSize="24">
-            <MenuItem Header="Create Tour" InputGestureText="CTRL + O"></MenuItem>
+            <MenuItem Header="Create Tour" Click="OpenGuideForm"></MenuItem>
         </MenuItem>
-        <MenuItem></MenuItem>
+        <MenuItem Header="LiveTour" Click="OpenLiveTourForm"></MenuItem>
         <MenuItem Header="Statistics" FontSize="24" Click="OpenTourStatisticForm"></MenuItem>
     </Menu>
         <DataGrid x:Name="DataPanel" Margin="116,279,116,216"/>
@@ -26,5 +26,6 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="555,947,0,0" VerticalAlignment="Top" Click="GetFired"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="474,947,0,0" VerticalAlignment="Top" Click="DeleteTour"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="999,957,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Reviews" HorizontalAlignment="Left" Margin="777,947,0,0" VerticalAlignment="Top" Height="70" Width="183" Click="OpenReviews"/>
     </Grid>
 </Window>
