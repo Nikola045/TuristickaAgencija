@@ -10,8 +10,6 @@ namespace TravelAgency.View
 {
     public partial class GuideOverview : Window
     {
-        private const string FilePath = "../../../Resources/Data/tours.csv";
-        private readonly App app = (App)App.Current;
         private readonly UserRepository userRepository;
         private readonly TourRepository tourRepository;
         public GuideOverview()
@@ -24,7 +22,9 @@ namespace TravelAgency.View
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
+
             tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
+
             userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
         }
 
@@ -69,6 +69,13 @@ namespace TravelAgency.View
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();
+        }
+
+        private void OpenReviews(object sender, RoutedEventArgs e)
+        {
+            Tour SelectedTour = DataPanel.SelectedItem as Tour;
+            GuideReviews createGuideReviewsForm = new GuideReviews(SelectedTour);
+            createGuideReviewsForm.Show();
         }
     }
 }

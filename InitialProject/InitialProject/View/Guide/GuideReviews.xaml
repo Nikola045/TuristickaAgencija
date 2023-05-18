@@ -1,0 +1,14 @@
+﻿<Window x:Class="TravelAgency.View.Guide.GuideReviews"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelAgency.View.Guide"
+        mc:Ignorable="d"
+        Title="GuideReviews" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="DataPanel" Margin="13,25,21,147" Loaded="DataPanel_Loaded"/>
+        <Button Content="Report" HorizontalAlignment="Center" Margin="0,322,0,0" VerticalAlignment="Top" Height="34" Width="84" Click="Report"/>
+
+    </Grid>
+</Window>
