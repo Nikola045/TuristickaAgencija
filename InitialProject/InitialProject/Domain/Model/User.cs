@@ -11,6 +11,7 @@ namespace TravelAgency.Domain.Model
         public string Password { get; set; }
         public string LoginRole { get; set; }
         public int Age { get; set; }
+        public int BonusPoints { get; set; }
 
         public User() { }
 
@@ -24,7 +25,7 @@ namespace TravelAgency.Domain.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password, LoginRole, Age.ToString() };
+            string[] csvValues = { Id.ToString(), Username, Password, LoginRole, Age.ToString(), BonusPoints.ToString() };
             return csvValues;
         }
 
@@ -35,6 +36,7 @@ namespace TravelAgency.Domain.Model
             Password = values[2];
             LoginRole = values[3];
             Age = Convert.ToInt32(values[4]);
+            BonusPoints = Convert.ToInt32(values[5]);
         }
     }
 }

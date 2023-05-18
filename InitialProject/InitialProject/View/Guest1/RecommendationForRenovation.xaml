@@ -6,14 +6,13 @@
         xmlns:local="clr-namespace:TravelAgency.View.Guest1"
         mc:Ignorable="d" Height="516" Width="1319">
     <Canvas Background="white">
-        <RadioButton x:Name="RadioButton1" VerticalContentAlignment="Center" FontSize="20" Content="Level 1 - Perfect/it would be nice to renovate some small things,but everything works fine even without it" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="89" Canvas.Top="215"/>
-        <RadioButton x:Name="RadioButton2" VerticalContentAlignment="Center" FontSize="20" Content="Level 2 - There are some minor complaints about the accommodation that if addressed,would make it perfect" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="89" Canvas.Top="247"/>
-        <RadioButton x:Name="RadioButton3" VerticalContentAlignment="Center" FontSize="20" Content="Level 3 - Several things that are reallz bothering need do be renovated" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="89" Canvas.Top="276"/>
-        <RadioButton x:Name="RadioButton4" VerticalContentAlignment="Center" FontSize="20" Content="Level 4 - There are a lot of bad things and renovation is really necessary" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="89" Canvas.Top="307"/>
-        <RadioButton x:Name="RadioButton5" VerticalContentAlignment="Center" FontSize="20" Content="Level 5 - The accommodation is in very poor condition and it's not worth renting unless it's renovated" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="89" Canvas.Top="339"/>
-        <Button x:Name="RateButton" FontSize="20" Content="Rate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="60" Click="Rate" Canvas.Left="90" Canvas.Top="438" />
-        <TextBox x:Name="tb1" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Canvas.Left="90" Canvas.Top="381"/>
-        <TextBox Canvas.Left="89" FontSize="20" TextWrapping="Wrap" Text="" Canvas.Top="58" Width="1137" Height="136" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbOption1" VerticalContentAlignment="Center" FontSize="20" Content="Level 1 - Perfect/it would be nice to renovate some small things,but everything works fine even without it" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="89" Canvas.Top="215"/>
+        <RadioButton x:Name="rbOption2" VerticalContentAlignment="Center" FontSize="20" Content="Level 2 - There are some minor complaints about the accommodation that if addressed,would make it perfect" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="89" Canvas.Top="247"/>
+        <RadioButton x:Name="rbOption3" VerticalContentAlignment="Center" FontSize="20" Content="Level 3 - Several things that are reallz bothering need do be renovated" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="89" Canvas.Top="276"/>
+        <RadioButton x:Name="rbOption4" VerticalContentAlignment="Center" FontSize="20" Content="Level 4 - There are a lot of bad things and renovation is really necessary" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="89" Canvas.Top="307"/>
+        <RadioButton x:Name="rbOption5" VerticalContentAlignment="Center" FontSize="20" Content="Level 5 - The accommodation is in very poor condition and it's not worth renting unless it's renovated" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="89" Canvas.Top="339"/>
+        <Button x:Name="RateButton" FontSize="20" Content="Rate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="60" Click="Rate" Canvas.Left="89" Canvas.Top="381" />
+        <TextBox x:Name="txtInfo" Canvas.Left="89" FontSize="20" TextWrapping="Wrap" Text="" Canvas.Top="58" Width="1137" Height="136" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Info about accommodation:" FontSize="20" Canvas.Left="88" Canvas.Top="24" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
     </Canvas>

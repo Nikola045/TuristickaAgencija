@@ -53,9 +53,9 @@
                 <DataGridTextColumn Header="Hotel Name" Binding="{Binding Name }" />
                 <DataGridTextColumn Header="City" Binding="{Binding City}" />
                 <DataGridTextColumn Header="Country" Binding="{Binding Country}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Number of Guests" Binding="{Binding NumberOfGuests}" />
-                <DataGridTextColumn Header="Number of Days" Binding="{Binding NumberOfDays}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding TypeOfHotel}" />
+                <DataGridTextColumn Header="Number of Guests" Binding="{Binding MaxNumberOfGuests}" />
+                <DataGridTextColumn Header="Number of Days" Binding="{Binding MinNumberOfDays}" />
 
             </DataGrid.Columns>
         </DataGrid>
