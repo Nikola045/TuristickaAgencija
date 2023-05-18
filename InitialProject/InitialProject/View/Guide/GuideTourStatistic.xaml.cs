@@ -74,6 +74,7 @@ namespace TravelAgency.View.Guide
 
         private void ShowStatisticButton_Click(object sender, RoutedEventArgs e)
         {
+            pieChart.Series.Clear();
             selectedTour = (Tour) DataPanel.SelectedItem;
             int[] Info = new int[4];
             Info = guestOnTourService.ShowStatistic(selectedTour.Id);
@@ -92,6 +93,7 @@ namespace TravelAgency.View.Guide
                     DataLabels = true
                 });
             }
+            
 
         }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
