@@ -11,18 +11,20 @@ namespace TravelAgency.Domain.Model
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public int BonusPoints { get; set; }
 
         public Guest1() { }
 
-        public Guest1(string username, string password)
+        public Guest1(string username, string password, int bonusPoints)
         {
             Username = username;
             Password = password;
+            BonusPoints = bonusPoints;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password };
+            string[] csvValues = { Id.ToString(), Username, Password, BonusPoints.ToString() };
             return csvValues;
         }
 
@@ -31,6 +33,7 @@ namespace TravelAgency.Domain.Model
             Id = Convert.ToInt32(values[0]);
             Username = values[1];
             Password = values[2];
+            BonusPoints = Convert.ToInt32(values[3]);
         }
     }
 }
