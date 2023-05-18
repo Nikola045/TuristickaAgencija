@@ -79,7 +79,7 @@ namespace TravelAgency.View.Guide
             Info = guestOnTourService.ShowStatistic(selectedTour.Id);
             txt1.Text = Info[0].ToString();
             txt2.Text = Info[1].ToString();
-            txt3.Text = Info[2].ToString();
+            txt3.Text = Info[2].ToString(); 
             txt4.Text = Info[3].ToString();
             string[] titles = { "a", "b", "c" };
             for (int i=0;i<Info.Length-1;i++)
