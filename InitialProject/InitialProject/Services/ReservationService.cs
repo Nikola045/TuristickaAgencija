@@ -146,6 +146,7 @@ namespace TravelAgency.Services
                 {
                     reservation.StartDate = newStartDate;
                     reservation.EndDate = newEndDate;
+                    reservation.NumberOfMuveReservation++;
                     reservationRepository.Update(reservation);
                     moveReservationRepository.Delete(moveReservationRepository.GetById(id));
                     MessageBox.Show("Reservation seccesfuly changed.");
@@ -289,47 +290,107 @@ namespace TravelAgency.Services
             }
         }
 
-        public ColumnSeries ShowHotelDataInChart(string hotelName)
+        public List<ColumnSeries> ShowHotelReservationInChart(string hotelName)
         {
             DateTime dateTime = DateTime.Now;
-            List<int> yValues = new List<int>();
+            List<int> yValuesReservation = new List<int>();
+            List<int> yValuesMoveReservation = new List<int>();
+            List<int> yValuesRenovation = new List<int>();
+            List<int> yValuesCanceledReservation = new List<int>();
             List<Reservation> reservations = reservationRepository.GetAll();
             for (int i = 0; i < 5; i++)
             {
                 int tempCount = 0;
+                int tempM = 0;
+                int tempIs = 0;
+                int tempR = 0;
                 foreach (Reservation reservation in reservations)
                 {
                     if (reservation.HotelName == hotelName && reservation.StartDate.Year == dateTime.Year - 4 + i)
                     {
-                        tempCount++;
+                        
+                        if(reservation.GradeStatus == "Canceled")
+                            tempIs++;
+                        else tempCount++;
+                        tempM += reservation.NumberOfMuveReservation;
+                        tempR += reservation.NumberOfRenovationRequest;
                     } 
                 }
-                yValues.Add(tempCount);
+                yValuesReservation.Add(tempCount);
+                yValuesCanceledReservation.Add(tempIs);
+                yValuesMoveReservation.Add(tempM);
+                yValuesRenovation.Add(tempR);
             }
-            ColumnSeries columnSeries = new ColumnSeries();
-            columnSeries.Title = hotelName;
-            columnSeries.Values = new ChartValues<int>(yValues);
+            ColumnSeries columnSeries1 = new ColumnSeries();
+            columnSeries1.Title = hotelName + ": reservations";
+            columnSeries1.Values = new ChartValues<int>(yValuesReservation);
+            ColumnSeries columnSeries2 = new ColumnSeries();
+            columnSeries2.Title = hotelName + ": canceled reservations";
+            columnSeries2.Values = new ChartValues<int>(yValuesCanceledReservation);
+            ColumnSeries columnSeries3 = new ColumnSeries();
+            columnSeries3.Title = hotelName + ": move reservations";
+            columnSeries3.Values = new ChartValues<int>(yValuesMoveReservation);
+            ColumnSeries columnSeries4 = new ColumnSeries();
+            columnSeries4.Title = hotelName + ": renovation request";
+            columnSeries4.Values = new ChartValues<int>(yValuesRenovation);
 
-            return columnSeries;
+            List<ColumnSeries> columns = new List<ColumnSeries>();
+            columns.Add(columnSeries1);
+            columns.Add(columnSeries2);
+            columns.Add(columnSeries3);
+            columns.Add(columnSeries4);
+            return columns;
         }
 
-        public List<int> ShowHotelDataPerMonth(string hotelName, int year)
+        public List<ColumnSeries> ShowHotelReservationPerMonth(string hotelName, int year)
         {
-            List<int> yValues = new List<int>();
+            List<int> yValuesReservation = new List<int>();
+            List<int> yValuesMoveReservation = new List<int>();
+            List<int> yValuesRenovation = new List<int>();
+            List<int> yValuesCanceledReservation = new List<int>();
             List<Reservation> reservations = reservationRepository.GetAll();
             for (int i = 1; i <= 12; i++)
             {
                 int tempCount = 0;
+                int tempM = 0;
+                int tempIs = 0;
+                int tempR = 0;
                 foreach (Reservation reservation in reservations)
                 {
                     if (reservation.HotelName == hotelName && reservation.StartDate.Month == i && year == reservation.StartDate.Year)
                     {
-                        tempCount++;
+                        if (reservation.GradeStatus == "Canceled")
+                            tempIs++;
+                        else tempCount++;
+                        tempM += reservation.NumberOfMuveReservation;
+                        tempR += reservation.NumberOfRenovationRequest;
                     }
                 }
-                yValues.Add(tempCount);
+                yValuesReservation.Add(tempCount);
+                yValuesCanceledReservation.Add(tempIs);
+                yValuesMoveReservation.Add(tempM);
+                yValuesRenovation.Add(tempR);
             }
-            return yValues;
+
+            ColumnSeries columnSeries1 = new ColumnSeries();
+            columnSeries1.Title = hotelName + ": reservations " + year.ToString();
+            columnSeries1.Values = new ChartValues<int>(yValuesReservation);
+            ColumnSeries columnSeries2 = new ColumnSeries();
+            columnSeries2.Title = hotelName + ": canceled reservations " + year.ToString();
+            columnSeries2.Values = new ChartValues<int>(yValuesCanceledReservation);
+            ColumnSeries columnSeries3 = new ColumnSeries();
+            columnSeries3.Title = hotelName + ": move reservations " + year.ToString();
+            columnSeries3.Values = new ChartValues<int>(yValuesMoveReservation);
+            ColumnSeries columnSeries4 = new ColumnSeries();
+            columnSeries4.Title = hotelName + ": renovation request " + year.ToString();
+            columnSeries4.Values = new ChartValues<int>(yValuesRenovation);
+
+            List<ColumnSeries> columns = new List<ColumnSeries>();
+            columns.Add(columnSeries1);
+            columns.Add(columnSeries2);
+            columns.Add(columnSeries3);
+            columns.Add(columnSeries4);
+            return columns;
         }
     }
 }

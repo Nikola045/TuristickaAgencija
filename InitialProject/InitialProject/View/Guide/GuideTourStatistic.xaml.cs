@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+
+using LiveCharts;
 using LiveCharts.Definitions.Charts;
 using LiveCharts.Wpf;
 using System;
@@ -9,23 +10,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Services;
 
 namespace TravelAgency.View.Guide
 {
-    /// <summary>
-    /// Interaction logic for TourStatistic.xaml
-    /// </summary>
     public partial class TourStatistic : Window, INotifyPropertyChanged
     {
         private SeriesCollection _data;
@@ -40,7 +30,6 @@ namespace TravelAgency.View.Guide
         public TourStatistic()
         {
             InitializeComponent();
-
             tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
             tourService = new TourService();
             guestOnTourService = new GuestOnTourService();

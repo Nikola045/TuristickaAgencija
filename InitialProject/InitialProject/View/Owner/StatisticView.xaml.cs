@@ -94,14 +94,18 @@ namespace TravelAgency.View.Owner
         {
             if(XTitle == "Years")
             {
-                DataChart.Add(reservationService.ShowHotelDataInChart(HotelName));
+                for(int i = 0; i<4; i++)
+                {
+                    DataChart.Add(reservationService.ShowHotelReservationInChart(HotelName)[i]);
+                }
+                
             }
             else if(XTitle == "Months")
             {
-                ColumnSeries columnSeries = new ColumnSeries();
-                columnSeries.Title = HotelName + YearForStatistic.ToString();
-                columnSeries.Values = new ChartValues<int>(reservationService.ShowHotelDataPerMonth(HotelName, YearForStatistic));
-                DataChart.Add(columnSeries);
+                for (int i = 0; i < 4; i++)
+                {
+                    DataChart.Add(reservationService.ShowHotelReservationPerMonth(HotelName, YearForStatistic)[i]);
+                }
             }
             else { }
             
@@ -109,10 +113,12 @@ namespace TravelAgency.View.Owner
 
         private void HideStatisticForHotel(object sender, RoutedEventArgs e)
         {
-            var seriesToRemove = DataChart.FirstOrDefault(s => s.Title == HotelName);
-            if (seriesToRemove != null)
+            foreach(ColumnSeries column in DataChart)
             {
-                DataChart.Remove(seriesToRemove);
+                if (column.Title.Split(":")[0] == HotelName)
+                {
+                    DataChart.Remove(column);
+                }
             }
         }
 
@@ -121,12 +127,17 @@ namespace TravelAgency.View.Owner
             List<Hotel> hotels = hotelService.GetHotelByOwner(LogedUser.Username);
             foreach(Hotel hotel in hotels)
             {
-                DataChart.Add(reservationService.ShowHotelDataInChart(hotel.Name));
+                for (int i = 0; i < 4; i++)
+                {
+                    DataChart.Add(reservationService.ShowHotelReservationInChart(hotel.Name)[i]);
+                }
+                
             }
         }
         private void Detect(object sender, RoutedEventArgs e)
         {
-            List<int> monthValues = reservationService.ShowHotelDataPerMonth(HotelName, YearForStatistic);
+            LiveCharts.ChartValues<int> chartValues = (LiveCharts.ChartValues<int>)reservationService.ShowHotelReservationPerMonth(HotelName, YearForStatistic)[0].Values;
+            List<int> monthValues = chartValues.ToList();
             int i = 0;
             int max = monthValues[i];
             int month = i;
