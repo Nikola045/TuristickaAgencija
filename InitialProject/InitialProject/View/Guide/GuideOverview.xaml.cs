@@ -77,6 +77,12 @@ namespace TravelAgency.View
             GuideReviews createGuideReviewsForm = new GuideReviews(SelectedTour);
             createGuideReviewsForm.Show();
         }
+
+        private void OpenTourRequestsForm(object sender, RoutedEventArgs e)
+        {
+            GuideTourRequests createGuideTourRequestsForm = new GuideTourRequests(LoggedInUser);
+            createGuideTourRequestsForm.Show();
+        }
     }
 }
 

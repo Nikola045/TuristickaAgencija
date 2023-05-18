@@ -31,6 +31,15 @@ namespace TravelAgency.Repository
             _storage.Save(_tourRequests);
             return entity;
         }
+        public TourRequests Update(TourRequests entity)
+        {
+            TourRequests current = _tourRequests.Find(c => c.Id == entity.Id);
+            int index = _tourRequests.IndexOf(current);
+            _tourRequests.Remove(current);
+            _tourRequests.Insert(index, entity);
+            _storage.Save(_tourRequests);
+            return entity;
+        }
 
         public int NextId()
         {

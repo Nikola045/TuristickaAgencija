@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
+using TravelAgency.Repository.HotelRepo;
 
 namespace TravelAgency.Services
 {
@@ -226,6 +228,40 @@ namespace TravelAgency.Services
                 }
             }
             return tour;
+        }
+        public List<TourRequests> FindTourRequest(string dateStart,string dateEnd,string city,string country,string maxNumOfGuest,string language)
+        {
+            List<TourRequests> tourRequests = tourRequestsRepository.GetAll();
+            List<TourRequests> findedRequests = new List<TourRequests>();
+            foreach (TourRequests tour in tourRequests)
+            {
+                bool requirementsMet = true;
+                if ((tour.FirstTime < Convert.ToDateTime(dateStart) || tour.SecondTime > Convert.ToDateTime(dateEnd)) && (!string.IsNullOrEmpty(dateStart) && !string.IsNullOrEmpty(dateEnd)))
+                {
+                    requirementsMet = false;
+                }
+                if (!string.IsNullOrEmpty(city) && tour.City != city)
+                {
+                    requirementsMet = false;
+                }
+                if (!string.IsNullOrEmpty(country) && tour.Country != country)
+                {
+                    requirementsMet = false;
+                }
+                if (!string.IsNullOrEmpty(maxNumOfGuest) && tour.MaxNumberOfGuests < int.Parse(maxNumOfGuest))
+                {
+                    requirementsMet = false;
+                }
+                if (!string.IsNullOrEmpty(language) && tour.Language !=language)
+                {
+                    requirementsMet = false;
+                }
+                if (requirementsMet)
+                {
+                    findedRequests.Add(tour);
+                }
+            }
+            return findedRequests;
         }
 
 
