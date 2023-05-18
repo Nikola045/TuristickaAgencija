@@ -30,7 +30,7 @@ namespace TravelAgency.Services
             { typeof(IStorage < RenovationRequest >), new RenovationRequestFileStorage()},
             { typeof(IStorage < TourRequests >), new TourRequestsFileStorage()},
             { typeof(IStorage < TourReview1 >), new GuideReviewFileStorage()},
-            //{ typeof(IStorage < Recomodation >), new RecomodationFileStorage()}
+            { typeof(IStorage < Recommendation >), new RecommendationFileStorage()}
         };
 
         public static T CreateInstance<T>()

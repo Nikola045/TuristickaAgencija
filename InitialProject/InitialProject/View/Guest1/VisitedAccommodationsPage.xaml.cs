@@ -20,6 +20,7 @@ using User = TravelAgency.Domain.Model.User;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Domain.RepositoryInterfaces;
 using System.Collections.ObjectModel;
+using Microsoft.Graph.Models.Security;
 
 namespace TravelAgency.View.Guest1
 {
@@ -152,7 +153,6 @@ namespace TravelAgency.View.Guest1
               }
           }
       };
-      RemoveLastColumns(ShowVisited, 7);
       ExpandColumns(ShowVisited);*/
             }
         private void ExpandColumns(DataGrid dataGrid)
@@ -170,23 +170,6 @@ namespace TravelAgency.View.Guest1
                 }
             }
         }
-
-        private void RemoveLastColumns(DataGrid dataGrid, int count)
-        {
-            int columnCount = dataGrid.Columns.Count;
-            int startIndex = columnCount - count;
-
-            // Provera da li ima dovoljno kolona za uklanjanje
-            if (startIndex >= 0)
-            {
-                for (int i = columnCount - 1; i >= startIndex; i--)
-                {
-                    dataGrid.Columns.RemoveAt(i);
-                }
-            }
-        }
-
-
 
         private static T FindVisualChild<T>(DependencyObject parent, string childName) where T : DependencyObject
         {
@@ -218,7 +201,8 @@ namespace TravelAgency.View.Guest1
 
             if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
             {
-                GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser);
+                VisitedHotel SelectedItem = SelectedHotel;
+                GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser, SelectedItem);
                 NavigationService.Navigate(gradeOwnerPage);
             }
         }
@@ -226,8 +210,8 @@ namespace TravelAgency.View.Guest1
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             VisitedHotel SelectedItem = SelectedHotel;
-            GradeOwnerForm gradeOwnerForm = new GradeOwnerForm(SelectedItem);
-            NavigationService.Navigate(gradeOwnerForm);
+            GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser, SelectedItem);
+            NavigationService.Navigate(gradeOwnerPage);
         }
     }
 }
