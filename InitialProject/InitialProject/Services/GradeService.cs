@@ -111,12 +111,12 @@ namespace TravelAgency.Services
         public ComboBox FindGuestsForGrade(ComboBox comboBox)
         {
             List<Reservation> reservations = reservationRepository.GetAll();
-            ComboBoxItem item = new ComboBoxItem();
             DateTime dateTimeNow = DateTime.Now;
             foreach(Reservation reservation in reservations)
             {
                 if (reservation.EndDate < dateTimeNow && reservation.EndDate.AddDays(5) > dateTimeNow && reservation.GradeStatus == "NotGraded")
                 {
+                    ComboBoxItem item = new ComboBoxItem();
                     item.Tag = reservation.Id;
                     item.Content = reservation.GuestUserName;
                     comboBox.Items.Add(item);
