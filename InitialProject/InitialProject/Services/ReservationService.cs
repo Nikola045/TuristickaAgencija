@@ -1,5 +1,6 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
+using Microsoft.Graph.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -229,7 +230,8 @@ namespace TravelAgency.Services
             if(renovation != null)
             {
                 DateTime dateTime = DateTime.Now;
-                if (renovation.StartDate.Day - dateTime.Day > 5)
+                
+                if (renovation.StartDate.Subtract(dateTime).TotalDays >= 5)
                 {
                     renovationRequestRepository.Delete(renovation);
                     MessageBox.Show("Sucess");
