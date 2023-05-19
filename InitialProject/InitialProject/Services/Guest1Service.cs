@@ -33,12 +33,14 @@ namespace TravelAgency.Services
             int reservationCount = CountReservationsFromGuest(guestUserName);
             if (reservationCount >= 10)
             {
-                return "Yes";
+                string message = "Yes";
+                return message;
             }
 
             else
             {
-                return "No";
+                string message = "No";
+                return message;
             }
         }
 
