@@ -30,7 +30,7 @@ namespace TravelAgency.Repository.HotelRepo
         public List<Hotel> GetAll()
         {
             return hotels;
-        }
+          }
 
         public int NextId()
         {
@@ -56,10 +56,6 @@ namespace TravelAgency.Repository.HotelRepo
             hotels.Insert(index, entity);
             _storage.Save(hotels);
             return entity;
-        }
-        public Hotel Get(int id)
-        {
-            return hotels.Find(h => h.Id == id);
         }
         public Hotel GetByHotelName(string hotelName)
         {

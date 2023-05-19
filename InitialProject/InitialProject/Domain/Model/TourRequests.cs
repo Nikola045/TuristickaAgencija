@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TravelAgency.Domain.Model
 {
-    internal class TourRequests : TravelAgency.Serializer.ISerializable
+    public class TourRequests : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
         public User Guest2 { get; set; } = new User();
@@ -41,7 +37,6 @@ namespace TravelAgency.Domain.Model
         {
             string CheckPointsList = null;
             int currentIndex = 0;
-            
             string[] csvValues = { Id.ToString(), Guest2.Id.ToString(), City, Country, Description, Language, MaxNumberOfGuests.ToString(), FirstTime.ToString(), SecondTime.ToString(), Status};
             return csvValues;
         }

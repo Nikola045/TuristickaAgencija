@@ -21,6 +21,7 @@ using DevExpress.XtraEditors.Filtering;
 using static TravelAgency.View.Guest1.GradeOwnerForm;
 using System.Collections.ObjectModel;
 using TravelAgency.Domain.RepositoryInterfaces;
+using Microsoft.Kiota.Abstractions;
 
 namespace TravelAgency.View.Guest1
 {
@@ -37,9 +38,10 @@ namespace TravelAgency.View.Guest1
         private readonly ReservationService reservationService;
         private readonly OwnerService ownerService;
         private User LogedUser { get; set; }
-        public ObservableCollection<Accommodation> Accommodations { get; set; }
+        public VisitedHotel SelectedItem{ get; set; }
+        public ObservableCollection<VisitedHotel> Hotels { get; set; }
 
-        public GradeOwnerForm(User user)
+        public GradeOwnerForm(User user, VisitedHotel hotel)
         {
             InitializeComponent();
             Title = "Grade owner";
@@ -52,50 +54,19 @@ namespace TravelAgency.View.Guest1
             reservationService = new ReservationService();
             ownerService = new OwnerService();
             LogedUser = user;
+            SelectedItem = hotel;
+            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());    
         }
 
-        public class Accommodation
+        public List<VisitedHotel> AddHotel()
         {
-            public string Name { get; set; }
-            public string City { get; set; }
-            public string Country { get; set; }
-            public string Type { get; set; }
-            public int NumberOfGuests { get; set; }
-            public int NumberOfDays { get; set; }
-
-            public Accommodation(string name, string city, string country, string type, int numberOfGuests, int numberOfDays)
-            {
-                Name = name;
-                City = city;
-                Country = country;
-                Type = type;
-                NumberOfGuests = numberOfGuests;
-                NumberOfDays = numberOfDays;
-            }
+            List<VisitedHotel> hotels = new List<VisitedHotel>();
+            hotels.Add(SelectedItem);
+            return hotels;  
         }
-
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            Accommodations = new ObservableCollection<Accommodation>();
-            Accommodations.Add(new Accommodation("Alpina", "Beograd", "Serbia", "Apartment", 6, 5));
-
-            DataPanel.ItemsSource = Accommodations;
-            RemoveLastColumns(DataPanel, 6);
-            ExpandColumns(DataPanel);
-        }
-        private void RemoveLastColumns(DataGrid dataGrid, int count)
-        {
-            int columnCount = dataGrid.Columns.Count;
-            int startIndex = columnCount - count;
-
-            // Provera da li ima dovoljno kolona za uklanjanje
-            if (startIndex >= 0)
-            {
-                for (int i = columnCount - 1; i >= startIndex; i--)
-                {
-                    dataGrid.Columns.RemoveAt(i);
-                }
-            }
+            
         }
         private void ExpandColumns(DataGrid dataGrid)
         {
@@ -116,7 +87,6 @@ namespace TravelAgency.View.Guest1
             {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            // Otvaranje dijaloga fajlova
             bool? result = openFileDialog.ShowDialog();
 
             if (result == true && !string.IsNullOrEmpty(openFileDialog.FileName))
@@ -126,7 +96,6 @@ namespace TravelAgency.View.Guest1
                 ListViewImg.Items.Add(image);
             }
         }
-
 
         private void Grade(object sender, RoutedEventArgs e)
         {
@@ -204,14 +173,8 @@ namespace TravelAgency.View.Guest1
             );
             ownerGradeRepository.Save(newGrade);
 
-            
-            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation();
-
-            var selectedHotel = cbHotelName.SelectedItem;
-
-            recommendationForRenovation.HotelChoice(selectedHotel);
-
-            recommendationForRenovation.Show();
+            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation(LogedUser, hotelName, id);
+            NavigationService.Navigate(recommendationForRenovation);
         }
 
         private void LoadHotels(object sender, RoutedEventArgs e)

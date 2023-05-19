@@ -1,40 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.Metrics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
-using static Azure.Core.HttpHeader;
 using Image = TravelAgency.Domain.Model.Image;
 
 namespace TravelAgency.View
 {
-    /// <summary>
-    /// Interaction logic for GuideForm.xaml
-    /// </summary>
     public partial class GuideForm : Window
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly TourRepository tourRepository;
 
+        private readonly CheckPointService checkPointService;
         private readonly CheckPointRepository checkPointRepository;
 
         private readonly ImageRepository tourImageRepository;
@@ -48,9 +32,10 @@ namespace TravelAgency.View
             InitializeComponent();
             Title = "Create new tour";
             DataContext = this;
-            tourRepository = new TourRepository();
-            checkPointRepository = new CheckPointRepository();
+            tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
+            checkPointService = new CheckPointService();
             tourImageRepository = new(InjectorService.CreateInstance<IStorage<Image>>());
+            checkPointRepository = new(InjectorService.CreateInstance<IStorage<CheckPoint>>());
         }
 
         private void SaveTour(object sender, RoutedEventArgs e)
@@ -62,7 +47,7 @@ namespace TravelAgency.View
             {
                 CheckPoint checkPoint = new CheckPoint();
                 checkPoint.Name = item.ToString();
-                checkPoint.Id = checkPointRepository.GetByName(FilePath, checkPoint.Name).Id;
+                checkPoint.Id = checkPointService.GetByName(checkPoint.Name).Id;
                 checkPoint.Status = "Neaktivna";
                 checkPoints.Add(checkPoint);
             }
@@ -111,7 +96,7 @@ namespace TravelAgency.View
         {
             List<CheckPoint> checkPoints = new List<CheckPoint>();
             string FilePath = "../../../Resources/Data/checkPoints.csv";
-            checkPoints = checkPointRepository.ReadFromCheckPointsCsv(FilePath);
+            checkPoints = checkPointRepository.GetAll();
 
             for (int i = 0; i < checkPoints.Count; i++)
             {

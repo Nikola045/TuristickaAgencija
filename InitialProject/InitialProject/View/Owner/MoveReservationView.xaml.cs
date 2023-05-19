@@ -35,6 +35,7 @@ namespace TravelAgency.View.Owner
             {
                 reservationService.MoveReservation(SelectedReservation.Reservation.Id, SelectedReservation.NewStartDate, SelectedReservation.NewEndDate);
                 OnPropertyChanged(nameof(Reservations));
+
             }
         }
 
