@@ -25,7 +25,8 @@ namespace TravelAgency.Services
         {
             int currentYear = DateTime.Now.Year;
             List<Reservation> reservations = reservationRepository.GetAll();
-            return reservations.Count(reservation => reservation.GuestUserName == guestUserName && reservation.StartDate.Year == currentYear);
+            int reservationsCount = reservations.Count(reservation => reservation.GuestUserName == guestUserName && reservation.StartDate.Year == currentYear);
+            return reservationsCount;
         }
 
         public string GetGuestStatus(string guestUserName)
@@ -33,12 +34,14 @@ namespace TravelAgency.Services
             int reservationCount = CountReservationsFromGuest(guestUserName);
             if (reservationCount >= 10)
             {
-                return "Yes";
+                string message = "Yes";
+                return message;
             }
 
             else
             {
-                return "No";
+                string message = "No";
+                return message;
             }
         }
 
@@ -52,7 +55,8 @@ namespace TravelAgency.Services
                 guest1.BonusPoints = 0;
                 userRepository.Update(guest1);
             }
-            return guest1.BonusPoints;
+            int bonusPoints = guest1.BonusPoints;
+            return bonusPoints;
         }
     }
 }

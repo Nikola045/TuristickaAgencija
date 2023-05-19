@@ -30,7 +30,7 @@ namespace TravelAgency.Repository.HotelRepo
         public List<Hotel> GetAll()
         {
             return hotels;
-        }
+          }
 
         public int NextId()
         {
