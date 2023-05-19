@@ -72,8 +72,4 @@
     <Resource Include="View\Owner\profilepic.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\Diagrams\" />
-  </ItemGroup>
-
 </Project>
