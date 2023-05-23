@@ -263,7 +263,65 @@ namespace TravelAgency.Services
             }
             return findedRequests;
         }
+        public int StatisticByLocation(string city, string country)
+        {
+            List<TourRequests> tourRequests = tourRequestsRepository.GetAll();
+            int numOfLocation = 0;
+            foreach (TourRequests tour in tourRequests)
+            {
+                if (tour.City == city && tour.Country == country)
+                {
+                    numOfLocation++;
+                }
+            }
+            return numOfLocation;
+        }
+        public int StatisticByLanguage(string language)
+        {
+            List<TourRequests> tourRequests = tourRequestsRepository.GetAll();
+            int numOfLanguage = 0;
+            foreach (TourRequests tour in tourRequests)
+            {
+                if (tour.Language == language)
+                {
+                    numOfLanguage++;
+                }
+            }
+            return numOfLanguage;
+
+        }
+        public string FindMostWantedLanguage()
+        {
+            DateTime lastYear = DateTime.Now.AddYears(-1);
+            List<TourRequests> tourRequests = tourRequestsRepository.GetAll().Where(t => t.FirstTime >= lastYear).ToList();
+            string bestLanguage = tourRequests.GroupBy(l => l.Language).OrderByDescending(g => g.Count())
+                                  .Select(g => g.Key).FirstOrDefault();
+
+            return bestLanguage;
 
 
+        }
+        public string FindMostWantedCity()
+        {
+            DateTime lastYear = DateTime.Now.AddYears(-1);
+            List<TourRequests> tourRequests = tourRequestsRepository.GetAll().Where(t => t.FirstTime >= lastYear).ToList();
+            string bestCity = tourRequests.GroupBy(l => l.City).OrderByDescending(g => g.Count())
+                                  .Select(g => g.Key).FirstOrDefault();
+
+            return bestCity;
+
+
+        }
+        public string FindMostWantedCountry()
+        {
+            DateTime lastYear = DateTime.Now.AddYears(-1);
+            List<TourRequests> tourRequests = tourRequestsRepository.GetAll().Where(t => t.FirstTime >= lastYear).ToList();
+            string bestCountry = tourRequests.GroupBy(l => l.Country).OrderByDescending(g => g.Count())
+                                  .Select(g => g.Key).FirstOrDefault();
+
+            return bestCountry;
+
+
+        }
     }
 }
