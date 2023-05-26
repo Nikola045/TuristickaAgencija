@@ -18,6 +18,10 @@ using TravelAgency.Services;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.HotelRepo;
 using DevExpress.XtraEditors.Filtering;
+using static TravelAgency.View.Guest1.GradeOwnerForm;
+using System.Collections.ObjectModel;
+using TravelAgency.Domain.RepositoryInterfaces;
+using Microsoft.Kiota.Abstractions;
 
 namespace TravelAgency.View.Guest1
 {
@@ -26,50 +30,70 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class GradeOwnerForm : Page
     {
-        private readonly App app = (App)App.Current;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
         public HotelRepository hotelRepository { get; }
         private readonly GradeService gradeService;
         private readonly HotelService hotelService;
         private readonly ReservationService reservationService;
+        private readonly OwnerService ownerService;
         private User LogedUser { get; set; }
-        public GradeOwnerForm(User user)
+        public VisitedHotel SelectedItem{ get; set; }
+        public ObservableCollection<VisitedHotel> Hotels { get; set; }
+
+        public GradeOwnerForm(User user, VisitedHotel hotel)
         {
             InitializeComponent();
             Title = "Grade owner";
             DataContext = this;
-            ownerGradeRepository = app.OwnerGradeRepository;
-            reservationRepository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
+            ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();
+            ownerService = new OwnerService();
             LogedUser = user;
+            SelectedItem = hotel;
+            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());    
         }
 
-        
-        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        public List<VisitedHotel> AddHotel()
         {
-            OpenFileDialog file = new OpenFileDialog();
-            file.ShowDialog();
-            txtImg.Text = file.FileName;
+            List<VisitedHotel> hotels = new List<VisitedHotel>();
+            hotels.Add(SelectedItem);
+            return hotels;  
         }
-
-        private void btnAddImage_Click(object sender, RoutedEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
-            string imageUrl = txtImg.Text;
+            
+        }
+        private void ExpandColumns(DataGrid dataGrid)
+        {
+            double totalWidth = dataGrid.ActualWidth;
+            int columnCount = dataGrid.Columns.Count;
 
-            if (!string.IsNullOrEmpty(imageUrl))
+            if (columnCount > 0)
             {
-                ListViewItem item = new ListViewItem
+                double columnWidth = totalWidth / columnCount;
+
+                foreach (DataGridColumn column in dataGrid.Columns)
                 {
-                    Content = imageUrl
-                };
+                    column.Width = new DataGridLength(columnWidth);
+                }
+            }
+        }
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+            {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
 
-                ListViewImg.Items.Add(item);
+            bool? result = openFileDialog.ShowDialog();
 
-                txtImg.Text = "";
+            if (result == true && !string.IsNullOrEmpty(openFileDialog.FileName))
+            {
+                BitmapImage image = new BitmapImage(new Uri(openFileDialog.FileName));
+
+                ListViewImg.Items.Add(image);
             }
         }
 
@@ -140,23 +164,17 @@ namespace TravelAgency.View.Guest1
             Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
 
             OwnerGrade newGrade = new OwnerGrade(
-                LogedUser.Username,
-                selectedOwnerUsername.OwnerUsername,
-                id,
+                ownerService.GetOwnerByUsername(LogedUser.Username),
+                ownerService.GetOwnerByUsername(selectedOwnerUsername.OwnerUsername),
+                reservationService.FindReservationByID(id),
                 hotelRating,
                 ownerRating,
                 txtComment.Text
             );
             ownerGradeRepository.Save(newGrade);
 
-            
-            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation();
-
-            var selectedHotel = cbHotelName.SelectedItem;
-
-            recommendationForRenovation.HotelChoice(selectedHotel);
-
-            recommendationForRenovation.Show();
+            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation(LogedUser, hotelName, id);
+            NavigationService.Navigate(recommendationForRenovation);
         }
 
         private void LoadHotels(object sender, RoutedEventArgs e)

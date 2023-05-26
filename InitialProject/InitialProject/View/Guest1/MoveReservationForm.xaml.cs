@@ -16,6 +16,7 @@ using DevExpress.Xpo.Logger;
 using DevExpress.XtraEditors.Filtering;
 using Microsoft.Kiota.Abstractions;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
@@ -27,7 +28,6 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class MoveReservationForm : Window
     {
-        private readonly App app = (App)App.Current;
         ReservationService reservationService;
         MoveReservationRepository moveReservationRepository;
         ReservationRepository reservationRepository;
@@ -37,8 +37,8 @@ namespace TravelAgency.View.Guest1
         {
             InitializeComponent();
             reservationService = new ReservationService();
-            moveReservationRepository = app.MoveReservationRepository;
-            reservationRepository = app.ReservationRepository;
+            moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             hotelService = new HotelService();
             LogedUser = user;
         }
@@ -64,7 +64,7 @@ namespace TravelAgency.View.Guest1
             if (SelectedReservation != null && AllFieldsValid())
             {
                 MoveReservation newRequest = new MoveReservation(
-                    SelectedReservation.Id,
+                    SelectedReservation,
                     SelectedReservation.HotelName,
                     LogedUser.Username,
                     SelectedReservation.StartDate,

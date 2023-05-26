@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Storage.FileStorage;
@@ -14,8 +15,7 @@ using TravelAgency.Storage.FileStorage;
 namespace TravelAgency.Services
 {
     internal class ReservationService
-    {
-        private readonly App app = (App)App.Current;
+    { 
         public HotelRepository hotelRepository;
         private ReservationRepository reservationRepository;
         private MoveReservationRepository moveReservationRepository;
@@ -23,10 +23,10 @@ namespace TravelAgency.Services
         private RenovationRequestRepository renovationRequestRepository;
         public ReservationService() 
         {
-            reservationRepository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
-            moveReservationRepository = app.MoveReservationRepository;
-            renovationRequestRepository = app.RenovationRequestRepository;
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
+            moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
+            renovationRequestRepository = new(InjectorService.CreateInstance<IStorage<RenovationRequest>>());
             hotelService = new HotelService();
         }
 
@@ -146,6 +146,7 @@ namespace TravelAgency.Services
                 {
                     reservation.StartDate = newStartDate;
                     reservation.EndDate = newEndDate;
+                    reservation.NumberOfMuveReservation++;
                     reservationRepository.Update(reservation);
                     moveReservationRepository.Delete(moveReservationRepository.GetById(id));
                     MessageBox.Show("Reservation seccesfuly changed.");
@@ -201,7 +202,11 @@ namespace TravelAgency.Services
             {
                 if (IsAvailable(reservations, comboBoxItem.Content.ToString(), startDate, endDate))
                 {
-                    RenovationRequest renovationRequest = new RenovationRequest(Convert.ToInt32(comboBoxItem.Tag), comboBoxItem.Content.ToString(), startDate, endDate);
+                    RenovationRequest renovationRequest = new RenovationRequest(
+                        renovationRequestRepository.NextId(),
+                        hotelService.GetHotelById(Convert.ToInt32(comboBoxItem.Tag.ToString())),
+                        startDate, 
+                        endDate);
                     renovationRequestRepository.Save(renovationRequest);
                     MessageBox.Show("Success");
                 }
@@ -212,6 +217,10 @@ namespace TravelAgency.Services
         public List<RenovationRequest> ShowAllRenovationForOwnerHotels()
         {
             List<RenovationRequest> renovations = renovationRequestRepository.GetAll();
+            foreach (RenovationRequest renovation in renovations)
+            {
+                renovation.Hotel.Name = hotelService.GetHotelById(renovation.Hotel.Id).Name;
+            }
             return renovations;
         }
 
@@ -223,6 +232,11 @@ namespace TravelAgency.Services
                 if (renovation.StartDate.Day - dateTime.Day > 5)
                 {
                     renovationRequestRepository.Delete(renovation);
+                    MessageBox.Show("Sucess");
+                }
+                else
+                {
+                    MessageBox.Show("You can't cancel renovation.");
                 }
             }
         }
@@ -233,13 +247,11 @@ namespace TravelAgency.Services
             List<Hotel> hotels = hotelRepository.GetAll();
             List<Hotel> changedHotels = new List<Hotel>();
             List<RenovationRequest> renovations = renovationRequestRepository.GetAll(); 
-            if(renovations.Count != 0 && hotels.Count != 0)
-            {
-                foreach (Hotel hotel in hotels)
+            foreach (Hotel hotel in hotels)
                 {
                     foreach (RenovationRequest renovation in renovations)
                     {
-                        if (hotel.Id == renovation.Id)
+                        if (hotel.Id == renovation.Hotel.Id)
                         {
                             if (renovation.StartDate <= dateTime && dateTime <= renovation.EndDate)
                             {
@@ -251,16 +263,21 @@ namespace TravelAgency.Services
                                 hotel.RenovationStatus = "Renovated";
                                 changedHotels.Add(hotel);
                             }
+                            else if(dateTime < renovation.EndDate && dateTime.Year - renovation.EndDate.Year == 0)
+                            {
+                                hotel.RenovationStatus = "Not Renovated";
+                                changedHotels.Add(hotel);
+                            }
                             else
                             {
                                 hotel.RenovationStatus = "Not Renovated";
                                 changedHotels.Add(hotel);
                                 renovationRequestRepository.Delete(renovation);
-                            }
+                        }
+
                         }
                         if (renovations.Count == 0) break;
                     }
-                }
             }
             return changedHotels;
         }
@@ -273,47 +290,107 @@ namespace TravelAgency.Services
             }
         }
 
-        public ColumnSeries ShowHotelDataInChart(string hotelName)
+        public List<ColumnSeries> ShowHotelReservationInChart(string hotelName)
         {
             DateTime dateTime = DateTime.Now;
-            List<int> yValues = new List<int>();
+            List<int> yValuesReservation = new List<int>();
+            List<int> yValuesMoveReservation = new List<int>();
+            List<int> yValuesRenovation = new List<int>();
+            List<int> yValuesCanceledReservation = new List<int>();
             List<Reservation> reservations = reservationRepository.GetAll();
             for (int i = 0; i < 5; i++)
             {
                 int tempCount = 0;
+                int tempM = 0;
+                int tempIs = 0;
+                int tempR = 0;
                 foreach (Reservation reservation in reservations)
                 {
                     if (reservation.HotelName == hotelName && reservation.StartDate.Year == dateTime.Year - 4 + i)
                     {
-                        tempCount++;
+                        
+                        if(reservation.GradeStatus == "Canceled")
+                            tempIs++;
+                        else tempCount++;
+                        tempM += reservation.NumberOfMuveReservation;
+                        tempR += reservation.NumberOfRenovationRequest;
                     } 
                 }
-                yValues.Add(tempCount);
+                yValuesReservation.Add(tempCount);
+                yValuesCanceledReservation.Add(tempIs);
+                yValuesMoveReservation.Add(tempM);
+                yValuesRenovation.Add(tempR);
             }
-            ColumnSeries columnSeries = new ColumnSeries();
-            columnSeries.Title = hotelName;
-            columnSeries.Values = new ChartValues<int>(yValues);
+            ColumnSeries columnSeries1 = new ColumnSeries();
+            columnSeries1.Title = hotelName + ": reservations";
+            columnSeries1.Values = new ChartValues<int>(yValuesReservation);
+            ColumnSeries columnSeries2 = new ColumnSeries();
+            columnSeries2.Title = hotelName + ": canceled reservations";
+            columnSeries2.Values = new ChartValues<int>(yValuesCanceledReservation);
+            ColumnSeries columnSeries3 = new ColumnSeries();
+            columnSeries3.Title = hotelName + ": move reservations";
+            columnSeries3.Values = new ChartValues<int>(yValuesMoveReservation);
+            ColumnSeries columnSeries4 = new ColumnSeries();
+            columnSeries4.Title = hotelName + ": renovation request";
+            columnSeries4.Values = new ChartValues<int>(yValuesRenovation);
 
-            return columnSeries;
+            List<ColumnSeries> columns = new List<ColumnSeries>();
+            columns.Add(columnSeries1);
+            columns.Add(columnSeries2);
+            columns.Add(columnSeries3);
+            columns.Add(columnSeries4);
+            return columns;
         }
 
-        public List<int> ShowHotelDataPerMonth(string hotelName, int year)
+        public List<ColumnSeries> ShowHotelReservationPerMonth(string hotelName, int year)
         {
-            List<int> yValues = new List<int>();
+            List<int> yValuesReservation = new List<int>();
+            List<int> yValuesMoveReservation = new List<int>();
+            List<int> yValuesRenovation = new List<int>();
+            List<int> yValuesCanceledReservation = new List<int>();
             List<Reservation> reservations = reservationRepository.GetAll();
             for (int i = 1; i <= 12; i++)
             {
                 int tempCount = 0;
+                int tempM = 0;
+                int tempIs = 0;
+                int tempR = 0;
                 foreach (Reservation reservation in reservations)
                 {
                     if (reservation.HotelName == hotelName && reservation.StartDate.Month == i && year == reservation.StartDate.Year)
                     {
-                        tempCount++;
+                        if (reservation.GradeStatus == "Canceled")
+                            tempIs++;
+                        else tempCount++;
+                        tempM += reservation.NumberOfMuveReservation;
+                        tempR += reservation.NumberOfRenovationRequest;
                     }
                 }
-                yValues.Add(tempCount);
+                yValuesReservation.Add(tempCount);
+                yValuesCanceledReservation.Add(tempIs);
+                yValuesMoveReservation.Add(tempM);
+                yValuesRenovation.Add(tempR);
             }
-            return yValues;
+
+            ColumnSeries columnSeries1 = new ColumnSeries();
+            columnSeries1.Title = hotelName + ": reservations " + year.ToString();
+            columnSeries1.Values = new ChartValues<int>(yValuesReservation);
+            ColumnSeries columnSeries2 = new ColumnSeries();
+            columnSeries2.Title = hotelName + ": canceled reservations " + year.ToString();
+            columnSeries2.Values = new ChartValues<int>(yValuesCanceledReservation);
+            ColumnSeries columnSeries3 = new ColumnSeries();
+            columnSeries3.Title = hotelName + ": move reservations " + year.ToString();
+            columnSeries3.Values = new ChartValues<int>(yValuesMoveReservation);
+            ColumnSeries columnSeries4 = new ColumnSeries();
+            columnSeries4.Title = hotelName + ": renovation request " + year.ToString();
+            columnSeries4.Values = new ChartValues<int>(yValuesRenovation);
+
+            List<ColumnSeries> columns = new List<ColumnSeries>();
+            columns.Add(columnSeries1);
+            columns.Add(columnSeries2);
+            columns.Add(columnSeries3);
+            columns.Add(columnSeries4);
+            return columns;
         }
     }
 }

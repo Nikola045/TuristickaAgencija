@@ -25,6 +25,7 @@
     <None Remove="Resources\Images\halfstar.png" />
     <None Remove="Resources\Images\hotel.jpg" />
     <None Remove="Resources\Images\hut.jpg" />
+    <None Remove="Resources\Images\language.png" />
     <None Remove="Resources\Images\logo-instagram-png-2430.png" />
     <None Remove="Resources\Images\logo-twitter-png-5859.png" />
     <None Remove="Resources\Images\profilepic.jpg" />
@@ -36,9 +37,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.PDF" Version="23.4.0" />
     <PackageReference Include="Cake.Core" Version="3.0.0" />
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="DevExpress.Data" Version="22.2.5" />
+    <PackageReference Include="itext7" Version="8.0.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="LiveCharts" Version="0.9.7" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Microsoft.Graph" Version="5.1.0" />
@@ -57,6 +61,7 @@
     <Resource Include="Resources\Images\halfstar.png" />
     <Resource Include="Resources\Images\hotel.jpg" />
     <Resource Include="Resources\Images\hut.jpg" />
+    <Resource Include="Resources\Images\language.png" />
     <Resource Include="Resources\Images\logo-instagram-png-2430.png" />
     <Resource Include="Resources\Images\logo-twitter-png-5859.png" />
     <Resource Include="Resources\Images\profilepic.jpg" />

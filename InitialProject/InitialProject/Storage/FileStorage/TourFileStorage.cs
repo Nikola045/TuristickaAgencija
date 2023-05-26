@@ -9,7 +9,7 @@ using TravelAgency.Serializer;
 
 namespace TravelAgency.Storage.FileStorage
 {
-    internal class TourFileStorage : IStorage<Tour>
+    public class TourFileStorage : IStorage<Tour>
     {
         private Serializer<Tour> _serializer;
         private readonly string _file = "../../../Resources/Data/tours.csv";

@@ -31,7 +31,7 @@ namespace TravelAgency.Repository
         {
             foreach(MoveReservation reservation in reservations)
             {
-                if (reservation.ReservationId == id)
+                if (reservation.Reservation.Id == id)
                     return reservation;
             }
             return null;
@@ -39,7 +39,7 @@ namespace TravelAgency.Repository
 
         public void Delete(MoveReservation reservation)
         {
-            MoveReservation founded = reservations.Find(c => c.ReservationId == reservation.ReservationId);
+            MoveReservation founded = reservations.Find(c => c.Reservation.Id == reservation.Reservation.Id);
             reservations.Remove(founded);
             _storage.Save(reservations);
         }

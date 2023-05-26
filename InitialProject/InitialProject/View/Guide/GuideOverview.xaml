@@ -5,44 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View"
         mc:Ignorable="d"
-        Title="GuideOverview" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="760"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="89*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="15"/>
-        </Grid.RowDefinitions>
-
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-            <Button Click="OpenGuideForm">
-                <StackPanel Orientation="Horizontal" Width="71">
-                    <Image Source="../Resources/Images/add.png" Width="20" Height="25" RenderTransformOrigin="0.5,0.6"/>
-                    <TextBlock Text="Create" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
-                </StackPanel>
-            </Button>
-            <Separator/>
-            <Button Click="OpenLiveTourForm">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="../Resources/Images/add.png" Width="20" Height="25"/>
-                    <TextBlock Text="LiveTour" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="46" />
-                </StackPanel>
-            </Button>
-            <Separator/>
-            <Button Click="OpenTourStatisticForm">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="../Resources/Images/add.png" Width="20" Height="25"/>
-                    <TextBlock Text="Tour Statistic" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="46" />
-                </StackPanel>
-            </Button>
-            <Separator/>
-        </ToolBar>
-
+        Title="GuideOverview" Height="1080" Width="1920" WindowStartupLocation="CenterScreen">
+        <Window.InputBindings>
+        <KeyBinding Command="{Binding OpenGuideForm}" Key="O" Modifiers="Ctrl"/>
+        <KeyBinding Command="Save" Key="S" Modifiers="Control"/>
+        </Window.InputBindings>
+    <Grid Loaded="OnLoad">
+    <Menu Margin="0,0,0,996">
+        <MenuItem Header="Home" FontSize="24"></MenuItem>
+        <Separator></Separator>
+        <MenuItem Header="Tours" FontSize="24">
+            <MenuItem Header="Create Tour" Click="OpenGuideForm"></MenuItem>
+        </MenuItem>
+        <MenuItem Header="LiveTour" Click="OpenLiveTourForm" FontSize="24"></MenuItem>
+            <MenuItem Header="Statistics" FontSize="24" Click="OpenTourStatisticForm"></MenuItem>
+            <MenuItem Header="Tour Requests" FontSize="24" Click="OpenTourRequestsForm"></MenuItem>
+            <MenuItem Header="Statistics on Tour Requests" FontSize="24" Click="OpenTourRequestsStatisticsForm"></MenuItem>
+        </Menu>
+        <DataGrid x:Name="DataPanel" Margin="116,279,116,216"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="894,170,0,0" VerticalAlignment="Top"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="249,962,0,0" VerticalAlignment="Top" Click="OpenLiveTourForm"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="555,947,0,0" VerticalAlignment="Top" Click="GetFired"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="474,947,0,0" VerticalAlignment="Top" Click="DeleteTour"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="999,957,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Reviews" HorizontalAlignment="Left" Margin="777,947,0,0" VerticalAlignment="Top" Height="70" Width="183" Click="OpenReviews"/>
     </Grid>
 </Window>

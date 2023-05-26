@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using TravelAgency.Domain.Model;
 using TravelAgency.Services;
+using PieSeries = LiveCharts.Wpf.PieSeries;
 
 namespace TravelAgency.View.Owner
 {
@@ -25,17 +26,18 @@ namespace TravelAgency.View.Owner
         private SeriesCollection _data;
         private string _hotelName;
         private int _year;
+        private Frame ShowSmallFrame;
         public event PropertyChangedEventHandler? PropertyChanged;
         private User LogedUser { get; }
-        public StatisticPage(User user)
+        public StatisticPage(User user, Frame frame)
         {
-            
             InitializeComponent();
             DataContext = this;
             reservationService = new ReservationService();
             hotelService = new HotelService();
             LogedUser = user;
             DataChart = new SeriesCollection();
+            ShowSmallFrame = frame;
         }
 
         private void YearStatistic(object sender, RoutedEventArgs e)
@@ -69,6 +71,7 @@ namespace TravelAgency.View.Owner
             Label1.Visibility = Visibility.Visible;
             Label2.Visibility = Visibility.Visible;
             YearCB.Visibility = Visibility.Visible;
+            PdfButton.IsEnabled = true;
             XTitle = "Months";
             XLabels = months;
         }
@@ -91,14 +94,18 @@ namespace TravelAgency.View.Owner
         {
             if(XTitle == "Years")
             {
-                DataChart.Add(reservationService.ShowHotelDataInChart(HotelName));
+                for(int i = 0; i<4; i++)
+                {
+                    DataChart.Add(reservationService.ShowHotelReservationInChart(HotelName)[i]);
+                }
+                
             }
             else if(XTitle == "Months")
             {
-                ColumnSeries columnSeries = new ColumnSeries();
-                columnSeries.Title = HotelName + YearForStatistic.ToString();
-                columnSeries.Values = new ChartValues<int>(reservationService.ShowHotelDataPerMonth(HotelName, YearForStatistic));
-                DataChart.Add(columnSeries);
+                for (int i = 0; i < 4; i++)
+                {
+                    DataChart.Add(reservationService.ShowHotelReservationPerMonth(HotelName, YearForStatistic)[i]);
+                }
             }
             else { }
             
@@ -106,10 +113,12 @@ namespace TravelAgency.View.Owner
 
         private void HideStatisticForHotel(object sender, RoutedEventArgs e)
         {
-            var seriesToRemove = DataChart.FirstOrDefault(s => s.Title == HotelName);
-            if (seriesToRemove != null)
+            foreach(ColumnSeries column in DataChart)
             {
-                DataChart.Remove(seriesToRemove);
+                if (column.Title.Split(":")[0] == HotelName)
+                {
+                    DataChart.Remove(column);
+                }
             }
         }
 
@@ -118,12 +127,17 @@ namespace TravelAgency.View.Owner
             List<Hotel> hotels = hotelService.GetHotelByOwner(LogedUser.Username);
             foreach(Hotel hotel in hotels)
             {
-                DataChart.Add(reservationService.ShowHotelDataInChart(hotel.Name));
+                for (int i = 0; i < 4; i++)
+                {
+                    DataChart.Add(reservationService.ShowHotelReservationInChart(hotel.Name)[i]);
+                }
+                
             }
         }
         private void Detect(object sender, RoutedEventArgs e)
         {
-            List<int> monthValues = reservationService.ShowHotelDataPerMonth(HotelName, YearForStatistic);
+            LiveCharts.ChartValues<int> chartValues = (LiveCharts.ChartValues<int>)reservationService.ShowHotelReservationPerMonth(HotelName, YearForStatistic)[0].Values;
+            List<int> monthValues = chartValues.ToList();
             int i = 0;
             int max = monthValues[i];
             int month = i;
@@ -136,6 +150,13 @@ namespace TravelAgency.View.Owner
                 }
             }
             MessageBox.Show(HotelName + " was the busiest in year: " + YearForStatistic.ToString() + " month: " + ConvertIntToMonth(month) + " with number of reservations: " + max.ToString());
+        }
+
+        private void PdfButton_Click(object sender, RoutedEventArgs e)
+        {
+            StatisticPdf statisticPdfPage = new StatisticPdf();
+            ShowSmallFrame.Content = statisticPdfPage;
+            OwnerHome.pages.Push(statisticPdfPage);
         }
 
         public string ConvertIntToMonth(int i)

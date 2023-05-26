@@ -1,6 +1,7 @@
 ﻿<Window x:Class="TravelAgency.View.Guide.TourStatistic"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guide"
@@ -22,6 +23,7 @@
         <Label Content="18-50" HorizontalAlignment="Left" Margin="23,339,0,0" VerticalAlignment="Top"/>
         <Label Content="50+" HorizontalAlignment="Left" Margin="23,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.127,0.167"/>
         <Label Content="People with vouchers" HorizontalAlignment="Left" Margin="465,335,0,0" VerticalAlignment="Top"/>
-
+        <lvc:PieChart   Name="pieChart" RenderTransformOrigin="0.506,0.512" Margin="249,299,425,38"/>
+        <lvc:PieChart RenderTransformOrigin="0.506,0.512" Margin="594,224,88,112"/>
     </Grid>
 </Window>

@@ -5,6 +5,8 @@ using TravelAgency.Domain.Model;
 using System.IO;
 using System;
 using TravelAgency.Domain.RepositoryInterfaces;
+using Cake.Core.IO;
+using System.Xml.Linq;
 
 namespace TravelAgency.Repository.UserRepo
 {
@@ -37,6 +39,13 @@ namespace TravelAgency.Repository.UserRepo
             users.Insert(index, entity);
             _storage.Save(users);
             return entity;
+        }
+        public void Delete(User user)
+        {
+            users = _storage.Load();
+            User founded = users.Find(c => c.Id == user.Id);
+            users.Remove(founded);
+            _storage.Save(users);
         }
     }
 }

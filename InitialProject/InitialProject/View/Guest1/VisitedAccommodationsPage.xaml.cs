@@ -18,6 +18,9 @@ using TravelAgency.Repository;
 using TravelAgency.Services;
 using User = TravelAgency.Domain.Model.User;
 using TravelAgency.Repository.HotelRepo;
+using TravelAgency.Domain.RepositoryInterfaces;
+using System.Collections.ObjectModel;
+using Microsoft.Graph.Models.Security;
 
 namespace TravelAgency.View.Guest1
 {
@@ -26,56 +29,29 @@ namespace TravelAgency.View.Guest1
     /// </summary>
     public partial class VisitedAccommodationsPage : Page
     {
-        private readonly App app = (App)App.Current;
         private GradeGuest1Repository gradeGuest1Repository;
         private ReservationRepository reservationRepository;
         private HotelRepository hotelRepository;
         private readonly GradeService gradeService;
+        public ObservableCollection<VisitedHotel> VisitedHotels { get; set; }
         private User LoggedInUser { get; set; }
+        public VisitedHotel SelectedHotel { get; set; }
         public VisitedAccommodationsPage(User user)
         {
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            gradeGuest1Repository = app.GradeGuest1Repository;
-            reservationRepository = app.ReservationRepository;
-            hotelRepository = app.HotelRepository;
+            gradeGuest1Repository = new(InjectorService.CreateInstance<IStorage<GuestGrade>>());
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
+            hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             gradeService = new GradeService();
+            VisitedHotels = new ObservableCollection<VisitedHotel>(GetAll());
         }
 
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {
-            List<GuestGrade> guestGrades = gradeGuest1Repository.GetAll();
-            List<object> filteredGrades = new List<object>();
-
-            foreach (GuestGrade grade in guestGrades)
-            {
-                Reservation reservation = reservationRepository.Get(grade.ReservationId);
-
-                if (reservation != null && gradeService.IsOwnerGradeExists(reservation.Id))
-                {
-                    var obj = new
-                    {
-                        OwnerOf = reservation.HotelName,
-                        Cleanliness = grade.Cleanliness,
-                        Politeness = grade.Respecting,
-                        Comment = grade.CommentText,
-                        ReservationId = grade.ReservationId
-                    };
-                    filteredGrades.Add(obj);
-                }
-            }
-
-            DataPanel.ItemsSource = filteredGrades;
-            ExpandColumns(DataPanel);
-        }
-
-        private bool isVisitedLoaded = false;
-
-        private void LoadVisited(object sender, RoutedEventArgs e)
+        public List<VisitedHotel> GetAll()
         {
             List<Reservation> reservations = reservationRepository.GetAll();
-            List<object> filteredGrades = new List<object>();
+            List<VisitedHotel> filteredGrades = new List<VisitedHotel>();
 
             foreach (Reservation reservation in reservations)
             {
@@ -83,46 +59,102 @@ namespace TravelAgency.View.Guest1
 
                 if (hotel != null)
                 {
-                    var obj = new
-                    {
-                        HotelName = hotel.Name,
-                        City = hotel.City,
-                        Country = hotel.Country,
-                        Type = hotel.TypeOfHotel,
-                        NumberOfGuests = reservation.NumberOfGuests,
-                        NumberOfDays = reservation.NumberOfDays,
-                        IsRated = reservation.GradeStatus,
-                    };
-                    filteredGrades.Add(obj);
+                    VisitedHotel obj = new VisitedHotel
+                    (
+                        hotel.Name,
+                        hotel.City,
+                        hotel.Country,
+                        hotel.TypeOfHotel,
+                        reservation.NumberOfGuests,
+                        reservation.NumberOfDays,
+                        reservation.GradeStatus
+                    );
+                filteredGrades.Add(obj);
                 }
             }
 
-            ShowVisited.ItemsSource = filteredGrades;
 
-            
-            ShowVisited.Loaded += (s, args) =>
-            {
-                foreach (var item in ShowVisited.Items)
-                {
-                    var container = ShowVisited.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
-                    var isRatedTextBlock = FindVisualChild<TextBlock>(container, "IsRatedTextBlock");
-
-                    if (isRatedTextBlock != null)
-                    {
-                        var propertyInfo = item.GetType().GetProperty("IsRated");
-                        var isRatedValue = propertyInfo?.GetValue(item);
-
-                        if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
-                        {
-                            isRatedTextBlock.Foreground = Brushes.Blue;
-                            isRatedTextBlock.TextDecorations = TextDecorations.Underline;
-                        }
-                    }
-                }
-            };
-            RemoveLastColumns(ShowVisited, 7);
-            ExpandColumns(ShowVisited);
+            return filteredGrades;
         }
+
+    private void OnLoad(object sender, RoutedEventArgs e)
+    {
+      List<GuestGrade> guestGrades = gradeGuest1Repository.GetAll();
+      List<object> filteredGrades = new List<object>();
+
+      foreach (GuestGrade grade in guestGrades)
+      {
+          Reservation reservation = reservationRepository.Get(grade.Reservation.Id);
+
+          if (reservation != null && gradeService.IsOwnerGradeExists(reservation.Id))
+          {
+              var obj = new
+              {
+                  OwnerOf = reservation.HotelName,
+                  Cleanliness = grade.Cleanliness,
+                  Politeness = grade.Respecting,
+                  Comment = grade.CommentText
+              };
+              filteredGrades.Add(obj);
+          }
+      }
+
+      DataPanel.ItemsSource = filteredGrades;
+      ExpandColumns(DataPanel);
+    }
+
+    private bool isVisitedLoaded = false;
+
+    private void LoadVisited(object sender, RoutedEventArgs e)
+    {
+    /*  List<Reservation> reservations = reservationRepository.GetAll();
+      List<object> filteredGrades = new List<object>();
+
+      foreach (Reservation reservation in reservations)
+      {
+          Hotel hotel = hotelRepository.GetByHotelName(reservation.HotelName);
+
+          if (hotel != null)
+          {
+              VisitedHotel obj = new VisitedHotel
+              (
+                  hotel.Name,
+                  hotel.City,
+                  hotel.Country,
+                  hotel.TypeOfHotel,
+                  reservation.NumberOfGuests,
+                  reservation.NumberOfDays,
+                  reservation.GradeStatus
+              );
+              filteredGrades.Add(obj);
+          }
+      }
+
+      ShowVisited.ItemsSource = filteredGrades;
+
+
+      ShowVisited.Loaded += (s, args) =>
+      {
+          foreach (var item in ShowVisited.Items)
+          {
+              var container = ShowVisited.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
+              var isRatedTextBlock = FindVisualChild<TextBlock>(container, "IsRatedTextBlock");
+
+              if (isRatedTextBlock != null)
+              {
+                  var propertyInfo = item.GetType().GetProperty("IsRated");
+                  var isRatedValue = propertyInfo?.GetValue(item);
+
+                  if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
+                  {
+                      isRatedTextBlock.Foreground = Brushes.Blue;
+                      isRatedTextBlock.TextDecorations = TextDecorations.Underline;
+                  }
+              }
+          }
+      };
+      ExpandColumns(ShowVisited);*/
+            }
         private void ExpandColumns(DataGrid dataGrid)
         {
             double totalWidth = dataGrid.ActualWidth;
@@ -138,23 +170,6 @@ namespace TravelAgency.View.Guest1
                 }
             }
         }
-
-        private void RemoveLastColumns(DataGrid dataGrid, int count)
-        {
-            int columnCount = dataGrid.Columns.Count;
-            int startIndex = columnCount - count;
-
-            // Provera da li ima dovoljno kolona za uklanjanje
-            if (startIndex >= 0)
-            {
-                for (int i = columnCount - 1; i >= startIndex; i--)
-                {
-                    dataGrid.Columns.RemoveAt(i);
-                }
-            }
-        }
-
-
 
         private static T FindVisualChild<T>(DependencyObject parent, string childName) where T : DependencyObject
         {
@@ -186,26 +201,17 @@ namespace TravelAgency.View.Guest1
 
             if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
             {
-                GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser);
+                VisitedHotel SelectedItem = SelectedHotel;
+                GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser, SelectedItem);
                 NavigationService.Navigate(gradeOwnerPage);
             }
         }
 
-
-        private void IsRated_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var textBlock = sender as TextBlock;
-            var item = textBlock.DataContext;
-
-            var propertyInfo = item.GetType().GetProperty("IsRated");
-            var isRatedValue = propertyInfo?.GetValue(item);
-
-            if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
-            {
-                GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser);
-                NavigationService.Navigate(gradeOwnerPage);
-            }
+            VisitedHotel SelectedItem = SelectedHotel;
+            GradeOwnerForm gradeOwnerPage = new GradeOwnerForm(LoggedInUser, SelectedItem);
+            NavigationService.Navigate(gradeOwnerPage);
         }
-
     }
 }

@@ -9,36 +9,36 @@ namespace TravelAgency.Domain.Model
 {
     public class GuestGrade : Serializer.ISerializable
     {
-        public string GuestUserName { get; set; }
+        public User Guest1 { get; set; } = new User();
         public int Cleanliness { get; set; }
         public int Respecting { get; set; }
         public string CommentText { get; set; }
-        public int ReservationId { get; set; }
+        public Reservation Reservation = new Reservation();
 
         public GuestGrade() { }
 
-        public GuestGrade(string guestUserName, int cleanilness, int respecting, string commentText, int reservationId)
+        public GuestGrade(User guest1, int cleanilness, int respecting, string commentText, Reservation reservation)
         {
-            GuestUserName = guestUserName;
+            Guest1 = guest1;
             Cleanliness = cleanilness;
             Respecting = respecting;
             CommentText = commentText;
-            ReservationId = reservationId;
+            Reservation = reservation;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { GuestUserName, Cleanliness.ToString(), Respecting.ToString(), CommentText, ReservationId.ToString() };
+            string[] csvValues = { Guest1.Username, Cleanliness.ToString(), Respecting.ToString(), CommentText, Reservation.Id.ToString() };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            GuestUserName = values[0];
+            Guest1.Username = values[0];
             Cleanliness = Convert.ToInt32(values[1]);
             Respecting = Convert.ToInt32(values[2]);
             CommentText = values[3];
-            ReservationId = Convert.ToInt32(values[4]);
+            Reservation.Id = Convert.ToInt32(values[4]);
         }
     }
 }

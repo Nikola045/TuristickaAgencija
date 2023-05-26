@@ -10,7 +10,7 @@ namespace TravelAgency.Domain.Model
 {
     public class MoveReservation : ISerializable
     {
-        public int ReservationId { get; set; }
+        public Reservation Reservation { get; set; } = new Reservation();
         public string HotelName { get; set; }
         public string GuestUsername { get; set; }
         public DateTime OldStartDate { get; set; }
@@ -19,9 +19,9 @@ namespace TravelAgency.Domain.Model
         public DateTime NewEndDate { get; set; }
 
         public MoveReservation() { }
-        public MoveReservation(int reservationId, string hotelName, string guestUsername, DateTime oldStartDate, DateTime odlEndDate, DateTime newStartDate, DateTime newEndDate)
+        public MoveReservation(Reservation reservation, string hotelName, string guestUsername, DateTime oldStartDate, DateTime odlEndDate, DateTime newStartDate, DateTime newEndDate)
         {
-            ReservationId = reservationId;
+            Reservation = reservation;
             HotelName = hotelName;
             GuestUsername = guestUsername;
             OldStartDate = oldStartDate;
@@ -32,13 +32,13 @@ namespace TravelAgency.Domain.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = {ReservationId.ToString(), HotelName, GuestUsername, OldStartDate.ToString(), OldEndDate.ToString(), NewStartDate.ToString(), NewEndDate.ToString()};
+            string[] csvValues = {Reservation.Id.ToString(), HotelName, GuestUsername, OldStartDate.ToString(), OldEndDate.ToString(), NewStartDate.ToString(), NewEndDate.ToString()};
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            ReservationId = Convert.ToInt32(values[0]);
+            Reservation.Id = Convert.ToInt32(values[0]);
             HotelName = values[1];
             GuestUsername = values[2];
             OldStartDate = Convert.ToDateTime(values[3]);
