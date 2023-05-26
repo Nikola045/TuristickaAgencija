@@ -21,7 +21,7 @@
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="4" Margin="4,0,-4,0">
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="4">
             <Button Click="OpenGuest2Form">
                 <StackPanel Orientation="Horizontal" Width="53">
 
@@ -64,15 +64,19 @@
                     <TextBlock Text="Statistic" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
                 </StackPanel>
             </Button>
-
             <Separator/>
-            <Separator/>
-
-
             <Button Click="OpenAllTourRequests" Width="80">
                 <StackPanel Orientation="Horizontal" Width="67">
 
                     <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+            <Button Click="OpenNotifications" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Notifications" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
                 </StackPanel>
             </Button>
         </ToolBar>
