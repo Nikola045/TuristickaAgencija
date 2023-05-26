@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="PastTours" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="DataPanel" HorizontalAlignment="Left" Height="130" Margin="118,69,0,0" VerticalAlignment="Top" Width="582" Loaded="LoadData"/>
+        <DataGrid x:Name="DataPanel" HorizontalAlignment="Left" Height="190" Margin="118,69,0,0" VerticalAlignment="Top" Width="582" Loaded="LoadData"/>
         <Button Content="Exit" HorizontalAlignment="Left" Margin="727,360,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
-        <Button Content="Review" HorizontalAlignment="Left" Height="40" Margin="356,239,0,0" VerticalAlignment="Top" Click="MakeReview" Width="106"/>
+        <Button Content="Review" HorizontalAlignment="Left" Height="19" Margin="356,311,0,0" VerticalAlignment="Top" Click="MakeReview" Width="79"/>
+        <Label Content="Would you like to rate selected tour?" HorizontalAlignment="Left" Margin="307,280,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

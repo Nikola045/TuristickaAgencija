@@ -5,22 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
-        Title="Guest2Form" Height="450" Width="1190">
-    <Grid Margin="0,0,36,0">
-        <DataGrid x:Name="DataPanel" Margin="315,93,24,123" Loaded="LoadData" >
+        Title="Guest2Form" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="DataPanel" Margin="350,139,24,123" Loaded="LoadData" >
 
         </DataGrid>
 
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="152,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="152,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Margin="152,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtLeng" HorizontalAlignment="Left" Margin="152,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtNum" HorizontalAlignment="Left" Margin="152,207,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="78,261,0,0" VerticalAlignment="Top" Click="Search" Width="61"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="182,261,0,0" VerticalAlignment="Top" Click="Cancel" Width="60"/>
-        <Label Content="City" HorizontalAlignment="Left" Margin="108,112,0,0" VerticalAlignment="Top"/>
-        <Label Content="Duration" HorizontalAlignment="Left" Margin="85,181,0,0" VerticalAlignment="Top"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="87,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="167,152,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="167,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Margin="167,220,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtLeng" HorizontalAlignment="Left" Margin="167,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtNum" HorizontalAlignment="Left" Margin="167,243,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="93,297,0,0" VerticalAlignment="Top" Click="Search" Width="61"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="197,297,0,0" VerticalAlignment="Top" Click="Cancel" Width="60"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="123,148,0,0" VerticalAlignment="Top"/>
+        <Label Content="Duration" HorizontalAlignment="Left" Margin="100,217,0,0" VerticalAlignment="Top"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="102,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -30,11 +30,11 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label Content="Lenguage" HorizontalAlignment="Left" Margin="80,158,0,0" VerticalAlignment="Top"/>
-        <Label Content="Free number of places" HorizontalAlignment="Left" Margin="14,203,0,0" VerticalAlignment="Top"/>
-        <Label Content="Search all off our tours." HorizontalAlignment="Left" Margin="54,79,0,0" VerticalAlignment="Top" Width="196" Height="28"/>
-        <Button Content="Show selected tour" HorizontalAlignment="Left" Margin="580,345,0,0" VerticalAlignment="Top" Click="ShowSelectedTour" Width="142" Height="27"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="1083,371,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
-
+        <Label Content="Lenguage" HorizontalAlignment="Left" Margin="95,194,0,0" VerticalAlignment="Top"/>
+        <Label Content="Free number of places" HorizontalAlignment="Left" Margin="29,239,0,0" VerticalAlignment="Top"/>
+        <Button Content="Show selected tour" HorizontalAlignment="Left" Margin="492,344,0,0" VerticalAlignment="Top" Click="ShowSelectedTour" Width="142" Height="27"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="729,381,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <Label Content="Search all our Tours" HorizontalAlignment="Center" FontSize="30" Margin="0,65,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="Filter" FontSize="20" Margin="10,120,485,76"/>
     </Grid>
 </Window>
