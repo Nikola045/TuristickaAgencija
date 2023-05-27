@@ -70,10 +70,6 @@ namespace TravelAgency.View.Owner
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             reservationService.ChangeAllRenovatedStatus();
-            foreach(Hotel Hotel in Hotels)
-            {
-
-            }
         }
 
         private void AccommodationDrop(object sender, RoutedEventArgs e)
@@ -160,6 +156,12 @@ namespace TravelAgency.View.Owner
             ShowSmallPage.Content = renovationReviewPage;
             pages.Push(renovationReviewPage);
         }
+        private void OpenForum(object sender, RoutedEventArgs e)
+        {
+            ForumView forumView = new ForumView(LoggedInUser, ShowSmallPage);
+            ShowSmallPage.Content = forumView;
+            pages.Push(forumView);
+        }
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
@@ -181,6 +183,6 @@ namespace TravelAgency.View.Owner
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
+
     }
 }
