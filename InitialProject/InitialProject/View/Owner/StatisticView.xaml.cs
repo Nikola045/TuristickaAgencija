@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TravelAgency.Domain.Model;
+using TravelAgency.Forms;
 using TravelAgency.Services;
 using PieSeries = LiveCharts.Wpf.PieSeries;
 
@@ -76,8 +77,27 @@ namespace TravelAgency.View.Owner
             XLabels = months;
         }
 
-        private void OnLoad(object sender, RoutedEventArgs e)
+        private void OnPageLoad(object sender, RoutedEventArgs e)
         {
+            //implementiraj preporuku
+
+            //grupise ih po lokacijama
+            //treba da uzme sve hotele i proveri im broj rezervacija
+
+            //kada vidi gde ima najvise rezervacija po lokaciji predlozi kreiranje novog hotela
+            //kada vidi da ima premalo rezervacija po lokaciji predlozi zatvaranje hotela
+
+            //**gleda statistiku u proslih god dana
+
+            //ovo ide ako prihvati kreiranje novog smestaja
+            /*OwnerForm ownerForm = new OwnerForm(LogedUser);
+            ownerForm.Country = "a";
+            ownerForm.City = "b";
+            ownerForm.Show();   */
+
+        }
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {    
             HotelCB.ItemsSource = hotelService.FillForComboBoxHotels(LogedUser);
         }
 
