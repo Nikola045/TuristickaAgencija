@@ -17,9 +17,11 @@
         <MenuItem Header="Tours" FontSize="24">
             <MenuItem Header="Create Tour" Click="OpenGuideForm"></MenuItem>
         </MenuItem>
-        <MenuItem Header="LiveTour" Click="OpenLiveTourForm"></MenuItem>
-        <MenuItem Header="Statistics" FontSize="24" Click="OpenTourStatisticForm"></MenuItem>
-    </Menu>
+        <MenuItem Header="LiveTour" Click="OpenLiveTourForm" FontSize="24"></MenuItem>
+            <MenuItem Header="Statistics" FontSize="24" Click="OpenTourStatisticForm"></MenuItem>
+            <MenuItem Header="Tour Requests" FontSize="24" Click="OpenTourRequestsForm"></MenuItem>
+            <MenuItem Header="Statistics on Tour Requests" FontSize="24" Click="OpenTourRequestsStatisticsForm"></MenuItem>
+        </Menu>
         <DataGrid x:Name="DataPanel" Margin="116,279,116,216"/>
         <Label Content="Label" HorizontalAlignment="Left" Margin="894,170,0,0" VerticalAlignment="Top"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="249,962,0,0" VerticalAlignment="Top" Click="OpenLiveTourForm"/>

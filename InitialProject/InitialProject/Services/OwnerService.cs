@@ -11,10 +11,12 @@ namespace TravelAgency.Services
     {
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly UserRepository userRepository;
+        private readonly HotelService hotelService;
         public OwnerService()
         {
             ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
             userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
+            hotelService = new HotelService();
         }
 
         public int CountGradesFromOwnerRating(string OwnerUserName)
@@ -98,6 +100,17 @@ namespace TravelAgency.Services
                 if(username == user.Username) return user;
             }
             return null;
+        }
+
+        public List<string> GetAllOwnerLocation(string OwnerUsername)
+        {
+            List<Hotel> hotels = hotelService.GetHotelByOwner(OwnerUsername);
+            List<string> locations = new List<string>();
+            foreach(Hotel hotel in hotels)
+            {
+                locations.Add(hotel.Country + hotel.City);
+            }
+            return locations;
         }
     }
 }
