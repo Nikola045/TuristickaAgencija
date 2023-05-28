@@ -108,9 +108,9 @@ namespace TravelAgency.Services
             List<string> locations = new List<string>();
             foreach(Hotel hotel in hotels)
             {
-                locations.Add(hotel.Country + hotel.City);
+                locations.Add(hotel.Country +"|"+ hotel.City);
             }
-            return locations;
+            return locations.Distinct().ToList();
         }
     }
 }

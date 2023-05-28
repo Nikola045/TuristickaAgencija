@@ -30,7 +30,7 @@ namespace TravelAgency.View
 
         private void OpenGuideForm(object sender, RoutedEventArgs e)
         {
-            GuideForm createGuideForm = new GuideForm();
+            GuideForm createGuideForm = new GuideForm(LoggedInUser);
             createGuideForm.Show();
         }
 
@@ -86,7 +86,7 @@ namespace TravelAgency.View
 
         private void OpenTourRequestsStatisticsForm(object sender, RoutedEventArgs e)
         {
-            GuideTourRequestStatistic createTourRequestStatisticsForm = new GuideTourRequestStatistic();
+            GuideTourRequestStatistic createTourRequestStatisticsForm = new GuideTourRequestStatistic(LoggedInUser);
             createTourRequestStatisticsForm.Show();
         }
     }

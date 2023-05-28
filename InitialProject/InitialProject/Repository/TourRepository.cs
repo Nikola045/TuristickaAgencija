@@ -35,7 +35,8 @@ namespace TravelAgency.Repository
             {
                 return 1;
             }
-            return _tours.Max(h => h.Id) + 1;
+
+            return _tours.Max(t => t.Id) + 1;
         }
 
         public List<Tour> GetAll()
