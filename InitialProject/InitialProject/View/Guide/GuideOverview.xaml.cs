@@ -86,7 +86,7 @@ namespace TravelAgency.View
 
         private void OpenTourRequestsStatisticsForm(object sender, RoutedEventArgs e)
         {
-            GuideTourRequestStatistic createTourRequestStatisticsForm = new GuideTourRequestStatistic();
+            GuideTourRequestStatistic createTourRequestStatisticsForm = new GuideTourRequestStatistic(LoggedInUser);
             createTourRequestStatisticsForm.Show();
         }
     }
