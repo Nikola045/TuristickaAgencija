@@ -12,7 +12,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Forms;
+using TravelAgency.Repository;
 using TravelAgency.Services;
 using PieSeries = LiveCharts.Wpf.PieSeries;
 
@@ -22,6 +24,8 @@ namespace TravelAgency.View.Owner
     {
         private readonly ReservationService reservationService;
         private readonly HotelService hotelService;
+        private readonly OwnerService ownerService;
+        private readonly ReservationRepository reservationRepository;
         private string _xTitle;
         private List<string> _xLabels;
         private SeriesCollection _data;
@@ -36,6 +40,8 @@ namespace TravelAgency.View.Owner
             DataContext = this;
             reservationService = new ReservationService();
             hotelService = new HotelService();
+            ownerService = new OwnerService();
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             LogedUser = user;
             DataChart = new SeriesCollection();
             ShowSmallFrame = frame;
@@ -79,22 +85,10 @@ namespace TravelAgency.View.Owner
 
         private void OnPageLoad(object sender, RoutedEventArgs e)
         {
-            //implementiraj preporuku
-
-            //grupise ih po lokacijama
-            //treba da uzme sve hotele i proveri im broj rezervacija
-
             //kada vidi gde ima najvise rezervacija po lokaciji predlozi kreiranje novog hotela
+            reservationService.FindLocationForInvest(LogedUser);
             //kada vidi da ima premalo rezervacija po lokaciji predlozi zatvaranje hotela
-
-            //**gleda statistiku u proslih god dana
-
-            //ovo ide ako prihvati kreiranje novog smestaja
-            /*OwnerForm ownerForm = new OwnerForm(LogedUser);
-            ownerForm.Country = "a";
-            ownerForm.City = "b";
-            ownerForm.Show();   */
-
+            reservationService.FindHotelToClose(LogedUser);
         }
         private void OnLoad(object sender, RoutedEventArgs e)
         {    

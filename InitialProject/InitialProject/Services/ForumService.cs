@@ -1,15 +1,9 @@
-﻿using DevExpress.Utils.CommonDialogs.Internal;
-using Prism.Services.Dialogs;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
-using TravelAgency.View.Owner;
 using DialogResult = DevExpress.Utils.CommonDialogs.Internal.DialogResult;
 
 namespace TravelAgency.Services
@@ -44,7 +38,7 @@ namespace TravelAgency.Services
             List<string> locations = ownerService.GetAllOwnerLocation(OwnerUsername);
             foreach(Forum forum in GetNewForums())
             {
-                if (locations.Contains(forum.Country + forum.City))
+                if (locations.Contains(forum.Country +"|"+ forum.City))
                 {
                     string username = forum.Username;
                     string country = forum.Country;
