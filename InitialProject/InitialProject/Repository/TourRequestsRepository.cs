@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Serializer;
@@ -25,6 +30,7 @@ namespace TravelAgency.Repository
         }
 
 
+
         public TourRequests Save(TourRequests entity)
         {
             _tourRequests.Add(entity);
@@ -39,6 +45,7 @@ namespace TravelAgency.Repository
             _tourRequests.Insert(index, entity);
             _storage.Save(_tourRequests);
             return entity;
+
         }
 
         public int NextId()

@@ -35,11 +35,11 @@
         <TextBox x:Name="txtCurentNumberOfGuests" HorizontalAlignment="Left" Height="16" Margin="179,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"/>
         <Label Content="Description" HorizontalAlignment="Left" Height="29" Margin="542,102,0,0" VerticalAlignment="Top" Width="114"/>
         <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="72" Margin="542,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="218"/>
-        <DataGrid x:Name="CheckPoints" HorizontalAlignment="Left" Height="78" Margin="336,255,0,0" VerticalAlignment="Top" Width="158" Loaded="LoadData "/>
-        <Label Content="Check Points" HorizontalAlignment="Left" Height="29" Margin="336,226,0,0" VerticalAlignment="Top" Width="114"/>
-        <DataGrid x:Name="Dates" HorizontalAlignment="Left" Height="78" Margin="336,131,0,0" VerticalAlignment="Top" Width="156" Loaded="LoadData "/>
-        <Label Content="Dates" HorizontalAlignment="Left" Height="29" Margin="336,102,0,0" VerticalAlignment="Top" Width="86"/>
-        <ComboBox x:Name="Vouchers" HorizontalAlignment="Center" Margin="0,382,0,0" Loaded="Vouchers_Loaded" VerticalAlignment="Top" Width="120"/>
+        <DataGrid x:Name="CheckPoints" HorizontalAlignment="Left" Height="78" Margin="336,193,0,0" VerticalAlignment="Top" Width="158" Loaded="LoadData "/>
+        <Label Content="Check Points" HorizontalAlignment="Left" Height="29" Margin="328,162,0,0" VerticalAlignment="Top" Width="114"/>
+        <Label Content="Date" HorizontalAlignment="Left" Height="29" Margin="336,102,0,0" VerticalAlignment="Top" Width="86"/>
+        <ComboBox x:Name="Vouchers" HorizontalAlignment="Center" Margin="0,348,0,0" Loaded="Vouchers_Loaded" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtDate" HorizontalAlignment="Left" Height="16" Margin="336,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"/>
 
     </Grid>
 </Window>

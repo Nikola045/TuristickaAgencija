@@ -92,9 +92,11 @@ namespace TravelAgency.View.Guest2
             txtMaxNumberOfGuests.Text = selectedTour.MaxNumberOfGuests.ToString();
             txtCurentNumberOfGuests.Text = selectedTour.CurentNumberOfGuests.ToString();
             txtDuration.Text = selectedTour.TourDuration.ToString();
+            txtDate.Text = selectedTour.StartTime.ToString();
             List < CheckPoint >  checkPoints = selectedTour.CheckPoints;
             CheckPoints.ItemsSource = checkPoints;
             List<string> dates = new List<string>();
+
         }
 
         private void Vouchers_Loaded(object sender, RoutedEventArgs e)
