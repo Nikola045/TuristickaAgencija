@@ -9,7 +9,20 @@
       Title="ForumReviewView">
 
     <Grid Background="White" Loaded="Grid_Loaded">
-        <Label x:Name="forumLabel" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100"/>
+        <Label x:Name="forumLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="388,8,0,0"/>
+        <DataGrid Margin="29,43,27,115" ItemsSource="{Binding Path=Comments,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedComment}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Username" Binding="{Binding Username}"/>
+                <DataGridTextColumn Width="*" Header="Role" Binding="{Binding Role}"/>
+                <DataGridTextColumn Width="*" Header="Valid" Binding="{Binding ValidComment}"/>
+                <DataGridTextColumn Width="*" Header="Useful" Binding="{Binding Useful}"/>
+                <DataGridTextColumn Width="*" Header="Number Of Reports" Binding="{Binding NumberOfReport}"/>
+                <DataGridTextColumn Width="*" Header="Comment" Binding="{Binding Comment}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Report" HorizontalAlignment="Left" Margin="291,530,0,0" VerticalAlignment="Top" FontSize="20" Height="46" Width="137" Click="Button_Click_1"/>
+        <Button IsEnabled="{Binding ButtonCreate}" Content="Create Comment" HorizontalAlignment="Left" Margin="528,530,0,0" VerticalAlignment="Top" FontSize="20" Height="46" Width="194" Click="Button_Click"/>
+        <Label Content="{Binding Useful}" HorizontalAlignment="Left" Margin="875,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
