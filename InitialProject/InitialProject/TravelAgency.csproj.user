@@ -74,6 +74,15 @@
     <Compile Update="View\Guide\GuideTourStatistic.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Owner\CrateComment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\ForumReviewView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\ForumView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Owner\GradeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -182,6 +191,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guide\GuideTourStatistic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\CrateComment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\ForumReviewView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\ForumView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\GradeView.xaml">

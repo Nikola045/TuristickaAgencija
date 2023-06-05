@@ -44,8 +44,8 @@
 
         <Button x:Name="GradeGuestBTN" Visibility="Hidden"  Content="Grade Guest" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="299" Click="OpenGradeForm" Canvas.Left="1081" Canvas.Top="123" FontSize="17" Margin="0,75,0,0" />
         <Button x:Name="ReviewFormBTN"  Visibility="Hidden" Content="Review Form" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="361" Click="OpenReviewForm" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="299,74,0,0" />
-        <Button x:Name="ForumsBTN" Visibility="Hidden"  Content="Forums" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="364" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="660,74,0,0" />
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Height="74" Width="101" Click="BackButton">
+        <Button x:Name="ForumsBTN" Visibility="Hidden"  Content="Forums" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="364" Canvas.Left="1081" Canvas.Top="163" FontSize="17" Margin="660,74,0,0" Click="OpenForum" />
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="74" Width="101" Click="BackButton" Margin="0,0,0,655">
             <Button.Background>
                 <ImageBrush ImageSource="/View/Owner/back.png"/>
             </Button.Background>

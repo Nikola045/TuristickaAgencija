@@ -62,5 +62,11 @@ namespace TravelAgency.View.Guest2
             Close();
             tourRequestsStatistic.Show();
         }
+
+        private void OpenNotifications(object sender, RoutedEventArgs e)
+        {
+            Notifications notifications = new Notifications(LoggedInUser);
+            notifications.Show();
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using System.Windows;
+using System.Windows.Controls;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
@@ -263,7 +264,7 @@ namespace TravelAgency.View.Guest2
                 Convert.ToDateTime(FirstDateBox.Text),
                 Convert.ToDateTime(SecondDateBox.Text));
 
-                tourRequestsRepository.Save(ButtonActivator(), newTourRequests);
+                tourRequestsRepository.Save(newTourRequests);
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {
