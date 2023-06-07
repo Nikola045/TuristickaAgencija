@@ -62,7 +62,7 @@
         <Button Content="Search accommodations"  HorizontalAlignment="Left" Margin="722,48,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20" Click="OpenGuest1Form"/>
         <Button Content="Make a reservation"  Click="OpenReserveForm" HorizontalAlignment="Left" Margin="974,48,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20"/>
         <Button Content="Account" Click="OpenAccount" HorizontalAlignment="Left" Margin="1225,48,0,0" VerticalAlignment="Top" Height="63" Width="252" FontSize="20"/>
-        <Button Content="Forum" HorizontalAlignment="Left" Margin="1477,48,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20"/>
+        <Button x:Name="Forum" Content="Forum" HorizontalAlignment="Left" Margin="1477,48,0,0" VerticalAlignment="Top" Height="63" Width="251" FontSize="20" Click="OpenForum"/>
         <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="1751,79,0,0" FontSize="16" VerticalAlignment="Top" Width="147" Height="32">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
