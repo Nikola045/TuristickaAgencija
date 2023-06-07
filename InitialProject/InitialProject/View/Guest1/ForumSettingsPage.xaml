@@ -6,7 +6,12 @@
       xmlns:local="clr-namespace:TravelAgency.View.Guest1"
       mc:Ignorable="d" Height="516" Width="1319"
     >
-    <Canvas Background="White">
-        <Label Content="Forum set" Canvas.Left="482" Canvas.Top="344"/>
+    <Canvas Background="White" Loaded="OnLoad">
+        <Label Content="Started discussions:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="-2"/>
+        <DataGrid Height="191" Width="1319" d:ItemsSource="{d:SampleData ItemCount=5}" Canvas.Top="35" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Choose discussion that you want to close:" FontSize="20" Canvas.Top="292" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <ComboBox Canvas.Left="383" FontSize="20" Canvas.Top="294" Width="210" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Close discussion" FontSize="20" Canvas.Left="383" Canvas.Top="332" Height="37" Width="210" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"/>
+        <Label x:Name="Label" Content="Label" FontSize="20" Canvas.Left="4" Canvas.Top="368" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Canvas>
 </Page>

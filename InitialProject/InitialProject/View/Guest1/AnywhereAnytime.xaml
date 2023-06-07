@@ -7,7 +7,7 @@
       mc:Ignorable="d" Height="575" Width="1590">
     <Canvas Background="White" Margin="0,0,0,0" Loaded="OnLoad">
         <Label x:Name="Label" Content="Label" Canvas.Left="10" Canvas.Top="10" FontSize="25"/>
-        <Button x:Name="btnReserve" IsEnabled="False" Content="Search"  FontSize="20" Height="40" Width="195" Canvas.Left="698" Canvas.Top="326" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="btnReserve" IsEnabled="False" Content="Search"  FontSize="20" Height="40" Width="195" Canvas.Left="698" Canvas.Top="326" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnReserve_Click"/>
         <DatePicker x:Name="Date1" FontSize="16" Height="32" Width="194" Canvas.Left="698" Canvas.Top="176" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <DatePicker x:Name="Date2" FontSize="16" Height="32" Width="194" Canvas.Left="698" Canvas.Top="212" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox x:Name="txtNumberOfGuests" VerticalContentAlignment="Center" FontSize="16" IsEnabled="false" TextWrapping="Wrap" Text="" Width="194" Height="32" Canvas.Left="698" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top"/>

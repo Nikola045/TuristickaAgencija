@@ -28,5 +28,17 @@ namespace TravelAgency.View.Guest1
             LoggedInUser = user;
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            TextBlock textBlock = new TextBlock();
+            textBlock.Inlines.Add(new Run("*Note\n The discussion will not be deleted (it will be visible),only\n further replying will be disabled."));
+            Label.Content = textBlock;
+        }
     }
 }

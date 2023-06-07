@@ -12,36 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Graph.Models;
 using Microsoft.Graph.Models.Security;
 using User = TravelAgency.Domain.Model.User;
 
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
-    /// Interaction logic for AnywhereAnytime.xaml
+    /// Interaction logic for StartNewDiscussion.xaml
     /// </summary>
-    public partial class AnywhereAnytime : Page
+    public partial class StartNewDiscussion : Page
     {
-        public User LoggedInUser { get; set; }
-        public AnywhereAnytime(User user)
+        private User LoggedInUser { get; set; }
+        public StartNewDiscussion(User user)
         {
-            InitializeComponent();
             LoggedInUser = user;
+            InitializeComponent();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             TextBlock textBlock = new TextBlock();
-            textBlock.Inlines.Add(new Run("Hello " + LoggedInUser.Username + ", here are some recommended accommodations based only on number of guests that are going, number of days that you are "));
-            textBlock.Inlines.Add(new Run("\nplanning to stay and period of time(optional)."));
-            textBlock.Inlines.Add(new Run("\n\nLets see what we have for you!"));
+            textBlock.Inlines.Add(new Run("If you need any kind of advice or question about any location, you can start your own discussion on our forum here and get advice from other users or owners of accommodations\non that location."));
             Label.Content = textBlock;
-        }
-
-        private void btnReserve_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
