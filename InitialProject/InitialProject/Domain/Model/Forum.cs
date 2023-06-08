@@ -14,22 +14,21 @@ namespace TravelAgency.Domain.Model
         public string Country { get; set; }
         public DateTime Date { get; set; }
         public int NumberOfReplies { get; set; }
-
+        public bool IsActive { get; set; }
+        public bool VeryUseful { get; set; }  
         public Forum() { }
 
-        public Forum(int id, User guest1, string city, string country, DateTime date,int noOfReplies)
+        public Forum(string city, string country)
         {
-            Id = id;
-            Guest1 = guest1;
             City = city;
             Country = country;
-            Date = date;
-            NumberOfReplies = noOfReplies;
+            NumberOfReplies = 0;
+            IsActive = true;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Guest1.Username, City, Country, Date.ToString(),NumberOfReplies.ToString()};
+            string[] csvValues = { Id.ToString(), Guest1.Username, City, Country, Date.ToString(),NumberOfReplies.ToString(),IsActive.ToString(),VeryUseful.ToString()};
             return csvValues;
         }
 
@@ -41,6 +40,8 @@ namespace TravelAgency.Domain.Model
             Country = values[3];
             Date = Convert.ToDateTime(values[4]);
             NumberOfReplies = Convert.ToInt32(values[5]);
+            IsActive = Convert.ToBoolean(values[6]);
+            VeryUseful = Convert.ToBoolean(values[7]);
         }
     }
 }

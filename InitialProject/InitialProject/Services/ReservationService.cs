@@ -468,5 +468,20 @@ namespace TravelAgency.Services
             }
             else { }
         }
+
+        public List<string> GetGuest1Reservations(string username)
+        {
+            List<string> findedLocations = new List<string>();
+            List<Reservation> reservations = reservationRepository.GetAll();
+            foreach (Reservation reservation in reservations)
+            {
+                if (username == reservation.GuestUserName)
+                {
+                    Hotel hotel = hotelService.GetHotelByName(reservation.HotelName);
+                    findedLocations.Add(hotel.Country + "|" + hotel.City);
+                }
+            }
+            return findedLocations;
+        }
     }
 }
