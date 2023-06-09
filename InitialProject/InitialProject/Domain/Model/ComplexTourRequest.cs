@@ -9,16 +9,14 @@ namespace TravelAgency.Domain.Model
     class ComplexTourRequest : TravelAgency.Serializer.ISerializable
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public string Status { get; set; }
-        public List<TourRequests> RequestToursIds { get; set; } = new List<TourRequests>();
+        public List<int> RequestToursIds { get; set; } = new List<int>();
 
 
-        public ComplexTourRequest(int id, string name, string status, List<TourRequests> tours)
+        public ComplexTourRequest(int id, List<int> tours)
         {
             Id = id;
-            Name = name;
-            Status = status;
+            Status = "Pending";
             RequestToursIds = tours;
         }
 
@@ -28,31 +26,24 @@ namespace TravelAgency.Domain.Model
         {
             string ToursIdsList = null;
             int currentIndex = 0;
-            foreach (TourRequests point in RequestToursIds)
+            foreach (int point in RequestToursIds)
             {
                 string delimiter = "|";
                 if (currentIndex == RequestToursIds.Count - 1) delimiter = "";
-                ToursIdsList = ToursIdsList + point.Id.ToString() + delimiter;
+                ToursIdsList = ToursIdsList + point.ToString() + delimiter;
                 currentIndex++;
             }
-            string[] csvValues = { Id.ToString(), Name, Status, ToursIdsList };
+            string[] csvValues = { Id.ToString(), Status, ToursIdsList };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            int i = 3;
-            List<TourRequests> tourRequests = new List<TourRequests>();
-            while (i <= values.Count())
-            {
-                int tourRequestId;
-                tourRequestId = Convert.ToInt32(values[i]);
-                i = i + 1;
-            }
+            int i = 2;
+            List<int> tourRequests = new List<int>();
             RequestToursIds = tourRequests;
             Id = Convert.ToInt32(values[0]);
-            Name = values[1];
-            Status = values[2];
+            Status = values[1];
         }
 
     }

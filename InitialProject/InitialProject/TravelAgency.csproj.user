@@ -41,6 +41,9 @@
     <Compile Update="View\Guest1\VisitedAccommodationsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest2\CreatingComplexTourRequest.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest2\Guest2Overview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -161,6 +164,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\VisitedAccommodationsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\CreatingComplexTourRequest.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\Guest2Overview.xaml">
