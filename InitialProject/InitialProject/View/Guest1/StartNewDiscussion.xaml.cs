@@ -28,6 +28,7 @@ namespace TravelAgency.View.Guest1
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private readonly ForumService forumService;
+        public Forum SelectedForum { get; set; }
         private User LoggedInUser { get; set; }
         private string _city;
         private string _country;
@@ -88,6 +89,8 @@ namespace TravelAgency.View.Guest1
             forumService.CreateForum(LoggedInUser,forum);
             ForumComment forumComment = new ForumComment(forum,"No","No",Comment);
             forumService.CreateCommentOfGuest1(LoggedInUser,forumComment);
+            OpenedForum page = new OpenedForum(SelectedForum, LoggedInUser);
+            NavigationService.Navigate(page);
         }
         private void OnLoad(object sender, RoutedEventArgs e)
         {

@@ -14,7 +14,7 @@
         <TextBox x:Name="txtCity" TextWrapping="Wrap"  FontSize="16" VerticalContentAlignment="Center"
             Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Height="32" Canvas.Left="3" Canvas.Top="174" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtNoGuests" TextWrapping="Wrap" FontSize="16" VerticalContentAlignment="Center"
-            Text="{Binding Max, UpdateSourceTrigger=PropertyChanged}" Height="32" RenderTransformOrigin="0.5,0.5" Canvas.Left="3" Canvas.Top="363" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top">
+            Text="{Binding MaxNumberOfGuests, UpdateSourceTrigger=PropertyChanged}" Height="32" RenderTransformOrigin="0.5,0.5" Canvas.Left="3" Canvas.Top="363" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -25,7 +25,7 @@
             </TextBox.RenderTransform>
         </TextBox>
         <TextBox x:Name="txtNoDays" TextWrapping="Wrap" Height="32" FontSize="16" VerticalContentAlignment="Center"
-            Text="{Binding DaysLeft, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="3" Canvas.Top="436" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            Text="{Binding MinNumberOfDays, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="3" Canvas.Top="436" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button Click="Search" Content="Search"  FontSize="20" Canvas.Left="3" Canvas.Top="483" Height="40" Width="115" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <RadioButton x:Name="RadioHouse" VerticalContentAlignment="Center" Content="House" GroupName="type" FontSize="20" Canvas.Left="59" Canvas.Top="293" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <RadioButton x:Name="RadioHotel" VerticalContentAlignment="Center" Content="Hotel" GroupName="type" FontSize="20" Canvas.Left="247" Canvas.Top="293" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -33,9 +33,17 @@
         <RadioButton x:Name="RadioHut" VerticalContentAlignment="Center" Content="Hut" GroupName="type" FontSize="20" Canvas.Left="162" Canvas.Top="293" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="City:" FontSize="20" Canvas.Left="3" Canvas.Top="134" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Country:" FontSize="20" Canvas.Top="211" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtCountry" VerticalContentAlignment="Center" FontSize="16" TextWrapping="Wrap" Canvas.Left="3" Canvas.Top="249" Width="454" Height="32" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <DataGrid x:Name="DataPanel" FontSize="16" AutoGenerateColumns="True" AutoGeneratingColumn="DataPanel_AutoGeneratingColumn"   
-            ItemsSource="{Binding Hotels}" SelectedItem="{Binding SelectedHotel}" Loaded="OnLoad" Height="410" Canvas.Left="495" Canvas.Top="58" Width="1085" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtCountry" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" FontSize="16" TextWrapping="Wrap" Canvas.Left="3" Canvas.Top="249" Width="454" Height="32" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <DataGrid x:Name="DataPanel" ItemsSource="{Binding Path = Hotels,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedHotel}" FontSize="16" AutoGenerateColumns="False"  Height="410" Canvas.Left="495" Canvas.Top="58" Width="1085" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Hotel Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Width="*" Header="Type" Binding="{Binding TypeOfHotel}"/>
+                <DataGridTextColumn Width="*" Header="Number of guests(Max)" Binding="{Binding MaxNumberOfGuests}"/>
+                <DataGridTextColumn Width="*" Header="Number of days(Min)" Binding="{Binding MinNumberOfDays}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Label Content="Searched accommodations:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Canvas.Left="496" Canvas.Top="16"/>
     </Canvas>
 </Page>

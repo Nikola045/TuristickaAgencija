@@ -27,7 +27,14 @@ namespace TravelAgency.Domain.Model
             OwnerRating = ownerRating;
             Comment = comment;
         }
-
+        public OwnerGrade(User guset1, User owner, int hotelRating, int ownerRating, string comment)
+        {
+            Guest1 = guset1;
+            Owner = owner;
+            HotelRating = hotelRating;
+            OwnerRating = ownerRating;
+            Comment = comment;
+        }
         public string[] ToCSV()
         {
             string[] csvValues = { Guest1.Username, Owner.Username, Reservation.Id.ToString(), HotelRating.ToString(), OwnerRating.ToString(), Comment };
