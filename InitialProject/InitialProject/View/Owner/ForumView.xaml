@@ -11,7 +11,7 @@
     <Grid Background="White" Loaded="OnLoad">
         <DataGrid ItemsSource="{Binding Path=Forums,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Margin="50,26,50,92">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Creator username" Binding="{Binding Username}"/>
+                <DataGridTextColumn Width="*" Header="Creator username" Binding="{Binding Guest1.Username}"/>
                 <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
                 <DataGridTextColumn Width="*" Header="Create date" Binding="{Binding Date}"/>

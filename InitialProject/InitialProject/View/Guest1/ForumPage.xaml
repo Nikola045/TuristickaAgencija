@@ -1,15 +1,15 @@
-﻿<Page x:Class="TravelAgency.View.Guest1.ForumSettingsPage"
+﻿<Page x:Class="TravelAgency.View.Guest1.ForumPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TravelAgency.View.Guest1"
-      mc:Ignorable="d" Height="516" Width="1319"
-    >
-    <Canvas Background="White" Loaded="OnLoad">
-        <Label Content="Started discussions:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="-2"/>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Path=Forums,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Height="270" Width="1317" FontSize="20" Canvas.Top="35" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="2">
-            <DataGrid.Columns>
+      mc:Ignorable="d" Height="575" Width="1590">
+
+    <Canvas Background="White">
+        <Label Content="List of all discussions:" Canvas.Top="12" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <DataGrid ItemsSource="{Binding Path=Forums, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Height="413" Width="1588" FontSize="20" Canvas.Top="50" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="2" MouseLeftButtonUp="MouseLeftButtonUp">
+            <DataGrid.Columns>                
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
                 <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
                 <DataGridTextColumn Width="*" Header="Number of replies" Binding="{Binding NumberOfReplies}"/>
@@ -18,7 +18,6 @@
                 <DataGridTextColumn Width="*" Header="Very useful" Binding="{Binding VeryUseful}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Close discussion" FontSize="20" Canvas.Left="2" Canvas.Top="312" Height="37" Width="210" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"/>
-        <Label x:Name="Label" Content="Label" FontSize="20" Canvas.Left="4" Canvas.Top="368" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Start new discussion" Canvas.Top="492" FontSize="20" Height="41" Width="228" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="2" Click="Button_Click"/>
     </Canvas>
 </Page>

@@ -51,7 +51,11 @@ namespace TravelAgency.View
             Guest1AccountForm page = new Guest1AccountForm(LoggedInUser);
             ShowPage.Content = page;
         }
-
+        private void OpenForum(object sender, RoutedEventArgs e)
+        {
+            ForumPage page = new ForumPage(LoggedInUser);
+            ShowPage.Content = page;
+        }
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             string language1 = "English";
@@ -169,6 +173,7 @@ namespace TravelAgency.View
             Mouse.OverrideCursor = null;
         }
 
+        
     }
 }
 

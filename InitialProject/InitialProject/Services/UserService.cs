@@ -7,12 +7,12 @@ using TravelAgency.Repository.UserRepo;
 
 namespace TravelAgency.Services
 {
-    internal class OwnerService
+    internal class UserService
     {
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly UserRepository userRepository;
         private readonly HotelService hotelService;
-        public OwnerService()
+        public UserService()
         {
             ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
             userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
@@ -112,5 +112,7 @@ namespace TravelAgency.Services
             }
             return locations.Distinct().ToList();
         }
+
+
     }
 }

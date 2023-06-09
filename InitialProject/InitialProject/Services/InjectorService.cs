@@ -31,7 +31,8 @@ namespace TravelAgency.Services
             { typeof(IStorage < TourRequests >), new TourRequestsFileStorage()},
             { typeof(IStorage < TourReview1 >), new GuideReviewFileStorage()},
             { typeof(IStorage < Recommendation >), new RecommendationFileStorage()},
-            { typeof(IStorage < Forum >), new ForumFileStorage()}
+            { typeof(IStorage < Forum >), new ForumFileStorage()},
+            { typeof(IStorage < ForumComment >), new FormCommentFileStorage()}
         };
 
         public static T CreateInstance<T>()

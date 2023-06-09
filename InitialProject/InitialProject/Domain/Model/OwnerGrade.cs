@@ -27,7 +27,6 @@ namespace TravelAgency.Domain.Model
             OwnerRating = ownerRating;
             Comment = comment;
         }
-
         public string[] ToCSV()
         {
             string[] csvValues = { Guest1.Username, Owner.Username, Reservation.Id.ToString(), HotelRating.ToString(), OwnerRating.ToString(), Comment };

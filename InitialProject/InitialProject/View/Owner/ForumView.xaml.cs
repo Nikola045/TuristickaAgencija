@@ -51,7 +51,7 @@ namespace TravelAgency.View.Owner
         {
             if(SelectedForum != null)
             {
-                ForumReviewView forumReviewView = new ForumReviewView(SelectedForum);
+                ForumReviewView forumReviewView = new ForumReviewView(SelectedForum, SmallPageShow, LoggedOwner);
                 SmallPageShow.Content = forumReviewView;
                 OwnerHome.pages.Push(forumReviewView);
             }
@@ -64,9 +64,9 @@ namespace TravelAgency.View.Owner
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             Forum forum = forumService.ShowMessageForForums(LoggedOwner.Username);
-            if(forum != null)
+            if (forum != null)
             {
-                ForumReviewView forumReviewView = new ForumReviewView(forum);
+                ForumReviewView forumReviewView = new ForumReviewView(forum, SmallPageShow, LoggedOwner);
                 SmallPageShow.Content = forumReviewView;
                 OwnerHome.pages.Push(forumReviewView);
             }

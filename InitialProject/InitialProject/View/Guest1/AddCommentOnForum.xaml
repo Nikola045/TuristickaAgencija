@@ -1,0 +1,14 @@
+﻿<Page x:Class="TravelAgency.View.Guest1.AddCommentOnForum"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelAgency.View.Guest1"
+      mc:Ignorable="d" Height="575" Width="1590">
+
+    <Canvas Background="White">
+        <Label Content="Insert your comment here:" FontSize="20" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="-2"/>
+        <TextBox TextWrapping="Wrap" FontSize="20" Canvas.Top="47" Width="1590" Height="282" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Content="Add comment" FontSize="20" Canvas.Top="340" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"/>
+    </Canvas>
+</Page>

@@ -9,9 +9,9 @@
         Title="HotelGalery" Height="400" Width="800
         ">
     <Grid>
-        <Image x:Name="Image" Source="{Binding Path=Image, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="358" Margin="10,10,0,0" VerticalAlignment="Top" Width="776"/>
+        <Image x:Name="Image" Source="{Binding Path=Image, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="287" Margin="46,27,0,0" VerticalAlignment="Top" Width="716"/>
 
-        <Button Content="Next" HorizontalAlignment="Left" Margin="698,156,0,0" VerticalAlignment="Top" Height="31" Width="92" Click="NextImage"/>
-        <Button Content="Preview" HorizontalAlignment="Left" Margin="10,156,0,0" VerticalAlignment="Top" Height="31" Width="87" Click="PreviewImage"/>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="490,322,0,0" VerticalAlignment="Top" Height="31" Width="92" Click="NextImage"/>
+        <Button Content="Preview" HorizontalAlignment="Left" Margin="215,322,0,0" VerticalAlignment="Top" Height="31" Width="87" Click="PreviewImage"/>
     </Grid>
 </Window>
