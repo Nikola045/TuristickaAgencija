@@ -346,7 +346,8 @@ namespace TravelAgency.Services
             int cumRating = 0;
             foreach(TourReview1 review in reviews)
             {
-                if(user.Id == review.Tour.GuideId && review.Tour.Lenguage == language)
+                Tour tour = FindById(review.Tour.Id);
+                if(user.Id == tour.GuideId && tour.Lenguage == language)
                 {
                     cumRating = cumRating + review.GuidesLenguage;
                 }
