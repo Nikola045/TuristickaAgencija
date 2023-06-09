@@ -37,7 +37,7 @@
         <Label Content="End Date:" HorizontalAlignment="Left" Margin="42,265,0,0" VerticalAlignment="Top"/>
         <Button Content="Exit" HorizontalAlignment="Left" Margin="727,360,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
         <Label Content="Location :" HorizontalAlignment="Left" Margin="39,109,0,0" VerticalAlignment="Top"/>
-        <Button Content="Create a complex tour request" HorizontalAlignment="Center" Margin="0,371,0,0" VerticalAlignment="Top" Height="28" Width="168"/>
+        <Button Content="Create a complex tour request" HorizontalAlignment="Center" Margin="0,371,0,0" Click ="CreateComplex" VerticalAlignment="Top" Height="28" Width="168"/>
         <Label Content="Create a Tour Request" HorizontalAlignment="Center" FontSize="30" Margin="0,50,0,0" VerticalAlignment="Top"/>
 
 
