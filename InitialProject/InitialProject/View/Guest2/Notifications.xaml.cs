@@ -13,12 +13,14 @@ namespace TravelAgency.View.Guest2
     public partial class Notifications : Window
     {
         private readonly NotificationsRepository _repository;
+        private readonly NotificationService notificationService;
         public User LoggedInUser { get; set; }
         public Notifications(User user)
         {
             InitializeComponent();
             LoggedInUser = user;
             _repository = new(InjectorService.CreateInstance<IStorage<Notification>>());
+            notificationService = new NotificationService();
         }
 
         private void LoadData(object sender, RoutedEventArgs e)
