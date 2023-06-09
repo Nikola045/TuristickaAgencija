@@ -8,6 +8,9 @@
     <Compile Update="View\Guest1\ActiveReservationsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest1\AddCommentOnForum.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest1\AnywhereAnytime.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -27,6 +30,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\MoveReservationForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\OpenedForum.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\RecommendationForRenovation.xaml.cs">
@@ -130,6 +136,9 @@
     <Page Update="View\Guest1\ActiveReservationsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Guest1\AddCommentOnForum.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\AnywhereAnytime.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -149,6 +158,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\MoveReservationForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\OpenedForum.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\RecommendationForRenovation.xaml">

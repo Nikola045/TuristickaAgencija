@@ -1,0 +1,30 @@
+﻿<Page x:Class="TravelAgency.View.Guest1.OpenedForum"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelAgency.View.Guest1"
+      mc:Ignorable="d" Height="575" Width="1590">
+
+    <Canvas Background="White">
+        <Rectangle Height="493" Stroke="Black" Width="1590" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Page:" FontSize="20" Canvas.Left="10" Canvas.Top="498" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="Add comment" FontSize="20" Canvas.Left="1450" Canvas.Top="502" Click="Button_Click"/>
+        <Button Content="Next page" FontSize="20" Canvas.Left="284" Canvas.Top="502" HorizontalAlignment="Center" VerticalAlignment="Top" Width="116"/>
+        <Line X1="0" Y1="0" X2="1590" Y2="0" Stroke="Black" StrokeThickness="2" Canvas.Top="244" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Width="1578" />
+        <Rectangle Height="474" Canvas.Left="10" Stroke="Black" Canvas.Top="10" Width="235" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="1" FontSize="20" Canvas.Left="72" Canvas.Top="502" Width="40" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="2" FontSize="20" Canvas.Left="111" Canvas.Top="502" Width="40" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="3" FontSize="20" Canvas.Left="150" Canvas.Top="502" Width="40" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="..." FontSize="20" Canvas.Left="195" Canvas.Top="496" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="24" FontSize="20" Canvas.Left="223" Canvas.Top="502" Width="40" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Image Height="100" Canvas.Left="78" Canvas.Top="29" Width="100" Source="/View/Owner/profilepic.jpg"/>
+        <Image Height="100" Canvas.Left="78" Canvas.Top="260" Width="100" Source="/View/Owner/profilepic.jpg"/>
+        <Label Content="User: User32" Canvas.Left="89" Canvas.Top="130" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Last active: 2 days ago" Canvas.Left="61" Canvas.Top="153" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Has visited location: No" Canvas.Left="60" Canvas.Top="176" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="User: User1" Canvas.Left="93" Canvas.Top="361" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Last active: a days ago" Canvas.Left="65" Canvas.Top="384" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Has visited location: Yes" Canvas.Left="64" Canvas.Top="407" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    </Canvas>
+</Page>

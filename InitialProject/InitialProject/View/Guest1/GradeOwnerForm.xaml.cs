@@ -99,83 +99,84 @@ namespace TravelAgency.View.Guest1
 
         private void Grade(object sender, RoutedEventArgs e)
         {
-            object selectedItem = cbHotelName.SelectedItem;
-            Reservation reservation = new Reservation();
-            
-            int id;
-            string line = selectedItem.ToString();
-            string[] fields = line.Split(' ');
-            id = Convert.ToInt32(fields[0]);
-            string hotelName = fields[1];
+            if (dataGrid.SelectedItem is VisitedHotel selectedHotel)
+            {
+                string hotelName = selectedHotel.Name;
 
-            int hotelRating = 0;
-            if (rbHotelOption1.IsChecked == true)
-            {
-                hotelRating = 1;
-            }
-            else if (rbHotelOption2.IsChecked == true)
-            {
-                hotelRating = 2;
-            }
-            else if (rbHotelOption3.IsChecked == true)
-            {
-                hotelRating = 3;
-            }
-            else if (rbHotelOption4.IsChecked == true)
-            {
-                hotelRating = 4;
-            }
-            else if (rbHotelOption5.IsChecked == true)
-            {
-                hotelRating = 5;
-            }
-
-            int ownerRating = 0;
-            if (rbOwnerOption1.IsChecked == true)
-            {
-                ownerRating = 1;
-            }
-            else if (rbOwnerOption2.IsChecked == true)
-            {
-                ownerRating = 2;
-            }
-            else if (rbOwnerOption3.IsChecked == true)
-            {
-                ownerRating = 3;
-            }
-            else if (rbOwnerOption4.IsChecked == true)
-            {
-                ownerRating = 4;
-            }
-            else if (rbOwnerOption5.IsChecked == true)
-            {
-                ownerRating = 5;
-            }
-
-            List<string> images = new List<string>();
-            foreach (object item in ListViewImg.Items)
-            {
-                if (item is string)
+                int hotelRating = 0;
+                if (rbHotelOption1.IsChecked == true)
                 {
-                    images.Add(item as string);
+                    hotelRating = 1;
                 }
+                else if (rbHotelOption2.IsChecked == true)
+                {
+                    hotelRating = 2;
+                }
+                else if (rbHotelOption3.IsChecked == true)
+                {
+                    hotelRating = 3;
+                }
+                else if (rbHotelOption4.IsChecked == true)
+                {
+                    hotelRating = 4;
+                }
+                else if (rbHotelOption5.IsChecked == true)
+                {
+                    hotelRating = 5;
+                }
+
+                int ownerRating = 0;
+                if (rbOwnerOption1.IsChecked == true)
+                {
+                    ownerRating = 1;
+                }
+                else if (rbOwnerOption2.IsChecked == true)
+                {
+                    ownerRating = 2;
+                }
+                else if (rbOwnerOption3.IsChecked == true)
+                {
+                    ownerRating = 3;
+                }
+                else if (rbOwnerOption4.IsChecked == true)
+                {
+                    ownerRating = 4;
+                }
+                else if (rbOwnerOption5.IsChecked == true)
+                {
+                    ownerRating = 5;
+                }
+
+                List<string> images = new List<string>();
+                foreach (object item in ListViewImg.Items)
+                {
+                    if (item is string)
+                    {
+                        images.Add(item as string);
+                    }
+                }
+
+                Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
+
+                OwnerGrade newGrade = new OwnerGrade(
+                    ownerService.GetOwnerByUsername(LogedUser.Username),
+                    ownerService.GetOwnerByUsername(selectedOwnerUsername.OwnerUsername),
+                    hotelRating,
+                    ownerRating,
+                    txtComment.Text
+                );
+                ownerGradeRepository.Save(newGrade);
+
+                RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation(LogedUser, hotelName);
+                NavigationService.Navigate(recommendationForRenovation);
             }
-
-            Hotel selectedOwnerUsername = hotelService.GetHotelByName(hotelName);
-
-            OwnerGrade newGrade = new OwnerGrade(
-                ownerService.GetOwnerByUsername(LogedUser.Username),
-                ownerService.GetOwnerByUsername(selectedOwnerUsername.OwnerUsername),
-                reservationService.FindReservationByID(id),
-                hotelRating,
-                ownerRating,
-                txtComment.Text
-            );
-            ownerGradeRepository.Save(newGrade);
-
-            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation(LogedUser, hotelName, id);
-            NavigationService.Navigate(recommendationForRenovation);
+            else
+            {
+                MessageBox.Show("Please select a hotel.");
+            }
         }
+
+
 
         private void LoadHotels(object sender, RoutedEventArgs e)
         {
@@ -211,10 +212,10 @@ namespace TravelAgency.View.Guest1
         {
             bool isHotelOptionSelected = rbHotelOption1.IsChecked == true || rbHotelOption2.IsChecked == true || rbHotelOption3.IsChecked == true || rbHotelOption4.IsChecked == true || rbHotelOption5.IsChecked == true;
             bool isOwnerOptionSelected = rbOwnerOption1.IsChecked == true || rbOwnerOption2.IsChecked == true || rbOwnerOption3.IsChecked == true || rbOwnerOption4.IsChecked == true || rbOwnerOption5.IsChecked == true;
-            bool isHotelNameSelected = cbHotelName.SelectedItem != null;
+            
             bool isCommentEntered = !string.IsNullOrWhiteSpace(txtComment.Text);
  
-            if (isHotelOptionSelected && isOwnerOptionSelected && isHotelNameSelected && isCommentEntered)
+            if (isHotelOptionSelected && isOwnerOptionSelected && isCommentEntered)
             {
                 btnGrade.IsEnabled = true;
             }

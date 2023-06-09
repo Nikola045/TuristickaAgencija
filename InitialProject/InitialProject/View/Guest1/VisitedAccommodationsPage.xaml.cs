@@ -21,14 +21,17 @@ using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Domain.RepositoryInterfaces;
 using System.Collections.ObjectModel;
 using Microsoft.Graph.Models.Security;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
     /// Interaction logic for VisitedAccommodationsPage.xaml
     /// </summary>
-    public partial class VisitedAccommodationsPage : Page
+    public partial class VisitedAccommodationsPage : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         private GradeGuest1Repository gradeGuest1Repository;
         private ReservationRepository reservationRepository;
         private HotelRepository hotelRepository;
@@ -100,7 +103,6 @@ namespace TravelAgency.View.Guest1
       }
 
       DataPanel.ItemsSource = filteredGrades;
-      ExpandColumns(DataPanel);
     }
 
     private bool isVisitedLoaded = false;
@@ -206,7 +208,10 @@ namespace TravelAgency.View.Guest1
                 NavigationService.Navigate(gradeOwnerPage);
             }
         }
-
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             VisitedHotel SelectedItem = SelectedHotel;

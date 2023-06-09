@@ -52,5 +52,13 @@ namespace TravelAgency.View.Guest1
             StartNewDiscussion page = new StartNewDiscussion(LoggedInUser);
             NavigationService.Navigate(page);
         }
+        private void MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedForum != null)
+            {
+                OpenedForum page = new OpenedForum(SelectedForum, LoggedInUser);
+                NavigationService.Navigate(page);
+            }
+        }
     }
 }

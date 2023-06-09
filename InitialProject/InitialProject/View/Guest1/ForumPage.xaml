@@ -8,9 +8,10 @@
 
     <Canvas Background="White">
         <Label Content="List of all discussions:" Canvas.Top="12" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <DataGrid ItemsSource="{Binding Path=Forums,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Height="413" Width="1588" FontSize="20" Canvas.Top="50" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="2">
+        <DataGrid ItemsSource="{Binding Path=Forums, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Height="413" Width="1588" FontSize="20" Canvas.Top="50" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="2" MouseLeftButtonUp="MouseLeftButtonUp">
             <DataGrid.Columns>                
-                <DataGridTextColumn Width="*" Header="Location" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
                 <DataGridTextColumn Width="*" Header="Number of replies" Binding="{Binding NumberOfReplies}"/>
                 <DataGridTextColumn Width="*" Header="Status(is discussion still open)" Binding="{Binding IsActive}"/>
                 <DataGridTextColumn Width="*" Header="User that started discussion" Binding="{Binding Guest1.Username}"/>

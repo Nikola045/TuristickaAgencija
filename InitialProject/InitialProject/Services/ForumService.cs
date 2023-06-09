@@ -146,8 +146,6 @@ namespace TravelAgency.Services
             comment.ValidComment = validation;
 
             forumCommentRepository.Save(comment);
-
-            MessageBox.Show("Comment successfully created");
         }
         public bool HasGuest1VisitedLocation(string Guest1Username, Forum forum)
         {
@@ -185,7 +183,7 @@ namespace TravelAgency.Services
             return counter;
         }
 
-        public string IsForumVearyUseful(Forum forum)
+        public string IsForumVeryUseful(Forum forum)
         {
             if (CountGuestComments(forum) >= 20 && CountOwnerComments(forum) >= 10)
                 return "Very useful";
