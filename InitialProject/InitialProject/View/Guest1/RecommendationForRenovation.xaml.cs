@@ -44,15 +44,6 @@ namespace TravelAgency.View.Guest1
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             recommendationRepository = new(InjectorService.CreateInstance<IStorage<Recommendation>>());
         }
-        public RecommendationForRenovation(User user, string hotelName)
-        {
-            InitializeComponent();
-            LogedUser = user;
-            HotelName = hotelName;
-            reservationService = new ReservationService();
-            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
-            recommendationRepository = new(InjectorService.CreateInstance<IStorage<Recommendation>>());
-        }
         private void Rate(object sender, RoutedEventArgs e)
         {
             int level = 0;
@@ -86,7 +77,7 @@ namespace TravelAgency.View.Guest1
             );
             recommendationRepository.Save(newRecommendation);
             Reservation reservation = reservationService.FindReservationByID(Id);
-            //reservation.NumberOfRenovationRequest++;
+            reservation.NumberOfRenovationRequest++;
             reservationRepository.Update(reservation);
             AccountSettingsPage page = new AccountSettingsPage(LogedUser);
             NavigationService.Navigate(page);
