@@ -29,5 +29,6 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="474,947,0,0" VerticalAlignment="Top" Click="DeleteTour"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="999,957,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Button Content="Reviews" HorizontalAlignment="Left" Margin="777,947,0,0" VerticalAlignment="Top" Height="70" Width="183" Click="OpenReviews"/>
+        <Label x:Name="SuperGuideLabel" Content="" HorizontalAlignment="Left" Margin="96,136,0,0" VerticalAlignment="Top" FontSize="30"/>
     </Grid>
 </Window>

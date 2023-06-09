@@ -17,11 +17,13 @@ namespace TravelAgency.Services
         private readonly TourRequestsRepository tourRequestsRepository;
         private readonly TourRepository tourRepository;
         private readonly GuestOnTourRepository guestOnTourRepository;
+        private readonly GuideReviewRepository guideReviewRepository;
         public TourService() 
         {
             tourRequestsRepository = new(InjectorService.CreateInstance<IStorage<TourRequests>>());
             tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
             guestOnTourRepository = new(InjectorService.CreateInstance<IStorage<GuestOnTour>>());
+            guideReviewRepository = new(InjectorService.CreateInstance<IStorage<TourReview1>>());
         }
 
         public List<Tour> GetMyTours(int id)
@@ -322,6 +324,61 @@ namespace TravelAgency.Services
             return bestCountry;
 
 
+        }
+
+        public int GetNumberOfToursLanguage(string language, User user)
+        {
+            List<Tour> toures = tourRepository.GetAll();
+            int counter = 0;
+            foreach (Tour tour in toures)
+            {
+                if(tour.Lenguage == language && user.Id == tour.GuideId)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        public int GetRatingLanguageTure(string language, User user)
+        {
+            List<TourReview1> reviews = guideReviewRepository.GetAll();
+            int cumRating = 0;
+            foreach(TourReview1 review in reviews)
+            {
+                if(user.Id == review.Tour.GuideId && review.Tour.Lenguage == language)
+                {
+                    cumRating = cumRating + review.GuidesLenguage;
+                }
+            }
+            return cumRating;
+        }
+
+        public double GetAllRatings(string language, User user)
+        {
+            int numberOfTours = GetNumberOfToursLanguage(language, user);
+            int cumRating = GetRatingLanguageTure(language, user);
+            double averageGrade = cumRating / numberOfTours;
+            if (numberOfTours > 20)
+            {
+                return averageGrade;
+            }
+            return 0;
+        }
+
+        public List<string> GetAllLanguages(User user)
+        {
+            List<Tour> tours = tourRepository.GetAll();
+            List<string> languages = new List<string>();
+            foreach(Tour tour in tours)
+            {
+                if(tour.GuideId == user.Id)
+                {
+                    languages.Add(tour.Lenguage);
+                }
+                
+            }
+            return languages.Distinct().ToList();
         }
     }
 }
