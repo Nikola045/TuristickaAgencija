@@ -38,5 +38,10 @@ namespace TravelAgency.View.Guest1
             textBlock.Inlines.Add(new Run("\n\nLets see what we have for you!"));
             Label.Content = textBlock;
         }
+
+        private void btnReserve_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

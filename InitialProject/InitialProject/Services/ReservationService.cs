@@ -1,4 +1,6 @@
-﻿using LiveCharts;
+﻿using DevExpress.Utils.CommonDialogs.Internal;
+using Forge.OpenAI.Services;
+using LiveCharts;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
+using TravelAgency.Forms;
 using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Storage.FileStorage;
@@ -21,6 +24,7 @@ namespace TravelAgency.Services
         private MoveReservationRepository moveReservationRepository;
         private HotelService hotelService;
         private RenovationRequestRepository renovationRequestRepository;
+        private readonly UserService ownerService;
         public ReservationService() 
         {
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
@@ -28,6 +32,7 @@ namespace TravelAgency.Services
             moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
             renovationRequestRepository = new(InjectorService.CreateInstance<IStorage<RenovationRequest>>());
             hotelService = new HotelService();
+            ownerService = new UserService();
         }
 
         public void LogicalDelete(Reservation reservation)
@@ -229,7 +234,8 @@ namespace TravelAgency.Services
             if(renovation != null)
             {
                 DateTime dateTime = DateTime.Now;
-                if (renovation.StartDate.Day - dateTime.Day > 5)
+                
+                if (renovation.StartDate.Subtract(dateTime).TotalDays >= 5)
                 {
                     renovationRequestRepository.Delete(renovation);
                     MessageBox.Show("Sucess");
@@ -391,6 +397,91 @@ namespace TravelAgency.Services
             columns.Add(columnSeries3);
             columns.Add(columnSeries4);
             return columns;
+        }
+
+        public Dictionary<string,int> GetReservationPerLocation(User user)
+        {
+            List<string> locations = ownerService.GetAllOwnerLocation(user.Username);
+            List<Reservation> reservations = reservationRepository.GetAll();
+            //grupise ih po lokacijama - (hes mapa lokacija - rezervacije)
+            Dictionary<string, int> ReservationPerLocation = new Dictionary<string, int>();
+            foreach (string location in locations)
+            {
+                ReservationPerLocation.Add(location, 0);
+            }
+            //treba da uzme sve hotele od vlasnika i proveri im broj rezervacija
+            foreach (Reservation reservation in reservations)
+            {
+                Hotel hotel = hotelService.GetHotelByName(reservation.HotelName);
+                if (locations.Contains(hotel.Country + hotel.City))
+                {
+                    ReservationPerLocation[hotel.Country + hotel.City]++;
+                }
+            }
+            return ReservationPerLocation;
+        }
+
+        public void FindLocationForInvest(User user)
+        {
+            Dictionary<string, int> locations = GetReservationPerLocation(user);
+            string mostPopularLocation = locations.Keys.Max();
+            string[] fields = mostPopularLocation.Split("|");
+            string country = fields[0];
+            string city = fields[1];
+            DialogResult result = (DialogResult)MessageBox.Show($"Do you want to create new accommodation on location: {country} {city}", "Proposal for the cration of a new accommodation", MessageBoxButton.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                OwnerForm ownerForm = new OwnerForm(user);
+                ownerForm.Country = country;
+                ownerForm.City = city;
+                ownerForm.Show();
+            }
+            else { }
+        }
+
+        public void FindHotelToClose(User user)
+        {
+            List<Hotel> hotels = hotelService.GetHotelByOwner(user.Username);
+            Dictionary<string,int> ReservationPerHotel = new Dictionary<string,int>();
+            foreach(Hotel hotel in hotels)
+            {
+                ReservationPerHotel.Add(hotel.Name, 0);
+            }
+            List <Reservation> reservations = reservationRepository.GetAll(); 
+            foreach(Hotel hotel in hotels)
+            {
+                foreach(Reservation reservation in reservations) 
+                { 
+                    if(hotel.Name == reservation.HotelName)
+                    {
+                        ReservationPerHotel[hotel.Name]++;
+                    }
+                }
+            }
+            string mostNonePopularHotel = ReservationPerHotel.Keys.Min();
+
+
+            DialogResult result = (DialogResult)MessageBox.Show($"Do you want to close accommodation: {mostNonePopularHotel}", "Proposal to close an unpopular accommodation", MessageBoxButton.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                hotelRepository.Delete(hotelService.GetHotelByName(mostNonePopularHotel));
+            }
+            else { }
+        }
+
+        public List<string> GetGuest1Reservations(string username)
+        {
+            List<string> findedLocations = new List<string>();
+            List<Reservation> reservations = reservationRepository.GetAll();
+            foreach (Reservation reservation in reservations)
+            {
+                if (username == reservation.GuestUserName)
+                {
+                    Hotel hotel = hotelService.GetHotelByName(reservation.HotelName);
+                    findedLocations.Add(hotel.Country + "|" + hotel.City);
+                }
+            }
+            return findedLocations;
         }
     }
 }

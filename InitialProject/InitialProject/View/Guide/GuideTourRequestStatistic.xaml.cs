@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelAgency.Domain.Model;
 using TravelAgency.Repository;
 using TravelAgency.Services;
 
@@ -22,7 +23,8 @@ namespace TravelAgency.View.Guide
     public partial class GuideTourRequestStatistic : Window
     {
         private readonly TourService tourService;
-        public GuideTourRequestStatistic()
+        private User LogedUser { get; set; }
+        public GuideTourRequestStatistic(User user)
         {
             InitializeComponent();
             tourService = new TourService();
@@ -32,6 +34,7 @@ namespace TravelAgency.View.Guide
             WantedCity.Text = mostWantedCity;
             string mostWantedCountry = tourService.FindMostWantedCountry();
             WantedCountry.Text = mostWantedCountry;
+            LogedUser = user;
         }
 
         private void FillComboBox(object sender, RoutedEventArgs e)
@@ -84,7 +87,7 @@ namespace TravelAgency.View.Guide
 
         private void Wanted_Click(object sender, RoutedEventArgs e)
         {
-            GuideForm createGuideForm = new GuideForm();  
+            GuideForm createGuideForm = new GuideForm(LogedUser);  
             createGuideForm.Show();
             createGuideForm.txtCity.Text = tourService.FindMostWantedCity();
             createGuideForm.txtCountry.Text = tourService.FindMostWantedCountry();

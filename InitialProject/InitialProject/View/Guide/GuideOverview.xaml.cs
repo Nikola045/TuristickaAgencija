@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
@@ -12,6 +14,7 @@ namespace TravelAgency.View
     {
         private readonly UserRepository userRepository;
         private readonly TourRepository tourRepository;
+        private readonly TourService tourService;
         public GuideOverview()
         {
         }
@@ -26,11 +29,12 @@ namespace TravelAgency.View
             tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
 
             userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
+            tourService = new TourService();
         }
 
         private void OpenGuideForm(object sender, RoutedEventArgs e)
         {
-            GuideForm createGuideForm = new GuideForm();
+            GuideForm createGuideForm = new GuideForm(LoggedInUser);
             createGuideForm.Show();
         }
 
@@ -49,7 +53,20 @@ namespace TravelAgency.View
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             DataPanel.ItemsSource = tourRepository.GetAll();
-
+            List<double> ratings = new List<double>();
+            foreach(string language in tourService.GetAllLanguages(LoggedInUser))
+            {
+                ratings.Add(tourService.GetAllRatings(language, LoggedInUser));
+            }
+            if(ratings.Max() > 4.5)
+            {
+                SuperGuideLabel.Content = "Super-Guide";
+            }
+            else
+            {
+                SuperGuideLabel.Content = "Guide";
+            }
+            
         }
 
         private void DeleteTour(object sender, RoutedEventArgs e)
@@ -86,7 +103,7 @@ namespace TravelAgency.View
 
         private void OpenTourRequestsStatisticsForm(object sender, RoutedEventArgs e)
         {
-            GuideTourRequestStatistic createTourRequestStatisticsForm = new GuideTourRequestStatistic();
+            GuideTourRequestStatistic createTourRequestStatisticsForm = new GuideTourRequestStatistic(LoggedInUser);
             createTourRequestStatisticsForm.Show();
         }
     }

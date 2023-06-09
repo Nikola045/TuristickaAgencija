@@ -8,7 +8,13 @@
     <Compile Update="View\Guest1\ActiveReservationsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest1\AddCommentOnForum.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest1\AnywhereAnytime.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\ForumPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\ForumSettingsPage.xaml.cs">
@@ -26,7 +32,13 @@
     <Compile Update="View\Guest1\MoveReservationForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest1\OpenedForum.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest1\RecommendationForRenovation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\StartNewDiscussion.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\SucessfullReservation.xaml.cs">
@@ -74,6 +86,15 @@
     <Compile Update="View\Guide\GuideTourStatistic.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Owner\CrateComment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\ForumReviewView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Owner\ForumView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Owner\GradeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -115,7 +136,13 @@
     <Page Update="View\Guest1\ActiveReservationsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Guest1\AddCommentOnForum.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\AnywhereAnytime.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\ForumPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\ForumSettingsPage.xaml">
@@ -133,7 +160,13 @@
     <Page Update="View\Guest1\MoveReservationForm.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Guest1\OpenedForum.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\RecommendationForRenovation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\StartNewDiscussion.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\SucessfullReservation.xaml">
@@ -182,6 +215,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guide\GuideTourStatistic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\CrateComment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\ForumReviewView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Owner\ForumView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Owner\GradeView.xaml">

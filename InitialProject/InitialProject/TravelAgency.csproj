@@ -41,6 +41,7 @@
     <PackageReference Include="Cake.Core" Version="3.0.0" />
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="DevExpress.Data" Version="22.2.5" />
+    <PackageReference Include="Forge.OpenAI" Version="1.1.5" />
     <PackageReference Include="itext7" Version="8.0.0" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="LiveCharts" Version="0.9.7" />
@@ -70,10 +71,6 @@
     <Resource Include="View\Owner\back.png" />
     <Resource Include="View\Owner\Gallery-PNG-File.png" />
     <Resource Include="View\Owner\profilepic.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repository\Diagrams\" />
   </ItemGroup>
 
 </Project>

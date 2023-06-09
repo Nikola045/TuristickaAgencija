@@ -44,7 +44,6 @@ namespace TravelAgency.View.Guest1
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             recommendationRepository = new(InjectorService.CreateInstance<IStorage<Recommendation>>());
         }
-        
         private void Rate(object sender, RoutedEventArgs e)
         {
             int level = 0;

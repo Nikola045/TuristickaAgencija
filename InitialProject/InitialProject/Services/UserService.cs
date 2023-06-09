@@ -7,14 +7,16 @@ using TravelAgency.Repository.UserRepo;
 
 namespace TravelAgency.Services
 {
-    internal class OwnerService
+    internal class UserService
     {
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly UserRepository userRepository;
-        public OwnerService()
+        private readonly HotelService hotelService;
+        public UserService()
         {
             ownerGradeRepository = new(InjectorService.CreateInstance<IStorage<OwnerGrade>>());
             userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
+            hotelService = new HotelService();
         }
 
         public int CountGradesFromOwnerRating(string OwnerUserName)
@@ -99,5 +101,18 @@ namespace TravelAgency.Services
             }
             return null;
         }
+
+        public List<string> GetAllOwnerLocation(string OwnerUsername)
+        {
+            List<Hotel> hotels = hotelService.GetHotelByOwner(OwnerUsername);
+            List<string> locations = new List<string>();
+            foreach(Hotel hotel in hotels)
+            {
+                locations.Add(hotel.Country +"|"+ hotel.City);
+            }
+            return locations.Distinct().ToList();
+        }
+
+
     }
 }

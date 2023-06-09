@@ -12,6 +12,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TravelAgency.Domain.Model;
+using TravelAgency.Domain.RepositoryInterfaces;
+using TravelAgency.Forms;
+using TravelAgency.Repository;
 using TravelAgency.Services;
 using PieSeries = LiveCharts.Wpf.PieSeries;
 
@@ -21,6 +24,8 @@ namespace TravelAgency.View.Owner
     {
         private readonly ReservationService reservationService;
         private readonly HotelService hotelService;
+        private readonly UserService ownerService;
+        private readonly ReservationRepository reservationRepository;
         private string _xTitle;
         private List<string> _xLabels;
         private SeriesCollection _data;
@@ -35,6 +40,8 @@ namespace TravelAgency.View.Owner
             DataContext = this;
             reservationService = new ReservationService();
             hotelService = new HotelService();
+            ownerService = new UserService();
+            reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             LogedUser = user;
             DataChart = new SeriesCollection();
             ShowSmallFrame = frame;
@@ -76,8 +83,15 @@ namespace TravelAgency.View.Owner
             XLabels = months;
         }
 
-        private void OnLoad(object sender, RoutedEventArgs e)
+        private void OnPageLoad(object sender, RoutedEventArgs e)
         {
+            //kada vidi gde ima najvise rezervacija po lokaciji predlozi kreiranje novog hotela
+            reservationService.FindLocationForInvest(LogedUser);
+            //kada vidi da ima premalo rezervacija po lokaciji predlozi zatvaranje hotela
+            reservationService.FindHotelToClose(LogedUser);
+        }
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {    
             HotelCB.ItemsSource = hotelService.FillForComboBoxHotels(LogedUser);
         }
 
