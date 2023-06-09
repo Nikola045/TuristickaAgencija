@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Graph.Models.Security;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -76,6 +77,59 @@ namespace TravelAgency.View.Guest2
             {
                 MessageBox.Show("Please select a tour you want to see.");
             }
+        }
+        private void OpenGuest2Form(object sender, RoutedEventArgs e)
+        {
+            Guest2Form createGuest2Form = new Guest2Form(LogedUser);
+            Close();
+            createGuest2Form.Show();
+        }
+
+        private void OpenGuestOnTour(object sender, RoutedEventArgs e)
+        {
+            GuestOnTour createGuestOnTour = new GuestOnTour(LogedUser);
+            Close();
+            createGuestOnTour.Show();
+        }
+
+        private void OpenVouchers(object sender, RoutedEventArgs e)
+        {
+            VouchersView createVouchers = new VouchersView(LogedUser);
+            Close();
+            createVouchers.Show();
+        }
+
+        private void OpenTourReviews(object sender, RoutedEventArgs e)
+        {
+            PastTours pastTours = new PastTours(LogedUser);
+            Close();
+            pastTours.Show();
+        }
+        private void OpenCreateTourRequest(object sender, RoutedEventArgs e)
+        {
+            CreatingTourRequest creatingTourRequest = new CreatingTourRequest(LogedUser);
+            Close();
+            creatingTourRequest.Show();
+        }
+
+        private void OpenTourRequestsStatistic(object sender, RoutedEventArgs e)
+        {
+            TourRequestsStatistic tourRequestsStatistic = new TourRequestsStatistic(LogedUser);
+            Close();
+            tourRequestsStatistic.Show();
+        }
+
+        private void OpenAllTourRequests(object sender, RoutedEventArgs e)
+        {
+            AllTourRequests tourRequestsStatistic = new AllTourRequests(LogedUser);
+            Close();
+            tourRequestsStatistic.Show();
+        }
+
+        private void OpenNotifications(object sender, RoutedEventArgs e)
+        {
+            Notifications notifications = new Notifications(LogedUser);
+            notifications.Show();
         }
     }
 }

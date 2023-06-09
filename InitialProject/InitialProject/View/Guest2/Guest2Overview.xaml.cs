@@ -66,6 +66,7 @@ namespace TravelAgency.View.Guest2
         private void OpenNotifications(object sender, RoutedEventArgs e)
         {
             Notifications notifications = new Notifications(LoggedInUser);
+            Close();
             notifications.Show();
         }
     }
