@@ -25,7 +25,7 @@ namespace TravelAgency.View.Guest2
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly TourRequestsRepository tourRequestsRepository;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         public User LoggedInUser { get; set; }
         
         private string _city;
@@ -52,7 +52,7 @@ namespace TravelAgency.View.Guest2
             InitializeComponent();
             LoggedInUser = user;
             tourRequestsRepository = new(InjectorService.CreateInstance<IStorage<TourRequests>>());
-            ownerService = new OwnerService();
+            ownerService = new UserService();
         }
 
 

@@ -31,7 +31,7 @@ namespace TravelAgency.View
         public static ObservableCollection<Hotel> Hotels { get; set; }
         public HotelRepository hotelRepository { get; set; }
         private readonly HotelService hotelService;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         private readonly ReservationService reservationService;
 
         const string FilePath = "../../../Resources/Data/hotels.csv";
@@ -43,7 +43,7 @@ namespace TravelAgency.View
             hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             Hotels = new ObservableCollection<Hotel>(hotelRepository.GetAll());
             hotelService = new HotelService();
-            ownerService = new OwnerService();
+            ownerService = new UserService();
             reservationService = new ReservationService();
         }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)

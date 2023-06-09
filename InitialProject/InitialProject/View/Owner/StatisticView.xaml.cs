@@ -24,7 +24,7 @@ namespace TravelAgency.View.Owner
     {
         private readonly ReservationService reservationService;
         private readonly HotelService hotelService;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         private readonly ReservationRepository reservationRepository;
         private string _xTitle;
         private List<string> _xLabels;
@@ -40,7 +40,7 @@ namespace TravelAgency.View.Owner
             DataContext = this;
             reservationService = new ReservationService();
             hotelService = new HotelService();
-            ownerService = new OwnerService();
+            ownerService = new UserService();
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             LogedUser = user;
             DataChart = new SeriesCollection();

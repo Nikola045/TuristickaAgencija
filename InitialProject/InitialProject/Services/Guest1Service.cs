@@ -13,12 +13,12 @@ namespace TravelAgency.Services
     {
         private readonly ReservationRepository reservationRepository;
         private readonly UserRepository userRepository;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         public Guest1Service()
         {
             reservationRepository = new ReservationRepository(InjectorService.CreateInstance<IStorage<Reservation>>());
             userRepository = new UserRepository(InjectorService.CreateInstance<IStorage<User>>());
-            ownerService = new OwnerService();
+            ownerService = new UserService();
         }
 
         public int CountReservationsFromGuest(string guestUserName)
