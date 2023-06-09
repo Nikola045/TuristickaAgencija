@@ -27,7 +27,7 @@ namespace TravelAgency.View.Guest2
 
         private readonly ComplexTourRequestRepositoty complexTourRequestsRepository;
         private readonly TourRequestsRepository tourRequestsRepository;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         public User LoggedInUser { get; set; }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -40,7 +40,7 @@ namespace TravelAgency.View.Guest2
             LoggedInUser = user;
             complexTourRequestsRepository = new(InjectorService.CreateInstance<IStorage<ComplexTourRequest>>());
             tourRequestsRepository = new(InjectorService.CreateInstance<IStorage<TourRequests>>());
-            ownerService = new OwnerService();
+            ownerService = new UserService();
         }
         private void SaveTourRequest(object sender, RoutedEventArgs e)
         {
