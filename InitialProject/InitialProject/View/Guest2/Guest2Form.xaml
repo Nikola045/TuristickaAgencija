@@ -36,7 +36,7 @@
         <Button Content="Exit" HorizontalAlignment="Left" Margin="729,381,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
         <Label Content="Search all our Tours" HorizontalAlignment="Left" FontSize="30" Margin="252,53,0,0" VerticalAlignment="Top"/>
         <GroupBox Header="Filter" FontSize="20" Margin="28,115,549,36"/>
-        <ToolBar Grid.Row="0" Margin="0,0,0,394">
+        <ToolBar Grid.Row="0" Margin="0,0,0,381">
             <Button Click="OpenGuest2Form">
                 <StackPanel Orientation="Horizontal" Width="53">
 
