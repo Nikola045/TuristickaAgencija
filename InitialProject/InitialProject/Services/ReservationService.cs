@@ -24,7 +24,7 @@ namespace TravelAgency.Services
         private MoveReservationRepository moveReservationRepository;
         private HotelService hotelService;
         private RenovationRequestRepository renovationRequestRepository;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         public ReservationService() 
         {
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
@@ -32,7 +32,7 @@ namespace TravelAgency.Services
             moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
             renovationRequestRepository = new(InjectorService.CreateInstance<IStorage<RenovationRequest>>());
             hotelService = new HotelService();
-            ownerService = new OwnerService();
+            ownerService = new UserService();
         }
 
         public void LogicalDelete(Reservation reservation)
@@ -467,6 +467,21 @@ namespace TravelAgency.Services
                 hotelRepository.Delete(hotelService.GetHotelByName(mostNonePopularHotel));
             }
             else { }
+        }
+
+        public List<string> GetGuest1Reservations(string username)
+        {
+            List<string> findedLocations = new List<string>();
+            List<Reservation> reservations = reservationRepository.GetAll();
+            foreach (Reservation reservation in reservations)
+            {
+                if (username == reservation.GuestUserName)
+                {
+                    Hotel hotel = hotelService.GetHotelByName(reservation.HotelName);
+                    findedLocations.Add(hotel.Country + "|" + hotel.City);
+                }
+            }
+            return findedLocations;
         }
     }
 }

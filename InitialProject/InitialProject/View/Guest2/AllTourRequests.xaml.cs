@@ -1,6 +1,5 @@
 
 ﻿using System.Collections.Generic;
-﻿using Microsoft.Graph.Models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;

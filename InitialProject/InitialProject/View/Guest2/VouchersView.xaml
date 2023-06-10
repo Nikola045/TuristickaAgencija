@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="VouchersView" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="DataPanel" HorizontalAlignment="Left" Height="169" Margin="180,88,0,0" VerticalAlignment="Top" Width="487" Loaded="LoadData"/>
+        <DataGrid x:Name="DataPanel" HorizontalAlignment="Left" Height="169" Margin="160,95,0,0" VerticalAlignment="Top" Width="488" Loaded="LoadData"/>
         <Button Content="Exit" HorizontalAlignment="Left" Margin="727,360,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <Button Content="Refresh" HorizontalAlignment="Center" Margin="0,319,0,0" Click ="AddVouchers"  VerticalAlignment="Top" Height="32" Width="70"/>
 
     </Grid>
 </Window>

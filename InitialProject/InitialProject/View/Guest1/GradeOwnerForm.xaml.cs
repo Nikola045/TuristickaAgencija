@@ -36,9 +36,9 @@ namespace TravelAgency.View.Guest1
         private readonly GradeService gradeService;
         private readonly HotelService hotelService;
         private readonly ReservationService reservationService;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         private User LogedUser { get; set; }
-        public VisitedHotel SelectedItem{ get; set; }
+        public VisitedHotel SelectedItem { get; set; }
         public ObservableCollection<VisitedHotel> Hotels { get; set; }
 
         public GradeOwnerForm(User user, VisitedHotel hotel)
@@ -52,21 +52,21 @@ namespace TravelAgency.View.Guest1
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();
-            ownerService = new OwnerService();
+            ownerService = new UserService();
             LogedUser = user;
             SelectedItem = hotel;
-            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());    
+            Hotels = new ObservableCollection<VisitedHotel>(AddHotel());
         }
 
         public List<VisitedHotel> AddHotel()
         {
             List<VisitedHotel> hotels = new List<VisitedHotel>();
             hotels.Add(SelectedItem);
-            return hotels;  
+            return hotels;
         }
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            
+
         }
         private void ExpandColumns(DataGrid dataGrid)
         {
@@ -84,7 +84,7 @@ namespace TravelAgency.View.Guest1
             }
         }
         private void btnPlus_Click(object sender, RoutedEventArgs e)
-            {
+        {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             bool? result = openFileDialog.ShowDialog();
@@ -101,7 +101,7 @@ namespace TravelAgency.View.Guest1
         {
             object selectedItem = cbHotelName.SelectedItem;
             Reservation reservation = new Reservation();
-            
+
             int id;
             string line = selectedItem.ToString();
             string[] fields = line.Split(' ');
@@ -213,7 +213,7 @@ namespace TravelAgency.View.Guest1
             bool isOwnerOptionSelected = rbOwnerOption1.IsChecked == true || rbOwnerOption2.IsChecked == true || rbOwnerOption3.IsChecked == true || rbOwnerOption4.IsChecked == true || rbOwnerOption5.IsChecked == true;
             bool isHotelNameSelected = cbHotelName.SelectedItem != null;
             bool isCommentEntered = !string.IsNullOrWhiteSpace(txtComment.Text);
- 
+
             if (isHotelOptionSelected && isOwnerOptionSelected && isHotelNameSelected && isCommentEntered)
             {
                 btnGrade.IsEnabled = true;

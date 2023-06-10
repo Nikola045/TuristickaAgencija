@@ -53,7 +53,7 @@
             <Button Click="OpenCreateTourRequest" Width="80">
                 <StackPanel Orientation="Horizontal" Width="67">
 
-                    <TextBlock Text="Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                    <TextBlock Text="Create Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
                 </StackPanel>
             </Button>
             <Separator/>
@@ -69,6 +69,13 @@
                 <StackPanel Orientation="Horizontal" Width="67">
 
                     <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenComplexTourRequests" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Complex" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
                 </StackPanel>
             </Button>
 

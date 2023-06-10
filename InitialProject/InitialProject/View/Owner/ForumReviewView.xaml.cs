@@ -53,7 +53,7 @@ namespace TravelAgency.View.Owner
         {
             forumLabel.Content = CurrentForum.Country + " " + CurrentForum.City;
             ButtonCreate = forumService.IsOwnerLocation(Owner.Username, CurrentForum);
-            Useful = forumService.IsForumVearyUseful(CurrentForum);
+            Useful = forumService.IsForumVeryUseful(CurrentForum);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

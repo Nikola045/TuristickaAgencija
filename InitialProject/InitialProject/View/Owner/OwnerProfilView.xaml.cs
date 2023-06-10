@@ -16,7 +16,7 @@ namespace TravelAgency.View.Owner
         private string _confirmPassword;
         private string _superOwner;
         private string _username;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -25,7 +25,7 @@ namespace TravelAgency.View.Owner
             InitializeComponent();
             DataContext = this;
             LogedOwner = user;
-            ownerService = new OwnerService();
+            ownerService = new UserService();
         }
 
         private void LogOut(object sender, RoutedEventArgs e)

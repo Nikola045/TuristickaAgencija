@@ -43,7 +43,5 @@ namespace TravelAgency.Repository
         {
             return _vouchers;
         }
-
-
     }
 }
