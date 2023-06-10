@@ -62,7 +62,7 @@ namespace TravelAgency.View
             {
                 ratings.Add(tourService.GetAllRatings(language, LoggedInUser));
             }
-            if(ratings.Max() > 4.5)
+            if(ratings.Max() > 1.5)
             {
                 SuperGuideLabel.Content = "Super-Guide";
             }

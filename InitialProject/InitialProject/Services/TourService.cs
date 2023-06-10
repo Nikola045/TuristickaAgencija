@@ -15,12 +15,16 @@ namespace TravelAgency.Services
     internal class TourService
     {
         private readonly TourRequestsRepository tourRequestsRepository;
+        private readonly ComplexTourRequestRepositoty complexTourRequestsRepository;
+        private readonly VoucherRepository voucherRepository;
+
         private readonly TourRepository tourRepository;
         private readonly GuestOnTourRepository guestOnTourRepository;
         private readonly GuideReviewRepository guideReviewRepository;
-        public TourService() 
+        public TourService()
         {
             tourRequestsRepository = new(InjectorService.CreateInstance<IStorage<TourRequests>>());
+            voucherRepository = new(InjectorService.CreateInstance<IStorage<Voucher>>());
             tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
             guestOnTourRepository = new(InjectorService.CreateInstance<IStorage<GuestOnTour>>());
             guideReviewRepository = new(InjectorService.CreateInstance<IStorage<TourReview1>>());
@@ -80,7 +84,24 @@ namespace TravelAgency.Services
 
             return tourRequests;
         }
+        /*
+        public List<ComplexTourRequest> MyComplexRequests(int id)
+        {
+            List<ComplexTourRequest> tourRequests = complexTourRequestsRepository.GetAll();
+            List<ComplexTourRequest> tourRequests1 = new List<ComplexTourRequest>();
 
+            for (int i = 0; i < tourRequests.Count(); i++)
+            {
+                TourRequests request = 
+                if (tourRequests[i].Guest2.Id == id && tourRequests[i].Status == "Pending")
+                {
+                    tourRequests1.Add(tourRequests[i]);
+                }
+            }
+
+            return tourRequests1;
+        }
+        */
         public Tour FindById(int id)
         {
             Tour tour = new Tour();
@@ -360,7 +381,7 @@ namespace TravelAgency.Services
             int numberOfTours = GetNumberOfToursLanguage(language, user);
             int cumRating = GetRatingLanguageTure(language, user);
             double averageGrade = cumRating / numberOfTours;
-            if (numberOfTours > 20)
+            if (numberOfTours > 1)
             {
                 return averageGrade;
             }
@@ -381,5 +402,29 @@ namespace TravelAgency.Services
             }
             return languages.Distinct().ToList();
         }
+
+        public void Refresh(int id)
+        {
+            List<GuestOnTour> guests = guestOnTourRepository.GetAll();
+            int c = 0;
+            User user = new User();
+            foreach (GuestOnTour guest in guests)
+            {
+               
+                if(guest.Guest2.Id == id)
+                {
+                    c = c + 1;
+                    user = guest.Guest2;
+                }
+               
+            }
+            if (c > 0.5)
+            {
+                Voucher voucher = new Voucher(voucherRepository.NextId(), "5 tura", DateTime.Now.AddYears(1), user);
+                voucherRepository.Save(voucher);
+            }
+            
+        }
+
     }
 }
