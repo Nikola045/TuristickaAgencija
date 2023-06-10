@@ -36,7 +36,7 @@ namespace TravelAgency.View.Guest1
         private readonly GradeService gradeService;
         private readonly HotelService hotelService;
         private readonly ReservationService reservationService;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         private User LogedUser { get; set; }
         public VisitedHotel SelectedItem { get; set; }
         public ObservableCollection<VisitedHotel> Hotels { get; set; }
@@ -52,7 +52,7 @@ namespace TravelAgency.View.Guest1
             gradeService = new GradeService();
             hotelService = new HotelService();
             reservationService = new ReservationService();
-            ownerService = new OwnerService();
+            ownerService = new UserService();
             LogedUser = user;
             SelectedItem = hotel;
             Hotels = new ObservableCollection<VisitedHotel>(AddHotel());

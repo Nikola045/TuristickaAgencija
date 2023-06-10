@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravelAgency.Resources.Data
+namespace TravelAgency.Services
 {
-    class notifications
+    class NotificationService
     {
     }
 }

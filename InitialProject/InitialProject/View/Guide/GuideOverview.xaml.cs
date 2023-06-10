@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
 using TravelAgency.Repository;
@@ -12,6 +15,9 @@ namespace TravelAgency.View
     {
         private readonly UserRepository userRepository;
         private readonly TourRepository tourRepository;
+        private readonly TourService tourService;
+        private readonly GuestOnTourRepository guestOnTourRepository;
+        private readonly VoucherRepository voucherRepository;
         public GuideOverview()
         {
         }
@@ -24,8 +30,10 @@ namespace TravelAgency.View
             LoggedInUser = user;
 
             tourRepository = new(InjectorService.CreateInstance<IStorage<Tour>>());
-
+            voucherRepository = new(InjectorService.CreateInstance<IStorage<Voucher>>());
+            guestOnTourRepository = new(InjectorService.CreateInstance<IStorage<GuestOnTour>>());
             userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
+            tourService = new TourService();
         }
 
         private void OpenGuideForm(object sender, RoutedEventArgs e)
@@ -49,7 +57,20 @@ namespace TravelAgency.View
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             DataPanel.ItemsSource = tourRepository.GetAll();
-
+            List<double> ratings = new List<double>();
+            foreach(string language in tourService.GetAllLanguages(LoggedInUser))
+            {
+                ratings.Add(tourService.GetAllRatings(language, LoggedInUser));
+            }
+            if(ratings.Max() > 4.5)
+            {
+                SuperGuideLabel.Content = "Super-Guide";
+            }
+            else
+            {
+                SuperGuideLabel.Content = "Guide";
+            }
+            
         }
 
         private void DeleteTour(object sender, RoutedEventArgs e)
@@ -60,6 +81,25 @@ namespace TravelAgency.View
         }
         private void GetFired(object sender, RoutedEventArgs e)
         {
+            List<GuestOnTour> guests = new List<GuestOnTour>();
+            guests = guestOnTourRepository.GetAll();
+            List<Tour> tours = new List<Tour>();
+            tours = tourRepository.GetAll();
+            foreach (Tour tour in tours)
+            {
+                if (LoggedInUser.Id == tour.GuideId)
+                { 
+                    foreach(GuestOnTour guest in guests)
+                    {
+                        if (guest.Tour.Id == tour.Id)
+                        {
+                            Voucher voucher = new Voucher(voucherRepository.NextId(),"Otkaz",DateTime.Now.AddYears(2),guest.Guest2);
+                            voucherRepository.Save(voucher);
+                        }
+                    }
+
+                }
+            }
             userRepository.Delete(LoggedInUser);
         }
 

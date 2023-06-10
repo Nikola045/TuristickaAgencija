@@ -12,19 +12,19 @@ namespace TravelAgency.Services
     {
         private readonly ForumRepository forumRepository;
         private readonly ForumCommentRepository forumCommentRepository;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         private readonly ReservationService reservationService;
         public ForumService()
         {
             forumRepository = new(InjectorService.CreateInstance<IStorage<Forum>>());
             forumCommentRepository = new(InjectorService.CreateInstance<IStorage<ForumComment>>());
-            ownerService = new OwnerService();
+            ownerService = new UserService();
             reservationService = new ReservationService();
         }
 
         public List<Forum> GetNewForums()
         {
-            List<Forum> fourms = forumRepository.GetAll();
+                List<Forum> fourms = forumRepository.GetAll();
             List<Forum> newForums = new List<Forum>();
             DateTime dateTime = DateTime.Now;
             foreach(Forum forum in fourms) 

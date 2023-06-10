@@ -25,7 +25,7 @@ namespace TravelAgency.View.Guest2
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly TourRequestsRepository tourRequestsRepository;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         public User LoggedInUser { get; set; }
         
         private string _city;
@@ -52,7 +52,7 @@ namespace TravelAgency.View.Guest2
             InitializeComponent();
             LoggedInUser = user;
             tourRequestsRepository = new(InjectorService.CreateInstance<IStorage<TourRequests>>());
-            ownerService = new OwnerService();
+            ownerService = new UserService();
         }
 
 
@@ -265,6 +265,7 @@ namespace TravelAgency.View.Guest2
                 Convert.ToDateTime(SecondDateBox.Text));
 
                 tourRequestsRepository.Save(newTourRequests);
+                MessageBox.Show("Uspesno kreiran zahtev za turu.");
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {
@@ -272,6 +273,12 @@ namespace TravelAgency.View.Guest2
             this.Close();
             guest2Overview.Show();
 
+        }
+        private void CreateComplex(object sender, RoutedEventArgs e)
+        {
+            CreatingComplexTourRequest guest2Overview = new CreatingComplexTourRequest(LoggedInUser);
+            this.Close();
+            guest2Overview.Show();
         }
         private void Exit(object sender, RoutedEventArgs e)
         {

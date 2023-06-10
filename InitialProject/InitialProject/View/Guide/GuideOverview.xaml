@@ -6,18 +6,18 @@
         xmlns:local="clr-namespace:TravelAgency.View"
         mc:Ignorable="d"
         Title="GuideOverview" Height="1080" Width="1920" WindowStartupLocation="CenterScreen">
-        <Window.InputBindings>
+    <Window.InputBindings>
         <KeyBinding Command="{Binding OpenGuideForm}" Key="O" Modifiers="Ctrl"/>
         <KeyBinding Command="Save" Key="S" Modifiers="Control"/>
-        </Window.InputBindings>
+    </Window.InputBindings>
     <Grid Loaded="OnLoad">
-    <Menu Margin="0,0,0,996">
-        <MenuItem Header="Home" FontSize="24"></MenuItem>
-        <Separator></Separator>
-        <MenuItem Header="Tours" FontSize="24">
-            <MenuItem Header="Create Tour" Click="OpenGuideForm"></MenuItem>
-        </MenuItem>
-        <MenuItem Header="LiveTour" Click="OpenLiveTourForm" FontSize="24"></MenuItem>
+        <Menu Margin="0,0,0,996">
+            <MenuItem Header="Home" FontSize="24"></MenuItem>
+            <Separator></Separator>
+            <MenuItem Header="Tours" FontSize="24">
+                <MenuItem Header="Create Tour" Click="OpenGuideForm"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="LiveTour" Click="OpenLiveTourForm" FontSize="24"></MenuItem>
             <MenuItem Header="Statistics" FontSize="24" Click="OpenTourStatisticForm"></MenuItem>
             <MenuItem Header="Tour Requests" FontSize="24" Click="OpenTourRequestsForm"></MenuItem>
             <MenuItem Header="Statistics on Tour Requests" FontSize="24" Click="OpenTourRequestsStatisticsForm"></MenuItem>
@@ -25,9 +25,10 @@
         <DataGrid x:Name="DataPanel" Margin="116,279,116,216"/>
         <Label Content="Label" HorizontalAlignment="Left" Margin="894,170,0,0" VerticalAlignment="Top"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="249,962,0,0" VerticalAlignment="Top" Click="OpenLiveTourForm"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="555,947,0,0" VerticalAlignment="Top" Click="GetFired"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="474,947,0,0" VerticalAlignment="Top" Click="DeleteTour"/>
+        <Button Content="Otkaz" HorizontalAlignment="Left" Margin="1533,952,0,0" VerticalAlignment="Top" Click="GetFired" Height="60" Width="148"/>
+        <Button Content="DeleteTour" HorizontalAlignment="Left" Margin="474,947,0,0" VerticalAlignment="Top" Click="DeleteTour"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="999,957,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Button Content="Reviews" HorizontalAlignment="Left" Margin="777,947,0,0" VerticalAlignment="Top" Height="70" Width="183" Click="OpenReviews"/>
+        <Label x:Name="SuperGuideLabel" Content="" HorizontalAlignment="Left" Margin="96,136,0,0" VerticalAlignment="Top" FontSize="30"/>
     </Grid>
 </Window>
