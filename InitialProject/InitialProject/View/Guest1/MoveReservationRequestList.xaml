@@ -1,0 +1,20 @@
+﻿<Page x:Class="TravelAgency.View.Guest1.MoveReservationRequestList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelAgency.View.Guest1"
+      mc:Ignorable="d" Height="516" Width="1284">
+    <Canvas Background="White">
+        <Label Content="List of all your requests:" FontSize="20"/>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path = MoveReservations,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedHotel}" Height="262" Width="1284" FontSize="16" Canvas.Top="42" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Hotel Name" Binding="{Binding HotelName}"/>
+                <DataGridTextColumn Width="*" Header="Start Date" Binding="{Binding NewStartDate}"/>
+                <DataGridTextColumn Width="*" Header="End Date" Binding="{Binding NewEndDate}"/>
+                <DataGridTextColumn Width="*" Header="Request status" Binding="{Binding Status}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Canvas>
+</Page>

@@ -101,6 +101,5 @@ namespace TravelAgency.View
                 e.Cancel = true;
             }
         }
-
     }
 }

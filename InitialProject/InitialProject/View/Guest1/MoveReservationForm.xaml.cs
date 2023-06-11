@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,6 +17,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using DevExpress.Xpo.Logger;
 using DevExpress.XtraEditors.Filtering;
+using Microsoft.Graph.Models.Security;
 using Microsoft.Kiota.Abstractions;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
@@ -28,13 +30,15 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for MoveReservationForm.xaml
     /// </summary>
-    public partial class MoveReservationForm : Window, INotifyPropertyChanged
+    public partial class MoveReservationForm : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         ReservationService reservationService;
         MoveReservationRepository moveReservationRepository;
         ReservationRepository reservationRepository;
         HotelService hotelService;
+        public ObservableCollection<Reservation> Reservations { get; set; }
+        public Reservation SelectedReservation { get; set; }
         User LogedUser { get; set; }
         public MoveReservationForm(User user)
         {
@@ -45,17 +49,12 @@ namespace TravelAgency.View.Guest1
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             hotelService = new HotelService();
             LogedUser = user;
+            Reservations = new ObservableCollection<Reservation>(reservationService.FindReservationByGuestUsername(LogedUser.Username));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            List<Reservation> reservations = reservationService.FindReservationByGuestUsername(LogedUser.Username);
-            DataPanel.ItemsSource = reservations;
-            btnRequest.IsEnabled = false;
+            
         }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -63,12 +62,11 @@ namespace TravelAgency.View.Guest1
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Reservation SelectedReservation = (Reservation)DataPanel.SelectedItem;
             if (SelectedReservation != null && AllFieldsValid())
             {
                 MoveReservation newRequest = new MoveReservation(
                     SelectedReservation,
-                    SelectedReservation.HotelName,
+                    SelectedReservation.Hotel.Name,
                     LogedUser.Username,
                     SelectedReservation.StartDate,
                     SelectedReservation.EndDate,
@@ -76,16 +74,16 @@ namespace TravelAgency.View.Guest1
                     Convert.ToDateTime(NewEndDate.Text)
                 );
                 moveReservationRepository.Save(newRequest);
-                MessageBox.Show("Request sent");
+                MoveReservationRequestList page = new MoveReservationRequestList(LogedUser);
+                NavigationService.Navigate(page);
             }
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             DateTime dateTime = DateTime.Now;
-            Reservation SelectedReservation = (Reservation)DataPanel.SelectedItem;
             if (SelectedReservation != null)
             {
-                Hotel hotel = hotelService.GetHotelByName(SelectedReservation.HotelName);
+                Hotel hotel = hotelService.GetHotelByName(SelectedReservation.Hotel.Name);
                 Reservation findedReservation = reservationService.FindReservationByID(SelectedReservation.Id);
                 int daysUntilCheckin = (int)(findedReservation.StartDate - dateTime).TotalDays;
 
@@ -93,14 +91,15 @@ namespace TravelAgency.View.Guest1
                 {
                     findedReservation.GradeStatus = "Canceled";
                     reservationRepository.Update(findedReservation);
-                    MessageBox.Show("Reservation successfully canceled.");
+                    SucessfullyCanceled page = new SucessfullyCanceled(LogedUser);
+                    NavigationService.Navigate(page);
                 }
                 else
                 {
-                    MessageBox.Show("This reservation cannot be canceled at this time.");
+                    NotSucessfullyCanceled page = new NotSucessfullyCanceled(LogedUser);
+                    NavigationService.Navigate(page);
                 }
                 List<Reservation> reservations = reservationService.FindReservationByGuestUsername(LogedUser.Username);
-                DataPanel.ItemsSource = reservations;
             }
         }
         private void WindowLoaded(object sender, RoutedEventArgs e)
@@ -135,7 +134,7 @@ namespace TravelAgency.View.Guest1
         }
         private bool AllFieldsValid()
         {
-            if (NewStartDate.SelectedDate != null && NewEndDate.SelectedDate != null && DataPanel.SelectedItem != null)
+            if (NewStartDate.SelectedDate != null && NewEndDate.SelectedDate != null && SelectedReservation != null)
             {
                 if (NewStartDate.SelectedDate >= NewEndDate.SelectedDate)
                 {
@@ -144,8 +143,7 @@ namespace TravelAgency.View.Guest1
                 }
                 else
                 {
-                    Reservation selectedReservation = (Reservation)DataPanel.SelectedItem;
-                    if (selectedReservation.StartDate <= Convert.ToDateTime(NewStartDate.Text) && selectedReservation.EndDate >= Convert.ToDateTime(NewEndDate.Text))
+                    if (SelectedReservation.StartDate <= Convert.ToDateTime(NewStartDate.Text) && SelectedReservation.EndDate >= Convert.ToDateTime(NewEndDate.Text))
                     {
                         MessageBox.Show("The selected date range is already booked.");
                         return false;
@@ -163,7 +161,7 @@ namespace TravelAgency.View.Guest1
         }        
         private void DataPanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataPanel.SelectedItem != null)
+            if (SelectedReservation != null)
             {
                 btnRequest.IsEnabled = AllFieldsValid();
             }
@@ -173,5 +171,10 @@ namespace TravelAgency.View.Guest1
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MoveReservationRequestList page = new MoveReservationRequestList(LogedUser);
+            NavigationService.Navigate(page);
+        }
     }
 }

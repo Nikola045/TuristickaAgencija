@@ -4,21 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TravelAgency.View.Guest1"
-      mc:Ignorable="d" Height="516" Width="1319"
+      mc:Ignorable="d" Height="516" Width="1284"
     >
     <Canvas Background="White" Loaded="OnLoad">
         <Label Content="Started discussions:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="-2"/>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Path=Forums,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Height="270" Width="1317" FontSize="20" Canvas.Top="35" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="2">
+        <DataGrid x:Name="dataGrid" FontSize="16" ItemsSource="{Binding Path=Forums,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Height="270" Width="1281" Canvas.Top="35" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
                 <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
                 <DataGridTextColumn Width="*" Header="Number of replies" Binding="{Binding NumberOfReplies}"/>
-                <DataGridTextColumn Width="*" Header="Status(is discussion still open)" Binding="{Binding IsActive}"/>
-                <DataGridTextColumn Width="*" Header="User that started discussion" Binding="{Binding Guest1.Username}"/>
+                <DataGridTextColumn Width="*" Header="Status s(is discussion still open)" Binding="{Binding IsActive}"/>
                 <DataGridTextColumn Width="*" Header="Very useful" Binding="{Binding VeryUseful}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Close discussion" FontSize="20" Canvas.Left="2" Canvas.Top="312" Height="37" Width="210" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Close discussion" FontSize="20" Canvas.Left="2" Canvas.Top="312" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
         <Label x:Name="Label" Content="Label" FontSize="20" Canvas.Left="4" Canvas.Top="368" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Canvas>
 </Page>

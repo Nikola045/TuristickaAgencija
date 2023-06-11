@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Repository.GradeRepo;
 using TravelAgency.Repository;
@@ -19,10 +18,6 @@ using TravelAgency.Services;
 using User = TravelAgency.Domain.Model.User;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Domain.RepositoryInterfaces;
-using System.Collections.ObjectModel;
-using Microsoft.Graph.Models.Security;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace TravelAgency.View.Guest1
 {
@@ -34,9 +29,11 @@ namespace TravelAgency.View.Guest1
         public event PropertyChangedEventHandler? PropertyChanged;
         private GradeGuest1Repository gradeGuest1Repository;
         private ReservationRepository reservationRepository;
+        private OwnerGradeRepository ereservationRepository;
         private HotelRepository hotelRepository;
         private readonly GradeService gradeService;
         public ObservableCollection<VisitedHotel> VisitedHotels { get; set; }
+        public ObservableCollection<OwnerGrade> Grades { get; set; }
         private User LoggedInUser { get; set; }
         public VisitedHotel SelectedHotel { get; set; }
         public VisitedAccommodationsPage(User user)
@@ -49,12 +46,67 @@ namespace TravelAgency.View.Guest1
             hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
             gradeService = new GradeService();
             VisitedHotels = new ObservableCollection<VisitedHotel>(GetAll());
+            Grades = new ObservableCollection<OwnerGrade>(GetAllGrades());
         }
 
         public List<VisitedHotel> GetAll()
         {
             List<Reservation> reservations = reservationRepository.GetAll();
             List<VisitedHotel> filteredGrades = new List<VisitedHotel>();
+
+            foreach (Reservation reservation in reservations)
+            {
+                Hotel hotel = hotelRepository.GetByHotelName(reservation.Hotel.Name);
+
+                if (hotel != null)
+                {
+                    VisitedHotel obj = new VisitedHotel
+                    (
+                        hotel.Name,
+                        hotel.City,
+                        hotel.Country,
+                        hotel.TypeOfHotel,
+                        reservation.NumberOfGuests,
+                        reservation.NumberOfDays,
+                        reservation.GradeStatus
+                    );
+                    filteredGrades.Add(obj);
+                }
+            }
+
+            return filteredGrades;
+        }
+
+        private List<OwnerGrade> GetAllGrades()
+        {
+            List<GuestGrade> guestGrades = gradeGuest1Repository.GetAll();
+            List<OwnerGrade> filteredGrades = new List<OwnerGrade>();
+
+            foreach (GuestGrade grade in guestGrades)
+            {
+                Reservation reservation = reservationRepository.Get(grade.Reservation.Id);
+
+                if (reservation != null && gradeService.IsOwnerGradeExists(reservation.Id))
+                {
+                    OwnerGrade ownerGrade = new OwnerGrade
+                    (
+                        reservation.Hotel.Name,
+                        grade.Cleanliness,
+                        grade.Respecting,
+                        grade.CommentText
+                    );
+                    filteredGrades.Add(ownerGrade);
+                }
+            }
+            return filteredGrades;
+        }
+
+        private bool isVisitedLoaded = false;
+
+        private void LoadVisited(object sender, RoutedEventArgs e)
+        {
+            /*List<Reservation> reservations = reservationRepository.GetAll();
+            List<object> filteredGrades = new List<object>();
 
             foreach (Reservation reservation in reservations)
             {
@@ -72,91 +124,36 @@ namespace TravelAgency.View.Guest1
                         reservation.NumberOfDays,
                         reservation.GradeStatus
                     );
-                filteredGrades.Add(obj);
+                    filteredGrades.Add(obj);
                 }
             }
 
+            ShowVisited.ItemsSource = filteredGrades;
 
-            return filteredGrades;
+
+            ShowVisited.Loaded += (s, args) =>
+            {
+                foreach (var item in ShowVisited.Items)
+                {
+                    var container = ShowVisited.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
+                    var isRatedTextBlock = FindVisualChild<TextBlock>(container, "IsRatedTextBlock");
+
+                    if (isRatedTextBlock != null)
+                    {
+                        var propertyInfo = item.GetType().GetProperty("IsRated");
+                        var isRatedValue = propertyInfo?.GetValue(item);
+
+                        if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
+                        {
+                            isRatedTextBlock.Foreground = Brushes.Blue;
+                            isRatedTextBlock.TextDecorations = TextDecorations.Underline;
+                        }
+                    }
+                }
+            };
+            ExpandColumns(ShowVisited);*/
         }
 
-    private void OnLoad(object sender, RoutedEventArgs e)
-    {
-      List<GuestGrade> guestGrades = gradeGuest1Repository.GetAll();
-      List<object> filteredGrades = new List<object>();
-
-      foreach (GuestGrade grade in guestGrades)
-      {
-          Reservation reservation = reservationRepository.Get(grade.Reservation.Id);
-
-          if (reservation != null && gradeService.IsOwnerGradeExists(reservation.Id))
-          {
-              var obj = new
-              {
-                  OwnerOf = reservation.HotelName,
-                  Cleanliness = grade.Cleanliness,
-                  Politeness = grade.Respecting,
-                  Comment = grade.CommentText
-              };
-              filteredGrades.Add(obj);
-          }
-      }
-
-      DataPanel.ItemsSource = filteredGrades;
-    }
-
-    private bool isVisitedLoaded = false;
-
-    private void LoadVisited(object sender, RoutedEventArgs e)
-    {
-    /*  List<Reservation> reservations = reservationRepository.GetAll();
-      List<object> filteredGrades = new List<object>();
-
-      foreach (Reservation reservation in reservations)
-      {
-          Hotel hotel = hotelRepository.GetByHotelName(reservation.HotelName);
-
-          if (hotel != null)
-          {
-              VisitedHotel obj = new VisitedHotel
-              (
-                  hotel.Name,
-                  hotel.City,
-                  hotel.Country,
-                  hotel.TypeOfHotel,
-                  reservation.NumberOfGuests,
-                  reservation.NumberOfDays,
-                  reservation.GradeStatus
-              );
-              filteredGrades.Add(obj);
-          }
-      }
-
-      ShowVisited.ItemsSource = filteredGrades;
-
-
-      ShowVisited.Loaded += (s, args) =>
-      {
-          foreach (var item in ShowVisited.Items)
-          {
-              var container = ShowVisited.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
-              var isRatedTextBlock = FindVisualChild<TextBlock>(container, "IsRatedTextBlock");
-
-              if (isRatedTextBlock != null)
-              {
-                  var propertyInfo = item.GetType().GetProperty("IsRated");
-                  var isRatedValue = propertyInfo?.GetValue(item);
-
-                  if (isRatedValue != null && isRatedValue.ToString() == "NotGraded")
-                  {
-                      isRatedTextBlock.Foreground = Brushes.Blue;
-                      isRatedTextBlock.TextDecorations = TextDecorations.Underline;
-                  }
-              }
-          }
-      };
-      ExpandColumns(ShowVisited);*/
-            }
         private void ExpandColumns(DataGrid dataGrid)
         {
             double totalWidth = dataGrid.ActualWidth;
@@ -208,10 +205,12 @@ namespace TravelAgency.View.Guest1
                 NavigationService.Navigate(gradeOwnerPage);
             }
         }
+
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             VisitedHotel SelectedItem = SelectedHotel;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for OpenedForum.xaml
     /// </summary>
-    public partial class OpenedForum : Page
+    public partial class OpenedForum : Page, INotifyPropertyChanged
     {
         public Forum SelectedForum { get; set; }
         private User LoggedInUser { get; set; }
@@ -31,7 +32,13 @@ namespace TravelAgency.View.Guest1
             InitializeComponent();
             SelectedForum = forum;
             LoggedInUser = user;
+            DataContext = this;
         }
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

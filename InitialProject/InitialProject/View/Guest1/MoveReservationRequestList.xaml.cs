@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,35 +15,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Graph.Models.Security;
+using Microsoft.Graph.Models;
 using TravelAgency.Domain.Model;
-
+using TravelAgency.Domain.RepositoryInterfaces;
+using TravelAgency.Repository;
+using TravelAgency.Services;
+using User = TravelAgency.Domain.Model.User;
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
-    /// Interaction logic for AddCommentOnForum.xaml
+    /// Interaction logic for MoveReservationRequestList.xaml
     /// </summary>
-    public partial class AddCommentOnForum : Page, INotifyPropertyChanged
+    public partial class MoveReservationRequestList : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        public Forum SelectedForum { get; set; }
         private User LoggedInUser { get; set; }
-
-        public AddCommentOnForum(Forum forum, User user)
+        MoveReservationRepository moveReservationRepository;
+        public ObservableCollection<MoveReservation> MoveReservations { get; set; }
+        public MoveReservationRequestList(User loggedInUser)
         {
             InitializeComponent();
+            LoggedInUser = loggedInUser;
+            moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
             DataContext = this;
-            SelectedForum = forum;
-            LoggedInUser = user;
+            MoveReservations = new ObservableCollection<MoveReservation>(moveReservationRepository.GetAll());
         }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenedForum page = new OpenedForum(SelectedForum, LoggedInUser);
-            NavigationService.Navigate(page);
         }
     }
 }

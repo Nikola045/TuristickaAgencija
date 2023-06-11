@@ -24,11 +24,13 @@ namespace TravelAgency.View.Guest1
         private readonly Guest1Service guest1Service;
         private User LoggedInUser { get; set; }
 
+        private readonly ReservationService reservationService;
         public AccountSettingsPage(User user)
         {
+            InitializeComponent();
             LoggedInUser = user;
             guest1Service = new Guest1Service();
-            InitializeComponent();
+            reservationService = new ReservationService();
         }
 
         private void LogoutClick(object sender, RoutedEventArgs e)
@@ -53,6 +55,18 @@ namespace TravelAgency.View.Guest1
         {
             int bonusPoints = guest1Service.GetBonusPoints(LoggedInUser.Username);
             BonusPointsLabel.Content = bonusPoints.ToString();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PdfReportMadeReservation page = new PdfReportMadeReservation(reservationService.ReservationInfoForPDF(Convert.ToDateTime(StartDate.Text), Convert.ToDateTime(EndDate.Text)));
+            NavigationService.Navigate(page);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            PdfReportCanceledReservation page = new PdfReportCanceledReservation(reservationService.CanceledReservationInfoForPDF(Convert.ToDateTime(StartDate.Text), Convert.ToDateTime(EndDate.Text)));
+            NavigationService.Navigate(page);
         }
     }
 }

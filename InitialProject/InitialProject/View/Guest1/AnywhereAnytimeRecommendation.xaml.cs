@@ -15,33 +15,38 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Graph.Models.Security;
-using TravelAgency.Domain.Model;
-
+using User = TravelAgency.Domain.Model.User;
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
-    /// Interaction logic for AddCommentOnForum.xaml
+    /// Interaction logic for AnywhereAnytimeRecommendation.xaml
     /// </summary>
-    public partial class AddCommentOnForum : Page, INotifyPropertyChanged
+    public partial class AnywhereAnytimeRecommendation : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        public Forum SelectedForum { get; set; }
-        private User LoggedInUser { get; set; }
-
-        public AddCommentOnForum(Forum forum, User user)
+        public User LoggedInUser { get; set; }
+        public AnywhereAnytimeRecommendation(User user)
         {
             InitializeComponent();
-            DataContext = this;
-            SelectedForum = forum;
             LoggedInUser = user;
+            DataContext = this;
         }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            TextBlock textBlock = new TextBlock();
+            textBlock.Inlines.Add(new Run("Hello " + LoggedInUser.Username + ", here are some recommended accommodations based only on number of guests that are going, number of days that you are "));
+            textBlock.Inlines.Add(new Run("\nplanning to stay and period of time(optional)."));
+            textBlock.Inlines.Add(new Run("\n\nLets see what we have for you!"));
+            Label.Content = textBlock;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OpenedForum page = new OpenedForum(SelectedForum, LoggedInUser);
+            ReservationForm page = new ReservationForm(LoggedInUser);
             NavigationService.Navigate(page);
         }
     }

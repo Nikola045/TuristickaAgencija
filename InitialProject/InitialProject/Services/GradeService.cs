@@ -63,7 +63,7 @@ namespace TravelAgency.Services
                     if (IsOwnerGradeExists(reservation.Id))
                     {
                         OwnerGrade ownerGrade = FindOwnerGradeByReservationId(reservation.Id);
-                        ownerGrade.Reservation.HotelName = hotelService.GetHotelByIdOfReservation(reservation.Id);
+                        ownerGrade.Reservation.Hotel.Name = hotelService.GetHotelByIdOfReservation(reservation.Id);
                         ownerGrades.Add(FindOwnerGradeByReservationId(reservation.Id));
                     }
                 }

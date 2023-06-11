@@ -14,7 +14,7 @@
         <Button x:Name="ForumSettings" Content="Forum settings" Height="53" Width="232" FontSize="20" HorizontalAlignment="Center" Canvas.Left="10" Canvas.Top="371" VerticalAlignment="Top" Click="ForumSettingsClick"/>
         <Button x:Name="VisitedAccommodations" Content="Visited accommodations" Height="53" Width="232" FontSize="20" Canvas.Left="10" Canvas.Top="424" HorizontalAlignment="Center" VerticalAlignment="Top" Click="VisitedAccommodationsClick"/>
         <Button x:Name="ActiveReservations" Content="Active reservations" Height="53" Width="232" FontSize="20" Canvas.Left="10" Canvas.Top="477" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ActiveReservationsClick"/>
-        <Frame NavigationUIVisibility="Hidden" x:Name="ShowSmallPage" Height="516" Width="1319" Canvas.Left="257" Canvas.Top="14" HorizontalAlignment="Left" VerticalAlignment="Center"></Frame>
+        <Frame NavigationUIVisibility="Hidden" x:Name="ShowSmallPage" Height="516" Width="1284" Canvas.Left="292" Canvas.Top="14" HorizontalAlignment="Left" VerticalAlignment="Center"></Frame>
         <Label x:Name="UsernameLabel" Content="Username: rista" Canvas.Left="20" FontSize="20" Canvas.Top="262" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Canvas>
 </Page>

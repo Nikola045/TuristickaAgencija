@@ -22,14 +22,17 @@ using static TravelAgency.View.Guest1.GradeOwnerForm;
 using System.Collections.ObjectModel;
 using TravelAgency.Domain.RepositoryInterfaces;
 using Microsoft.Kiota.Abstractions;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
     /// Interaction logic for GradeOwnerForm.xaml
     /// </summary>
-    public partial class GradeOwnerForm : Page
+    public partial class GradeOwnerForm : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         private readonly OwnerGradeRepository ownerGradeRepository;
         private readonly ReservationRepository reservationRepository;
         public HotelRepository hotelRepository { get; }
@@ -57,7 +60,10 @@ namespace TravelAgency.View.Guest1
             SelectedItem = hotel;
             Hotels = new ObservableCollection<VisitedHotel>(AddHotel());
         }
-
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public List<VisitedHotel> AddHotel()
         {
             List<VisitedHotel> hotels = new List<VisitedHotel>();
@@ -67,21 +73,6 @@ namespace TravelAgency.View.Guest1
         private void OnLoad(object sender, RoutedEventArgs e)
         {
 
-        }
-        private void ExpandColumns(DataGrid dataGrid)
-        {
-            double totalWidth = dataGrid.ActualWidth;
-            int columnCount = dataGrid.Columns.Count;
-
-            if (columnCount > 0)
-            {
-                double columnWidth = totalWidth / columnCount;
-
-                foreach (DataGridColumn column in dataGrid.Columns)
-                {
-                    column.Width = new DataGridLength(columnWidth);
-                }
-            }
         }
         private void btnPlus_Click(object sender, RoutedEventArgs e)
         {
@@ -97,16 +88,31 @@ namespace TravelAgency.View.Guest1
             }
         }
 
+        private void LoadHotels(object sender, RoutedEventArgs e)
+        {
+            List<KeyValuePair<int, string>> hotelNames = new List<KeyValuePair<int, string>>();
+            List<Reservation> reservations = reservationRepository.GetAll();
+            foreach (Reservation reservation in reservations)
+            {
+                if (reservation.EndDate >= DateTime.Today.AddDays(-5) && reservation.EndDate <= DateTime.Today)
+                {
+                    if (!hotelNames.Any(h => h.Value == reservation.Hotel.Name))
+                    {
+                        hotelNames.Add(new KeyValuePair<int, string>(reservation.Id, reservation.Hotel.Name));
+                    }
+                }
+            }
+
+            cbHotelName.DisplayMemberPath = "Value";
+            cbHotelName.SelectedValuePath = "Key";
+            cbHotelName.ItemsSource = hotelNames;
+        }
+
         private void Grade(object sender, RoutedEventArgs e)
         {
-            object selectedItem = cbHotelName.SelectedItem;
-            Reservation reservation = new Reservation();
-
-            int id;
-            string line = selectedItem.ToString();
-            string[] fields = line.Split(' ');
-            id = Convert.ToInt32(fields[0]);
-            string hotelName = fields[1];
+            KeyValuePair<int, string> selectedHotel = (KeyValuePair<int, string>)cbHotelName.SelectedItem;
+            int hotelId = selectedHotel.Key;
+            string hotelName = selectedHotel.Value;
 
             int hotelRating = 0;
             if (rbHotelOption1.IsChecked == true)
@@ -166,34 +172,17 @@ namespace TravelAgency.View.Guest1
             OwnerGrade newGrade = new OwnerGrade(
                 ownerService.GetOwnerByUsername(LogedUser.Username),
                 ownerService.GetOwnerByUsername(selectedOwnerUsername.OwnerUsername),
-                reservationService.FindReservationByID(id),
+                reservationService.FindReservationByID(hotelId),
                 hotelRating,
                 ownerRating,
                 txtComment.Text
             );
             ownerGradeRepository.Save(newGrade);
 
-            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation(LogedUser, hotelName, id);
+            RecommendationForRenovation recommendationForRenovation = new RecommendationForRenovation(LogedUser, hotelName, hotelId);
             NavigationService.Navigate(recommendationForRenovation);
         }
 
-        private void LoadHotels(object sender, RoutedEventArgs e)
-        {
-            List<string> hotelNames = new List<string>();
-            List<Reservation> reservations = reservationRepository.GetAll();
-            foreach (Reservation reservation in reservations)
-            {
-                if (reservation.EndDate >= DateTime.Today.AddDays(-5) && reservation.EndDate <= DateTime.Today)
-                {
-                    if (!hotelNames.Contains(reservation.HotelName))
-                    {
-                        hotelNames.Add(reservation.Id.ToString() + " " + reservation.HotelName);
-                    }
-                }
-            }
-
-            cbHotelName.ItemsSource = hotelNames;
-        }
 
         private void btnDeleteImage_Click(object sender, RoutedEventArgs e)
         {

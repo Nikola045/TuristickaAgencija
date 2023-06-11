@@ -8,14 +8,16 @@
     <Canvas Background="White" Margin="0,0,0,0" Loaded="OnLoad">
         <Label x:Name="Label" Content="Label" Canvas.Left="10" Canvas.Top="10" FontSize="25"/>
         <Button x:Name="btnReserve" IsEnabled="False" Content="Search"  FontSize="20" Height="40" Width="195" Canvas.Left="698" Canvas.Top="326" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnReserve_Click"/>
-        <DatePicker x:Name="Date1" FontSize="16" Height="32" Width="194" Canvas.Left="698" Canvas.Top="176" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <DatePicker x:Name="Date2" FontSize="16" Height="32" Width="194" Canvas.Left="698" Canvas.Top="212" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtNumberOfGuests" VerticalContentAlignment="Center" FontSize="16" IsEnabled="false" TextWrapping="Wrap" Text="" Width="194" Height="32" Canvas.Left="698" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <DatePicker x:Name="Date1" FontSize="16" Height="32" Width="194" Canvas.Left="698" Canvas.Top="176" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDateChanged="Date1_SelectedDateChanged"/>
+        <DatePicker x:Name="Date2" FontSize="16" Height="32" Width="194" Canvas.Left="698" Canvas.Top="212" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDateChanged="Date2_SelectedDateChanged"/>
+        <TextBox x:Name="txtNumberOfGuests" Text="{Binding NumberOfGuests}" VerticalContentAlignment="Center" FontSize="16" IsEnabled="True" TextWrapping="Wrap" Width="194" Height="32" Canvas.Left="698" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="txtNumberOfGuests_TextChanged"/>
         <Label Content="Number of guests:" FontSize="20" Height="auto" Width="auto" Canvas.Left="520" Canvas.Top="246" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Start date:" FontSize="20" Height="auto" Width="auto" Canvas.Left="592" Canvas.Top="170" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="End date:" FontSize="20" Height="auto" Width="auto" Canvas.Left="600" Canvas.Top="209" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtNumberOfDays" VerticalContentAlignment="Center" FontSize="16" IsEnabled="false" TextWrapping="Wrap" Text="" Width="194" Height="32" Canvas.Left="698" Canvas.Top="288" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtNumberOfDays" Text="{Binding NumberOfDays}" VerticalContentAlignment="Center" FontSize="16" IsEnabled="True" TextWrapping="Wrap" Width="194" Height="32" Canvas.Left="698" Canvas.Top="288" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="txtNumberOfDays_TextChanged"/>
         <Label Content="Number of days:" FontSize="20" Height="auto" Width="auto" Canvas.Left="537" Canvas.Top="284" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="dateValidation" Content="*Return date must be greater than departure date" FontSize="20" Canvas.Left="903" Canvas.Top="209" Foreground="Red" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="dateValidationBefore" Content="*It is not possible to select a date before today" FontSize="20" Canvas.Left="903" Canvas.Top="172" Foreground="Red" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
     </Canvas>
 </Page>

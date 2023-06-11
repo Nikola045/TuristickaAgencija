@@ -50,5 +50,14 @@ namespace TravelAgency.Repository
             _storage.Save(reservations);
             return moveReservation;
         }
+        public MoveReservation Update(MoveReservation entity)
+        {
+            MoveReservation current = reservations.Find(c => c.Reservation.Id == entity.Reservation.Id);
+            int index = reservations.IndexOf(current);
+            reservations.Remove(current);
+            reservations.Insert(index, entity);
+            _storage.Save(reservations);
+            return entity;
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace TravelAgency.Domain.Model
     {
         public int Id { get; set; }
         public string GuestUserName { get; set; }
-        public string HotelName { get; set; }
+        public Hotel Hotel { get; set; } = new Hotel();
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int NumberOfDays { get; set; }
@@ -24,11 +24,11 @@ namespace TravelAgency.Domain.Model
 
         public Reservation() { }
 
-        public Reservation(int id, string guestUserName, string hotelName, DateTime startDate, DateTime endDate, int numberOfDays, int numberOfGuests)
+        public Reservation(int id, string guestUserName, Hotel hotelName, DateTime startDate, DateTime endDate, int numberOfDays, int numberOfGuests)
         {
             Id = id;
             GuestUserName = guestUserName;
-            HotelName = hotelName;
+            Hotel = hotelName;
             StartDate = startDate;
             EndDate = endDate;
             NumberOfDays = numberOfDays;
@@ -37,10 +37,9 @@ namespace TravelAgency.Domain.Model
             NumberOfMuveReservation = 0;
             NumberOfRenovationRequest = 0;
         }
-
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), GuestUserName, HotelName, StartDate.ToString(), EndDate.ToString(), NumberOfDays.ToString(), NumberOfGuests.ToString(), GradeStatus, NumberOfMuveReservation.ToString(),NumberOfRenovationRequest.ToString() };
+            string[] csvValues = { Id.ToString(), GuestUserName, Hotel.Name, StartDate.ToString(), EndDate.ToString(), NumberOfDays.ToString(), NumberOfGuests.ToString(), GradeStatus, NumberOfMuveReservation.ToString(),NumberOfRenovationRequest.ToString() };
             return csvValues;
         }
 
@@ -48,7 +47,7 @@ namespace TravelAgency.Domain.Model
         {
             Id = Convert.ToInt32(values[0]);
             GuestUserName = values[1];
-            HotelName = values[2];
+            Hotel.Name = values[2];
             StartDate = Convert.ToDateTime(values[3]);
             EndDate = Convert.ToDateTime(values[4]);
             NumberOfDays = Convert.ToInt32(values[5]);

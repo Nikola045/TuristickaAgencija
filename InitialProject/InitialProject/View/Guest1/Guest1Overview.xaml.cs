@@ -21,19 +21,25 @@ using TravelAgency.Repository;
 using TravelAgency.View.Guest1;
 using TravelAgency.View.Guest2;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TravelAgency.View
 {
-    public partial class Guest1Overview : Window
+    public partial class Guest1Overview : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         public User LoggedInUser { get; set; }
         public Guest1Overview(User user)
         {
             InitializeComponent();
-            DataContext = this;
             LoggedInUser = user;
+            DataContext = this;
         }
-
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private void OpenGuest1Form(object sender, RoutedEventArgs e)
         {
             Guest1Form page = new Guest1Form();
@@ -58,15 +64,8 @@ namespace TravelAgency.View
         }
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            string language1 = "English";
-            string language2 = "Serbian";
-            cbLanguage.Items.Add(language1);
-            cbLanguage.Items.Add(language2);
-            cbLanguage.Text = language1;
-
             Guest1HomePage page = new Guest1HomePage(LoggedInUser);
             ShowPage.Content = page;
-
         }
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -171,9 +170,7 @@ namespace TravelAgency.View
         private void Instagram_MouseLeave(object sender, MouseEventArgs e)
         {
             Mouse.OverrideCursor = null;
-        }
-
-        
+        }        
     }
 }
 

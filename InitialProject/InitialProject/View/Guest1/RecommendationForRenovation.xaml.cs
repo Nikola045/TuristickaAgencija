@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,12 +28,15 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for RecommendationForRenovation.xaml
     /// </summary>
-    public partial class RecommendationForRenovation : Page
+    public partial class RecommendationForRenovation : Page, INotifyPropertyChanged
     {
         private User LogedUser { get; set; }
         private readonly RenovationRecommendationRepository recommendationRepository;
         private readonly ReservationService reservationService;
         private readonly ReservationRepository reservationRepository;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        
         public string HotelName { get; set; }
         public int Id { get; set; }
         public RecommendationForRenovation(User user,string hotelName, int id)
@@ -40,6 +45,7 @@ namespace TravelAgency.View.Guest1
             LogedUser = user;
             HotelName = hotelName;
             Id = id;
+            DataContext = this;
             reservationService = new ReservationService();
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
             recommendationRepository = new(InjectorService.CreateInstance<IStorage<Recommendation>>());
@@ -81,6 +87,10 @@ namespace TravelAgency.View.Guest1
             reservationRepository.Update(reservation);
             AccountSettingsPage page = new AccountSettingsPage(LogedUser);
             NavigationService.Navigate(page);
+        }
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

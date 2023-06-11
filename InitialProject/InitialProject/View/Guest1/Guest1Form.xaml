@@ -15,14 +15,6 @@
             Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Height="32" Canvas.Left="3" Canvas.Top="174" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtNoGuests" TextWrapping="Wrap" FontSize="16" VerticalContentAlignment="Center"
             Text="{Binding MaxNumberOfGuests, UpdateSourceTrigger=PropertyChanged}" Height="32" RenderTransformOrigin="0.5,0.5" Canvas.Left="3" Canvas.Top="363" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.121"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
         </TextBox>
         <TextBox x:Name="txtNoDays" TextWrapping="Wrap" Height="32" FontSize="16" VerticalContentAlignment="Center"
             Text="{Binding MinNumberOfDays, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="3" Canvas.Top="436" Width="454" HorizontalAlignment="Center" VerticalAlignment="Top"/>

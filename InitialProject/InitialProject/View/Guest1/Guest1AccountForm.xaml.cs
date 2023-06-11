@@ -2,7 +2,9 @@
 using Microsoft.Graph.Models.Security;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,13 +23,19 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for Guest1AccountForm.xaml
     /// </summary>
-    public partial class Guest1AccountForm : Page
+    public partial class Guest1AccountForm : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         private User LoggedInUser { get; set; }
         public Guest1AccountForm(User user)
-        {
-            LoggedInUser = user;
+        {            
             InitializeComponent();
+            DataContext = this;
+            LoggedInUser = user;
+        }
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private void AccountSettingsClick(object sender, RoutedEventArgs e)
         {
@@ -58,7 +66,7 @@ namespace TravelAgency.View.Guest1
 
         private void ActiveReservationsClick(object sender, RoutedEventArgs e)
         {
-            ActiveReservationsPage page = new ActiveReservationsPage(LoggedInUser);
+            MoveReservationForm page = new MoveReservationForm(LoggedInUser);
             ShowSmallPage.Content = page;
             Image.Visibility = Visibility.Collapsed;
             Label.Visibility = Visibility.Collapsed;

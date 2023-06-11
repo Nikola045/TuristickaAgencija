@@ -43,7 +43,8 @@ namespace TravelAgency.View.Owner
         {
             if (SelectedReservation != null)
             {
-                moveReservationRepository.Delete(SelectedReservation);
+                SelectedReservation.Status = "Declined";
+                moveReservationRepository.Update(SelectedReservation);
                 OnPropertyChanged(nameof(Reservations));
             }
         }

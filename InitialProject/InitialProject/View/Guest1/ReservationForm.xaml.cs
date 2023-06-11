@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,7 +19,7 @@ namespace TravelAgency.View
     /// <summary>
     /// Interaction logic for ReservationForm.xaml
     /// </summary>
-    public partial class ReservationForm : Page
+    public partial class ReservationForm : Page, INotifyPropertyChanged
     {
         User LogedUser = new User();
 
@@ -27,10 +28,13 @@ namespace TravelAgency.View
         private readonly ReservationService reservationService;
         private readonly UserRepository userRepository;
         private readonly Guest1Service guest1Service;
+        private readonly HotelService hotelService;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public ReservationForm(User user)
         {
             InitializeComponent();
-            Title = "Create new reservation";
             DataContext = this;
             LogedUser = user;
             _repository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
@@ -38,6 +42,7 @@ namespace TravelAgency.View
             userRepository = new(InjectorService.CreateInstance<IStorage<User>>());
             reservationService = new ReservationService();
             guest1Service = new Guest1Service();
+            hotelService = new HotelService();
         }
         
         private void Reserve(object sender, RoutedEventArgs e)
@@ -107,8 +112,6 @@ namespace TravelAgency.View
 
                     suggestionLabel.Visibility = Visibility.Collapsed;
 
-
-
                 }
             }
 
@@ -118,7 +121,7 @@ namespace TravelAgency.View
                 Reservation newReservation = new Reservation(
                     _repository.NextId(),
                     LogedUser.Username,
-                    HotelNameCB.Text,
+                    hotelService.GetHotelByName(HotelNameCB.Text),
                     Convert.ToDateTime(Date1.Text),
                     Convert.ToDateTime(Date2.Text),
                     Convert.ToInt32(txtNumberOfDays.Text),
@@ -226,20 +229,24 @@ namespace TravelAgency.View
             if (isDate1Valid && isDate2Valid)
             {
                 dateValidationBefore.Visibility = Visibility.Collapsed;
+                btnReserve.IsEnabled = true;
             }
             else if (!isDate1Valid && !isDate2Valid)
             {
                 dateValidationBefore.Visibility = Visibility.Visible;
+                btnReserve.IsEnabled = false;
             }
             else if (!isDate1Valid && isDate2Valid)
             {
                 if (Date1.SelectedDate != null && Date1.SelectedDate.Value.Date < today)
                 {
                     dateValidationBefore.Visibility = Visibility.Visible;
+                    btnReserve.IsEnabled = false;
                 }
                 else
                 {
                     dateValidationBefore.Visibility = Visibility.Collapsed;
+                    btnReserve.IsEnabled = true;
                 }
             }
             else if (isDate1Valid && !isDate2Valid)
@@ -247,14 +254,14 @@ namespace TravelAgency.View
                 if (Date2.SelectedDate != null && Date2.SelectedDate.Value.Date < today)
                 {
                     dateValidationBefore.Visibility = Visibility.Visible;
+                    btnReserve.IsEnabled = false;
                 }
                 else
                 {
                     dateValidationBefore.Visibility = Visibility.Collapsed;
+                    btnReserve.IsEnabled = false;
                 }
             }
-
-            btnReserve.IsEnabled = AllFieldsValid() && !dateValidationBefore.IsVisible;
 
             if (Date1.SelectedDate > Date2.SelectedDate)
             {
@@ -278,20 +285,24 @@ namespace TravelAgency.View
             if (isDate1Valid && isDate2Valid)
             {
                 dateValidationBefore.Visibility = Visibility.Collapsed;
+                btnReserve.IsEnabled = true;
             }
             else if (!isDate1Valid && !isDate2Valid)
             {
                 dateValidationBefore.Visibility = Visibility.Visible;
+                btnReserve.IsEnabled = false;
             }
             else if (!isDate1Valid && isDate2Valid)
             {
                 if (Date1.SelectedDate != null && Date1.SelectedDate.Value.Date < today)
                 {
                     dateValidationBefore.Visibility = Visibility.Visible;
+                    btnReserve.IsEnabled = false;
                 }
                 else
                 {
                     dateValidationBefore.Visibility = Visibility.Collapsed;
+                    btnReserve.IsEnabled = false;
                 }
             }
             else if (isDate1Valid && !isDate2Valid)
@@ -299,14 +310,14 @@ namespace TravelAgency.View
                 if (Date2.SelectedDate != null && Date2.SelectedDate.Value.Date < today)
                 {
                     dateValidationBefore.Visibility = Visibility.Visible;
+                    btnReserve.IsEnabled = false;
                 }
                 else
                 {
                     dateValidationBefore.Visibility = Visibility.Collapsed;
+                    btnReserve.IsEnabled = true;
                 }
             }
-
-            btnReserve.IsEnabled = AllFieldsValid() && !dateValidationBefore.IsVisible;
 
             if (Date1.SelectedDate > Date2.SelectedDate)
             {
@@ -321,7 +332,10 @@ namespace TravelAgency.View
             CheckAllFields();
         }
 
-
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private void txtNumberOfGuests_LostFocus(object sender, RoutedEventArgs e)
         {
             btnReserve.IsEnabled = AllFieldsValid();

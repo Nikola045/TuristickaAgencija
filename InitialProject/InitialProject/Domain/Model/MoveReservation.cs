@@ -17,7 +17,7 @@ namespace TravelAgency.Domain.Model
         public DateTime OldEndDate { get; set; }
         public DateTime NewStartDate { get; set; }
         public DateTime NewEndDate { get; set; }
-
+        public string Status { get; set; }
         public MoveReservation() { }
         public MoveReservation(Reservation reservation, string hotelName, string guestUsername, DateTime oldStartDate, DateTime odlEndDate, DateTime newStartDate, DateTime newEndDate)
         {
@@ -28,11 +28,12 @@ namespace TravelAgency.Domain.Model
             OldEndDate = odlEndDate;
             NewStartDate = newStartDate;
             NewEndDate = newEndDate;
+            Status = "Pending";
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = {Reservation.Id.ToString(), HotelName, GuestUsername, OldStartDate.ToString(), OldEndDate.ToString(), NewStartDate.ToString(), NewEndDate.ToString()};
+            string[] csvValues = {Reservation.Id.ToString(), HotelName, GuestUsername, OldStartDate.ToString(), OldEndDate.ToString(), NewStartDate.ToString(), NewEndDate.ToString(), Status};
             return csvValues;
         }
 
@@ -45,6 +46,7 @@ namespace TravelAgency.Domain.Model
             OldEndDate = Convert.ToDateTime(values[4]);
             NewStartDate = Convert.ToDateTime(values[5]);
             NewEndDate = Convert.ToDateTime(values[6]);
+            Status = values[7];
         }
     }
 }

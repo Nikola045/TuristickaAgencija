@@ -5,13 +5,13 @@
     <Compile Update="View\Guest1\AccountSettingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Guest1\ActiveReservationsPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Guest1\AddCommentOnForum.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\AnywhereAnytime.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\AnywhereAnytimeRecommendation.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\ForumPage.xaml.cs">
@@ -32,7 +32,19 @@
     <Compile Update="View\Guest1\MoveReservationForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest1\MoveReservationRequestList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\NotSucessfullyCanceled.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest1\OpenedForum.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\PdfReportCanceledReservation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\PdfReportMadeReservation.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\RecommendationForRenovation.xaml.cs">
@@ -42,6 +54,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\SucessfullReservation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Guest1\SucessfullyCanceled.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Guest1\VisitedAccommodationsPage.xaml.cs">
@@ -136,13 +151,13 @@
     <Page Update="View\Guest1\AccountSettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Guest1\ActiveReservationsPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="View\Guest1\AddCommentOnForum.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\AnywhereAnytime.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\AnywhereAnytimeRecommendation.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\ForumPage.xaml">
@@ -163,7 +178,19 @@
     <Page Update="View\Guest1\MoveReservationForm.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Guest1\MoveReservationRequestList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\NotSucessfullyCanceled.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\OpenedForum.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\PdfReportCanceledReservation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\PdfReportMadeReservation.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\RecommendationForRenovation.xaml">
@@ -173,6 +200,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\SucessfullReservation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest1\SucessfullyCanceled.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest1\VisitedAccommodationsPage.xaml">

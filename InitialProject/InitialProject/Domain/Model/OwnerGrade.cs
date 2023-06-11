@@ -15,6 +15,10 @@ namespace TravelAgency.Domain.Model
         public int HotelRating { get; set; }
         public int OwnerRating { get; set; }
         public string Comment { get; set; }
+        public string Name { get; set; }
+        public int Cleanliness { get; set; }
+        public int Respecting { get; set; }
+        public string CommentText { get; set; }
 
         public OwnerGrade() { }
 
@@ -27,6 +31,15 @@ namespace TravelAgency.Domain.Model
             OwnerRating = ownerRating;
             Comment = comment;
         }
+
+        public OwnerGrade(string name, int cleanliness, int respecting, string commentText)
+        {
+            Name = name;
+            Cleanliness = cleanliness;
+            Respecting = respecting;
+            CommentText = commentText;
+        }
+
         public string[] ToCSV()
         {
             string[] csvValues = { Guest1.Username, Owner.Username, Reservation.Id.ToString(), HotelRating.ToString(), OwnerRating.ToString(), Comment };

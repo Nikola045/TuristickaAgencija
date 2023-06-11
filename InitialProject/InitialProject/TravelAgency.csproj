@@ -16,12 +16,14 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\apartment.jpg" />
+    <None Remove="Resources\Images\BookingLogo.png" />
     <None Remove="Resources\Images\camera.png" />
     <None Remove="Resources\Images\confetti.jpeg" />
     <None Remove="Resources\Images\confetti.jpg" />
     <None Remove="Resources\Images\emptystar.png" />
     <None Remove="Resources\Images\facebook-logo-493.png" />
     <None Remove="Resources\Images\fullstar.png" />
+    <None Remove="Resources\Images\googleLogo.png" />
     <None Remove="Resources\Images\halfstar.png" />
     <None Remove="Resources\Images\hotel.jpg" />
     <None Remove="Resources\Images\hut.jpg" />
@@ -30,6 +32,7 @@
     <None Remove="Resources\Images\logo-twitter-png-5859.png" />
     <None Remove="Resources\Images\profilepic.jpg" />
     <None Remove="Resources\Images\Ta.jpg" />
+    <None Remove="Resources\Images\Ta2.jpg" />
     <None Remove="View\Owner\536-5367699_add-plus-new-user-green-page-file-up.png" />
     <None Remove="View\Owner\back.png" />
     <None Remove="View\Owner\Gallery-PNG-File.png" />
@@ -54,11 +57,13 @@
 
   <ItemGroup>
     <Resource Include="Resources\Images\apartment.jpg" />
+    <Resource Include="Resources\Images\BookingLogo.png" />
     <Resource Include="Resources\Images\camera.png" />
     <Resource Include="Resources\Images\confetti.jpg" />
     <Resource Include="Resources\Images\emptystar.png" />
     <Resource Include="Resources\Images\facebook-logo-493.png" />
     <Resource Include="Resources\Images\fullstar.png" />
+    <Resource Include="Resources\Images\googleLogo.png" />
     <Resource Include="Resources\Images\halfstar.png" />
     <Resource Include="Resources\Images\hotel.jpg" />
     <Resource Include="Resources\Images\hut.jpg" />
@@ -67,6 +72,7 @@
     <Resource Include="Resources\Images\logo-twitter-png-5859.png" />
     <Resource Include="Resources\Images\profilepic.jpg" />
     <Resource Include="Resources\Images\Ta.jpg" />
+    <Resource Include="Resources\Images\Ta2.jpg" />
     <Resource Include="View\Owner\536-5367699_add-plus-new-user-green-page-file-up.png" />
     <Resource Include="View\Owner\back.png" />
     <Resource Include="View\Owner\Gallery-PNG-File.png" />

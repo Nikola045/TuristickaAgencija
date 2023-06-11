@@ -217,7 +217,7 @@ namespace TravelAgency.Services
             foreach(Reservation reservation in reservations)
             {
                 if (reservation.Id == idReservation)
-                    return reservation.HotelName;
+                    return reservation.Hotel.Name;
             }
             return null;
         }

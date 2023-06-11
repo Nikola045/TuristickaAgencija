@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,8 +21,9 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for Guest1HomePage.xaml
     /// </summary>
-    public partial class Guest1HomePage : Page
+    public partial class Guest1HomePage : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         public User LoggedInUser { get; set; }
         public Guest1HomePage(User user)
         {
@@ -28,7 +31,10 @@ namespace TravelAgency.View.Guest1
             DataContext = this;
             LoggedInUser = user;
         }
-
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private void Canvas_Loaded(object sender, RoutedEventArgs e)
         {
             string hyperlinkText = "Anywhere/anytime";

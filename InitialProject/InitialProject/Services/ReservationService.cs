@@ -34,7 +34,56 @@ namespace TravelAgency.Services
             hotelService = new HotelService();
             ownerService = new UserService();
         }
+        public string GetReservationInfo(Reservation reservation, DateTime startDate,DateTime endDate)
+        {
+            if (reservation.GradeStatus != "Canceled" && startDate < reservation.StartDate && endDate > reservation.EndDate) 
+            {             
+                return "Reservation for " + reservation.Hotel.Name + ", from "+  reservation.StartDate.ToShortDateString() + " to " + reservation.EndDate.ToShortDateString() + " with " + reservation.NumberOfGuests.ToString() + " number of guests.";
+            }
+            else
+            {
+                return null;
+            }
+        }
 
+        public string ReservationInfoForPDF(DateTime startDate, DateTime endDate)
+        {
+            string Text = "";
+            List<Reservation> reservations = reservationRepository.GetAll();
+            foreach (Reservation reservation in reservations)
+            {
+                if(GetReservationInfo(reservation, startDate, endDate) != null) 
+                {
+                    Text = Text + GetReservationInfo(reservation, startDate, endDate) + "\n";
+                }
+            }
+            return Text;
+        }
+        public string GetCanceledReservationInfo(Reservation reservation, DateTime startDate, DateTime endDate)
+        {
+            if (reservation.GradeStatus == "Canceled" && startDate < reservation.StartDate && endDate > reservation.EndDate)
+            {
+                return "Canceled reservation for " + reservation.Hotel.Name + ", from " + reservation.StartDate.ToShortDateString() + " to " + reservation.EndDate.ToShortDateString() + " with " + reservation.NumberOfGuests.ToString() + " number of guests.";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public string CanceledReservationInfoForPDF(DateTime startDate, DateTime endDate)
+        {
+            string Text = "";
+            List<Reservation> reservations = reservationRepository.GetAll();
+            foreach (Reservation reservation in reservations)
+            {
+                if (GetCanceledReservationInfo(reservation, startDate, endDate) != null)
+                {
+                    Text = Text + GetCanceledReservationInfo(reservation, startDate, endDate) + "\n";
+                }
+            }
+            return Text;
+        }
         public void LogicalDelete(Reservation reservation)
         {
             reservation.GradeStatus = "Graded";
@@ -71,7 +120,7 @@ namespace TravelAgency.Services
             
             foreach (Reservation reservation in reservations)
             {
-                if (reservation.HotelName == hotelName)
+                if (reservation.Hotel.Name == hotelName)
                 {
                     dates.Add(reservation.StartDate);
                     dates.Add(reservation.EndDate);
@@ -132,7 +181,7 @@ namespace TravelAgency.Services
 
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                int reservationsForDate = reservations.Where(r => r.HotelName == hotelName && date >= r.StartDate && date <= r.EndDate).Sum(r => r.NumberOfGuests);
+                int reservationsForDate = reservations.Where(r => r.Hotel.Name == hotelName && date >= r.StartDate && date <= r.EndDate).Sum(r => r.NumberOfGuests);
 
                 if (reservationsForDate >= hotel.MaxNumberOfGuests)
                 {
@@ -153,7 +202,8 @@ namespace TravelAgency.Services
                     reservation.EndDate = newEndDate;
                     reservation.NumberOfMuveReservation++;
                     reservationRepository.Update(reservation);
-                    moveReservationRepository.Delete(moveReservationRepository.GetById(id));
+                    moveReservationRepository.GetById(id).Status = "Accepted";
+                    moveReservationRepository.Update(moveReservationRepository.GetById(id));
                     MessageBox.Show("Reservation seccesfuly changed.");
                     break;
                 }
@@ -193,6 +243,7 @@ namespace TravelAgency.Services
             {
                 if(reservation.GuestUserName == username && reservation.EndDate > dateTime && reservation.GradeStatus == "NotGraded")
                 {
+                    reservation.Hotel = hotelService.GetHotelByName(reservation.Hotel.Name);
                     findedReservation.Add(reservation);
                 }
             }
@@ -312,7 +363,7 @@ namespace TravelAgency.Services
                 int tempR = 0;
                 foreach (Reservation reservation in reservations)
                 {
-                    if (reservation.HotelName == hotelName && reservation.StartDate.Year == dateTime.Year - 4 + i)
+                    if (reservation.Hotel.Name == hotelName && reservation.StartDate.Year == dateTime.Year - 4 + i)
                     {
                         
                         if(reservation.GradeStatus == "Canceled")
@@ -363,7 +414,7 @@ namespace TravelAgency.Services
                 int tempR = 0;
                 foreach (Reservation reservation in reservations)
                 {
-                    if (reservation.HotelName == hotelName && reservation.StartDate.Month == i && year == reservation.StartDate.Year)
+                    if (reservation.Hotel.Name == hotelName && reservation.StartDate.Month == i && year == reservation.StartDate.Year)
                     {
                         if (reservation.GradeStatus == "Canceled")
                             tempIs++;
@@ -412,7 +463,7 @@ namespace TravelAgency.Services
             //treba da uzme sve hotele od vlasnika i proveri im broj rezervacija
             foreach (Reservation reservation in reservations)
             {
-                Hotel hotel = hotelService.GetHotelByName(reservation.HotelName);
+                Hotel hotel = hotelService.GetHotelByName(reservation.Hotel.Name);
                 if (locations.Contains(hotel.Country + hotel.City))
                 {
                     ReservationPerLocation[hotel.Country + hotel.City]++;
@@ -452,7 +503,7 @@ namespace TravelAgency.Services
             {
                 foreach(Reservation reservation in reservations) 
                 { 
-                    if(hotel.Name == reservation.HotelName)
+                    if(hotel.Name == reservation.Hotel.Name)
                     {
                         ReservationPerHotel[hotel.Name]++;
                     }
@@ -477,7 +528,7 @@ namespace TravelAgency.Services
             {
                 if (username == reservation.GuestUserName)
                 {
-                    Hotel hotel = hotelService.GetHotelByName(reservation.HotelName);
+                    Hotel hotel = hotelService.GetHotelByName(reservation.Hotel.Name);
                     findedLocations.Add(hotel.Country + "|" + hotel.City);
                 }
             }

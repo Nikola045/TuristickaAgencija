@@ -1,0 +1,14 @@
+﻿<Page x:Class="TravelAgency.View.Guest1.SucessfullyCanceled"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelAgency.View.Guest1"
+      mc:Ignorable="d" Height="516" Width="1284">
+
+    <Canvas Background="White">
+        <Button Content="Get back!" FontSize="20" Canvas.Top="202" Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+        <Label Content="Your reservation is canceled successfully!" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+    </Canvas>
+</Page>

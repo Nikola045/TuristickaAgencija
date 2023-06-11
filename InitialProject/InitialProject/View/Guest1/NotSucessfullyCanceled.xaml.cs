@@ -14,34 +14,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Graph.Models.Security;
-using TravelAgency.Domain.Model;
+using User = TravelAgency.Domain.Model.User;
 
 namespace TravelAgency.View.Guest1
 {
     /// <summary>
-    /// Interaction logic for AddCommentOnForum.xaml
+    /// Interaction logic for NotSucessfullyCanceled.xaml
     /// </summary>
-    public partial class AddCommentOnForum : Page, INotifyPropertyChanged
+    public partial class NotSucessfullyCanceled : Page, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public Forum SelectedForum { get; set; }
-        private User LoggedInUser { get; set; }
-
-        public AddCommentOnForum(Forum forum, User user)
+        User LogedUser { get; set; }
+        public NotSucessfullyCanceled(User user)
         {
             InitializeComponent();
+            LogedUser = user;
             DataContext = this;
-            SelectedForum = forum;
-            LoggedInUser = user;
         }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OpenedForum page = new OpenedForum(SelectedForum, LoggedInUser);
+            MoveReservationForm page = new MoveReservationForm(LogedUser);
             NavigationService.Navigate(page);
         }
     }

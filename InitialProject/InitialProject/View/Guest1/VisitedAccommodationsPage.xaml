@@ -17,10 +17,10 @@
     </Page.Resources>
 
     <Canvas Background="White">
-        
-        <Label Content="How owners rated you:" FontSize="20" Canvas.Left="28" Canvas.Top="266" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Visited accommodations:" FontSize="20" Canvas.Left="29" Canvas.Top="-5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path = VisitedHotels,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedHotel}" FontSize="16" Height="194" Width="1266" Canvas.Left="28" Canvas.Top="33" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="LoadVisited">
+
+        <Label Content="How owners rated you:" FontSize="20" Canvas.Top="266" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="-1"/>
+        <Label Content="Visited accommodations:" FontSize="20" Canvas.Top="-5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=VisitedHotels, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedHotel}" FontSize="16" Height="194" Width="1283" Canvas.Top="33" HorizontalAlignment="Left" VerticalAlignment="Center" Loaded="LoadVisited">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="Hotel Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}" />
@@ -31,14 +31,15 @@
                 <DataGridTextColumn Width="*" Header="Grade Status" Binding="{Binding GradeStatus}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Rate accomodation" FontSize="20" Canvas.Left="29" Canvas.Top="236" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <DataGrid x:Name="DataPanel" AutoGenerateColumns="False" ItemsSource="{Binding Path = FilteredGrades,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedHotel}" FontSize="16" Height="212" Canvas.Left="27" Canvas.Top="304" Width="1267" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Button Content="Rate accommodations" FontSize="20" Canvas.Top="236" Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Width="212"/>
+        <DataGrid x:Name="DataPanel" AutoGenerateColumns="False" ItemsSource="{Binding Path=Grades, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedHotel}" FontSize="16" Height="212" Canvas.Top="304" Width="1283" HorizontalAlignment="Left" VerticalAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="Hotel Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Width="*" Header="Cleanliness" Binding="{Binding Cleanliness}" />
                 <DataGridTextColumn Width="*" Header="Respecting" Binding="{Binding Respecting}" />
-                <DataGridTextColumn Width="*" Header="Addiotional comment" Binding="{Binding CommentText}" />
+                <DataGridTextColumn Width="*" Header="Additional comment" Binding="{Binding CommentText}" />
             </DataGrid.Columns>
         </DataGrid>
+
     </Canvas>
 </Page>

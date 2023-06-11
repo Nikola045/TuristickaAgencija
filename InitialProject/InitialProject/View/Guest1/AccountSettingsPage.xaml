@@ -4,16 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TravelAgency.View.Guest1"
-      mc:Ignorable="d" Height="516" Width="1319">
+      mc:Ignorable="d" Height="516" Width="1284">
     <Canvas Background="White">
-        <Button x:Name="Logout" Content="Log out" Height="32" Width="139" FontSize="20" Canvas.Left="1170" Canvas.Top="482" Click="LogoutClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Period of time you want check:" FontSize="20" Canvas.Left="932" Canvas.Top="6" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="-" FontSize="20" Canvas.Left="1102" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <DatePicker Canvas.Left="936" Canvas.Top="48" FontSize="20" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <DatePicker Canvas.Left="1127" Canvas.Top="48" FontSize="20" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="Report of every made resevation" FontSize="20" Canvas.Left="936" Canvas.Top="92" Width="351" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="Report of every canceled resevation" FontSize="20" Canvas.Left="935" Canvas.Top="132" Width="352" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Rectangle Height="176" Canvas.Left="916" Stroke="Black" Canvas.Top="6" Width="390" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="Logout" Content="Log out" Width="139" FontSize="20" Canvas.Left="1146" Canvas.Top="484" Click="LogoutClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Period of time you want check:" FontSize="20" Canvas.Left="906" Canvas.Top="6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="-" FontSize="20" Canvas.Left="1076" Canvas.Top="45" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <DatePicker x:Name="StartDate" Canvas.Left="910" Canvas.Top="48" FontSize="20" Width="160" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <DatePicker x:Name="EndDate" Canvas.Left="1101" Canvas.Top="48" FontSize="20" Width="160" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Content="Report of every made resevation" FontSize="20" Canvas.Left="910" Canvas.Top="92" Width="351" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
+        <Button Content="Report of every canceled resevation" FontSize="20" Canvas.Left="909" Canvas.Top="132" Width="352" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click_1"/>
         <Label Content="First name:" FontSize="18" Canvas.Left="333" Canvas.Top="27" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Last name:" FontSize="18" Canvas.Left="335" Canvas.Top="62" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Username:" FontSize="18" Canvas.Left="335" Canvas.Top="97" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -38,6 +37,7 @@
         <DatePicker x:Name="Date1" Canvas.Left="434" FontSize="18" Canvas.Top="312" Width="214" Loaded="DatePicker_Loaded" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <RadioButton Content="Male" FontSize="18" IsChecked="True" VerticalContentAlignment="Center" Canvas.Left="434" Canvas.Top="280" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <RadioButton Content="Female" FontSize="18" VerticalContentAlignment="Center" Canvas.Left="521" Canvas.Top="280" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Rectangle Height="176" Canvas.Left="890" Stroke="Black" Canvas.Top="6" Width="390" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     </Canvas>
 </Page>
