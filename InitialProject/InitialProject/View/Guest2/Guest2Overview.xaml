@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
-        Title="Guest2Overview" Height="450" Width="800">
+        Title="Guest2Overview" Height="700" Width="1300"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -15,13 +16,20 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="89*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="19"/>
+            <RowDefinition Height="266*"/>
+            <RowDefinition Height="39*"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0" Grid.ColumnSpan="4">
+            <Button Click="OpenGuestOverview">
+                <StackPanel Orientation="Horizontal" Width="53">
+
+                    <TextBlock Text="Home" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="50" />
+                </StackPanel>
+            </Button>
+            <Separator/>
             <Button Click="OpenGuest2Form">
                 <StackPanel Orientation="Horizontal" Width="53">
 
@@ -46,50 +54,53 @@
             <Button Click="OpenTourReviews" Width="80">
                 <StackPanel Orientation="Horizontal" Width="67">
 
-                    <TextBlock Text="Past Tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                    <TextBlock Text="Past Tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="62" />
                 </StackPanel>
             </Button>
             <Separator/>
-            <Button Click="OpenCreateTourRequest" Width="80">
-                <StackPanel Orientation="Horizontal" Width="67">
+            <Button Click="OpenCreateTourRequest" Width="110">
+                <StackPanel Orientation="Horizontal" Width="103">
 
-                    <TextBlock Text="Create Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                    <TextBlock Text="Create Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="92" />
                 </StackPanel>
             </Button>
             <Separator/>
 
-            <Button Click="OpenTourRequestsStatistic" Width="80">
+            <Button Click="OpenComplexTourRequests" Width="70">
                 <StackPanel Orientation="Horizontal" Width="67">
 
-                    <TextBlock Text="Statistic" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                    <TextBlock Text="Complex" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="55" />
                 </StackPanel>
             </Button>
             <Separator/>
-            <Button Click="OpenAllTourRequests" Width="80">
-                <StackPanel Orientation="Horizontal" Width="67">
+            <Button Click="OpenAllTourRequests" Width="93">
+                <StackPanel Orientation="Horizontal" Width="81">
 
-                    <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                    <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="79" />
                 </StackPanel>
             </Button>
             <Separator/>
-            <Button Click="OpenComplexTourRequests" Width="80">
-                <StackPanel Orientation="Horizontal" Width="67">
-
-                    <TextBlock Text="Complex" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+            <Button Click="OpenTourRequestsStatistic" Width="57">
+                <StackPanel Orientation="Horizontal" Width="57">
+                    <TextBlock Text="Statistic" FontSize="14" Width="50" />
                 </StackPanel>
             </Button>
 
             <Separator/>
-            <Button Click="OpenNotifications" Width="80">
-                <StackPanel Orientation="Horizontal" Width="67">
+            <Button Click="OpenNotifications" Width="98">
+                <StackPanel Orientation="Horizontal" Width="86">
 
-                    <TextBlock Text="Notifications" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="66" />
+                    <TextBlock Text="Notifications" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="82" />
                 </StackPanel>
             </Button>
         </ToolBar>
-        
-        
-        
-      
+        <DataGrid x:Name="DataPanel" Grid.Column="1" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="18,262,18,67" Loaded="LoadData"/>
+        <Label Grid.Column="1" Content="TRAVEL AGENCY" FontSize="48" HorizontalAlignment="Center" Margin="0,42,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="70" Width="372"/>
+        <GroupBox Header="GroupBox" Grid.Row="2" Margin="45,132,10,15" Grid.RowSpan="2"/>
+        <GroupBox Header="GroupBox" Grid.Row="2" Margin="28,132,28,15" Grid.RowSpan="2" Grid.Column="3"/>
+
+
+
+
     </Grid>
 </Window>

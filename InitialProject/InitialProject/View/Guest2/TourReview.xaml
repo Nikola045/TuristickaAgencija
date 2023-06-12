@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
-        Title="TourReview" Height="450" Width="800">
+        Title="TourReview" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid RenderTransformOrigin="0.494,0.603">
 
         <Label Content="Comment" HorizontalAlignment="Left" Margin="40,249,0,0" VerticalAlignment="Top" Height="47" Width="160" FontSize="20"/>

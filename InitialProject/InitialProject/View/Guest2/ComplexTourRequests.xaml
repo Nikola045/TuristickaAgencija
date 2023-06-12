@@ -5,11 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
-        Title="ComplexTourRequests" Height="450" Width="800">
-    <Grid>
-        <DataGrid x:Name="DataPanel" HorizontalAlignment="Left" Height="206" Margin="126,136,0,0" VerticalAlignment="Top" Width="582" Loaded="LoadData"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="727,360,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
-        <Label Content="Complex Tour Requests" HorizontalAlignment="Center" FontSize="30" Margin="0,65,0,0" VerticalAlignment="Top"/>
+        Title="ComplexTourRequests" Height="700" Width="1300"
+        WindowStartupLocation="CenterScreen">
+    <Grid Height="683" VerticalAlignment="Top">
+        <DataGrid x:Name="DataPanel" HorizontalAlignment="Center" Height="335" VerticalAlignment="Center" Width="1100" Loaded="LoadData"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="1243,640,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <Label Content="Complex Tour Requests" HorizontalAlignment="Center" FontSize="45" Margin="0,72,0,0" VerticalAlignment="Top"/>
+        <ToolBar Grid.Row="0" Margin="0,0,0,645">
+            <Button Click="OpenGuest2Form">
+                <StackPanel Orientation="Horizontal" Width="53">
 
+                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="50" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenGuestOnTour"  Width="69">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="My tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="59" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenVouchers">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Vouchers" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="60" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourReviews" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Past Tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="62" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenCreateTourRequest" Width="110">
+                <StackPanel Orientation="Horizontal" Width="103">
+
+                    <TextBlock Text="Create Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="92" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+
+            <Button Click="OpenComplexTourRequests" Width="70">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Complex" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="55" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenAllTourRequests" Width="85">
+                <StackPanel Orientation="Horizontal" Width="81">
+
+                    <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="79" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourRequestsStatistic" Width="54">
+                <StackPanel Orientation="Horizontal" Width="57">
+                    <TextBlock Text="Statistic" FontSize="14" Width="50" />
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+            <Button Click="OpenNotifications" Width="98">
+                <StackPanel Orientation="Horizontal" Width="86">
+
+                    <TextBlock Text="Notifications" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="82" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
     </Grid>
 </Window>

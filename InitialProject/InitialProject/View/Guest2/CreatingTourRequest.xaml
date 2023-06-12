@@ -5,41 +5,113 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
-        Title="CreatingTourRequest" Height="450" Width="800">
-    <Grid Margin="2,-2,-2,2">
-        <Label Content="{Binding Path=CityV, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="119,122,0,0"/>
-        <Label Content="{Binding Path=CountryV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="466,142,0,0"/>
-        <Label Content="{Binding Path=DescriptionV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="273,172,0,0"/>
-        <Label Content="{Binding Path=LanguageV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="273,195,0,0"/>
-        <Label Content="{Binding Path=MaxGuestsV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="273,217,0,0"/>
+        Title="CreatingTourRequest" Height="700" Width="1300"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="2,-2,-2,-6">
+        <Label Content="{Binding Path=CityV, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Height="37" Foreground="Red" FontSize="10" Margin="209,194,0,0"/>
+        <Label Content="{Binding Path=CountryV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Height="37" Foreground="Red" FontSize="10" Margin="704,225,0,0"/>
+        <Label Content="{Binding Path=DescriptionV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,286,0,0"/>
+        <Label Content="{Binding Path=LanguageV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,334,0,0"/>
+        <Label Content="{Binding Path=MaxGuestsV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,379,0,0"/>
 
-        <Button Content="Create a request" HorizontalAlignment="Center" Margin="0,322,0,0" VerticalAlignment="Top" Click="SaveTourRequest" Height="44" Width="204"/>
-        <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,404,0,0" VerticalAlignment="Top" Click="Cancel"/>
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="114,142,0,0" TextWrapping="Wrap"  
-                 Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="316,142,0,0" TextWrapping="Wrap" 
-                 Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="114,166,0,0" TextWrapping="Wrap" 
-                 Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtLanguage" HorizontalAlignment="Left" Margin="114,189,0,0" TextWrapping="Wrap"
-                 Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtMaxNumberOfGuests" HorizontalAlignment="Left" Margin="114,212,0,0" TextWrapping="Wrap"
-                 Text="{Binding Path=Max, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" />
-        <DatePicker x:Name="FirstDateBox" HorizontalAlignment="Left" Margin="114,235,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="SecondDateBox" HorizontalAlignment="Left" Margin="114,264,0,0" VerticalAlignment="Top"/>
+        <Button Content="Create a request" HorizontalAlignment="Center" Margin="0,532,0,0" VerticalAlignment="Top" FontSize="23" Click="SaveTourRequest" Height="40" Width="223"/>
+        <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,616,0,0" VerticalAlignment="Top" Click="Cancel" Height="23" Width="47"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="181,223,0,0" TextWrapping="Wrap"  
+                 Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="197" Height="37"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="499,225,0,0" TextWrapping="Wrap" 
+                 Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="197" Height="37"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="181,280,0,0" TextWrapping="Wrap" 
+                 Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="197" Height="37"/>
+        <TextBox x:Name="txtLanguage" HorizontalAlignment="Left" Margin="181,0,0,0" TextWrapping="Wrap"
+                 Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="197" Height="37"/>
+        <TextBox x:Name="txtMaxNumberOfGuests" HorizontalAlignment="Left" Margin="181,375,0,0" TextWrapping="Wrap"
+                 Text="{Binding Path=Max, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="197" Height="37" />
+        <DatePicker x:Name="FirstDateBox" HorizontalAlignment="Left" Margin="181,422,0,0" VerticalAlignment="Top" Height="49" Width="197"/>
+        <DatePicker x:Name="SecondDateBox" HorizontalAlignment="Left" Margin="507,425,0,0" VerticalAlignment="Top" Height="50" Width="189"/>
 
-        <Label Content="Description:" HorizontalAlignment="Left" Margin="32,159,0,0" VerticalAlignment="Top"/>
-        <Label Content="Laguage:" HorizontalAlignment="Left" Margin="47,182,0,0" VerticalAlignment="Top"/>
-        <Label Content="Max Guests:" HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Center"/>
-        <Label Content="City:" HorizontalAlignment="Left" Margin="70,135,0,0" VerticalAlignment="Top"/>
-        <Label Content="Country:" HorizontalAlignment="Left" Margin="252,137,0,0" VerticalAlignment="Top"/>
-        <Label Content="Start Date:" HorizontalAlignment="Left" Margin="38,234,0,0" VerticalAlignment="Top"/>
-        <Label Content="End Date:" HorizontalAlignment="Left" Margin="42,265,0,0" VerticalAlignment="Top"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="727,360,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
-        <Label Content="Location :" HorizontalAlignment="Left" Margin="39,109,0,0" VerticalAlignment="Top"/>
-        <Button Content="Create a complex tour request" HorizontalAlignment="Center" Margin="0,371,0,0" Click ="CreateComplex" VerticalAlignment="Top" Height="28" Width="168"/>
-        <Label Content="Create a Tour Request" HorizontalAlignment="Center" FontSize="30" Margin="0,50,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description:" HorizontalAlignment="Left" FontSize="18" Margin="64,274,0,0" VerticalAlignment="Top" Height="53" Width="119"/>
+        <Label Content="Laguage:" HorizontalAlignment="Left" FontSize="18" Margin="66,321,0,0" VerticalAlignment="Top" Height="54" Width="94"/>
+        <Label Content="Max Guests:" HorizontalAlignment="Left" FontSize="18" Margin="64,366,0,0" VerticalAlignment="Top" Height="54" Width="121"/>
+        <Label Content="City:" HorizontalAlignment="Left" FontSize="18" Margin="66,216,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.499,0.581" Width="60" Height="54"/>
+        <Label Content="Country:" HorizontalAlignment="Left" FontSize="18" Margin="401,216,0,0" VerticalAlignment="Top" Height="54" Width="89"/>
+        <Label Content="Start Date:" HorizontalAlignment="Left"  FontSize="18" Margin="64,424,0,0" VerticalAlignment="Top" Height="53" Width="107"/>
+        <Label Content="End Date:" HorizontalAlignment="Left" FontSize="18" Margin="401,421,0,0" VerticalAlignment="Top" Height="54" Width="99"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="1222,629,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <Label Content="Location:" HorizontalAlignment="Left" Margin="64,159,0,0" FontSize="18" VerticalAlignment="Top" Width="124" Height="56"/>
+        <Button Content="Create a complex tour request" HorizontalAlignment="Center" Margin="0,577,0,0" FontSize="12" Click ="CreateComplex" VerticalAlignment="Top" Height="33" Width="202"/>
+        <Label Content="Create a Tour Request" HorizontalAlignment="Center" FontSize="45" Margin="0,72,0,0" VerticalAlignment="Top"/>
 
+        <ToolBar Grid.Row="0" Height="39" VerticalAlignment="Top">
+            <Button Click="OpenGuestOverview">
+                <StackPanel Orientation="Horizontal" Width="53">
 
+                    <TextBlock Text="Home" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="50" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenGuest2Form">
+                <StackPanel Orientation="Horizontal" Width="53">
+
+                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="50" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenGuestOnTour"  Width="69">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="My tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="59" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenVouchers">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Vouchers" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="60" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourReviews" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Past Tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="62" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenCreateTourRequest" Width="110">
+                <StackPanel Orientation="Horizontal" Width="103">
+
+                    <TextBlock Text="Create Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="92" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+
+            <Button Click="OpenComplexTourRequests" Width="70">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Complex" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="55" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenAllTourRequests" Width="85">
+                <StackPanel Orientation="Horizontal" Width="81">
+
+                    <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="79" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourRequestsStatistic" Width="54">
+                <StackPanel Orientation="Horizontal" Width="57">
+                    <TextBlock Text="Statistic" FontSize="14" Width="50" />
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+            <Button Click="OpenNotifications" Width="98">
+                <StackPanel Orientation="Horizontal" Width="86">
+
+                    <TextBlock Text="Notifications" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="82" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
     </Grid>
 </Window>

@@ -65,6 +65,9 @@
     <Compile Update="View\Guest2\PastTours.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Guest2\Report.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Guest2\TourReview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -197,6 +200,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\PastTours.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Guest2\Report.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Guest2\TourRequestsStatistic.xaml">

@@ -78,9 +78,22 @@ namespace TravelAgency.View.Guest2
                 MessageBox.Show("Please select a tour you want to see.");
             }
         }
+
+        private void OpenGuestOverview(object sender, RoutedEventArgs e)
+        {
+            Guest2Overview createGuest2Form = new Guest2Overview(LogedUser);
+            Close();
+            createGuest2Form.Show();
+        }
         private void OpenGuest2Form(object sender, RoutedEventArgs e)
         {
             Guest2Form createGuest2Form = new Guest2Form(LogedUser);
+            Close();
+            createGuest2Form.Show();
+        }
+        private void OpenComplexTourRequests(object sender, RoutedEventArgs e)
+        {
+            ComplexTourRequests createGuest2Form = new ComplexTourRequests(LogedUser);
             Close();
             createGuest2Form.Show();
         }

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Graph.Models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +25,15 @@ namespace TravelAgency.View.Guest2
     {
 
         private readonly TourService tourService;
-        User LogedUser = new User();
+        User LoggedInUser = new User();
 
         public ComplexTourRequests(User user)
         {
             InitializeComponent();
-            LogedUser = user;
+            LoggedInUser = user;
             tourService = new TourService();
+            this.Width = 1100;
+            this.Height = 600;
         }
         private void LoadData(object sender, RoutedEventArgs e)
         {
@@ -41,10 +44,70 @@ namespace TravelAgency.View.Guest2
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            Guest2Overview guest2Overview = new Guest2Overview(LogedUser);
+            Guest2Overview guest2Overview = new Guest2Overview(LoggedInUser);
             this.Close();
             guest2Overview.Show();
 
+        }
+        private void OpenGuest2Form(object sender, RoutedEventArgs e)
+        {
+            Guest2Form createGuest2Form = new Guest2Form(LoggedInUser);
+            Close();
+            createGuest2Form.Show();
+        }
+        private void OpenComplexTourRequests(object sender, RoutedEventArgs e)
+        {
+            ComplexTourRequests createGuest2Form = new ComplexTourRequests(LoggedInUser);
+            Close();
+            createGuest2Form.Show();
+        }
+
+        private void OpenGuestOnTour(object sender, RoutedEventArgs e)
+        {
+            GuestOnTour createGuestOnTour = new GuestOnTour(LoggedInUser);
+            Close();
+            createGuestOnTour.Show();
+        }
+
+        private void OpenVouchers(object sender, RoutedEventArgs e)
+        {
+            VouchersView createVouchers = new VouchersView(LoggedInUser);
+            Close();
+            createVouchers.Show();
+        }
+
+        private void OpenTourReviews(object sender, RoutedEventArgs e)
+        {
+            PastTours pastTours = new PastTours(LoggedInUser);
+            Close();
+            pastTours.Show();
+        }
+        private void OpenCreateTourRequest(object sender, RoutedEventArgs e)
+        {
+            CreatingTourRequest creatingTourRequest = new CreatingTourRequest(LoggedInUser);
+            Close();
+            creatingTourRequest.Show();
+        }
+
+        private void OpenTourRequestsStatistic(object sender, RoutedEventArgs e)
+        {
+            TourRequestsStatistic tourRequestsStatistic = new TourRequestsStatistic(LoggedInUser);
+            Close();
+            tourRequestsStatistic.Show();
+        }
+
+        private void OpenAllTourRequests(object sender, RoutedEventArgs e)
+        {
+            AllTourRequests tourRequestsStatistic = new AllTourRequests(LoggedInUser);
+            Close();
+            tourRequestsStatistic.Show();
+        }
+
+        private void OpenNotifications(object sender, RoutedEventArgs e)
+        {
+            Notifications notifications = new Notifications(LoggedInUser);
+            Close();
+            notifications.Show();
         }
     }
 }

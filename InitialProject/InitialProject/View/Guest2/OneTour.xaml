@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
-        Title="OneTour" Height="450" Width="800">
+        Title="OneTour" Height="700" Width="1300"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="Reserve" HorizontalAlignment="Left" Height="31" Margin="117,378,0,0" VerticalAlignment="Top" Click="AddPeopleOnSelectedTour" Width="77"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="736,376,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
-        <TextBox x:Name="txtNumOfGuests" HorizontalAlignment="Left" Margin="97,355,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" FontSize="24" Height="45" Margin="33,46,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="168" Loaded="LoadData"/>
-        <Label Content="How many people are going on selected tour?" HorizontalAlignment="Left" Margin="33,324,0,0" VerticalAlignment="Top" Width="251" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Book" HorizontalAlignment="Center" Height="40" FontSize="21" Margin="0,567,0,0" VerticalAlignment="Top" Click="AddPeopleOnSelectedTour" Width="88"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="1222,618,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <TextBox x:Name="txtNumOfGuests" HorizontalAlignment="Left" Margin="45,531,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" Height="29"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" FontSize="45" Height="67" Margin="45,82,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="185" Loaded="LoadData" BorderThickness="0,0,0,0"/>
+        <Label Content="How many people are going on selected tour?" HorizontalAlignment="Left" FontSize="18" Margin="36,496,0,0" VerticalAlignment="Top" Width="386" RenderTransformOrigin="0.5,0.5">
+
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -21,25 +23,91 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label Content="Lenguage" HorizontalAlignment="Left" Height="29" Margin="33,165,0,0" VerticalAlignment="Top" Width="114"/>
-        <TextBox x:Name="txtLenguage" HorizontalAlignment="Left" Height="16" Margin="33,194,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="98"/>
-        <Label Content="City" HorizontalAlignment="Left" Height="29" Margin="33,102,0,0" VerticalAlignment="Top" Width="114"/>
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Height="16" Margin="33,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"/>
-        <Label Content="Country" HorizontalAlignment="Left" Height="29" Margin="179,102,0,0" VerticalAlignment="Top" Width="114"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="16" Margin="179,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"/>
-        <Label Content="Max Number of Guests" HorizontalAlignment="Left" Height="29" Margin="33,226,0,0" VerticalAlignment="Top" Width="126"/>
-        <TextBox x:Name="txtMaxNumberOfGuests" HorizontalAlignment="Left" Height="16" Margin="33,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="100"/>
-        <Label Content="Tour Duration" HorizontalAlignment="Left" Height="29" Margin="179,165,0,0" VerticalAlignment="Top" Width="114"/>
-        <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Height="16" Margin="179,194,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"/>
-        <Label Content="Curent Number of Guests" HorizontalAlignment="Left" Height="29" Margin="172,226,0,0" VerticalAlignment="Top" Width="146"/>
-        <TextBox x:Name="txtCurentNumberOfGuests" HorizontalAlignment="Left" Height="16" Margin="179,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"/>
-        <Label Content="Description" HorizontalAlignment="Left" Height="29" Margin="542,102,0,0" VerticalAlignment="Top" Width="114"/>
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="72" Margin="542,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="218"/>
-        <DataGrid x:Name="CheckPoints" HorizontalAlignment="Left" Height="78" Margin="336,193,0,0" VerticalAlignment="Top" Width="158" Loaded="LoadData "/>
-        <Label Content="Check Points" HorizontalAlignment="Left" Height="29" Margin="328,162,0,0" VerticalAlignment="Top" Width="114"/>
-        <Label Content="Date" HorizontalAlignment="Left" Height="29" Margin="336,102,0,0" VerticalAlignment="Top" Width="86"/>
-        <ComboBox x:Name="Vouchers" HorizontalAlignment="Center" Margin="0,348,0,0" Loaded="Vouchers_Loaded" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtDate" HorizontalAlignment="Left" Height="16" Margin="336,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"/>
+        <Label Content="Lenguage" HorizontalAlignment="Left" Height="44"  FontSize="18" Margin="45,287,0,0" VerticalAlignment="Top" Width="179"/>
 
+        <Label Content="Would you like to use a voucher?" HorizontalAlignment="Left" Height="44"  FontSize="18" Margin="38,567,0,0" VerticalAlignment="Top" Width="325"/>
+        <TextBox x:Name="txtLenguage" HorizontalAlignment="Left" Height="25" Margin="45,331,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="197" BorderThickness="0,0,0,0"/>
+        <Label Content="City" HorizontalAlignment="Left" Height="44" FontSize="18" Margin="45,190,0,0" VerticalAlignment="Top" Width="179"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Height="25" Margin="45,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="155" BorderThickness="0,0,0,0"/>
+        <Label Content="Country" HorizontalAlignment="Left" Height="44"  FontSize="18" Margin="274,190,0,0" VerticalAlignment="Top" Width="178"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="25" Margin="274,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="197" BorderThickness="0,0,0,0"/>
+        <Label Content="Max Number of Guests" HorizontalAlignment="Left" Height="44"  FontSize="18" Margin="45,380,0,0" VerticalAlignment="Top" Width="197"/>
+        <TextBox x:Name="txtMaxNumberOfGuests" HorizontalAlignment="Left" Height="25" Margin="45,424,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="197" BorderThickness="0,0,0,0"/>
+        <Label Content="Tour Duration" HorizontalAlignment="Left" Height="44"  FontSize="18" Margin="274,287,0,0" VerticalAlignment="Top" Width="178"/>
+        <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Height="25" Margin="274,331,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="197" BorderThickness="0,0,0,0" TextChanged="txtDuration_TextChanged"/>
+        <Label Content="Curent Number of Guests" HorizontalAlignment="Left" Height="44"  FontSize="18" Margin="263,380,0,0" VerticalAlignment="Top" Width="229"/>
+        <TextBox x:Name="txtCurentNumberOfGuests" HorizontalAlignment="Left" Height="25" Margin="274,424,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="197" BorderThickness="0,0,0,0"/>
+        <Label Content="Description" HorizontalAlignment="Left" Height="44"  FontSize="18" Margin="842,190,0,0" VerticalAlignment="Top" Width="179"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="111" Margin="848,220,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="342"/>
+        <DataGrid x:Name="CheckPoints" HorizontalAlignment="Left" Height="120" Margin="520,321,0,0" VerticalAlignment="Top" Width="248" Loaded="LoadData "/>
+        <Label Content="Check Points" HorizontalAlignment="Left" Height="44"  FontSize="18" Margin="520,290,0,0" VerticalAlignment="Top" Width="179"/>
+        <Label Content="Date" HorizontalAlignment="Left" Height="44" Margin="520,190,0,0" FontSize="18" VerticalAlignment="Top" Width="134"/>
+        <ComboBox x:Name="Vouchers" HorizontalAlignment="Left" Margin="45,604,0,0"  FontSize="16" Loaded="Vouchers_Loaded" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtDate"  HorizontalAlignment="Left" Height="25" Margin="520,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="155" BorderThickness="0,0,0,0"/>
+        <ToolBar Grid.Row="0" Height="39" VerticalAlignment="Top">
+            <Button Click="OpenGuest2Form">
+                <StackPanel Orientation="Horizontal" Width="53">
+
+                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="50" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenGuestOnTour"  Width="69">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="My tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="59" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenVouchers">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Vouchers" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="60" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourReviews" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Past Tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="62" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenCreateTourRequest" Width="110">
+                <StackPanel Orientation="Horizontal" Width="103">
+
+                    <TextBlock Text="Create Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="92" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+
+            <Button Click="OpenComplexTourRequests" Width="70">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Complex" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="55" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenAllTourRequests" Width="85">
+                <StackPanel Orientation="Horizontal" Width="81">
+
+                    <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="79" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourRequestsStatistic" Width="54">
+                <StackPanel Orientation="Horizontal" Width="57">
+                    <TextBlock Text="Statistic" FontSize="14" Width="50" />
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+            <Button Click="OpenNotifications" Width="98">
+                <StackPanel Orientation="Horizontal" Width="86">
+
+                    <TextBlock Text="Notifications" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="82" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
     </Grid>
 </Window>

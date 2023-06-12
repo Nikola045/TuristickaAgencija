@@ -5,10 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency.View.Guest2"
         mc:Ignorable="d"
-        Title="Notifications" Height="450" Width="800">
+        Title="Notifications" Height="700" Width="1300"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="DataPanel" HorizontalAlignment="Left" Height="169" Margin="180,88,0,0" VerticalAlignment="Top" Width="487" Loaded="LoadData"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="727,360,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <DataGrid x:Name="DataPanel" HorizontalAlignment="Left" Height="338" Margin="180,186,0,0" VerticalAlignment="Top" Width="1010" Loaded="LoadData"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="1227,623,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
+        <ToolBar Grid.Row="0" Height="39" VerticalAlignment="Top">
+            <Button Click="OpenGuestOverview">
+                <StackPanel Orientation="Horizontal" Width="53">
 
+                    <TextBlock Text="Home" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="50" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenGuest2Form">
+                <StackPanel Orientation="Horizontal" Width="53">
+
+                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="50" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenGuestOnTour"  Width="69">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="My tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="59" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenVouchers">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Vouchers" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="60" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourReviews" Width="80">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Past Tours" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="62" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenCreateTourRequest" Width="110">
+                <StackPanel Orientation="Horizontal" Width="103">
+
+                    <TextBlock Text="Create Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="92" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+
+            <Button Click="OpenComplexTourRequests" Width="70">
+                <StackPanel Orientation="Horizontal" Width="67">
+
+                    <TextBlock Text="Complex" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="55" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenAllTourRequests" Width="85">
+                <StackPanel Orientation="Horizontal" Width="81">
+
+                    <TextBlock Text="All Requests" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="79" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="OpenTourRequestsStatistic" Width="54">
+                <StackPanel Orientation="Horizontal" Width="57">
+                    <TextBlock Text="Statistic" FontSize="14" Width="50" />
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+            <Button Click="OpenNotifications" Width="98">
+                <StackPanel Orientation="Horizontal" Width="86">
+
+                    <TextBlock Text="Notifications" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" Width="82" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <Label Content="Notifications" HorizontalAlignment="Center" FontSize="45" Margin="0,72,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

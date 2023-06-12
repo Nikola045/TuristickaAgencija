@@ -26,7 +26,7 @@ namespace TravelAgency.View.Guest2
 
         private readonly TourRequestsRepository tourRequestsRepository;
         private readonly UserService ownerService;
-        public User LoggedInUser { get; set; }
+        public User LogedUser { get; set; }
         
         private string _city;
         private string _country;
@@ -50,9 +50,11 @@ namespace TravelAgency.View.Guest2
         public CreatingTourRequest(User user)
         {
             InitializeComponent();
-            LoggedInUser = user;
+            LogedUser = user;
             tourRequestsRepository = new(InjectorService.CreateInstance<IStorage<TourRequests>>());
             ownerService = new UserService();
+            this.Width = 1100;
+            this.Height = 600;
         }
 
 
@@ -255,7 +257,7 @@ namespace TravelAgency.View.Guest2
         {
             TourRequests newTourRequests = new TourRequests(
                 tourRequestsRepository.NextId(),
-                ownerService.GetOwnerByUsername(LoggedInUser.Username),
+                ownerService.GetOwnerByUsername(LogedUser.Username),
                 txtCity.Text,
                 txtCountry.Text,
                 txtDescription.Text,
@@ -269,23 +271,89 @@ namespace TravelAgency.View.Guest2
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            Guest2Overview guest2Overview = new Guest2Overview(LoggedInUser);
+            Guest2Overview guest2Overview = new Guest2Overview(LogedUser);
             this.Close();
             guest2Overview.Show();
 
         }
         private void CreateComplex(object sender, RoutedEventArgs e)
         {
-            CreatingComplexTourRequest guest2Overview = new CreatingComplexTourRequest(LoggedInUser);
+            CreatingComplexTourRequest guest2Overview = new CreatingComplexTourRequest(LogedUser);
             this.Close();
             guest2Overview.Show();
         }
         private void Exit(object sender, RoutedEventArgs e)
         {
-            Guest2Overview guest2Overview = new Guest2Overview(LoggedInUser);
+            Guest2Overview guest2Overview = new Guest2Overview(LogedUser);
             this.Close();
             guest2Overview.Show();
 
+        }
+
+        private void OpenGuestOverview(object sender, RoutedEventArgs e)
+        {
+            Guest2Overview createGuest2Form = new Guest2Overview(LogedUser);
+            Close();
+            createGuest2Form.Show();
+        }
+        private void OpenGuest2Form(object sender, RoutedEventArgs e)
+        {
+            Guest2Form createGuest2Form = new Guest2Form(LogedUser);
+            Close();
+            createGuest2Form.Show();
+        }
+        private void OpenComplexTourRequests(object sender, RoutedEventArgs e)
+        {
+            ComplexTourRequests createGuest2Form = new ComplexTourRequests(LogedUser);
+            Close();
+            createGuest2Form.Show();
+        }
+
+        private void OpenGuestOnTour(object sender, RoutedEventArgs e)
+        {
+            GuestOnTour createGuestOnTour = new GuestOnTour(LogedUser);
+            Close();
+            createGuestOnTour.Show();
+        }
+
+        private void OpenVouchers(object sender, RoutedEventArgs e)
+        {
+            VouchersView createVouchers = new VouchersView(LogedUser);
+            Close();
+            createVouchers.Show();
+        }
+
+        private void OpenTourReviews(object sender, RoutedEventArgs e)
+        {
+            PastTours pastTours = new PastTours(LogedUser);
+            Close();
+            pastTours.Show();
+        }
+        private void OpenCreateTourRequest(object sender, RoutedEventArgs e)
+        {
+            CreatingTourRequest creatingTourRequest = new CreatingTourRequest(LogedUser);
+            Close();
+            creatingTourRequest.Show();
+        }
+
+        private void OpenTourRequestsStatistic(object sender, RoutedEventArgs e)
+        {
+            TourRequestsStatistic tourRequestsStatistic = new TourRequestsStatistic(LogedUser);
+            Close();
+            tourRequestsStatistic.Show();
+        }
+
+        private void OpenAllTourRequests(object sender, RoutedEventArgs e)
+        {
+            AllTourRequests tourRequestsStatistic = new AllTourRequests(LogedUser);
+            Close();
+            tourRequestsStatistic.Show();
+        }
+
+        private void OpenNotifications(object sender, RoutedEventArgs e)
+        {
+            Notifications notifications = new Notifications(LogedUser);
+            notifications.Show();
         }
 
     }
