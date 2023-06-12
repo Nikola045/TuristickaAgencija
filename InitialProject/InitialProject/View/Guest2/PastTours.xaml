@@ -12,7 +12,16 @@
             <RowDefinition Height="139*"/>
             <RowDefinition Height="545*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="DataPanel" HorizontalAlignment="Center" Height="269" Margin="0,85,0,0" VerticalAlignment="Top" Width="1116" Loaded="LoadData" Grid.Row="1"/>
+        <DataGrid x:Name="DataPanel" AutoGenerateColumns="False" Loaded="LoadData" Margin="92,95,92,165" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Width="*" Header="Language" Binding="{Binding Lenguage}"/>
+                <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Width="*" Header="Date" Binding="{Binding StartTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Exit" HorizontalAlignment="Left" Margin="1220,480,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33" Grid.Row="1"/>
         <Button Content="Review" HorizontalAlignment="Center" Height="31" FontSize="18" Margin="0,419,0,0" VerticalAlignment="Top" Click="MakeReview" Width="92" Grid.Row="1"/>
         <Label Content="Would you like to rate selected tour?" HorizontalAlignment="Center" FontSize="18" Margin="0,380,0,0" VerticalAlignment="Top" Grid.Row="1"/>

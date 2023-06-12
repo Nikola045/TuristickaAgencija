@@ -92,9 +92,9 @@
             </Button>
         </ToolBar>
         <Label Content="Statistic" HorizontalAlignment="Center" Margin="0,72,0,0" FontSize="45" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CB_Copy" HorizontalAlignment="Left" Margin="187,246,0,0" VerticalAlignment="Top" Width="120" Loaded="FillComboBox"/>
+        <ComboBox x:Name="CB_language" HorizontalAlignment="Left" Margin="187,246,0,0" VerticalAlignment="Top" Width="120" Loaded="FillComboBox"/>
         <Label Content="Select language" HorizontalAlignment="Left" FontSize="16" Margin="44,240,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CB_Copy1" HorizontalAlignment="Left" Margin="187,282,0,0" VerticalAlignment="Top" Width="120" Loaded="FillComboBox"/>
+        <ComboBox x:Name="CB_location" HorizontalAlignment="Left" Margin="187,282,0,0" VerticalAlignment="Top" Width="120" Loaded="FillComboBox"/>
         <Label Content="Select location" HorizontalAlignment="Left" FontSize="16" Margin="48,276,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

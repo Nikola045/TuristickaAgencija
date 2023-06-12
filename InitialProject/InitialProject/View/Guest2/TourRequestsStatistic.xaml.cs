@@ -34,7 +34,9 @@ namespace TravelAgency.View.Guest2
             CB.Items.Add("2021");
             CB.Items.Add("2020");
             CB.Items.Add("2019");
+
         }
+
 
 
         private void ShowStatisticButton_Click(object sender, RoutedEventArgs e)

@@ -8,7 +8,12 @@
         Title="VouchersView" Height="700" Width="1300"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="DataPanel" HorizontalAlignment="Center" Height="254" Margin="0,178,0,0" VerticalAlignment="Top" Width="932" Loaded="LoadData"/>
+        <DataGrid x:Name="DataPanel" AutoGenerateColumns="False" Loaded="LoadData" Margin="163,197,163,177">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="Date" Binding="{Binding ExpirationDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Exit" HorizontalAlignment="Left" Margin="1227,620,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
         <Button Content="Refresh" HorizontalAlignment="Center" FontSize="18" Margin="0,546,0,0" Click ="AddVouchers"  VerticalAlignment="Top" Height="37" Width="84"/>
         <Label Content="Vouchers" HorizontalAlignment="Center" FontSize="45" Margin="0,72,0,0" VerticalAlignment="Top"/>

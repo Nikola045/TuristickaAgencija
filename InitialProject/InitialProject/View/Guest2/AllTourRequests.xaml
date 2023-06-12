@@ -8,7 +8,16 @@
         Title="AllTourRequests" Height="700" Width="1300"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,3">
-        <DataGrid x:Name="DataPanel" HorizontalAlignment="Center" Height="307" Margin="0,229,0,0" VerticalAlignment="Top" Width="812" Loaded="LoadData"/>
+        <DataGrid x:Name="DataPanel" AutoGenerateColumns="False" Loaded="LoadData" Margin="80,204,80,203">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Width="*" Header="Language" Binding="{Binding Lenguage}"/>
+                <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Width="*" Header="Date" Binding="{Binding StartTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Exit" HorizontalAlignment="Left" Margin="1243,638,0,0" VerticalAlignment="Top" Click="Exit" Width="47" Height="33"/>
         <Label Content="All your Tours" HorizontalAlignment="Center" FontSize="45" Margin="0,72,0,0" VerticalAlignment="Top"/>
         <ToolBar Grid.Row="0" Height="39" VerticalAlignment="Top">

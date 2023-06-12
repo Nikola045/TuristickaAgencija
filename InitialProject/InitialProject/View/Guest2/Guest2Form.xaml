@@ -8,9 +8,15 @@
         Title="Guest2Form" Height="700" Width="1300"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,3">
-        <DataGrid x:Name="DataPanel" Margin="389,216,64,154" Loaded="LoadData"  >
-
-
+        <DataGrid x:Name="DataPanel" AutoGenerateColumns="False" Loaded="LoadData" Margin="389,216,54,154">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Width="*" Header="Language" Binding="{Binding Lenguage}"/>
+                <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Width="*" Header="Date" Binding="{Binding StartTime}"/>
+            </DataGrid.Columns>
         </DataGrid>
 
         <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="63,260,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="248" Height="27"/>
