@@ -8,11 +8,11 @@
         Title="CreatingComplexTourRequest" Height="700" Width="1300"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="{Binding CityV, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="2,414,0,0"/>
-        <Label Content="{Binding CountryV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="349,434,0,0"/>
-        <Label Content="{Binding DescriptionV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="156,464,0,0"/>
-        <Label Content="{Binding LanguageV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="156,487,0,0"/>
-        <Label Content="{Binding MaxGuestsV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="18" Foreground="Red" FontSize="10" Margin="156,509,0,0"/>
+        <Label x:Name="cityV" Content="Must be only letters." Visibility="Collapsed"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Height="37" Foreground="Red" FontSize="10" Margin="142,254,0,0"/>
+        <Label x:Name="countryV" Content="Must be only letters." Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Height="37" Foreground="Red" FontSize="10" Margin="400,248,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,286,0,0"/>
+        <Label x:Name="languageV" Content="Must be only letters." Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="299,331,0,0"/>
+        <Label x:Name="numV" Content="Must be only numbers." Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="307,375,0,0"/>
 
         <Button Content="Cancel" HorizontalAlignment="Left" FontSize="16" Margin="864,538,0,0" VerticalAlignment="Top" Click="Cancel" Height="31" Width="60"/>
         <TextBox x:Name="txtCity" HorizontalAlignment="Left" Margin="144,220,0,0" TextWrapping="Wrap"  
@@ -20,7 +20,7 @@
         <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Margin="400,220,0,0" TextWrapping="Wrap" 
             Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="150" Height="35"/>
         <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="144,285,0,0" TextWrapping="Wrap" 
-            Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="406" Height="35"/>
+            Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="150" Height="35"/>
         <TextBox x:Name="txtLanguage" HorizontalAlignment="Left" Margin="144,329,0,0" TextWrapping="Wrap"
             Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="150" Height="35"/>
         <TextBox x:Name="txtMaxNumberOfGuests" HorizontalAlignment="Left" Margin="144,373,0,0" TextWrapping="Wrap"
@@ -28,7 +28,7 @@
         <DatePicker x:Name="FirstDateBox" HorizontalAlignment="Left" Margin="144,417,0,0" VerticalAlignment="Top" Height="46" Width="127"/>
         <DatePicker x:Name="SecondDateBox" HorizontalAlignment="Left" Margin="144,473,0,0" VerticalAlignment="Top" Height="46" Width="127"/>
         <Button  Content="Add Tour" HorizontalAlignment="Left" FontSize="18" Margin="156,532,0,0" VerticalAlignment="Top" Width="114" Click="AddRequestToList"/>
-        <ListBox x:Name="ListCheckPoints" Margin="617,208,129,324"/>
+        <ListBox x:Name="ListCheckPoints" Margin="621,203,125,329"/>
         <Label Content="Description:" HorizontalAlignment="Left" FontSize="18" Margin="33,278,0,0" VerticalAlignment="Top" Height="50" Width="104"/>
         <Label Content="Laguage:" HorizontalAlignment="Left" FontSize="18" Margin="34,322,0,0" VerticalAlignment="Top" Height="50" Width="102"/>
         <Label Content="Max Guests:" HorizontalAlignment="Left" FontSize="18" Margin="34,365,0,0" VerticalAlignment="Top" Height="49" Width="112"/>
@@ -107,7 +107,7 @@
         </ToolBar>
         <Label Content="Single tours you added:" HorizontalAlignment="Left" Margin="617,172,0,0" FontSize="16" VerticalAlignment="Top"/>
         <Label Content="If you are sure that you have entered all the tours, click here." FontSize="20" HorizontalAlignment="Left" Margin="625,429,0,0" VerticalAlignment="Top" Width="546"/>
-        <GroupBox Header="" Margin="21,172,714,93"/>
+
 
     </Grid>
 </Window>

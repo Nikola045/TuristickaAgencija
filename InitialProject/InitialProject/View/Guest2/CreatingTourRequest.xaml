@@ -8,11 +8,11 @@
         Title="CreatingTourRequest" Height="700" Width="1300"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="2,-2,-2,-6">
-        <Label Content="{Binding Path=CityV, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Height="37" Foreground="Red" FontSize="10" Margin="209,194,0,0"/>
-        <Label Content="{Binding Path=CountryV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Height="37" Foreground="Red" FontSize="10" Margin="704,225,0,0"/>
-        <Label Content="{Binding Path=DescriptionV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,286,0,0"/>
-        <Label Content="{Binding Path=LanguageV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,334,0,0"/>
-        <Label Content="{Binding Path=MaxGuestsV, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,379,0,0"/>
+        <Label x:Name="cityV" Content="Must be only letters." Visibility="Collapsed"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Height="37" Foreground="Red" FontSize="10" Margin="209,194,0,0"/>
+        <Label x:Name="countryV" Content="Must be only letters." Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="169" Height="37" Foreground="Red" FontSize="10" Margin="704,225,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,286,0,0"/>
+        <Label x:Name="languageV" Content="Must be only letters." Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,334,0,0"/>
+        <Label x:Name="numV" Content="Must be only numbers." Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Height="37" Foreground="Red" FontSize="10" Margin="423,379,0,0"/>
 
         <Button Content="Create a request" HorizontalAlignment="Center" Margin="0,532,0,0" VerticalAlignment="Top" FontSize="23" Click="SaveTourRequest" Height="40" Width="223"/>
         <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,616,0,0" VerticalAlignment="Top" Click="Cancel" Height="23" Width="47"/>

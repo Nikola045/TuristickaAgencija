@@ -8,7 +8,7 @@
         Title="Guest2Form" Height="700" Width="1300"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,3">
-        <DataGrid x:Name="DataPanel" Margin="389,216,64,154" Loaded="LoadData" >
+        <DataGrid x:Name="DataPanel" Margin="389,216,64,154" Loaded="LoadData"  >
 
 
         </DataGrid>

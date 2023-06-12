@@ -94,7 +94,16 @@
                 </StackPanel>
             </Button>
         </ToolBar>
-        <DataGrid x:Name="DataPanel" Grid.Column="1" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="18,262,18,67" Loaded="LoadData"/>
+        <DataGrid x:Name="DataPanel" AutoGenerateColumns="False" Loaded="LoadData" Grid.Column="1" Grid.ColumnSpan="2" Margin="36,192,50,49" Grid.Row="2">
+        <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
+                <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
+                <DataGridTextColumn Width="*" Header="Language" Binding="{Binding Lenguage}"/>
+                <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Width="*" Header="Date" Binding="{Binding StartTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Label Grid.Column="1" Content="TRAVEL AGENCY" FontSize="48" HorizontalAlignment="Center" Margin="0,42,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="70" Width="372"/>
         <GroupBox Header="GroupBox" Grid.Row="2" Margin="45,132,10,15" Grid.RowSpan="2"/>
         <GroupBox Header="GroupBox" Grid.Row="2" Margin="28,132,28,15" Grid.RowSpan="2" Grid.Column="3"/>

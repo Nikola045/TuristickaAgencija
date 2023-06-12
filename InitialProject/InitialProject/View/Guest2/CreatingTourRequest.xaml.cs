@@ -53,35 +53,11 @@ namespace TravelAgency.View.Guest2
             LogedUser = user;
             tourRequestsRepository = new(InjectorService.CreateInstance<IStorage<TourRequests>>());
             ownerService = new UserService();
-            this.Width = 1100;
-            this.Height = 600;
         }
 
 
 
-        public bool ButtonActivator()
-        {
-            if (
-                CityV == "" &&
-                CountryV == "" &&
-                MaxV == "" &&
-                DescriptionV == "" &&
-                LanguageV == "" &&
-
-                City != "" &&
-                Country != "" &&
-                Max.ToString() != "" &&
-                Description != "" &&
-                Language != "")
-
-            {
-                return true;
-            }
-            else
-            { return false; }
-           
-        }
-
+        /*
         public string City
         {
             get => _city;
@@ -212,44 +188,66 @@ namespace TravelAgency.View.Guest2
                 }
 
             }
-        }
+        }*/
 
-        private void CityValidation(object sender, TextChangedEventArgs e)
+        private bool CityValidation()
         {
-            string city = City;
+            string city = txtCity.Text;
             if (Regex.IsMatch(city, @"^[a-zA-Z\s]+$"))
             {
-                CityV = "";
+                return true;
+                cityV.Visibility = Visibility.Collapsed;
             }
             else
             {
-                CityV = "Please enter valid value";
+                cityV.Visibility = Visibility.Visible;
+                return false;
             }
         }
 
-        private void CountryValidation(object sender, TextChangedEventArgs e)
+        private bool CountryValidation()
         {
-            string country = Country;
+            string country = txtCountry.Text;
             if (Regex.IsMatch(country, @"^[a-zA-Z\s]+$"))
             {
-                CountryV = "";
+                return true;
+                countryV.Visibility = Visibility.Collapsed;
             }
             else
             {
-                CountryV = "Please enter valid value";
+                countryV.Visibility = Visibility.Visible;
+                return false;
             }
         }
 
-        private void MaxGuestValidation(object sender, TextChangedEventArgs e)
+        private bool LanguageValidation()
         {
-            int maxGuests = Max;
-            if (Regex.IsMatch(maxGuests.ToString(), @"^[0-9]+$"))
+            string language = txtLanguage.Text;
+            if (Regex.IsMatch(language, @"^[a-zA-Z\s]+$"))
             {
-                MaxV = "";
+                return true;
+                languageV.Visibility = Visibility.Collapsed;
             }
             else
             {
-                MaxV = "Please enter valid value";
+                languageV.Visibility = Visibility.Visible;
+                return false;
+            }
+        }
+
+        private bool MaxGuestValidation()
+        {
+            string maxGuests = txtMaxNumberOfGuests.Text;
+            if (Regex.IsMatch(maxGuests, @"^[0-9]+$"))
+            {
+                return true;
+                numV.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                numV.Visibility = Visibility.Visible;
+                return false;
+
             }
         }
 
@@ -265,10 +263,13 @@ namespace TravelAgency.View.Guest2
                 Convert.ToInt32(txtMaxNumberOfGuests.Text),
                 Convert.ToDateTime(FirstDateBox.Text),
                 Convert.ToDateTime(SecondDateBox.Text));
+            if (CityValidation() && CountryValidation() && LanguageValidation() && MaxGuestValidation()) {
 
                 tourRequestsRepository.Save(newTourRequests);
                 MessageBox.Show("Uspesno kreiran zahtev za turu.");
+            }
         }
+
         private void Cancel(object sender, RoutedEventArgs e)
         {
             Guest2Overview guest2Overview = new Guest2Overview(LogedUser);

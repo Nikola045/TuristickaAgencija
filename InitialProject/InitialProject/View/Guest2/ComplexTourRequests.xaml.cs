@@ -32,8 +32,6 @@ namespace TravelAgency.View.Guest2
             InitializeComponent();
             LoggedInUser = user;
             tourService = new TourService();
-            this.Width = 1100;
-            this.Height = 600;
         }
         private void LoadData(object sender, RoutedEventArgs e)
         {

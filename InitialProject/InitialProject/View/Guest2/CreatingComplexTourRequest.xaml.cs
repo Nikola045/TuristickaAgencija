@@ -46,7 +46,69 @@ namespace TravelAgency.View.Guest2
         {
             ComplexTourRequest newTourRequests = new ComplexTourRequest();
             complexTourRequestsRepository.Save(newTourRequests);
-            MessageBox.Show("Uspesno unet zahtev za kompleksnu turu.");
+            MessageBox.Show("Complex tour request saved.");
+            
+        }
+
+        private bool CityValidation()
+        {
+            string city = txtCity.Text;
+            if (Regex.IsMatch(city, @"^[a-zA-Z\s]+$"))
+            {
+                return true;
+                cityV.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                cityV.Visibility = Visibility.Visible;
+                return false;
+            }
+        }
+
+        private bool CountryValidation()
+        {
+            string country = txtCountry.Text;
+            if (Regex.IsMatch(country, @"^[a-zA-Z\s]+$"))
+            {
+                return true;
+                countryV.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                countryV.Visibility = Visibility.Visible;
+                return false;
+            }
+        }
+
+        private bool LanguageValidation()
+        {
+            string language = txtLanguage.Text;
+            if (Regex.IsMatch(language, @"^[a-zA-Z\s]+$"))
+            {
+                return true;
+                languageV.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                languageV.Visibility = Visibility.Visible;
+                return false;
+            }
+        }
+
+        private bool MaxGuestValidation()
+        {
+            string maxGuests = txtMaxNumberOfGuests.Text;
+            if (Regex.IsMatch(maxGuests, @"^[0-9]+$"))
+            {
+                return true;
+                numV.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                numV.Visibility = Visibility.Visible;
+                return false;
+
+            }
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {
@@ -66,8 +128,12 @@ namespace TravelAgency.View.Guest2
         private void AddRequestToList(object sender, RoutedEventArgs e)
         {
             TourRequests request = new TourRequests();
-            tourRequestsRepository.Save(request);
-            ListCheckPoints.Items.Add(request);
+            if (CityValidation() && CountryValidation() && LanguageValidation() && MaxGuestValidation())
+            {
+                tourRequestsRepository.Save(request);
+                ListCheckPoints.Items.Add(request);
+                MessageBox.Show("Tour added to list.S");
+            }
         }
 
         private void OpenGuest2Form(object sender, RoutedEventArgs e)
