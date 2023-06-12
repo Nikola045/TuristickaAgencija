@@ -8,7 +8,7 @@
 
     <Canvas Background="White">
         <Label Content="Insert your comment here:" FontSize="20" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="-2"/>
-        <TextBox TextWrapping="Wrap"  Text="{Binding Comment}"  FontSize="20" Canvas.Top="47" Width="1590" Height="282" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button Content="Add comment" FontSize="20" Canvas.Top="340" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click" Width="153"/>
+        <TextBox x:Name="CommentTextBox" TextWrapping="Wrap"  Text="{Binding Comment}"  FontSize="20" Canvas.Top="47" Width="1590" Height="282" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="CommentTextBox_TextChanged"/>
+        <Button x:Name="CommentBtn" Content="Add comment" FontSize="20" Canvas.Top="340" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click" Width="153"/>
     </Canvas>
 </Page>

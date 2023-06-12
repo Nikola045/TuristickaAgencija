@@ -11,7 +11,7 @@
         <ComboBox x:Name="cbHotelName" FontSize="20" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Center" Width="206" Loaded="LoadHotels" SelectionChanged="cbHotelName_SelectionChanged" Canvas.Top="42"/>
         <Label Content="Additional comment:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="148" Canvas.Left="-4"/>
         <Label Content="Add photos of accommodation:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="338" Canvas.Left="-4"/>
-        <TextBox x:Name="txtComment" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="1282" Height="147" TextChanged="txtComment_TextChanged" Canvas.Top="184"/>
+        <TextBox x:Name="txtComment" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap"  Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="1282" Height="147" TextChanged="txtComment_TextChanged" Canvas.Top="184"/>
         <Button x:Name="btnPlus" Content="+" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Width="31" Click="btnPlus_Click" Canvas.Left="291" Canvas.Top="344"/>
         <Button x:Name="btnDeleteImage" FontSize="20" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Center" Click="btnDeleteImage_Click" Canvas.Left="321" Canvas.Top="344" Width="80"/>
         <ListView x:Name="ListViewImg" Height="89" Canvas.Top="386" Width="405" HorizontalAlignment="Left" VerticalAlignment="Center">

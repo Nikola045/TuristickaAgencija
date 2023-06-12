@@ -6,14 +6,16 @@
         xmlns:local="clr-namespace:TravelAgency.View.Guest1"
         mc:Ignorable="d" Height="516" Width="1284">
     <Canvas Background="white">
-        <RadioButton x:Name="rbOption1" VerticalContentAlignment="Center" FontSize="20" Content="Level 1 - Perfect/it would be nice to renovate some small things,but everything works fine even without it" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="227"/>
-        <RadioButton x:Name="rbOption2" VerticalContentAlignment="Center" FontSize="20" Content="Level 2 - There are some minor complaints about the accommodation that if addressed,would make it perfect" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="257"/>
-        <RadioButton x:Name="rbOption3" VerticalContentAlignment="Center" FontSize="20" Content="Level 3 - Several things that are reallz bothering need do be renovated" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="287"/>
-        <RadioButton x:Name="rbOption4" VerticalContentAlignment="Center" FontSize="20" Content="Level 4 - There are a lot of bad things and renovation is really necessary" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="317"/>
-        <RadioButton x:Name="rbOption5" VerticalContentAlignment="Center" FontSize="20" Content="Level 5 - The accommodation is in very poor condition and it's not worth renting unless it's renovated" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="347"/>
-        <Button x:Name="RateButton" FontSize="20" Content="Rate" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Click="Rate" Canvas.Left="1" Canvas.Top="387" />
-        <TextBox x:Name="txtInfo" Canvas.Left="1" FontSize="20" TextWrapping="Wrap" Text="{Binding Info}" Canvas.Top="50" Width="1281" Height="161" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Info about accommodation:" FontSize="20" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Center" Height="43" Width="286"/>
+        <RadioButton x:Name="rbOption1" VerticalContentAlignment="Center" FontSize="20" Content="Level 1 - Perfect/it would be nice to renovate some small things, but everything works fine even without it" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="295"/>
+        <RadioButton x:Name="rbOption2" VerticalContentAlignment="Center" FontSize="20" Content="Level 2 - There are some minor complaints about the accommodation that if addressed,would make it perfect" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="325"/>
+        <RadioButton x:Name="rbOption3" VerticalContentAlignment="Center" FontSize="20" Content="Level 3 - Several things that are really bothering need do be renovated" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="355"/>
+        <RadioButton x:Name="rbOption4" VerticalContentAlignment="Center" FontSize="20" Content="Level 4 - There are a lot of bad things and renovation is really necessary" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="385"/>
+        <RadioButton x:Name="rbOption5" VerticalContentAlignment="Center" FontSize="20" Content="Level 5 - The accommodation is in very poor condition and it's not worth renting unless it's renovated" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="1" Canvas.Top="415"/>
+        <Button x:Name="RateButton" FontSize="20" Content="Rate" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Click="Rate" Canvas.Left="1" Canvas.Top="461" />
+        <TextBox x:Name="txtInfo" FontSize="20" TextWrapping="Wrap" Text="{Binding Info}" Canvas.Top="86" Width="1284" Height="161" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Please tell us additional info about rated accommodation:" FontSize="20" Canvas.Top="49" HorizontalAlignment="Center" VerticalAlignment="Top" Height="43" Width="518" Canvas.Left="-3"/>
+        <Label Content="Thank you for your information, accomodation rated successfully!" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="-4" Canvas.Top="-4"/>
+        <Label Content="If you could rate the status of the accommodation what would it be:" FontSize="20" Canvas.Left="-3" Canvas.Top="247" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
     </Canvas>
 </Page>

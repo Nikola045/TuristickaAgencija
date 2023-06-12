@@ -12,7 +12,7 @@
         <Label Content="Insert your first comment here:" FontSize="20" Canvas.Top="157" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="2"/>
         <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding City}" Canvas.Top="125" Width="225" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="57"/>
         <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Comment}" Canvas.Top="199" Width="1570" HorizontalAlignment="Left" VerticalAlignment="Center" Height="285" Canvas.Left="4"/>
-        <Button Content="Start new discussion" Canvas.Top="510" FontSize="20" Width="228" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="4" Click="Button_Click"/>
+        <Button x:Name="btnStartNewDiscussion" Content="Start new discussion" Canvas.Top="510" FontSize="20" Width="228" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="4" Click="Button_Click"/>
         <Label Content="City:" FontSize="20" Canvas.Top="119" Canvas.Left="4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Country}" Canvas.Top="125" Width="226" Canvas.Left="380" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Country:" FontSize="20" Canvas.Top="119" Canvas.Left="290" HorizontalAlignment="Left" VerticalAlignment="Center"/>

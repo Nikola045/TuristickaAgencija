@@ -102,10 +102,6 @@ namespace TravelAgency.View.Guest1
                 List<Reservation> reservations = reservationService.FindReservationByGuestUsername(LogedUser.Username);
             }
         }
-        private void WindowLoaded(object sender, RoutedEventArgs e)
-        {
-            btnRequest.IsEnabled = false;
-        }
         private void NewStartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DateTime today = DateTime.Now.Date;
@@ -113,7 +109,6 @@ namespace TravelAgency.View.Guest1
             {
                 if (NewStartDate.SelectedDate.Value.Date != today)
                 {
-                    MessageBox.Show("It is not possible to select a date before today.");
                 }
                 NewStartDate.SelectedDate = today;
             }
@@ -126,7 +121,6 @@ namespace TravelAgency.View.Guest1
             {
                 if (NewEndDate.SelectedDate.Value.Date != today)
                 {
-                    MessageBox.Show("It is not possible to select a date before today.");
                 }
                 NewEndDate.SelectedDate = today;
             }
@@ -158,18 +152,21 @@ namespace TravelAgency.View.Guest1
             {
                 return false;
             }
-        }        
+        }
         private void DataPanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (SelectedReservation != null)
             {
                 btnRequest.IsEnabled = AllFieldsValid();
+                CancelReservation.IsEnabled = true;
             }
             else
             {
                 btnRequest.IsEnabled = false;
+                CancelReservation.IsEnabled = false;
             }
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

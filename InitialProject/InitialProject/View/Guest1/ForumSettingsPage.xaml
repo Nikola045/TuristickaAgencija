@@ -8,7 +8,7 @@
     >
     <Canvas Background="White" Loaded="OnLoad">
         <Label Content="Started discussions:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="-2"/>
-        <DataGrid x:Name="dataGrid" FontSize="16" ItemsSource="{Binding Path=Forums,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Height="270" Width="1281" Canvas.Top="35" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="2">
+        <DataGrid x:Name="dataGrid" FontSize="16" ItemsSource="{Binding Path=Forums,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForum}" AutoGenerateColumns="False" Height="270" Width="1281" Canvas.Top="35" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="2" SelectionChanged="dataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding City}"/>
                 <DataGridTextColumn Width="*" Header="Country" Binding="{Binding Country}"/>
@@ -17,7 +17,8 @@
                 <DataGridTextColumn Width="*" Header="Very useful" Binding="{Binding VeryUseful}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Close discussion" FontSize="20" Canvas.Left="2" Canvas.Top="312" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
+        <Button Content="Close discussion" x:Name="CloseDiscussion" FontSize="20" Canvas.Left="2" Canvas.Top="312" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click" IsEnabled="False" />
+
         <Label x:Name="Label" Content="Label" FontSize="20" Canvas.Left="4" Canvas.Top="368" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Canvas>
 </Page>

@@ -68,6 +68,38 @@ namespace TravelAgency.View.Guest1
             PdfReportCanceledReservation page = new PdfReportCanceledReservation(reservationService.CanceledReservationInfoForPDF(Convert.ToDateTime(StartDate.Text), Convert.ToDateTime(EndDate.Text)));
             NavigationService.Navigate(page);
         }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            StartDate.SelectedDateChanged += StartDate_SelectedDateChanged;
+            EndDate.SelectedDateChanged += EndDate_SelectedDateChanged;
+            UpdateButtonAvailability();
+        }
+
+        private void StartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateButtonAvailability();
+        }
+
+        private void EndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateButtonAvailability();
+        }
+
+        private void UpdateButtonAvailability()
+        {
+            bool isStartDateSelected = StartDate.SelectedDate.HasValue;
+            bool isEndDateSelected = EndDate.SelectedDate.HasValue;
+            bool isStartDateGreaterThanEndDate = false;
+
+            if (isStartDateSelected && isEndDateSelected)
+            {
+                isStartDateGreaterThanEndDate = StartDate.SelectedDate.Value > EndDate.SelectedDate.Value;
+            }
+
+            MadeReservation.IsEnabled = isStartDateSelected && isEndDateSelected && !isStartDateGreaterThanEndDate;
+            CanceledReservation.IsEnabled = isStartDateSelected && isEndDateSelected && !isStartDateGreaterThanEndDate;
+        }
+
     }
 }
 

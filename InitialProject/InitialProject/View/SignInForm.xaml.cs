@@ -201,5 +201,10 @@ namespace TravelAgency
                 MessageBox.Show("Error opening Booking: " + ex.Message);
             }
         }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

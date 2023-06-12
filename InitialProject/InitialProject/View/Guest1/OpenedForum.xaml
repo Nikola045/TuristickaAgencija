@@ -20,11 +20,13 @@
         <Button Content="24" FontSize="20" Canvas.Left="223" Canvas.Top="502" Width="40" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Image Height="100" Canvas.Left="78" Canvas.Top="29" Width="100" Source="/View/Owner/profilepic.jpg"/>
         <Image Height="100" Canvas.Left="78" Canvas.Top="260" Width="100" Source="/View/Owner/profilepic.jpg"/>
-        <Label Content="User: User32" Canvas.Left="89" Canvas.Top="130" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Last active: 2 days ago" Canvas.Left="61" Canvas.Top="153" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Has visited location: No" Canvas.Left="60" Canvas.Top="176" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="User: User1" Canvas.Left="93" Canvas.Top="361" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Last active: a days ago" Canvas.Left="65" Canvas.Top="384" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Has visited location: Yes" Canvas.Left="64" Canvas.Top="407" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="User: User32" FontSize="15" Canvas.Left="82" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Last active: 2 days ago" FontSize="15" Canvas.Left="49" Canvas.Top="153" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Has visited location: No" FontSize="15" Canvas.Left="45" Canvas.Top="176" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="User: User1" FontSize="15" Canvas.Left="86" Canvas.Top="360" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Last active: a days ago" FontSize="15" Canvas.Left="52" Canvas.Top="382" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Has visited location: Yes" FontSize="15" Canvas.Left="50" Canvas.Top="408" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="hsaaaaaaaaaaaaaaaaaa" FontSize="20" Canvas.Left="256" Canvas.Top="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="asohjdpasjdsad" FontSize="20" Canvas.Left="256" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Canvas>
 </Page>

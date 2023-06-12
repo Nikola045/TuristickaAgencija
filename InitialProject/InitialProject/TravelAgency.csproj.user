@@ -148,6 +148,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Resources\Dark.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Light.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Guest1\AccountSettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>

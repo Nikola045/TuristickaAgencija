@@ -137,7 +137,6 @@ namespace TravelAgency.View
                     
                     else
                     {
-                        MessageBox.Show("No more Bonus Points!");
                     }
                 }
                 if(guest1Service.CountReservationsFromGuest(LogedUser.Username) == 9)

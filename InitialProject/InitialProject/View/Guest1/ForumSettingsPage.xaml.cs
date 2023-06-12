@@ -68,5 +68,18 @@ namespace TravelAgency.View.Guest1
             textBlock.Inlines.Add(new Run("*Note\n The discussion will not be deleted (it will be visible),only\n further replying will be disabled."));
             Label.Content = textBlock;
         }
+
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dataGrid.SelectedItem != null)
+            {
+                CloseDiscussion.IsEnabled = true;
+            }
+            else
+            {
+                CloseDiscussion.IsEnabled = false;
+            }
+
+        }
     }
 }

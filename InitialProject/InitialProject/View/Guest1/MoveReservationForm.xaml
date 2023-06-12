@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TravelAgency.View.Guest1"
         mc:Ignorable="d" Height="516" Width="1284">
     <Canvas Background="White">
-        <Button x:Name="btnRequest" FontSize="20" Content="Submit request" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click_1" Canvas.Left="471" Canvas.Top="432" Width="179"/>
+        <Button x:Name="btnRequest" IsEnabled="False" FontSize="20" Content="Submit request" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click_1" Canvas.Left="471" Canvas.Top="432" Width="179"/>
         <DataGrid ItemsSource="{Binding Reservations}" SelectedItem="{Binding SelectedReservation}" AutoGenerateColumns="False" FontSize="16" Loaded="OnLoad" SelectionChanged="DataPanel_SelectionChanged" Height="159" Canvas.Top="30" Width="1284" HorizontalAlignment="Center" VerticalAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Hotel.Name}"/>
@@ -21,7 +21,7 @@
         </DataGrid>
         <DatePicker x:Name="NewStartDate" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Height="41" Width="180" SelectedDateChanged="NewStartDate_SelectedDateChanged" Canvas.Left="148" Canvas.Top="380"/>
         <DatePicker x:Name="NewEndDate" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Height="41" Width="180" SelectedDateChanged="NewEndDate_SelectedDateChanged" Canvas.Left="471" Canvas.Top="380"/>
-        <Button Content="Cancel Reservation" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click_2" Canvas.Top="197" Canvas.Left="613" Width="176"/>
+        <Button x:Name="CancelReservation" IsEnabled="False" Content="Cancel Reservation" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click_2" Canvas.Top="197" Canvas.Left="613" Width="176"/>
         <Label Content="List of all your active reservations:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="-2"/>
         <Label Content="If you want to cancel reservation choose it and then click the button" FontSize="20" Canvas.Top="194"/>
         <Label Content="Submit a date change request to the accommodation owner:" FontSize="20" Canvas.Top="308" HorizontalAlignment="Center" VerticalAlignment="Top"/>
