@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.Domain.Model;
 using TravelAgency.Domain.RepositoryInterfaces;
+using TravelAgency.Repository;
 using TravelAgency.Repository.HotelRepo;
 using TravelAgency.Services;
 
@@ -21,11 +25,13 @@ namespace TravelAgency.View
     /// <summary>
     /// Interaction logic for Guest1Form.xaml
     /// </summary>
-    public partial class Guest1Form : Page
+    public partial class Guest1Form : Page, INotifyPropertyChanged
     {
-        public HotelRepository hotelRepository { get; }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public static ObservableCollection<Hotel> Hotels { get; set; }
+        public HotelRepository hotelRepository { get; set; }
         private readonly HotelService hotelService;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         private readonly ReservationService reservationService;
 
         const string FilePath = "../../../Resources/Data/hotels.csv";
@@ -35,11 +41,15 @@ namespace TravelAgency.View
             Title = "Search hotel";
             DataContext = this;
             hotelRepository = new(InjectorService.CreateInstance<IStorage<Hotel>>());
+            Hotels = new ObservableCollection<Hotel>(hotelRepository.GetAll());
             hotelService = new HotelService();
-            ownerService = new OwnerService();
+            ownerService = new UserService();
             reservationService = new ReservationService();
         }
-
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             reservationService.ChangeAllRenovatedStatus();

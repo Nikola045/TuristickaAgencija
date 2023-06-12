@@ -24,7 +24,7 @@ namespace TravelAgency.Services
         private MoveReservationRepository moveReservationRepository;
         private HotelService hotelService;
         private RenovationRequestRepository renovationRequestRepository;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         public ReservationService() 
         {
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
@@ -32,7 +32,7 @@ namespace TravelAgency.Services
             moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
             renovationRequestRepository = new(InjectorService.CreateInstance<IStorage<RenovationRequest>>());
             hotelService = new HotelService();
-            ownerService = new OwnerService();
+            ownerService = new UserService();
         }
 
         public void LogicalDelete(Reservation reservation)

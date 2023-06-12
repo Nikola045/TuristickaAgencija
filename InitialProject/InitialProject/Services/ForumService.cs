@@ -12,19 +12,19 @@ namespace TravelAgency.Services
     {
         private readonly ForumRepository forumRepository;
         private readonly ForumCommentRepository forumCommentRepository;
-        private readonly OwnerService ownerService;
+        private readonly UserService ownerService;
         private readonly ReservationService reservationService;
         public ForumService()
         {
             forumRepository = new(InjectorService.CreateInstance<IStorage<Forum>>());
             forumCommentRepository = new(InjectorService.CreateInstance<IStorage<ForumComment>>());
-            ownerService = new OwnerService();
+            ownerService = new UserService();
             reservationService = new ReservationService();
         }
 
         public List<Forum> GetNewForums()
         {
-            List<Forum> fourms = forumRepository.GetAll();
+                List<Forum> fourms = forumRepository.GetAll();
             List<Forum> newForums = new List<Forum>();
             DateTime dateTime = DateTime.Now;
             foreach(Forum forum in fourms) 
@@ -146,8 +146,6 @@ namespace TravelAgency.Services
             comment.ValidComment = validation;
 
             forumCommentRepository.Save(comment);
-
-            MessageBox.Show("Comment successfully created");
         }
         public bool HasGuest1VisitedLocation(string Guest1Username, Forum forum)
         {
@@ -185,7 +183,7 @@ namespace TravelAgency.Services
             return counter;
         }
 
-        public string IsForumVearyUseful(Forum forum)
+        public string IsForumVeryUseful(Forum forum)
         {
             if (CountGuestComments(forum) >= 20 && CountOwnerComments(forum) >= 10)
                 return "Very useful";

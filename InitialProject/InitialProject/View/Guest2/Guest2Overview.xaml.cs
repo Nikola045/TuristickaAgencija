@@ -21,6 +21,12 @@ namespace TravelAgency.View.Guest2
             Close();
             createGuest2Form.Show(); 
         }
+        private void OpenComplexTourRequests(object sender, RoutedEventArgs e)
+        {
+            ComplexTourRequests createGuest2Form = new ComplexTourRequests(LoggedInUser);
+            Close();
+            createGuest2Form.Show();
+        }
 
         private void OpenGuestOnTour(object sender, RoutedEventArgs e)
         {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,8 +28,9 @@ namespace TravelAgency.View.Guest1
     /// <summary>
     /// Interaction logic for MoveReservationForm.xaml
     /// </summary>
-    public partial class MoveReservationForm : Window
+    public partial class MoveReservationForm : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         ReservationService reservationService;
         MoveReservationRepository moveReservationRepository;
         ReservationRepository reservationRepository;
@@ -36,6 +39,7 @@ namespace TravelAgency.View.Guest1
         public MoveReservationForm(User user)
         {
             InitializeComponent();
+            DataContext = this;
             reservationService = new ReservationService();
             moveReservationRepository = new(InjectorService.CreateInstance<IStorage<MoveReservation>>());
             reservationRepository = new(InjectorService.CreateInstance<IStorage<Reservation>>());
@@ -47,17 +51,16 @@ namespace TravelAgency.View.Guest1
         {
             this.Close();
         }
-
-
-
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             List<Reservation> reservations = reservationService.FindReservationByGuestUsername(LogedUser.Username);
             DataPanel.ItemsSource = reservations;
             btnRequest.IsEnabled = false;
         }
-
-
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Reservation SelectedReservation = (Reservation)DataPanel.SelectedItem;
@@ -100,8 +103,6 @@ namespace TravelAgency.View.Guest1
                 DataPanel.ItemsSource = reservations;
             }
         }
-
-
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             btnRequest.IsEnabled = false;
@@ -119,7 +120,6 @@ namespace TravelAgency.View.Guest1
             }
             btnRequest.IsEnabled = AllFieldsValid();
         }
-
         private void NewEndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DateTime today = DateTime.Now.Date;
@@ -133,7 +133,6 @@ namespace TravelAgency.View.Guest1
             }
             btnRequest.IsEnabled = AllFieldsValid();
         }
-
         private bool AllFieldsValid()
         {
             if (NewStartDate.SelectedDate != null && NewEndDate.SelectedDate != null && DataPanel.SelectedItem != null)
@@ -161,9 +160,7 @@ namespace TravelAgency.View.Guest1
             {
                 return false;
             }
-        }
-
-
+        }        
         private void DataPanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (DataPanel.SelectedItem != null)
