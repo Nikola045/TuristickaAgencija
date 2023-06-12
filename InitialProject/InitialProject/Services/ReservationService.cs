@@ -38,7 +38,7 @@ namespace TravelAgency.Services
         {
             if (reservation.GradeStatus != "Canceled" && startDate < reservation.StartDate && endDate > reservation.EndDate) 
             {             
-                return "Reservation for " + reservation.Hotel.Name + ", from "+  reservation.StartDate.ToShortDateString() + " to " + reservation.EndDate.ToShortDateString() + " with " + reservation.NumberOfGuests.ToString() + " number of guests.";
+                return "Reservation for accommodation " + reservation.Hotel.Name + ", from "+  reservation.StartDate.ToShortDateString() + " - " + reservation.EndDate.ToShortDateString() + " with " + reservation.NumberOfGuests.ToString() + " number of guests.";
             }
             else
             {
@@ -63,7 +63,7 @@ namespace TravelAgency.Services
         {
             if (reservation.GradeStatus == "Canceled" && startDate < reservation.StartDate && endDate > reservation.EndDate)
             {
-                return "Canceled reservation for " + reservation.Hotel.Name + ", from " + reservation.StartDate.ToShortDateString() + " to " + reservation.EndDate.ToShortDateString() + " with " + reservation.NumberOfGuests.ToString() + " number of guests.";
+                return "Canceled reservation for accommodation " + reservation.Hotel.Name + ", from " + reservation.StartDate.ToShortDateString() + " - " + reservation.EndDate.ToShortDateString() + " with " + reservation.NumberOfGuests.ToString() + " number of guests.";
             }
             else
             {

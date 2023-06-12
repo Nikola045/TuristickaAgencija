@@ -78,10 +78,8 @@ namespace TravelAgency
                         PasswordLabel.Visibility = Visibility.Collapsed;
                         txtUsername.Visibility = Visibility.Collapsed;
                         txtPassword.Visibility = Visibility.Collapsed;
-                        Facebook.Visibility = Visibility.Collapsed;
+                       
                         Logo.Visibility = Visibility.Collapsed;
-                        Booking.Visibility = Visibility.Collapsed;
-                        Google.Visibility = Visibility.Collapsed;
                         ValidUser.Visibility = Visibility.Collapsed;
                     }
                     if (user.LoginRole == "Guest2")
@@ -112,94 +110,6 @@ namespace TravelAgency
             cbLanguage.Text = language1;
 
             ValidUser.Visibility = Visibility.Collapsed;
-        }
-        private void Facebook_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Hand;
-        }
-
-        private void Facebook_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Mouse.OverrideCursor = null;
-        }
-
-        private void Facebook_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            string url = "https://www.facebook.com/login/";
-
-            try
-            {
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                };
-
-                Process.Start(psi);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error opening Facebook: " + ex.Message);
-            }
-        }
-
-        private void Google_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Hand;
-        }
-
-        private void Google_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Mouse.OverrideCursor = null;
-        }
-
-        private void Google_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            string url = "https://accounts.google.com/";
-
-            try
-            {
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                };
-
-                Process.Start(psi);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error opening Google: " + ex.Message);
-            }
-        }
-        private void Booking_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Hand;
-        }
-
-        private void Booking_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Mouse.OverrideCursor = null;
-        }
-
-        private void Booking_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            string url = "https://account.booking.com/";
-
-            try
-            {
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                };
-
-                Process.Start(psi);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error opening Booking: " + ex.Message);
-            }
         }
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)

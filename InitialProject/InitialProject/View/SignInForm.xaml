@@ -14,8 +14,6 @@
         <TextBox x:Name="txtUsername" FontSize="20" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Margin="769,530,769,0"/>
         <PasswordBox FontSize="20" x:Name="txtPassword" Height="32" VerticalAlignment="Top" Margin="769,604,769,0"/>
         <Button x:Name="SignInButton" FontSize="20" Click="SignIn" Content="Log In" HorizontalAlignment="Center" VerticalAlignment="Top" Height="34" Width="248" Margin="0,661,0,0"/>
-        <Image x:Name="Facebook" MouseEnter="Facebook_MouseEnter" MouseLeave="Facebook_MouseLeave" MouseLeftButtonUp="Facebook_MouseLeftButtonUp" HorizontalAlignment="Left" Height="47" Margin="1038,711,0,0" VerticalAlignment="Top" Width="46" Source="/Resources/Images/facebook-logo-493.png"/>
-        <Image x:Name="Google" MouseEnter="Google_MouseEnter" MouseLeave="Google_MouseLeave" MouseLeftButtonUp="Google_MouseLeftButtonUp" HorizontalAlignment="Left" Height="48" Margin="836,710,0,0" VerticalAlignment="Top" Width="48" Source="/Resources/Images/googleLogo.png"/>
         <Image x:Name="Logo" Margin="592,171,592,581" Source="/Resources/Images/Ta2.jpg"/>
         <ToggleButton Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1851,49,0,0" Width="47">
             <ToggleButton.Template>
@@ -61,7 +59,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Image x:Name="Booking" MouseEnter="Booking_MouseEnter" MouseLeave="Booking_MouseLeave" MouseLeftButtonUp="Booking_MouseLeftButtonUp" HorizontalAlignment="Center" Height="48" Margin="0,709,0,0" VerticalAlignment="Top" Width="48" Source="/Resources/Images/BookingLogo.png"/>
         <Label x:Name="ValidUser" Content="*Wrong username or password" FontSize="20" HorizontalAlignment="Left" Margin="1172,602,0,0" VerticalAlignment="Top" Foreground="Red"/>
     </Grid>
 </Window>
